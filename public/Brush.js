@@ -4,8 +4,8 @@ class Brush {
         this.buffer = createGraphics(this.size, this.size);
 
         // this.buffer.noStroke();
-        this.buffer.fill(color("#818181"));
-        this.buffer.stroke(color("#616161"));
+        this.buffer.fill(color(PALETTE.pixelColors[2]));
+        this.buffer.stroke(color(PALETTE.pixelColors[1]));
         this.buffer.strokeWeight(3);
         this.buffer.beginShape();
         this.buffer.vertex(10, 10);

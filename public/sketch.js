@@ -8,8 +8,6 @@ let rescaling_width;
 let rescaling_height;
 let backgroundTexture;
 
-let wanze;
-
 let ANIMATIONSTATE = true;
 let PALETTE;
 let PALETTE_LABEL;
@@ -33,7 +31,7 @@ let CURRENTPIXELDENS = 1;
 const PALETTESYSTEM = {
   "Brutus": {
     "background": ["#dac289", "#bea977"],
-    "pixelColors": ["#8ad1f7", "#0778C2", "#034370"],
+    "pixelColors": ["#8ad1f7", "#0777c2ff", "#034370ff"],
   },
 }
 
@@ -45,7 +43,6 @@ function preload() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  wanze = loadImage('oida.png');
   // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
 
   // if (urlParams.has('infinity')) {
@@ -123,7 +120,8 @@ function draw() {
     background(color(PALETTE.background[0]));
   }
 
-  image(brush.buffer, 0, 0);
+  // show brush
+  // image(brush.buffer, 0, 0);
 
   b.show();
   b.applyForce(b.seek());
@@ -133,8 +131,6 @@ function draw() {
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
   // noLoop();
-
-
 }
 
 function mousePressed() {
