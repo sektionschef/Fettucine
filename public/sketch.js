@@ -110,7 +110,8 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  b = new Brushstroke(wanze);
+  brush = new Brush();
+  b = new Brushstroke(brush.buffer);
 
 }
 
@@ -121,6 +122,8 @@ function draw() {
     pixelDensity(CURRENTPIXELDENS);
     background(color(PALETTE.background[0]));
   }
+
+  image(brush.buffer, 0, 0);
 
   b.show();
   b.applyForce(b.seek());

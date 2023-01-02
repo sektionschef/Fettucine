@@ -89,8 +89,11 @@ class Brushstroke {
         noStroke();
         rotate(this.vel.heading())
         imageMode(CENTER);
-        wanze.resize(0, this.basicSize);
-        image(wanze, 0, 0);
+        // image
+        // this.sprite.resize(0, this.basicSize);
+        // image(this.sprite, 0, 0);
+        // buffer
+        image(this.sprite, 0, 0, 0, this.basicSize);
         if (this.DEBUG) {
             triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
         }
