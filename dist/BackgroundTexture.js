@@ -1,0 +1,1 @@
+class BackgroundTexture{constructor(t){this.buffer=createGraphics(width,height),this.stepSize=.003*DOMINANTSIDE;for(var e=0;e<=height;e+=this.stepSize)for(var i=0;i<=width;i+=this.stepSize)this.buffer.fill(distortColorSuperNew(t,5)),this.buffer.strokeWeight(5e-4*DOMINANTSIDE),this.buffer.stroke(distortColorSuperNew(t,10)),this.buffer.rect(i,e,this.stepSize,this.stepSize)}}
