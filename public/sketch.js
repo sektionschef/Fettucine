@@ -114,19 +114,16 @@ function setup() {
 
 function draw() {
 
-  pixelDensity(CURRENTPIXELDENS);
-  background(PALETTE.background[0]);
+  if (frameCount == 1) {
+    pixelDensity(CURRENTPIXELDENS);
+    background(color(PALETTE.background[0]));
+  }
   // image(hatchSystem.buffer, 0, 0);
 
   b.show();
-
-  force = createVector(1, 1);
-  b.applyForce(force);
-
+  b.applyForce(b.seek());
 
   // fxpreview();
-
-
 
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
