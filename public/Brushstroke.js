@@ -1,11 +1,13 @@
 class Brushstroke {
-    constructor() {
+    constructor(sprite) {
         this.maxSpeed = 15;
         this.minSpeed = 2;
+        this.desiredSpeed = 0;
         this.maxForce = 2;
         this.slowRadius = 500;  // when to slow down
+        this.DEBUG = false;
 
-        this.basicSizeMin = 20;  // for debug
+        this.basicSizeMin = 50;  // for debug
         this.basicSizeMax = 100;  // for debug
         this.basicSize = this.basicSizeMax;  // for debug
 
@@ -13,8 +15,12 @@ class Brushstroke {
         this.origin = createVector(width / 2, height / 2);
 
         this.pos = this.origin.copy();
-        this.vel = createVector(0, 0);
+        // this.vel = createVector(0, 0);
+        this.vel = p5.Vector.sub(this.target, this.origin);  // make the starting angle
         this.acc = createVector(0, 0);
+
+        this.sprite = sprite;
+
 
     }
 
@@ -24,7 +30,7 @@ class Brushstroke {
         this.pos.add(this.vel);
         this.acc.set(0, 0);
 
-        this.basicSize = map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin);
+        this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
     }
 
     applyForce(force) {
@@ -58,49 +64,56 @@ class Brushstroke {
     show() {
         this.update();
 
+        if (this.DEBUG) {
+            // origin DEBUG        
+            push();
+            translate(this.origin.x, this.origin.y);
+            fill(color("orange"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
 
-        // origin DEBUG        
-        push();
-        translate(this.origin.x, this.origin.y);
-        fill(color("orange"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
-
-        // target slowRadius
-        push();
-        translate(this.origin.x, this.origin.y);
-        strokeWeight(5);
-        stroke(color("orange"));
-        noFill();
-        circle(0, 0, this.slowRadius * 2);
-        pop();
-
+            // target slowRadius
+            push();
+            translate(this.origin.x, this.origin.y);
+            strokeWeight(5);
+            stroke(color("orange"));
+            noFill();
+            circle(0, 0, this.slowRadius * 2);
+            pop();
+        }
 
         push();
         translate(this.pos.x, this.pos.y);
         fill(color(PALETTE.pixelColors[2]));
         noStroke();
         rotate(this.vel.heading())
-        triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
+        imageMode(CENTER);
+        wanze.resize(0, this.basicSize);
+        image(wanze, 0, 0);
+        if (this.DEBUG) {
+            triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
+        }
         pop();
 
-        // target DEBUG        
-        push();
-        translate(this.target.x, this.target.y);
-        fill(color("green"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
+        if (this.DEBUG) {
+            // target DEBUG        
+            push();
+            translate(this.target.x, this.target.y);
+            fill(color("green"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
 
-        // target slowRadius
-        push();
-        translate(this.target.x, this.target.y);
-        strokeWeight(5);
-        stroke(color("green"));
-        noFill();
-        circle(0, 0, this.slowRadius * 2);
-        pop();
+            // target slowRadius
+            push();
+            translate(this.target.x, this.target.y);
+            strokeWeight(5);
+            stroke(color("green"));
+            noFill();
+            circle(0, 0, this.slowRadius * 2);
+            pop();
+        }
     }
 
 

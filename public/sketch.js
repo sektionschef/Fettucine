@@ -8,6 +8,8 @@ let rescaling_width;
 let rescaling_height;
 let backgroundTexture;
 
+let wanze;
+
 let ANIMATIONSTATE = true;
 let PALETTE;
 let PALETTE_LABEL;
@@ -43,6 +45,7 @@ function preload() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
+  wanze = loadImage('oida.png');
   // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
 
   // if (urlParams.has('infinity')) {
@@ -107,7 +110,7 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  b = new Brushstroke();
+  b = new Brushstroke(wanze);
 
 }
 
@@ -118,7 +121,6 @@ function draw() {
     pixelDensity(CURRENTPIXELDENS);
     background(color(PALETTE.background[0]));
   }
-  // image(hatchSystem.buffer, 0, 0);
 
   b.show();
   b.applyForce(b.seek());
