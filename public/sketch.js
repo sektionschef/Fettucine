@@ -93,14 +93,6 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  // TEXTURE EXAMPLE
-  // textureEx = new PopselTexture({
-  //   "color": color(150),
-  //   "coords": [[0, 0], [width, 0], [width, height], [0, height]],
-  //   "A": createVector(0, 0),
-  //   "B": createVector(0, 0),
-  //   "C": createVector(0, 0),
-  // });
 
   // hatch example
   // A1 = createVector(0.2 * DOMINANTSIDE, width / 2, 0);
@@ -113,25 +105,32 @@ function setup() {
   // mastahatch2 = new Hatch(B1, B2, color("#181818"), "", hatchSystem.buffer);
   // hatchSystem.add(mastahatch2);
 
-  hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
+  // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
+
+  b = new Brushstroke();
 
 }
 
 
 function draw() {
 
-  if (frameCount == 1) {
-    pixelDensity(CURRENTPIXELDENS);
-    background(PALETTE.background[0]);
-    image(hatchSystem.buffer, 0, 0);
+  pixelDensity(CURRENTPIXELDENS);
+  background(PALETTE.background[0]);
+  // image(hatchSystem.buffer, 0, 0);
 
-    fxpreview();
+  b.show();
 
-    // let endTime = performance.now()
-    // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
+  force = createVector(1, 1);
+  b.applyForce(force);
 
-    noLoop();
-  }
+
+  // fxpreview();
+
+
+
+  // let endTime = performance.now()
+  // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
+  // noLoop();
 
 
 }
