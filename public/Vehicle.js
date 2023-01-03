@@ -27,7 +27,6 @@ class Vehicle {
 
     revertToOrigin() {
         this.target = this.origin.copy();
-        console.log("asdfa");
     }
 
     seek(moving_target = false) {
