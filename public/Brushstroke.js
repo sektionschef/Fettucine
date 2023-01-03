@@ -22,6 +22,8 @@ class Brushstroke {
         this.vel = p5.Vector.sub(this.target, this.origin);  // make the starting angle
         this.acc = createVector(0, 0);
 
+        this.switchTargetMoveA = false;
+        this.switchTargetMoveB = false;
         this.sprite = sprite;
     }
 
@@ -33,9 +35,14 @@ class Brushstroke {
 
         this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
 
-        // this.target = createVector(mouseX, mouseY);
-        if (this.distanceToTarget < 500) {
-            this.targetDyn = createVector(500, 500);
+
+        if (this.distanceToTarget < 800 && this.switchTargetMoveA == false) {
+            this.targetDyn = p5.Vector.add(this.target, p5.Vector.random2D().mult(100));
+            this.switchTargetMoveA = true;
+        }
+        if (this.distanceToTarget < 300 && this.switchTargetMoveB == false) {
+            this.targetDyn = this.target.copy();
+            this.switchTargetMoveB = true;
         }
     }
 
