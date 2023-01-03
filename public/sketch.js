@@ -107,8 +107,10 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  brush = new Brush();
-  b = new Brushstroke(brush.buffer);
+  v = new Vehicle(createVector(width / 2, height / 2), createVector(width / 4 * 3, height / 8 * 6));
+
+  // brush = new Brush();
+  // b = new Brushstroke(brush.buffer);
 
 }
 
@@ -123,8 +125,13 @@ function draw() {
   // show brush
   // image(brush.buffer, 0, 0);
 
-  b.show();
-  b.applyForce(b.seek());
+  v.show();
+  v.applyForce(v.seek());
+
+  // b.show();
+  // b.applyForce(b.seek());
+
+
 
   // fxpreview();
 

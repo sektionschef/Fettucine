@@ -27,14 +27,10 @@ class Brushstroke {
         this.sprite = sprite;
     }
 
-    update() {
-        this.vel.add(this.acc)
-        this.vel.limit(this.maxSpeed);
-        this.pos.add(this.vel);
-        this.acc.set(0, 0);
+    updateBrushstroke() {
+        this.update()
 
         this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
-
 
         if (this.distanceToTarget < 800 && this.switchTargetMoveA == false) {
             this.targetDyn = p5.Vector.add(this.target, p5.Vector.random2D().mult(100));
@@ -46,59 +42,14 @@ class Brushstroke {
         }
     }
 
-    applyForce(force) {
-        this.acc.add(force);
-    }
-
-    seek() {
-        let force = p5.Vector.sub(this.targetDyn, this.pos);
-        this.desiredSpeed = this.maxSpeed;
-
-        // launching at lower speed
-        this.distanceToOrigin = p5.Vector.sub(this.origin, this.pos).mag();
-        // console.log(this.distanceToOrigin);
-        if (this.distanceToOrigin < this.slowRadius) {
-            this.desiredSpeed = map(this.distanceToOrigin, 0, this.slowRadius, this.minSpeed, this.maxSpeed);
-            // this.desiredSpeed = 50;
-        }
-
-        // arrival at target with lower speed
-        this.distanceToTarget = force.mag();
-        if (this.distanceToTarget < this.slowRadius) {
-            this.desiredSpeed = map(this.distanceToTarget, 0, this.slowRadius, 0, this.maxSpeed);
-        }
-
-        force.setMag(this.desiredSpeed);
-        force.sub(this.vel);
-        force.limit(this.maxForce);
-        return force;
-    }
-
-    show() {
-        this.update();
+    showBrushstroke() {
 
         if (this.DEBUG) {
-            // origin DEBUG        
-            push();
-            translate(this.origin.x, this.origin.y);
-            fill(color("orange"));
-            noStroke();
-            circle(0, 0, 50);
-            pop();
-
-            // target slowRadius
-            push();
-            translate(this.origin.x, this.origin.y);
-            strokeWeight(5);
-            stroke(color("orange"));
-            noFill();
-            circle(0, 0, this.slowRadius * 2);
-            pop();
+            this.show();
         }
 
         push();
         translate(this.pos.x, this.pos.y);
-        if (this.DEBUG) { fill(color("blue")) };
         noStroke();
         rotate(this.vel.heading())
         imageMode(CENTER);
@@ -107,30 +58,8 @@ class Brushstroke {
         // image(this.sprite, 0, 0);
         // buffer
         image(this.sprite, 0, 0, 0, this.basicSize);
-        if (this.DEBUG) {
-            triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
-        }
         pop();
 
-        if (this.DEBUG) {
-            // target DEBUG        
-            push();
-            translate(this.targetDyn.x, this.targetDyn.y);
-            fill(color("green"));
-            noStroke();
-            circle(0, 0, 50);
-            pop();
-
-            // target slowRadius
-            push();
-            translate(this.targetDyn.x, this.targetDyn.y);
-            strokeWeight(5);
-            stroke(color("green"));
-            noFill();
-            circle(0, 0, this.slowRadius * 2);
-            pop();
-        }
     }
-
 
 }
