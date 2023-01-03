@@ -9,6 +9,9 @@ class Brushstroke extends Vehicle {
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
         this.slowRadius = 500;  // radius in which to slow down
+        this.target = new Vehicle(target, p5.Vector.add(target, p5.Vector.random2D().mult(400)));
+        this.origin = origin;
+        this.turningDistance = p5.Vector.sub(this.target.pos, this.origin).mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
 
         this.DEBUG = false;
         // for dynamic resizing
@@ -17,10 +20,6 @@ class Brushstroke extends Vehicle {
         this.basicSize = this.basicSizeMax;
 
         this.desiredSpeed = 0;  // initial value, dynamic actual speed
-        // this.target = createVector(width / 4 * 3, height / 8 * 6);
-        // this.origin = createVector(width / 2, height / 2);
-        this.target = new Vehicle(target, p5.Vector.add(target, p5.Vector.random2D().mult(400)));
-        this.origin = origin;
 
         this.sprite = sprite;
 
@@ -41,7 +40,7 @@ class Brushstroke extends Vehicle {
         this.update();
         this.updateTarget();
 
-        if (this.distanceToTarget < (1000) && this.switchTarget == false) {
+        if (this.distanceToTarget < this.turningDistance && this.switchTarget == false) {
 
             this.target.revertToOrigin();
             this.switchTarget = true;
