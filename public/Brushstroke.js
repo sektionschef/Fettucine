@@ -1,13 +1,16 @@
 // grasp maxforce;
 
-class Brushstroke {
-    constructor(sprite) {
+class Brushstroke extends Vehicle {
+    constructor(origin, target, sprite) {
+
+        super(origin, target);
+
         this.maxSpeed = 15;  // top speed limit
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
         this.slowRadius = 500;  // radius in which to slow down
 
-        this.DEBUG = true;
+        this.DEBUG = false;
         // for dynamic resizing
         this.basicSizeMin = 50;
         this.basicSizeMax = 100;
@@ -17,13 +20,6 @@ class Brushstroke {
         this.target = createVector(width / 4 * 3, height / 8 * 6);
         this.origin = createVector(width / 2, height / 2);
 
-        this.pos = this.origin.copy();  // start position
-        this.targetDyn = this.target.copy();
-        this.vel = p5.Vector.sub(this.target, this.origin);  // make the starting angle
-        this.acc = createVector(0, 0);
-
-        this.switchTargetMoveA = false;
-        this.switchTargetMoveB = false;
         this.sprite = sprite;
     }
 
@@ -32,17 +28,19 @@ class Brushstroke {
 
         this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
 
-        if (this.distanceToTarget < 800 && this.switchTargetMoveA == false) {
-            this.targetDyn = p5.Vector.add(this.target, p5.Vector.random2D().mult(100));
-            this.switchTargetMoveA = true;
-        }
-        if (this.distanceToTarget < 300 && this.switchTargetMoveB == false) {
-            this.targetDyn = this.target.copy();
-            this.switchTargetMoveB = true;
-        }
+        // if (this.distanceToTarget < 800 && this.switchTargetMoveA == false) {
+        //     this.targetDyn = p5.Vector.add(this.target, p5.Vector.random2D().mult(100));
+        //     this.switchTargetMoveA = true;
+        // }
+        // if (this.distanceToTarget < 300 && this.switchTargetMoveB == false) {
+        //     this.targetDyn = this.target.copy();
+        //     this.switchTargetMoveB = true;
+        // }
     }
 
     showBrushstroke() {
+
+        this.updateBrushstroke();
 
         if (this.DEBUG) {
             this.show();

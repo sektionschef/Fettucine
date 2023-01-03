@@ -5,12 +5,10 @@ class Vehicle {
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
         this.slowRadius = 500;  // radius in which to slow down
         this.basicSize = 75;
-
         this.DEBUG = true;
 
         this.origin = origin;
         this.target = target;
-
         this.pos = this.origin.copy();  // start position
         this.vel = p5.Vector.sub(this.target, this.origin);  // make the starting angle
         this.acc = createVector(0, 0);
