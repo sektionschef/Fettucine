@@ -111,8 +111,6 @@ function setup() {
   originA = createVector(width / 2, height / 2);
   targetA = createVector(width / 4 * 3, height / 8 * 6);
 
-  // v = new Vehicle(originA, targetA);
-
   brush = new Brush();
   b = new Brushstroke(originA, targetA, brush.buffer);
 
@@ -129,11 +127,8 @@ function draw() {
   // show brush
   // image(brush.buffer, 0, 0);
 
-  // v.show();
-  // v.applyForce(v.seek());
-
   b.showBrushstroke();
-  b.applyForce(b.seek());
+  b.applyForce(b.seek(moving_target = true));
 
 
 

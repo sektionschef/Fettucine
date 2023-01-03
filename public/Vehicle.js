@@ -25,8 +25,18 @@ class Vehicle {
         this.acc.add(force);
     }
 
-    seek() {
-        let force = p5.Vector.sub(this.target, this.pos);
+    revertToOrigin() {
+        this.target = this.origin.copy();
+        console.log("asdfa");
+    }
+
+    seek(moving_target = false) {
+        let force;
+        if (moving_target) {
+            force = p5.Vector.sub(this.target.pos, this.pos);
+        } else {
+            force = p5.Vector.sub(this.target, this.pos);
+        }
         this.desiredSpeed = this.maxSpeed;
 
         // launching at lower speed

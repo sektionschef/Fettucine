@@ -17,25 +17,37 @@ class Brushstroke extends Vehicle {
         this.basicSize = this.basicSizeMax;
 
         this.desiredSpeed = 0;  // initial value, dynamic actual speed
-        this.target = createVector(width / 4 * 3, height / 8 * 6);
-        this.origin = createVector(width / 2, height / 2);
+        // this.target = createVector(width / 4 * 3, height / 8 * 6);
+        // this.origin = createVector(width / 2, height / 2);
+        this.target = new Vehicle(target, p5.Vector.add(target, p5.Vector.random2D().mult(400)));
+        this.origin = origin;
 
         this.sprite = sprite;
+
+        this.switchTarget = false;
     }
 
+    seekBrushstrokeTarget() {
+
+    }
+
+    updateTarget() {
+        this.target.show();
+        this.target.applyForce(this.target.seek());
+    }
+
+
     updateBrushstroke() {
-        this.update()
+        this.update();
+        this.updateTarget();
+
+        if (this.distanceToTarget < (1000) && this.switchTarget == false) {
+
+            this.target.revertToOrigin();
+            this.switchTarget = true;
+        }
 
         this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
-
-        // if (this.distanceToTarget < 800 && this.switchTargetMoveA == false) {
-        //     this.targetDyn = p5.Vector.add(this.target, p5.Vector.random2D().mult(100));
-        //     this.switchTargetMoveA = true;
-        // }
-        // if (this.distanceToTarget < 300 && this.switchTargetMoveB == false) {
-        //     this.targetDyn = this.target.copy();
-        //     this.switchTargetMoveB = true;
-        // }
     }
 
     showBrushstroke() {
