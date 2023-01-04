@@ -9,9 +9,11 @@ class Brushstroke extends Vehicle {
         this.maxSpeed = 15;  // top speed limit
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
-        this.slowRadius = 200;  // radius in which to slow down
-        this.targetBdist = 400 // getRandomFromList([50, 100, 200]);  // distance between target and target B - offset of target - 
+        this.slowRadius = 400;  // radius in which to slow down
+        this.finishedRadius = 20;  // minimal distance to stop
+        this.targetBdist = 300 // getRandomFromList([50, 100, 200]);  // distance between target and target B - offset of target - 
         this.targetBDirection = getRandomFromList([1, -1]);  // add 90 or 270 degrees to the target for finding target B
+        this.finished = false;
         this.DEBUG = true;
 
         this.origin = origin;
@@ -35,22 +37,30 @@ class Brushstroke extends Vehicle {
 
     updateTarget() {
         // move to targetB
-        this.target.show();
         this.target.update();
+        this.target.show();
         this.target.applyForce(this.target.seek());
     }
 
     updateBrushstroke() {
-        this.update();
-        this.updateTarget();
 
-        if (this.distanceToTarget > this.turningDistance && this.switchTarget == false) {
-            this.target.target = this.target.origin.copy();
-            this.switchTarget = true;
+        if (this.finished == false) {
+            this.update();
+            this.updateTarget();
+
+            if (this.distanceToTarget < this.turningDistance && this.switchTarget == false) {
+                this.target.target = this.target.origin.copy();
+                this.switchTarget = true;
+            }
+
+            // dynamic size for speed
+            this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
+
+            if (p5.Vector.dist(this.pos, this.target.target) < this.finishedRadius) {
+                this.finished = true;
+            }
         }
 
-        // dynamic size for speed
-        this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
     }
 
     showBrushstroke() {
