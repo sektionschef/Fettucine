@@ -1,6 +1,6 @@
 class Vehicle {
     constructor(origin, target, debug = true) {
-        this.maxSpeed = 30;  // top speed limit
+        this.maxSpeed = getRandomFromInterval(15, 30);  // 30 top speed limit
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
         this.slowRadius = 200;  // radius in which to slow down

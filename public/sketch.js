@@ -28,6 +28,8 @@ let EDITIONS = "100 editions";
 let CURRENTPIXELDENS = 1;
 
 
+let brushsystem;
+
 const PALETTESYSTEM = {
   "Brutus": {
     "background": ["#dac289", "#bea977"],
@@ -113,6 +115,11 @@ function setup() {
 
   brush = new Brush();
   b = new Brushstroke(originA, targetA, brush.buffer);
+  brushsystem = [];
+
+  for (var i = 0; i < 20; i++) {
+    brushsystem.push(new Brushstroke(p5.Vector.add(originA, i * 20), p5.Vector.add(targetA, i * 20), brush.buffer));
+  }
 }
 
 
@@ -130,6 +137,11 @@ function draw() {
   b.applyForce(b.seek(moving_target = true));
 
 
+  for (var i = 0; i < brushsystem.length; i++) {
+    brushsystem[i].updateBrushstroke();
+    brushsystem[i].showBrushstroke();
+    brushsystem[i].applyForce(brushsystem[i].seek(moving_target = true));
+  }
 
   // fxpreview();
 
