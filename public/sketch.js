@@ -110,8 +110,9 @@ function setup() {
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
 
-  originA = createVector(width / 2, height / 2);
-  targetA = createVector(width / 4 * 3, height / 8 * 6);
+  originA = createVector(width / 2, height / 8);
+  // targetA = createVector(width / 4 * 3, height / 8 * 6);
+  targetA = createVector(width / 2, height / 8 * 7);
 
   brush = new Brush();
   b = new Brushstroke(originA, targetA, brush.buffer);
@@ -132,6 +133,8 @@ function draw() {
 
   // show brush
   // image(brush.buffer, 0, 0);
+  // image(brush.buffer, mouseX, mouseY);
+
   b.updateBrushstroke();
   b.showBrushstroke();
   b.applyForce(b.seek(moving_target = true));
@@ -148,6 +151,58 @@ function draw() {
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
   // noLoop();
+
+
+  // overlay
+  let overlayColor = color("#aaaaaa8c");
+  let curveSexyness = 1;
+  fill(overlayColor)
+  noStroke();
+  curveTightness(curveSexyness);
+
+  // top
+  beginShape();
+  curveVertex(0, 0);
+  curveVertex(0, 0);
+  curveVertex(width / 8 * 3, height / 8 * 1);
+  curveVertex(width / 8 * 4, height / 8 * 1);
+  curveVertex(width / 8 * 5, height / 8 * 1);
+  curveVertex(width, 0);
+  curveVertex(width, 0);
+  endShape();
+
+  // left
+  beginShape();
+  curveVertex(0, 0);
+  curveVertex(0, 0);
+  curveVertex(width / 8 * 3, height / 8 * 1);
+  curveVertex(width / 8 * 3, height / 8 * 4);
+  curveVertex(width / 8 * 3, height / 8 * 7);
+  curveVertex(0, height);
+  curveVertex(0, height);
+  endShape();
+
+  // bottom
+  beginShape();
+  curveVertex(0, height);
+  curveVertex(0, height);
+  curveVertex(width / 8 * 3, height / 8 * 7);
+  curveVertex(width / 8 * 4, height / 8 * 7);
+  curveVertex(width / 8 * 5, height / 8 * 7);
+  curveVertex(width, height);
+  curveVertex(width, height);
+  endShape();
+
+  // right
+  beginShape();
+  curveVertex(width, 0);
+  curveVertex(width, 0);
+  curveVertex(width / 8 * 5, height / 8 * 1);
+  curveVertex(width / 8 * 5, height / 8 * 4);
+  curveVertex(width / 8 * 5, height / 8 * 7);
+  curveVertex(width, height);
+  curveVertex(width, height);
+  endShape();
 }
 
 function mousePressed() {

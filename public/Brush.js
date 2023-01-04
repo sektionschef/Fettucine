@@ -13,5 +13,17 @@ class Brush {
         this.buffer.vertex(60, 60);
         this.buffer.vertex(10, 40);
         this.buffer.endShape();
+
+
+        // this.buffer.noStroke();
+        // this.buffer.fill(color("#bb585854"));
+        // this.buffer.stroke(color("#8f494969"));
+        // this.buffer.strokeWeight(3);
+        // this.buffer.beginShape();
+        // this.buffer.vertex(10, 10);
+        // this.buffer.vertex(90, 10);
+        // this.buffer.vertex(60, 60);
+        // this.buffer.vertex(10, 40);
+        // this.buffer.endShape();
     }
 }
