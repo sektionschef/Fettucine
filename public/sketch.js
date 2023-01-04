@@ -113,7 +113,6 @@ function setup() {
 
   brush = new Brush();
   b = new Brushstroke(originA, targetA, brush.buffer);
-
 }
 
 
@@ -126,7 +125,7 @@ function draw() {
 
   // show brush
   // image(brush.buffer, 0, 0);
-
+  b.updateBrushstroke();
   b.showBrushstroke();
   b.applyForce(b.seek(moving_target = true));
 
