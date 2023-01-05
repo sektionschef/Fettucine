@@ -1,14 +1,14 @@
 class BrushSystem {
     constructor() {
 
-        this.originA = createVector(width / 4, height / 9);
-        this.targetA = createVector(width / 4, height / 9 * 8);
+        this.originA = createVector(width / 3, height / 9);
+        this.targetA = createVector(width / 3, height / 9 * 8);
         this.allFinished = false;
 
         this.buffer = createGraphics(width, height);
         this.brushstrokes = [];
 
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 75; i++) {
             this.brushstrokes.push(new Brushstroke(
                 p5.Vector.add(this.originA, i * 20),
                 p5.Vector.add(this.targetA, i * 20),
