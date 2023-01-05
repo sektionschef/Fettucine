@@ -113,7 +113,8 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  noise = new Noise();
+  // noise = new Noise();
+  paper = new Paper();
 
   // elements
   brush = new Brush();
@@ -150,8 +151,8 @@ function draw() {
   // show brush
   image(brush.buffer, 0, 0);
 
-  // show noise
-  noise.show();
+  // noise.show();
+  paper.show();
 
   // fxpreview();
   noLoop();

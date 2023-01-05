@@ -1,9 +1,15 @@
+// https://editor.p5js.org/AhmadMoussa/sketches/o8Oj_LSty 
+
 class Noise {
     constructor() {
 
-        this.buffer = createGraphics(400, 400);
-        this.xoff = 50;
-        this.yoff = 50;
+        this.buffer = createGraphics(width, height);
+        this.marginX = 50;
+        this.marginY = 50;
+
+        this.jCount = 1;  // 1
+        this.iCount = 1;  // 6
+
 
         this.create();
     }
@@ -15,21 +21,24 @@ class Noise {
         //rect(100,100,200)
 
         this.buffer.strokeWeight(1);
-        for (var j = 0; j < 1; j++) {
-            for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < this.jCount; j++) {
+            for (var i = 0; i < this.iCount; i++) {
                 this.buffer.stroke(0);
-                for (var x = 1; x < (this.buffer.width - this.yoff * 2); x++) {
-                    for (var y = 0; y < this.buffer.height - this.yoff * 2; y++) {
+                for (var x = 1; x < (this.buffer.width - this.marginX * 2); x++) {
+                    for (var y = 0; y < this.buffer.height - this.marginY * 2; y++) {
                         var n = noise(x * 0.02, y * 0.02);
                         if (random(1) > 0.9 - 0.01 * i - n / 5) {
+                            // if (random(1) > 0.9) {
                             this.buffer.strokeWeight(
-                                random(
-                                    0.2 + y / 500 - n / 10,
-                                    0.3 + y / 100 - n / 10 - j / 5
-                                )
+                                // random(
+                                //     0.2 + y / 500 - n / 10,
+                                //     0.3 + y / 100 - n / 10 - j / 5
+                                // )
+                                1
                             );
 
-                            this.buffer.point(this.xoff + x + (j) * (this.buffer.width - this.yoff * 2) / 5 + random(-2, 2), this.yoff + y + random(-3, 3));
+                            // this.buffer.point(this.marginX + x + (j) * (this.buffer.width - this.marginY * 2) / 5 + random(-2, 2), this.marginY + y + random(-3, 3));
+                            this.buffer.point(this.marginX + x + random(-2, 2), this.marginY + y + random(-3, 3));
                         }
                     }
                 }
@@ -38,6 +47,11 @@ class Noise {
     }
 
     show() {
-        image(this.buffer, 300, 300);
+        // image(this.buffer, 0, 0);
+
+        blendMode(OVERLAY);
+        // blendMode(MULTIPLY);
+        image(this.buffer, 0, 0);
+        blendMode(NORMAL);
     }
 }
