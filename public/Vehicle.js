@@ -1,5 +1,7 @@
 class Vehicle {
-    constructor(origin, target, debug = true) {
+    constructor(origin, target, drawBuffer, debug = true) {
+        this.buffer = drawBuffer;
+
         this.maxSpeed = getRandomFromInterval(15, 30);  // 30 top speed limit
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
         this.maxForce = 2;  // agility for changes, if too little -> overshoot
@@ -60,46 +62,46 @@ class Vehicle {
 
         if (this.DEBUG) {
             // origin DEBUG        
-            push();
-            translate(this.origin.x, this.origin.y);
-            fill(color("orange"));
-            noStroke();
-            circle(0, 0, 50);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.origin.x, this.origin.y);
+            this.buffer.fill(color("orange"));
+            this.buffer.noStroke();
+            this.buffer.circle(0, 0, 50);
+            this.buffer.pop();
 
             // target slowRadius
-            push();
-            translate(this.origin.x, this.origin.y);
-            strokeWeight(5);
-            stroke(color("orange"));
-            noFill();
-            circle(0, 0, this.slowRadius * 2);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.origin.x, this.origin.y);
+            this.buffer.strokeWeight(5);
+            this.buffer.stroke(color("orange"));
+            this.buffer.noFill();
+            this.buffer.circle(0, 0, this.slowRadius * 2);
+            this.buffer.pop();
 
-            push();
-            translate(this.pos.x, this.pos.y);
-            fill(color("blue"));
-            noStroke();
-            rotate(this.vel.heading())
-            triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.pos.x, this.pos.y);
+            this.buffer.fill(color("blue"));
+            this.buffer.noStroke();
+            this.buffer.rotate(this.vel.heading())
+            this.buffer.triangle(0, -this.basicSize / 4, this.basicSize, 0, 0, this.basicSize / 4);
+            this.buffer.pop();
 
             // target DEBUG        
-            push();
-            translate(this.target.x, this.target.y);
-            fill(color("green"));
-            noStroke();
-            circle(0, 0, 50);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.target.x, this.target.y);
+            this.buffer.fill(color("green"));
+            this.buffer.noStroke();
+            this.buffer.circle(0, 0, 50);
+            this.buffer.pop();
 
             // target slowRadius
-            push();
-            translate(this.target.x, this.target.y);
-            strokeWeight(5);
-            stroke(color("green"));
-            noFill();
-            circle(0, 0, this.slowRadius * 2);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.target.x, this.target.y);
+            this.buffer.strokeWeight(5);
+            this.buffer.stroke(color("green"));
+            this.buffer.noFill();
+            this.buffer.circle(0, 0, this.slowRadius * 2);
+            this.buffer.pop();
         }
     }
 }

@@ -109,17 +109,18 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
+  brushLy = createGraphics(width, height);
 
-  originA = createVector(width / 2, height / 9);
+  originA = createVector(width / 4, height / 9);
   // targetA = createVector(width / 4 * 3, height / 8 * 6);
-  targetA = createVector(width / 2, height / 9 * 8);
+  targetA = createVector(width / 4, height / 9 * 8);
 
   brush = new Brush();
-  b = new Brushstroke(originA, targetA, brush.buffer);
+  b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
   brushsystem = [];
 
-  for (var i = 0; i < 20; i++) {
-    brushsystem.push(new Brushstroke(p5.Vector.add(originA, i * 20), p5.Vector.add(targetA, i * 20), brush.buffer));
+  for (var i = 0; i < 200; i++) {
+    brushsystem.push(new Brushstroke(p5.Vector.add(originA, i * 20), p5.Vector.add(targetA, i * 20), brush.buffer, brushLy));
   }
 
   overlay = new Overlay();

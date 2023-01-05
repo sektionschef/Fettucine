@@ -1,10 +1,14 @@
 // grasp maxforce;
 
 class Brushstroke extends Vehicle {
-    constructor(origin, target, sprite) {
+    constructor(origin, target, sprite, drawBuffer) {
+
 
         // adds a sprite and a moving target on top of vehicle class
-        super(origin, target);
+        super(origin, target, drawBuffer, false);
+        console.log(this.buffer);
+
+        // this.buffer = drawBuffer;
 
         this.maxSpeed = getRandomFromInterval(8, 20);  // 15 top speed limit
         this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
@@ -20,7 +24,7 @@ class Brushstroke extends Vehicle {
         this.totalDistance = p5.Vector.sub(target, this.origin);
         this.targetBAngle = this.totalDistance.heading() + PI / 2 * this.targetBDirection; // or - PI/2
         this.targetB = p5.Vector.add(target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
-        this.target = new Vehicle(target, this.targetB, this.DEBUG);
+        this.target = new Vehicle(target, this.targetB, drawBuffer, this.DEBUG);
         this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
 
         // for dynamic resizing
@@ -66,35 +70,34 @@ class Brushstroke extends Vehicle {
     showBrushstroke() {
         if (this.DEBUG) {
             // origin DEBUG        
-            push();
-            translate(this.origin.x, this.origin.y);
-            fill(color("orange"));
-            noStroke();
-            circle(0, 0, 50);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.origin.x, this.origin.y);
+            this.buffer.fill(color("orange"));
+            this.buffer.noStroke();
+            this.buffer.circle(0, 0, 50);
+            this.buffer.pop();
 
             // target slowRadius
-            push();
-            translate(this.origin.x, this.origin.y);
-            strokeWeight(5);
-            stroke(color("orange"));
-            noFill();
-            circle(0, 0, this.slowRadius * 2);
-            pop();
+            this.buffer.push();
+            this.buffer.translate(this.origin.x, this.origin.y);
+            this.buffer.strokeWeight(5);
+            this.buffer.stroke(color("orange"));
+            this.buffer.noFill();
+            this.buffer.circle(0, 0, this.slowRadius * 2);
+            this.buffer.pop();
         }
 
-        push();
-        translate(this.pos.x, this.pos.y);
-        noStroke();
-        rotate(this.vel.heading())
-        imageMode(CENTER);
+        this.buffer.push();
+        this.buffer.translate(this.pos.x, this.pos.y);
+        this.buffer.noStroke();
+        this.buffer.rotate(this.vel.heading())
+        this.buffer.imageMode(CENTER);
         // image
         // this.sprite.resize(0, this.basicSize);
-        // image(this.sprite, 0, 0);
+        // this.buffer.image(this.sprite, 0, 0);
         // buffer
-        image(this.sprite, 0, 0, 0, this.basicSize);
-        pop();
-
+        this.buffer.image(this.sprite, 0, 0, 0, this.basicSize);
+        this.buffer.pop();
     }
 
 }
