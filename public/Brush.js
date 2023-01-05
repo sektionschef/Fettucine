@@ -39,21 +39,21 @@ class Brush {
         this.buffer.curveVertex(q3X, q3Y);
         this.buffer.endShape(CLOSE);
 
-        this.buffer.loadPixels();
-        var x, y, index;
-        for (x = 0; x < width; x++) {
-            for (y = 0; y < height; y++) {
-                index = (x + y * width) * 4;
+        // this.buffer.loadPixels();
+        // var x, y, index;
+        // for (x = 0; x < width; x++) {
+        //     for (y = 0; y < height; y++) {
+        //         index = (x + y * width) * 4;
 
-                if (this.buffer.pixels[index + 3] != 0) {
-                    this.buffer.pixels[index + 0] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
-                    this.buffer.pixels[index + 1] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
-                    this.buffer.pixels[index + 2] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
-                    this.buffer.pixels[index + 3] = 255;
-                }
+        //         if (this.buffer.pixels[index + 3] != 0) {
+        //             this.buffer.pixels[index + 0] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
+        //             this.buffer.pixels[index + 1] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
+        //             this.buffer.pixels[index + 2] += getRandomFromInterval(-this.pixelDistort, this.pixelDistort);
+        //             this.buffer.pixels[index + 3] = 255;
+        //         }
 
-            }
-        }
-        this.buffer.updatePixels();
+        //     }
+        // }
+        // this.buffer.updatePixels();
     }
 }

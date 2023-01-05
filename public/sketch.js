@@ -109,19 +109,15 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  brushLy = createGraphics(width, height);
 
-  originA = createVector(width / 4, height / 9);
-  // targetA = createVector(width / 4 * 3, height / 8 * 6);
-  targetA = createVector(width / 4, height / 9 * 8);
-
+  // elements
   brush = new Brush();
-  b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
-  brushsystem = [];
 
-  for (var i = 0; i < 200; i++) {
-    brushsystem.push(new Brushstroke(p5.Vector.add(originA, i * 20), p5.Vector.add(targetA, i * 20), brush.buffer, brushLy));
-  }
+  brushsystem = new BrushSystem();
+
+  // originA = createVector(width / 4, height / 9);
+  // targetA = createVector(width / 4, height / 9 * 8);
+  // b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
 
   overlay = new Overlay();
 }
@@ -134,19 +130,13 @@ function draw() {
     background(color(PALETTE.background[0]));
   }
 
-  b.updateBrushstroke();
-  b.showBrushstroke();
-  b.applyForce(b.seek(moving_target = true));
+  // b.updateBrushstroke();
+  // b.showBrushstroke();
+  // b.applyForce(b.seek(moving_target = true));
 
-
-  for (var i = 0; i < brushsystem.length; i++) {
-    brushsystem[i].updateBrushstroke();
-    brushsystem[i].showBrushstroke();
-    brushsystem[i].applyForce(brushsystem[i].seek(moving_target = true));
-  }
+  brushsystem.show();
 
   image(overlay.buffer, 0, 0);
-  // fxpreview();
 
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
@@ -154,8 +144,8 @@ function draw() {
 
   // show brush
   image(brush.buffer, 0, 0);
-  // image(brush.buffer, mouseX, mouseY);
 
+  // fxpreview();
 }
 
 function mousePressed() {

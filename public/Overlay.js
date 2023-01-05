@@ -2,7 +2,7 @@ class Overlay {
     constructor() {
 
         this.overlayColor = color(PALETTE.background[1]);
-        this.curveSexyness = 1;
+        this.curveSexyness = 1.07;
         this.buffer = createGraphics(width, height);
 
         this.buffer.fill(this.overlayColor)

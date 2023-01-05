@@ -3,10 +3,8 @@
 class Brushstroke extends Vehicle {
     constructor(origin, target, sprite, drawBuffer) {
 
-
         // adds a sprite and a moving target on top of vehicle class
         super(origin, target, drawBuffer, false);
-        console.log(this.buffer);
 
         // this.buffer = drawBuffer;
 
