@@ -12,8 +12,8 @@ class BrushSystem {
 
         for (var i = 0; i < this.brushCount; i++) {
             this.brushstrokes.push(new Brushstroke({
-                origin: p5.Vector.add(this.originA, i * 20),
-                target: p5.Vector.add(this.targetA, i * 20),
+                origin: p5.Vector.add(this.originA, i * data.density),
+                target: p5.Vector.add(this.targetA, i * data.density),
                 sprite: data.brushBuffer,  // GLOBAL - integrate in class
                 drawBuffer: this.buffer
             }));

@@ -26,8 +26,8 @@ class Brushstroke extends Vehicle {
         this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
 
         // for dynamic resizing
-        this.basicSizeMin = getRandomFromInterval(25, 60);  // 50
-        this.basicSizeMax = getRandomFromInterval(80, 140);  // 100
+        this.basicSizeMin = 50; // getRandomFromInterval(25, 60);  // 50
+        this.basicSizeMax = 80; // getRandomFromInterval(80, 140);  // 100
         this.basicSize = this.basicSizeMax;
 
         this.desiredSpeed = 0;  // initial value, dynamic actual speed

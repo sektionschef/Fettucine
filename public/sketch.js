@@ -39,8 +39,8 @@ const PALETTESYSTEM = {
   //   "pixelColors": ["#8ad1f7", "#7c1c1cff", "#d80f0fff"],
   // }
   "Judd": {
-    "background": ["#c9c9c9", "#d80f0fff"],
-    "pixelColors": ["#dadada", "#3a3a3a"],
+    "background": ["#868686", "#d80f0fff"],
+    "pixelColors": ["#dadada3b", "#c5c3c3c2"],
   }
 }
 
@@ -134,8 +134,9 @@ function setup() {
   });
 
   brushsystemBig = new BrushSystem({
-    brushCount: 75,
+    brushCount: 175,
     brushBuffer: brushBig.buffer,
+    density: 7,
   });
   // brushsystem = new BrushSystem({brushCount: 133, brushBuffer: brush.buffer});
 
@@ -168,7 +169,7 @@ function draw() {
   // noLoop();
 
   // show brush
-  // image(brush.buffer, 0, 0);
+  image(brushBig.buffer, 0, 0);
 
   // noise.show();
   // paper.show();
