@@ -1,9 +1,9 @@
 class Brush {
-    constructor() {
-        this.size = 100;
+    constructor(size, fillColor, strokeColor) {
+        this.size = size;
         this.strokeSize = 5;
-        this.fillColor = color(PALETTE.pixelColors[2]);
-        this.strokeColor = color(PALETTE.pixelColors[1]);
+        this.fillColor = fillColor;
+        this.strokeColor = strokeColor;
         this.buffer = createGraphics(this.size, this.size);
         this.pixelDistort = 20;
 

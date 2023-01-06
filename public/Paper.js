@@ -1,7 +1,7 @@
 class Paper {
     constructor() {
         this.buffer = createGraphics(width, height);
-        this.strokeColor = color("black");
+        this.strokeColor = color("#1d1d1d");
         this.strokeSize = 1;
         this.lineLenght = 25; // 5 +2
 

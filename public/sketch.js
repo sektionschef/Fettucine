@@ -27,7 +27,6 @@ let EDITIONS = "100 editions";
 
 let CURRENTPIXELDENS = 1;
 
-
 let brushsystem;
 
 const PALETTESYSTEM = {
@@ -35,9 +34,13 @@ const PALETTESYSTEM = {
   //   "background": ["#dac289", "#bea977"],
   //   "pixelColors": ["#8ad1f7", "#0777c2ff", "#034370ff"],
   // },
+  // "Judd": {
+  //   "background": ["#9e9e9e", "#ececec"],
+  //   "pixelColors": ["#8ad1f7", "#7c1c1cff", "#d80f0fff"],
+  // }
   "Judd": {
-    "background": ["#9e9e9e", "#ececec"],
-    "pixelColors": ["#8ad1f7", "#7c1c1cff", "#d80f0fff"],
+    "background": ["#c9c9c9", "#d80f0fff"],
+    "pixelColors": ["#ececec", "#8d8d8d"],
   }
 }
 
@@ -117,9 +120,11 @@ function setup() {
   paper = new Paper();
 
   // elements
-  brush = new Brush();
+  brush = new Brush(50, color("#1f1f1f"), color("#808080"));
+  brush2 = new Brush(100, color(PALETTE.pixelColors[0]), color(PALETTE.pixelColors[1]));
 
-  brushsystem = new BrushSystem();
+  brushsystem = new BrushSystem(133, brush.buffer);
+  brushsystem2 = new BrushSystem(75, brush2.buffer);
 
   // originA = createVector(width / 4, height / 9);
   // targetA = createVector(width / 4, height / 9 * 8);
@@ -133,14 +138,15 @@ function draw() {
 
   if (frameCount == 1) {
     pixelDensity(CURRENTPIXELDENS);
-    background(color(PALETTE.background[0]));
   }
+  background(color(PALETTE.background[0]));
 
   // b.updateBrushstroke();
   // b.showBrushstroke();
   // b.applyForce(b.seek(moving_target = true));
 
   brushsystem.show();
+  brushsystem2.show();
 
   image(overlay.buffer, 0, 0);
 
@@ -149,7 +155,7 @@ function draw() {
   // noLoop();
 
   // show brush
-  image(brush.buffer, 0, 0);
+  // image(brush.buffer, 0, 0);
 
   // noise.show();
   paper.show();
