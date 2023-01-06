@@ -94,6 +94,7 @@ class Brushstroke extends Vehicle {
         // this.sprite.resize(0, this.basicSize);
         // this.buffer.image(this.sprite, 0, 0);
         // buffer
+        this.buffer.blendMode(OVERLAY);
         this.buffer.image(this.sprite, 0, 0, 0, this.basicSize);
         this.buffer.pop();
     }

@@ -30,17 +30,13 @@ let CURRENTPIXELDENS = 1;
 let brushsystem;
 
 const PALETTESYSTEM = {
-  // "Brutus": {
-  //   "background": ["#dac289", "#bea977"],
-  //   "pixelColors": ["#8ad1f7", "#0777c2ff", "#034370ff"],
-  // },
   // "Judd": {
-  //   "background": ["#9e9e9e", "#ececec"],
-  //   "pixelColors": ["#8ad1f7", "#7c1c1cff", "#d80f0fff"],
-  // }
-  "Judd": {
-    "background": ["#868686", "#d80f0fff"],
-    "pixelColors": ["#dadada3b", "#c5c3c3c2"],
+  //   "background": ["#d6d5d5", "#d80f0fff"],
+  //   "pixelColors": ["#dadada3b", "#afafafff"],
+  // },
+  "Only white": {
+    "background": ["#d6d5d5", "#eeeeeeff"],
+    "pixelColors": ["#dadada3b", "#afafafff"],
   }
 }
 
@@ -117,7 +113,7 @@ function setup() {
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
   // noise = new Noise();
-  // paper = new Paper();
+  paper = new Paper();
 
   // elements
   // brush = new Brush({
@@ -172,7 +168,7 @@ function draw() {
   image(brushBig.buffer, 0, 0);
 
   // noise.show();
-  // paper.show();
+  paper.show();
 
   // fxpreview();
   noLoop();
