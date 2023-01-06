@@ -1,7 +1,7 @@
 class BrushSystem {
-    constructor(brushCount, brushBuffer) {
+    constructor(data) {
 
-        this.brushCount = brushCount;
+        this.brushCount = data.brushCount;
 
         this.originA = createVector(width / 3, height / 9);
         this.targetA = createVector(width / 3, height / 9 * 8);
@@ -11,12 +11,12 @@ class BrushSystem {
         this.brushstrokes = [];
 
         for (var i = 0; i < this.brushCount; i++) {
-            this.brushstrokes.push(new Brushstroke(
-                p5.Vector.add(this.originA, i * 20),
-                p5.Vector.add(this.targetA, i * 20),
-                brushBuffer,  // GLOBAL - integrate in class
-                this.buffer
-            ));
+            this.brushstrokes.push(new Brushstroke({
+                origin: p5.Vector.add(this.originA, i * 20),
+                target: p5.Vector.add(this.targetA, i * 20),
+                sprite: data.brushBuffer,  // GLOBAL - integrate in class
+                drawBuffer: this.buffer
+            }));
         }
 
         this.create();

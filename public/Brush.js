@@ -1,11 +1,13 @@
 class Brush {
-    constructor(size, fillColor, strokeColor) {
-        this.size = size;
-        this.strokeSize = 5;
-        this.fillColor = fillColor;
-        this.strokeColor = strokeColor;
-        this.buffer = createGraphics(this.size, this.size);
+    constructor(data) {
+        this.size = data.size;
+        this.strokeSize = data.strokeSize;
+        this.fillColor = data.fillColor;
+        this.strokeColor = data.strokeColor;
+
         this.pixelDistort = 20;
+
+        this.buffer = createGraphics(this.size, this.size);
 
         let q1X = getRandomFromInterval(0, this.buffer.width / 2);
         let q1Y = getRandomFromInterval(0, this.buffer.height / 2);

@@ -40,7 +40,7 @@ const PALETTESYSTEM = {
   // }
   "Judd": {
     "background": ["#c9c9c9", "#d80f0fff"],
-    "pixelColors": ["#ececec", "#8d8d8d"],
+    "pixelColors": ["#dadada", "#3a3a3a"],
   }
 }
 
@@ -117,14 +117,27 @@ function setup() {
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
   // noise = new Noise();
-  paper = new Paper();
+  // paper = new Paper();
 
   // elements
-  brush = new Brush(50, color("#1f1f1f"), color("#808080"));
-  brush2 = new Brush(100, color(PALETTE.pixelColors[0]), color(PALETTE.pixelColors[1]));
+  // brush = new Brush({
+  //   size: 50,
+  //   strokeSize: 5,
+  //   fillColor: color("#1f1f1f"),
+  //   strokeColor: color("#808080")
+  // });
+  brushBig = new Brush({
+    size: 100,
+    strokeSize: 1,
+    fillColor: color(PALETTE.pixelColors[0]),
+    strokeColor: color(PALETTE.pixelColors[1])
+  });
 
-  brushsystem = new BrushSystem(133, brush.buffer);
-  brushsystem2 = new BrushSystem(75, brush2.buffer);
+  brushsystemBig = new BrushSystem({
+    brushCount: 75,
+    brushBuffer: brushBig.buffer,
+  });
+  // brushsystem = new BrushSystem({brushCount: 133, brushBuffer: brush.buffer});
 
   // originA = createVector(width / 4, height / 9);
   // targetA = createVector(width / 4, height / 9 * 8);
@@ -145,8 +158,8 @@ function draw() {
   // b.showBrushstroke();
   // b.applyForce(b.seek(moving_target = true));
 
-  brushsystem.show();
-  brushsystem2.show();
+  // brushsystem.show();
+  brushsystemBig.show();
 
   image(overlay.buffer, 0, 0);
 
@@ -158,7 +171,7 @@ function draw() {
   // image(brush.buffer, 0, 0);
 
   // noise.show();
-  paper.show();
+  // paper.show();
 
   // fxpreview();
   noLoop();

@@ -1,10 +1,10 @@
 // grasp maxforce;
 
 class Brushstroke extends Vehicle {
-    constructor(origin, target, sprite, drawBuffer) {
+    constructor(data) {
 
         // adds a sprite and a moving target on top of vehicle class
-        super(origin, target, drawBuffer, false);
+        super(data.origin, data.target, data.drawBuffer, false);
 
         // this.buffer = drawBuffer;
 
@@ -18,11 +18,11 @@ class Brushstroke extends Vehicle {
         this.finished = false;
         this.DEBUG = false;
 
-        this.origin = origin;
-        this.totalDistance = p5.Vector.sub(target, this.origin);
+        this.origin = data.origin;
+        this.totalDistance = p5.Vector.sub(data.target, this.origin);
         this.targetBAngle = this.totalDistance.heading() + PI / 2 * this.targetBDirection; // or - PI/2
-        this.targetB = p5.Vector.add(target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
-        this.target = new Vehicle(target, this.targetB, drawBuffer, this.DEBUG);
+        this.targetB = p5.Vector.add(data.target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
+        this.target = new Vehicle(data.target, this.targetB, data.drawBuffer, this.DEBUG);
         this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
 
         // for dynamic resizing
@@ -32,7 +32,7 @@ class Brushstroke extends Vehicle {
 
         this.desiredSpeed = 0;  // initial value, dynamic actual speed
 
-        this.sprite = sprite;
+        this.sprite = data.sprite;
 
         this.switchTarget = false;
     }
