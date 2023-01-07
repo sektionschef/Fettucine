@@ -55,7 +55,7 @@ class Brushstroke extends Vehicle {
             }
 
             // dynamic size for speed
-            this.basicSize = Math.round(map(this.desiredSpeed, 0, this.maxSpeed, this.basicSizeMax, this.basicSizeMin));
+            this.basicSize = Math.round(map(this.desiredSpeed, this.minSpeed, this.maxSpeed, this.sprite.width * this.basicSizeMax, this.sprite.width * this.basicSizeMin));
 
             if (p5.Vector.dist(this.pos, this.target.target) < this.finishedRadius) {
                 this.finished = true;

@@ -126,12 +126,8 @@ function setup() {
   //   fillColor: color("#1f1f1f"),
   //   strokeColor: color("#808080")
   // });
-  brushBig = new Brush({
-    size: 100,
-    strokeSize: 1,
-    fillColor: color(PALETTE.pixelColors[0]),
-    strokeColor: color(PALETTE.pixelColors[1])
-  });
+
+  brushCollection = new BrushCollection();
 
   areaABig = new BrushstrokeSystem({
     originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
@@ -139,8 +135,6 @@ function setup() {
     originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
     targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
     densityFactor: 10,
-    // brushCount: 175, bei 1500
-    sprite: brushBig.buffer,
     density: 1,
     maxSpeedMin: 8,
     maxSpeedMax: 20,
@@ -150,8 +144,8 @@ function setup() {
     finishedRadius: 20,
     targetBdistList: [100, 200],
     targetBDirectionList: [-1, 1],
-    basicSizeMin: 50,
-    basicSizeMax: 55,
+    basicSizeMin: 1,
+    basicSizeMax: 1.1,
   });
   // areaA = new BrushstrokeSystem({brushCount: 133, brushBuffer: brush.buffer});
 
@@ -183,11 +177,11 @@ function draw() {
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
   // noLoop();
 
-  // show brush
-  image(brushBig.buffer, 0, 0);
 
   // paper.show();
   // noise.show();
+
+  brushCollection.show();
 
   // fxpreview();
   noLoop();

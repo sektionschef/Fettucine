@@ -22,6 +22,7 @@ class BrushstrokeSystem {
             data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
             data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
             // specificData.sprite = data.brushBuffer;  // GLOBAL - integrate in class
+            data.sprite = getRandomFromList(brushCollection.brushes);
             data.drawBuffer = this.buffer;
 
             this.brushstrokes.push(new Brushstroke(data));
