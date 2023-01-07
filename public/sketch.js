@@ -116,8 +116,8 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
-  // paper = new Paper();
-  // noise = new Noise();
+  paper = new Paper();
+  noise = new Noise();
 
   // elements
   // brush = new Brush({
@@ -135,7 +135,6 @@ function setup() {
     originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
     targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
     densityFactor: 10,
-    density: 1,
     maxSpeedMin: 8,
     maxSpeedMax: 20,
     minSpeed: 2,
@@ -153,7 +152,7 @@ function setup() {
   // targetA = createVector(width / 4, height / 9 * 8);
   // b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
 
-  // overlay = new Overlay();
+  overlay = new Overlay();
 }
 
 
@@ -168,18 +167,28 @@ function draw() {
   // b.showBrushstroke();
   // b.applyForce(b.seek(moving_target = true));
 
+  // TEST with rects
+  // for (var i = 0; i < 1000; i++) {
+  //   push();
+  //   fill(distortColorSuperNew(color("#6b6b6b"), 70));
+  //   translate(width / 2 + getRandomFromInterval(-500, 500), height / 2 + getRandomFromInterval(-1000, 1000));
+  //   rectMode(CENTER);
+  //   rect(0, 0, 300, 300);
+  //   pop();
+  // }
+
   // areaA.show();
   areaABig.show();
 
-  // image(overlay.buffer, 0, 0);
+  image(overlay.buffer, 0, 0);
 
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
   // noLoop();
 
 
-  // paper.show();
-  // noise.show();
+  paper.show();
+  noise.show();
 
   brushCollection.show();
 

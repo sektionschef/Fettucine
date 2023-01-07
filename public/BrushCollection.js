@@ -1,25 +1,29 @@
 class BrushCollection {
     constructor() {
-        this.brushCount = 15;
-
+        this.brushTemplateCount = 15;
+        this.brushTemplateSize = 50;
+        this.brushTemplateStrokeSize = 1;
+        this.brushTemplateFillColor = color(PALETTE.pixelColors[0]);
+        this.brushTemplateFillColorDistort = 30;
+        this.brushTemplateStrokeColor = color(PALETTE.pixelColors[1]);
+        this.brushTemplateStrokeColorDistort = 30;
 
         this.brushes = [];
 
-
-        for (var i = 0; i < this.brushCount; i++) {
+        for (var i = 0; i < this.brushTemplateCount; i++) {
             var data = {
-                size: 50,
-                strokeSize: 1,
-                fillColor: distortColorSuperNew(color(PALETTE.pixelColors[0]), 30),
-                strokeColor: distortColorSuperNew(color(PALETTE.pixelColors[1]), 30)
+                size: this.brushTemplateSize,
+                strokeSize: this.brushTemplateStrokeSize,
+                fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
+                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort)
             }
             this.brushes.push(new Brush(data).buffer);
         }
     }
 
     show() {
-        // for debugging
-        for (var i = 0; i < this.brushCount; i++) {
+        // for debugging - list them all
+        for (var i = 0; i < this.brushes.length; i++) {
             image(this.brushes[i], i * this.brushes[i].width, 0);
         }
     }
