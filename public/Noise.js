@@ -3,14 +3,16 @@
 class Noise {
     constructor() {
 
-        this.buffer = createGraphics(width, height);
-        this.marginX = 50;
-        this.marginY = 50;
+        this.width = 500;
+        this.height = 500;
+        this.marginX = 0; //50;
+        this.marginY = 0; //50;
 
         this.jCount = 1;  // 1
         this.iCount = 1;  // 6
 
 
+        this.buffer = createGraphics(this.width, this.height);
         this.create();
     }
 
@@ -49,9 +51,18 @@ class Noise {
     show() {
         // image(this.buffer, 0, 0);
 
-        blendMode(OVERLAY);
-        // blendMode(MULTIPLY);
-        image(this.buffer, 0, 0);
-        blendMode(NORMAL);
+        var xCount = Math.ceil(width / this.buffer.width);
+        var yCount = Math.ceil(height / this.buffer.height);
+
+        for (var y = 0; y < yCount; y++) {
+            for (var x = 0; x < xCount; x++) {
+                blendMode(OVERLAY);
+                // blendMode(MULTIPLY);
+                image(this.buffer, x * this.buffer.width, y * this.buffer.height);
+                blendMode(NORMAL);
+            }
+        }
+
+
     }
 }

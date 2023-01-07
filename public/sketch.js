@@ -27,16 +27,20 @@ let EDITIONS = "100 editions";
 
 let CURRENTPIXELDENS = 1;
 
-let brushsystem;
+let areaA;
 
 const PALETTESYSTEM = {
   // "Judd": {
   //   "background": ["#d6d5d5", "#d80f0fff"],
   //   "pixelColors": ["#dadada3b", "#afafafff"],
   // },
-  "Only white": {
-    "background": ["#d6d5d5", "#eeeeeeff"],
-    "pixelColors": ["#dadada3b", "#afafafff"],
+  // "Only white": {
+  //   "background": ["#d6d5d5", "#f7f7f7ff"],
+  //   "pixelColors": ["#9c9c9c3b", "#afafafff"],
+  // },
+  "Only red": {
+    "background": ["#d6d5d5", "#ee4949ff"],
+    "pixelColors": ["#d3d3d33b", "#afafafff"],
   }
 }
 
@@ -112,8 +116,8 @@ function setup() {
 
   // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
 
+  // paper = new Paper();
   // noise = new Noise();
-  paper = new Paper();
 
   // elements
   // brush = new Brush({
@@ -129,18 +133,23 @@ function setup() {
     strokeColor: color(PALETTE.pixelColors[1])
   });
 
-  brushsystemBig = new BrushSystem({
-    brushCount: 175,
+  areaABig = new BrushstrokeSystem({
+    originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
+    targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
+    originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
+    targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
+    densityFactor: 10,
+    // brushCount: 175, bei 1500
     brushBuffer: brushBig.buffer,
-    density: 7,
+    density: 1,
   });
-  // brushsystem = new BrushSystem({brushCount: 133, brushBuffer: brush.buffer});
+  // areaA = new BrushstrokeSystem({brushCount: 133, brushBuffer: brush.buffer});
 
   // originA = createVector(width / 4, height / 9);
   // targetA = createVector(width / 4, height / 9 * 8);
   // b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
 
-  overlay = new Overlay();
+  // overlay = new Overlay();
 }
 
 
@@ -155,10 +164,10 @@ function draw() {
   // b.showBrushstroke();
   // b.applyForce(b.seek(moving_target = true));
 
-  // brushsystem.show();
-  brushsystemBig.show();
+  // areaA.show();
+  areaABig.show();
 
-  image(overlay.buffer, 0, 0);
+  // image(overlay.buffer, 0, 0);
 
   // let endTime = performance.now()
   // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
@@ -167,8 +176,8 @@ function draw() {
   // show brush
   image(brushBig.buffer, 0, 0);
 
+  // paper.show();
   // noise.show();
-  paper.show();
 
   // fxpreview();
   noLoop();

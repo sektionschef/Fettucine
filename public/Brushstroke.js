@@ -27,7 +27,7 @@ class Brushstroke extends Vehicle {
 
         // for dynamic resizing
         this.basicSizeMin = 50; // getRandomFromInterval(25, 60);  // 50
-        this.basicSizeMax = 80; // getRandomFromInterval(80, 140);  // 100
+        this.basicSizeMax = 55; // getRandomFromInterval(80, 140);  // 100
         this.basicSize = this.basicSizeMax;
 
         this.desiredSpeed = 0;  // initial value, dynamic actual speed

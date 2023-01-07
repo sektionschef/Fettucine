@@ -1,10 +1,16 @@
-class BrushSystem {
+class BrushstrokeSystem {
     constructor(data) {
 
-        this.brushCount = data.brushCount;
+        this.originA = data.originA;
+        this.targetA = data.targetA;
+        this.originB = data.originB;
+        this.targetB = data.targetB;
+        this.densityFactor = data.densityFactor;
 
-        this.originA = createVector(width / 3, height / 9);
-        this.targetA = createVector(width / 3, height / 9 * 8);
+        this.distanceAB = p5.Vector.dist(this.originA, this.originB);
+        this.brushCount = this.distanceAB / this.densityFactor;
+        // console.log(this.brushCount);
+
         this.allFinished = false;
 
         this.buffer = createGraphics(width, height);
@@ -12,8 +18,8 @@ class BrushSystem {
 
         for (var i = 0; i < this.brushCount; i++) {
             this.brushstrokes.push(new Brushstroke({
-                origin: p5.Vector.add(this.originA, i * data.density),
-                target: p5.Vector.add(this.targetA, i * data.density),
+                origin: p5.Vector.add(this.originA, i * this.densityFactor),
+                target: p5.Vector.add(this.targetA, i * this.densityFactor),
                 sprite: data.brushBuffer,  // GLOBAL - integrate in class
                 drawBuffer: this.buffer
             }));
@@ -56,5 +62,37 @@ class BrushSystem {
         if (this.allFinished) {
             image(this.buffer, 0, 0);
         }
+
+        // origin DEBUG        
+        push();
+        translate(this.originA.x, this.originA.y);
+        fill(color("orange"));
+        noStroke();
+        circle(0, 0, 50);
+        pop();
+
+        // target DEBUG        
+        push();
+        translate(this.targetA.x, this.targetA.y);
+        fill(color("green"));
+        noStroke();
+        circle(0, 0, 50);
+        pop();
+
+        // origin DEBUG        
+        push();
+        translate(this.originB.x, this.originB.y);
+        fill(color("orange"));
+        noStroke();
+        circle(0, 0, 50);
+        pop();
+
+        // target DEBUG        
+        push();
+        translate(this.targetB.x, this.targetB.y);
+        fill(color("green"));
+        noStroke();
+        circle(0, 0, 50);
+        pop();
     }
 }
