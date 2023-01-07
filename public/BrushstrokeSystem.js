@@ -6,23 +6,25 @@ class BrushstrokeSystem {
         this.originB = data.originB;
         this.targetB = data.targetB;
         this.densityFactor = data.densityFactor;
+        this.DEBUG = false;
 
+        // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
         this.brushCount = this.distanceAB / this.densityFactor;
         // console.log(this.brushCount);
 
         this.allFinished = false;
-
         this.buffer = createGraphics(width, height);
         this.brushstrokes = [];
 
         for (var i = 0; i < this.brushCount; i++) {
-            this.brushstrokes.push(new Brushstroke({
-                origin: p5.Vector.add(this.originA, i * this.densityFactor),
-                target: p5.Vector.add(this.targetA, i * this.densityFactor),
-                sprite: data.brushBuffer,  // GLOBAL - integrate in class
-                drawBuffer: this.buffer
-            }));
+
+            data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
+            data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
+            // specificData.sprite = data.brushBuffer;  // GLOBAL - integrate in class
+            data.drawBuffer = this.buffer;
+
+            this.brushstrokes.push(new Brushstroke(data));
         }
 
         this.create();
@@ -63,36 +65,38 @@ class BrushstrokeSystem {
             image(this.buffer, 0, 0);
         }
 
-        // origin DEBUG        
-        push();
-        translate(this.originA.x, this.originA.y);
-        fill(color("orange"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
+        if (this.DEBUG) {
+            // origin DEBUG        
+            push();
+            translate(this.originA.x, this.originA.y);
+            fill(color("orange"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
 
-        // target DEBUG        
-        push();
-        translate(this.targetA.x, this.targetA.y);
-        fill(color("green"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
+            // target DEBUG        
+            push();
+            translate(this.targetA.x, this.targetA.y);
+            fill(color("green"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
 
-        // origin DEBUG        
-        push();
-        translate(this.originB.x, this.originB.y);
-        fill(color("orange"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
+            // origin DEBUG        
+            push();
+            translate(this.originB.x, this.originB.y);
+            fill(color("orange"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
 
-        // target DEBUG        
-        push();
-        translate(this.targetB.x, this.targetB.y);
-        fill(color("green"));
-        noStroke();
-        circle(0, 0, 50);
-        pop();
+            // target DEBUG        
+            push();
+            translate(this.targetB.x, this.targetB.y);
+            fill(color("green"));
+            noStroke();
+            circle(0, 0, 50);
+            pop();
+        }
     }
 }

@@ -140,8 +140,18 @@ function setup() {
     targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
     densityFactor: 10,
     // brushCount: 175, bei 1500
-    brushBuffer: brushBig.buffer,
+    sprite: brushBig.buffer,
     density: 1,
+    maxSpeedMin: 8,
+    maxSpeedMax: 20,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 400,
+    finishedRadius: 20,
+    targetBdistList: [100, 200],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 50,
+    basicSizeMax: 55,
   });
   // areaA = new BrushstrokeSystem({brushCount: 133, brushBuffer: brush.buffer});
 

@@ -8,33 +8,32 @@ class Brushstroke extends Vehicle {
 
         // this.buffer = drawBuffer;
 
-        this.maxSpeed = getRandomFromInterval(8, 20);  // 15 top speed limit
-        this.minSpeed = 2;  // minimum speed - prevents from stopping at 0
-        this.maxForce = 2;  // agility for changes, if too little -> overshoot
-        this.slowRadius = 400;  // radius in which to slow down
-        this.finishedRadius = 20;  // minimal distance to stop
-        this.targetBdist = getRandomFromList([50, 100, 200]);  // 300 distance between target and target B - offset of target - 
-        this.targetBDirection = getRandomFromList([1, -1]);  // add 90 or 270 degrees to the target for finding target B
+        this.maxSpeed = getRandomFromInterval(data.maxSpeedMin, data.maxSpeedMax); // 8-20 // 15 top speed limit
+        this.minSpeed = data.minSpeed // 2;  // minimum speed - prevents from stopping at 0
+        this.maxForce = data.maxForce; // 2  // agility for changes, if too little -> overshoot
+        this.slowRadius = data.slowRadius; // 400;  // radius in which to slow down
+        this.finishedRadius = data.finishedRadius; // 20;  // minimal distance to stop
+        this.targetBdist = getRandomFromList(data.targetBdistList); // [50, 100, 200]  // 300 distance between target and target B - offset of target - 
+        this.targetBDirection = getRandomFromList(data.targetBDirectionList); // [1, -1] // add 90 or 270 degrees to the target for finding target B
+        // for dynamic resizing
+        this.basicSizeMin = data.basicSizeMin; // getRandomFromInterval(25, 60);  // 50
+        this.basicSizeMax = data.basicSizeMax; // getRandomFromInterval(80, 140);  // 100
+
+        this.basicSize = this.basicSizeMax;
+        this.origin = data.origin;
         this.finished = false;
         this.DEBUG = false;
+        this.desiredSpeed = 0;  // initial value, dynamic actual speed
+        this.sprite = data.sprite;
+        this.switchTarget = false;
 
-        this.origin = data.origin;
         this.totalDistance = p5.Vector.sub(data.target, this.origin);
         this.targetBAngle = this.totalDistance.heading() + PI / 2 * this.targetBDirection; // or - PI/2
         this.targetB = p5.Vector.add(data.target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
         this.target = new Vehicle(data.target, this.targetB, data.drawBuffer, this.DEBUG);
         this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
 
-        // for dynamic resizing
-        this.basicSizeMin = 50; // getRandomFromInterval(25, 60);  // 50
-        this.basicSizeMax = 55; // getRandomFromInterval(80, 140);  // 100
-        this.basicSize = this.basicSizeMax;
 
-        this.desiredSpeed = 0;  // initial value, dynamic actual speed
-
-        this.sprite = data.sprite;
-
-        this.switchTarget = false;
     }
 
     updateTarget() {
