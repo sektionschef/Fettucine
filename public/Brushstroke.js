@@ -18,6 +18,7 @@ class Brushstroke extends Vehicle {
         // for dynamic resizing
         this.basicSizeMin = data.basicSizeMin; // getRandomFromInterval(25, 60);  // 50
         this.basicSizeMax = data.basicSizeMax; // getRandomFromInterval(80, 140);  // 100
+        this.OVERLAY = data.OVERLAY;
 
         this.basicSize = this.basicSizeMax;
         this.origin = data.origin;
@@ -93,7 +94,9 @@ class Brushstroke extends Vehicle {
         // this.sprite.resize(0, this.basicSize);
         // this.buffer.image(this.sprite, 0, 0);
         // buffer
-        this.buffer.blendMode(OVERLAY);
+        if (this.OVERLAY) {
+            this.buffer.blendMode(OVERLAY);
+        }
         this.buffer.image(this.sprite, 0, 0, 0, this.basicSize);
         this.buffer.pop();
     }

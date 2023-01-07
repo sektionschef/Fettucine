@@ -24,6 +24,6 @@ class Paper {
     show() {
         blendMode(OVERLAY);
         image(this.buffer, 0, 0);
-        blendMode(NORMAL);
+        // blendMode(BLEND);
     }
 }

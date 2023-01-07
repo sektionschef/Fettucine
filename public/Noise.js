@@ -58,8 +58,8 @@ class Noise {
             for (var x = 0; x < xCount; x++) {
                 blendMode(OVERLAY);
                 // blendMode(MULTIPLY);
+                // ROTATE
                 image(this.buffer, x * this.buffer.width, y * this.buffer.height);
-                blendMode(NORMAL);
             }
         }
 

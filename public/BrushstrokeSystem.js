@@ -6,7 +6,15 @@ class BrushstrokeSystem {
         this.originB = data.originB;
         this.targetB = data.targetB;
         this.densityFactor = data.densityFactor;
+        this.brushTemplateCount = data.brushTemplateCount;
+        this.brushTemplateSize = data.brushTemplateSize;
+        this.brushTemplateStrokeSize = data.brushTemplateStrokeSize;
+        this.brushTemplateFillColor = data.brushTemplateFillColor;
+        this.brushTemplateFillColorDistort = data.brushTemplateFillColorDistort;
+        this.brushTemplateStrokeColor = data.brushTemplateStrokeColor;
+        this.brushTemplateStrokeColorDistort = data.brushTemplateStrokeColorDistort;
         this.DEBUG = false;
+
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
@@ -15,20 +23,43 @@ class BrushstrokeSystem {
 
         this.allFinished = false;
         this.buffer = createGraphics(width, height);
+        this.brushTemplates = [];
         this.brushstrokes = [];
+
+        this.createBrushTemplates();
 
         for (var i = 0; i < this.brushCount; i++) {
 
             data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
             data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
             // specificData.sprite = data.brushBuffer;  // GLOBAL - integrate in class
-            data.sprite = getRandomFromList(brushCollection.brushes);
+            data.sprite = getRandomFromList(this.brushTemplates);
             data.drawBuffer = this.buffer;
 
             this.brushstrokes.push(new Brushstroke(data));
         }
 
         this.create();
+    }
+
+    createBrushTemplates() {
+
+        for (var i = 0; i < this.brushTemplateCount; i++) {
+            var BrushData = {
+                size: this.brushTemplateSize,
+                strokeSize: this.brushTemplateStrokeSize,
+                fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
+                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort)
+            }
+            this.brushTemplates.push(new Brush(BrushData).buffer);
+        }
+    }
+
+    showBrushTemplates() {
+        // for debugging - list them all
+        for (var i = 0; i < this.brushTemplates.length; i++) {
+            image(this.brushTemplates[i], i * this.brushTemplates[i].width, 0);
+        }
     }
 
     check_all_complete() {
@@ -63,7 +94,7 @@ class BrushstrokeSystem {
 
     show() {
         if (this.allFinished) {
-            this.buffer.blendMode(OVERLAY);
+            // this.buffer.blendMode(OVERLAY);
             image(this.buffer, 0, 0);
         }
 

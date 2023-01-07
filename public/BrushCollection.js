@@ -1,12 +1,5 @@
 class BrushCollection {
-    constructor() {
-        this.brushTemplateCount = 15;
-        this.brushTemplateSize = 50;
-        this.brushTemplateStrokeSize = 1;
-        this.brushTemplateFillColor = color(PALETTE.pixelColors[0]);
-        this.brushTemplateFillColorDistort = 30;
-        this.brushTemplateStrokeColor = color(PALETTE.pixelColors[1]);
-        this.brushTemplateStrokeColorDistort = 30;
+    constructor(data) {
 
         this.brushes = [];
 
