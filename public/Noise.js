@@ -26,11 +26,10 @@ class Noise {
         this.buffer.noStroke();
         //rect(100,100,200)
 
-        this.buffer.strokeWeight(1);
         for (var j = 0; j < this.jCount; j++) {
             for (var i = 0; i < this.iCount; i++) {
                 this.buffer.stroke(0);
-                for (var x = 1; x < (this.buffer.width - this.marginX * 2); x++) {
+                for (var x = 0; x < (this.buffer.width - this.marginX * 2); x++) {
                     for (var y = 0; y < this.buffer.height - this.marginY * 2; y++) {
                         var n = noise(x * 0.02, y * 0.02);
                         if (random(1) > 0.9 - 0.01 * i - n / 5) {
@@ -43,13 +42,22 @@ class Noise {
                                 this.strokeWeight
                             );
 
-                            var x = this.marginX + x + random(-2, 2);
-                            var y = this.marginY + y + random(-3, 3);
+                            // let A = createVector(this.marginX + x + random(-2, 2), this.marginY + y + random(-3, 3))
+                            let A = createVector(this.marginX + x, this.marginY + y);
 
                             // this.buffer.point(this.marginX + x + (j) * (this.buffer.width - this.marginY * 2) / 5 + random(-2, 2), this.marginY + y + random(-3, 3));
-                            this.buffer.point(x, y);
+                            this.buffer.point(A.x, A.y);
 
+                            // SEAMLESS PATTERN
+                            if (A.x > (this.buffer.width - this.strokeWeight)) {
+                                A.x -= (this.buffer.width);
+                                this.buffer.point(A.x, A.y);
+                            }
 
+                            if (A.y > (this.buffer.height - this.strokeWeight)) {
+                                A.y -= (this.buffer.height);
+                                this.buffer.point(A.x, A.y);
+                            }
                         }
                     }
                 }
