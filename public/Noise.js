@@ -11,9 +11,13 @@ class Noise {
         this.jCount = 1;  // 1
         this.iCount = 1;  // 6
 
+        this.strokeWeight = 1;
 
         this.buffer = createGraphics(this.width, this.height);
         this.create();
+
+        this.xCount = Math.ceil(width / this.buffer.width);
+        this.yCount = Math.ceil(height / this.buffer.height);
     }
 
     create() {
@@ -36,11 +40,16 @@ class Noise {
                                 //     0.2 + y / 500 - n / 10,
                                 //     0.3 + y / 100 - n / 10 - j / 5
                                 // )
-                                1
+                                this.strokeWeight
                             );
 
+                            var x = this.marginX + x + random(-2, 2);
+                            var y = this.marginY + y + random(-3, 3);
+
                             // this.buffer.point(this.marginX + x + (j) * (this.buffer.width - this.marginY * 2) / 5 + random(-2, 2), this.marginY + y + random(-3, 3));
-                            this.buffer.point(this.marginX + x + random(-2, 2), this.marginY + y + random(-3, 3));
+                            this.buffer.point(x, y);
+
+
                         }
                     }
                 }
@@ -49,16 +58,9 @@ class Noise {
     }
 
     show() {
-        // image(this.buffer, 0, 0);
-
-        var xCount = Math.ceil(width / this.buffer.width);
-        var yCount = Math.ceil(height / this.buffer.height);
-
-        for (var y = 0; y < yCount; y++) {
-            for (var x = 0; x < xCount; x++) {
+        for (var y = 0; y < this.yCount; y++) {
+            for (var x = 0; x < this.xCount; x++) {
                 blendMode(OVERLAY);
-                // blendMode(MULTIPLY);
-                // ROTATE
                 image(this.buffer, x * this.buffer.width, y * this.buffer.height);
             }
         }
