@@ -112,25 +112,25 @@ function setup() {
     targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
     originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
     targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
-    overlay: true,
+    OVERLAY: true,
     densityFactor: 10,
-    maxSpeedMin: 8,
+    maxSpeedMin: 15,
     maxSpeedMax: 20,
     minSpeed: 2,
     maxForce: 2,
-    slowRadius: 400,
-    finishedRadius: 20,
-    targetBdistList: [100, 200],
+    slowRadius: 40,
+    finishedRadius: 10,
+    targetBdistList: [50, 100, 200, 300],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.1,
-    brushTemplateCount: 15,
+    brushTemplateCount: 20,
     brushTemplateSize: 50,
-    brushTemplateStrokeSize: 1,
-    brushTemplateFillColor: color(PALETTE.pixelColors[0]),
-    brushTemplateFillColorDistort: 30,
-    brushTemplateStrokeColor: color(PALETTE.pixelColors[1]),
-    brushTemplateStrokeColorDistort: 30,
+    brushTemplateStrokeSize: 2,
+    brushTemplateFillColor: color("#b8b8b8"),
+    brushTemplateFillColorDistort: 10,
+    brushTemplateStrokeColor: color("#6d6d6d"),
+    brushTemplateStrokeColorDistort: 40,
   });
 
 
@@ -249,7 +249,7 @@ function draw() {
   }
   // background(color(PALETTE.background[0]));
   // background(color("#fdfdfd"));  // areaB
-  background(color("#808080"));  // areaC
+  background(color("#929292"));  // areaC
 
 
   // TEST with rects
@@ -262,7 +262,6 @@ function draw() {
   //   pop();
   // }
 
-  areaA.show();
   // areaB.show();
   // areaB.show();
 
@@ -271,6 +270,8 @@ function draw() {
   // BorteC.show();
 
   image(overlay.buffer, 0, 0);
+  areaA.show();
+
 
   paper.show();
   noise.show();
