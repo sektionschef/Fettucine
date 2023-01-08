@@ -29,16 +29,30 @@ class Brush {
         // this.buffer.vertex(10, 40);
         // this.buffer.endShape(CLOSE);
 
+        // CURVES
+        // this.buffer.fill(this.fillColor);
+        // this.buffer.stroke(this.strokeColor);
+        // this.buffer.strokeWeight(this.strokeSize);
+        // this.buffer.beginShape();
+        // this.buffer.curveVertex(q1X, q1Y);
+        // this.buffer.curveVertex(q1X, q1Y);
+        // this.buffer.curveVertex(q2X, q2Y);
+        // this.buffer.curveVertex(q4X, q4Y);
+        // this.buffer.curveVertex(q3X, q3Y);
+        // this.buffer.curveVertex(q3X, q3Y);
+        // this.buffer.endShape(CLOSE);
+
+        // LINES
         this.buffer.fill(this.fillColor);
         this.buffer.stroke(this.strokeColor);
         this.buffer.strokeWeight(this.strokeSize);
         this.buffer.beginShape();
-        this.buffer.curveVertex(q1X, q1Y);
-        this.buffer.curveVertex(q1X, q1Y);
-        this.buffer.curveVertex(q2X, q2Y);
-        this.buffer.curveVertex(q4X, q4Y);
-        this.buffer.curveVertex(q3X, q3Y);
-        this.buffer.curveVertex(q3X, q3Y);
+        this.buffer.vertex(q1X, q1Y);
+        this.buffer.vertex(q1X, q1Y);
+        this.buffer.vertex(q2X, q2Y);
+        this.buffer.vertex(q4X, q4Y);
+        this.buffer.vertex(q3X, q3Y);
+        this.buffer.vertex(q3X, q3Y);
         this.buffer.endShape(CLOSE);
 
         // this.buffer.loadPixels();

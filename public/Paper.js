@@ -17,8 +17,8 @@ class Paper {
     create() {
         for (var i = 0; i < 10000; i++) {
             let A = createVector(getRandomFromInterval(0, this.width), getRandomFromInterval(0, this.height));
-            let theta = fxrand() * 2 * PI;
-            let segmentLength = fxrand() * this.lineLength;  // fxrand() * 5 + 2
+            let theta = getRandomFromInterval(0, 2 * PI);
+            let segmentLength = getRandomFromInterval(2, this.lineLength);  // fxrand() * 5 + 2
             let B = createVector(Math.cos(theta) * segmentLength + A.x, Math.sin(theta) * segmentLength + A.y);
 
             this.buffer.stroke(this.strokeColor);
@@ -47,10 +47,7 @@ class Paper {
             for (var x = 0; x < this.xCount; x++) {
                 push();
                 blendMode(OVERLAY);
-
-                // blendMode(MULTIPLY);
                 translate(x * this.buffer.width, y * this.buffer.height);
-                // rotate(getRandomFromList([PI / 2]));
                 image(this.buffer, 0, 0);
                 pop();
             }

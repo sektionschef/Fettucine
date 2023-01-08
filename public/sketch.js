@@ -100,56 +100,39 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-
-  // hatch example
-  // A1 = createVector(0.2 * DOMINANTSIDE, width / 2, 0);
-  // A2 = createVector(0.6 * DOMINANTSIDE, width / 2, 0);
-  // B1 = createVector(0.2 * DOMINANTSIDE, height / 2 - 100, 0);
-  // B2 = createVector(0.6 * DOMINANTSIDE, width / 2 + 100, 0);
-
-  // mastahatch = new Hatch(A1, A2, color("#363636"), "", hatchSystem.buffer);
-  // hatchSystem.add(mastahatch);
-  // mastahatch2 = new Hatch(B1, B2, color("#181818"), "", hatchSystem.buffer);
-  // hatchSystem.add(mastahatch2);
-
-  // hatchSystem = new hatchSystem(0, 0, width, height, DOMINANTSIDE * 0.015, color(PALETTE.background[1]));
-
-  // paper = new Paper();
+  paper = new Paper();
   noise = new Noise();
 
-  // elements
-  // brush = new Brush({
-  //   size: 50,
-  //   strokeSize: 5,
-  //   fillColor: color("#1f1f1f"),
-  //   strokeColor: color("#808080")
-  // });
+  let borteFillColor = color("#f1f1f1");
+  let borteStrokeColor = color("#cacaca");
 
-  // areaA = new BrushstrokeSystem({
-  //   originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
-  //   targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
-  //   originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
-  //   targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
-  // overlay: true,
-  //   densityFactor: 10,
-  //   maxSpeedMin: 8,
-  //   maxSpeedMax: 20,
-  //   minSpeed: 2,
-  //   maxForce: 2,
-  //   slowRadius: 400,
-  //   finishedRadius: 20,
-  //   targetBdistList: [100, 200],
-  //   targetBDirectionList: [-1, 1],
-  //   basicSizeMin: 1,
-  //   basicSizeMax: 1.1,
-  //   brushTemplateCount: 15,
-  //   brushTemplateSize: 50,
-  //   brushTemplateStrokeSize: 1,
-  //   brushTemplateFillColor: color(PALETTE.pixelColors[0]),
-  //   brushTemplateFillColorDistort: 30,
-  //   brushTemplateStrokeColor: color(PALETTE.pixelColors[1]),
-  //   brushTemplateStrokeColorDistort: 30,
-  // });
+
+  areaA = new BrushstrokeSystem({
+    originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
+    targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
+    originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
+    targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
+    overlay: true,
+    densityFactor: 10,
+    maxSpeedMin: 8,
+    maxSpeedMax: 20,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 400,
+    finishedRadius: 20,
+    targetBdistList: [100, 200],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.1,
+    brushTemplateCount: 15,
+    brushTemplateSize: 50,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color(PALETTE.pixelColors[0]),
+    brushTemplateFillColorDistort: 30,
+    brushTemplateStrokeColor: color(PALETTE.pixelColors[1]),
+    brushTemplateStrokeColorDistort: 30,
+  });
+
 
   // areaB = new BrushstrokeSystem({
   //   originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
@@ -177,9 +160,83 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 20,
   // });
 
-  // originA = createVector(width / 4, height / 9);
-  // targetA = createVector(width / 4, height / 9 * 8);
-  // b = new Brushstroke(originA, targetA, brush.buffer, brushLy);
+  // BorteA = new BrushstrokeSystem({
+  //   originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
+  //   targetA: createVector(width / 3, height / 9 * 3), // left, end of brusshtrokes
+  //   originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
+  //   targetB: createVector(width / 3 * 2, height / 9 * 3), // right, end of brushstrokes
+  //   OVERLAY: false,
+  //   densityFactor: 15,
+  //   maxSpeedMin: 10,
+  //   maxSpeedMax: 20,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 100,
+  //   finishedRadius: 20,
+  //   targetBdistList: [500, 600],
+  //   targetBDirectionList: [1, -1],
+  //   basicSizeMin: 2,
+  //   basicSizeMax: 2,
+  //   brushTemplateCount: 10,
+  //   brushTemplateSize: 10,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: borteFillColor,
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: borteStrokeColor,
+  //   brushTemplateStrokeColorDistort: 10,
+  // });
+
+  // BorteB = new BrushstrokeSystem({
+  //   originA: createVector(width / 3, height / 9 * 3),  // left, start of brushstrokes
+  //   targetA: createVector(width / 3, height / 9 * 6), // left, end of brusshtrokes
+  //   originB: createVector(width / 3 * 2, height / 9 * 3), // right, start of brushstrokes
+  //   targetB: createVector(width / 3 * 2, height / 9 * 6), // right, end of brushstrokes
+  //   OVERLAY: false,
+  //   densityFactor: 15,
+  //   maxSpeedMin: 3,
+  //   maxSpeedMax: 10,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 100,
+  //   finishedRadius: 20,
+  //   targetBdistList: [500, 600],
+  //   targetBDirectionList: [1, -1],
+  //   basicSizeMin: 2,
+  //   basicSizeMax: 2,
+  //   brushTemplateCount: 10,
+  //   brushTemplateSize: 10,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: borteFillColor,
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: borteStrokeColor,
+  //   brushTemplateStrokeColorDistort: 10,
+  // });
+
+  // BorteC = new BrushstrokeSystem({
+  //   originA: createVector(width / 3, height / 9 * 6),  // left, start of brushstrokes
+  //   targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
+  //   originB: createVector(width / 3 * 2, height / 9 * 6), // right, start of brushstrokes
+  //   targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
+  //   OVERLAY: false,
+  //   densityFactor: 15,
+  //   maxSpeedMin: 10,
+  //   maxSpeedMax: 20,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 100,
+  //   finishedRadius: 20,
+  //   targetBdistList: [500, 600],
+  //   targetBDirectionList: [1, -1],
+  //   basicSizeMin: 2,
+  //   basicSizeMax: 2,
+  //   brushTemplateCount: 10,
+  //   brushTemplateSize: 10,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: borteFillColor,
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: borteStrokeColor,
+  //   brushTemplateStrokeColorDistort: 10,
+  // });
 
   overlay = new Overlay();
 }
@@ -191,11 +248,9 @@ function draw() {
     pixelDensity(CURRENTPIXELDENS);
   }
   // background(color(PALETTE.background[0]));
-  background(color("#fdfdfd"));  // areaB
+  // background(color("#fdfdfd"));  // areaB
+  background(color("#808080"));  // areaC
 
-  // b.updateBrushstroke();
-  // b.showBrushstroke();
-  // b.applyForce(b.seek(moving_target = true));
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -207,17 +262,17 @@ function draw() {
   //   pop();
   // }
 
-  // areaA.show();
+  areaA.show();
   // areaB.show();
+  // areaB.show();
+
+  // BorteA.show();
+  // BorteB.show();
+  // BorteC.show();
 
   image(overlay.buffer, 0, 0);
 
-  // let endTime = performance.now()
-  // console.log(`It took ${(endTime - startTime) / 1000} seconds.`)
-  // noLoop();
-
-
-  // paper.show();
+  paper.show();
   noise.show();
 
   // areaA.showBrushTemplates();

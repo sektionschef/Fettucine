@@ -3,8 +3,8 @@
 class Noise {
     constructor() {
 
-        this.width = 500;
-        this.height = 500;
+        this.width = 600;
+        this.height = 600;
         this.marginX = 0; //50;
         this.marginY = 0; //50;
 
@@ -50,12 +50,12 @@ class Noise {
 
                             // SEAMLESS PATTERN
                             if (A.x > (this.buffer.width - this.strokeWeight)) {
-                                A.x -= (this.buffer.width);
+                                A.x -= (this.buffer.width - this.strokeWeight);
                                 this.buffer.point(A.x, A.y);
                             }
 
                             if (A.y > (this.buffer.height - this.strokeWeight)) {
-                                A.y -= (this.buffer.height);
+                                A.y -= (this.buffer.height - this.strokeWeight);
                                 this.buffer.point(A.x, A.y);
                             }
                         }
