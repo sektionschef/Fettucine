@@ -1,8 +1,8 @@
 class Overlay {
-    constructor() {
+    constructor(colorObject) {
         this.DEBUG = false;
 
-        this.overlayColor = color(PALETTE.background[1]);
+        this.overlayColor = color(colorObject);
         this.curveSexyness = 1.2;
         this.buffer = createGraphics(width, height);
 

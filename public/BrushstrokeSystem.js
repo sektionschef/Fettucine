@@ -94,7 +94,7 @@ class BrushstrokeSystem {
 
     show() {
         if (this.allFinished) {
-            // this.buffer.blendMode(OVERLAY);
+            this.buffer.blendMode(OVERLAY);
             image(this.buffer, 0, 0);
         }
 

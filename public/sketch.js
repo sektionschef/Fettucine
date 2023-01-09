@@ -83,6 +83,9 @@ function preload() {
 
 function setup() {
   // startTime = performance.now()
+  // BACKGROUND = "#ee4949ff";
+  // BACKGROUND = "#f8cc3bff";
+  BACKGROUND = "#333cbbff";
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
@@ -103,15 +106,11 @@ function setup() {
   paper = new Paper();
   noise = new Noise();
 
-  let borteFillColor = color("#f1f1f1");
-  let borteStrokeColor = color("#cacaca");
-
-
   areaA = new BrushstrokeSystem({
-    originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
-    targetA: createVector(width / 3, height / 9 * 8), // left, end of brusshtrokes
-    originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
-    targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
+    originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+    targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+    originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+    targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
     OVERLAY: true,
     densityFactor: 10,
     maxSpeedMin: 15,
@@ -120,16 +119,16 @@ function setup() {
     maxForce: 2,
     slowRadius: 40,
     finishedRadius: 10,
-    targetBdistList: [50, 100, 200, 300],
+    targetBdistList: [50, 100],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.1,
     brushTemplateCount: 20,
     brushTemplateSize: 50,
-    brushTemplateStrokeSize: 2,
-    brushTemplateFillColor: color("#b8b8b8"),
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#b8b8b883"),
     brushTemplateFillColorDistort: 10,
-    brushTemplateStrokeColor: color("#6d6d6d"),
+    brushTemplateStrokeColor: color("#6d6d6d83"),
     brushTemplateStrokeColorDistort: 40,
   });
 
@@ -159,6 +158,9 @@ function setup() {
   //   brushTemplateStrokeColor: color("#f0f0f0"),
   //   brushTemplateStrokeColorDistort: 20,
   // });
+
+  // let borteFillColor = color("#f1f1f1");
+  // let borteStrokeColor = color("#cacaca");
 
   // BorteA = new BrushstrokeSystem({
   //   originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
@@ -238,7 +240,7 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 10,
   // });
 
-  overlay = new Overlay();
+  // overlay = new Overlay(BACKGROUND);
 }
 
 
@@ -249,7 +251,9 @@ function draw() {
   }
   // background(color(PALETTE.background[0]));
   // background(color("#fdfdfd"));  // areaB
-  background(color("#929292"));  // areaC
+  // background(color("#929292"));  // areaC
+
+  background(color(BACKGROUND));  // yellow
 
 
   // TEST with rects
@@ -269,12 +273,14 @@ function draw() {
   // BorteB.show();
   // BorteC.show();
 
-  image(overlay.buffer, 0, 0);
-  areaA.show();
 
+  // image(overlay.buffer, 0, 0);
+
+  areaA.show();
 
   paper.show();
   noise.show();
+
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
