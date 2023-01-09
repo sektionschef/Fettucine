@@ -85,7 +85,7 @@ function setup() {
   // startTime = performance.now()
   // BACKGROUND = "#ee4949ff";
   // BACKGROUND = "#f8cc3bff";
-  BACKGROUND = "#4b55e0ff"// "#313eecff";
+  BACKGROUND = "#525bdaff"// "#313eecff";
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
@@ -257,6 +257,7 @@ function draw() {
 
   background(color(BACKGROUND));  // yellow
 
+  pixelgradient.show();
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -280,10 +281,9 @@ function draw() {
 
   areaA.show();
 
-  // paper.show();
-  // noise.show();
+  paper.show();
+  noise.show();
 
-  pixelgradient.show();
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();

@@ -1,13 +1,20 @@
 class PixelGradient {
     constructor() {
-        this.A = createVector(width / 8 * 3, height / 8 * 3);
-        this.B = createVector(width / 8 * 6, height / 8 * 3);
-        this.C = createVector(width / 8 * 6, height / 8 * 6);
-        this.D = createVector(width / 8 * 3, height / 8 * 6);
+        // this.A = createVector(width / 8 * 3, height / 8 * 3);
+        // this.B = createVector(width / 8 * 6, height / 8 * 3);
+        // this.C = createVector(width / 8 * 6, height / 8 * 6);
+        // this.D = createVector(width / 8 * 3, height / 8 * 6);
 
-        this.strokeColor = color("black");
-        this.strokeWeight = 1;
-        this.pointCount = 1000000;
+        this.A = createVector(0, 0);
+        this.B = createVector(width, 0);
+        this.C = createVector(width, height);
+        this.D = createVector(0, height);
+
+        this.center = createVector(width / 2, height / 2);
+
+        this.strokeColor = color("#272727");
+        this.strokeWeight = 10;
+        this.pointCount = 100000;
 
         this.buffer = createGraphics(width, height);
         this.create();
@@ -15,14 +22,19 @@ class PixelGradient {
 
     create() {
         // debug
-        // this.buffer.rect(this.A.x, this.A.y, p5.Vector.dist(this.B, this.A), p5.Vector.dist(this.C, this.B));
+        // this.buffer.fill(color("#555555"));
+        // this.buffer.rect(0, height / 6 * 2, width, height / 6 * 2);
+        // this.buffer.stroke()
 
         for (var i = 0; i < this.pointCount; i++) {
 
             let x = getRandomFromInterval(this.A.x, this.B.x);
             let y = getRandomFromInterval(this.B.y, this.C.y);
 
-            if (fxrand() < map(x, this.A.x, this.B.x, 0, 1)) {
+            let point = createVector(x, y);
+
+            // if (fxrand() < map(x, this.A.x, this.B.x, 0, 1)) {  // more noise to the right
+            if (fxrand() < map(p5.Vector.dist(this.center, point), (width / 2), p5.Vector.dist(this.center, this.A), 0, 1)) {  // more noise to the right
                 this.buffer.push();
                 this.buffer.stroke(this.strokeColor);
                 this.buffer.strokeWeight(this.strokeWeight);
@@ -34,6 +46,7 @@ class PixelGradient {
 
     show() {
         push();
+        blendMode(OVERLAY);
         image(this.buffer, 0, 0);
         pop();
     }
