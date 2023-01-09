@@ -83,9 +83,9 @@ function preload() {
 
 function setup() {
   // startTime = performance.now()
-  // BACKGROUND = "#ee4949ff";
+  BACKGROUND = "#ee4949ff";
   // BACKGROUND = "#f8cc3bff";
-  BACKGROUND = "#525bdaff"// "#313eecff";
+  // BACKGROUND = "#525bdaff"// "#313eecff";
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
@@ -240,7 +240,7 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 10,
   // });
 
-  // overlay = new Overlay(BACKGROUND);
+  overlay = new Overlay(color("#505050"));
 
   pixelgradient = new PixelGradient();
 }
@@ -255,9 +255,8 @@ function draw() {
   // background(color("#fdfdfd"));  // areaB
   // background(color("#929292"));  // areaC
 
-  background(color(BACKGROUND));  // yellow
+  background(color(BACKGROUND));
 
-  pixelgradient.show();
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -276,13 +275,14 @@ function draw() {
   // BorteB.show();
   // BorteC.show();
 
-
-  // image(overlay.buffer, 0, 0);
+  overlay.show();
 
   areaA.show();
 
+
   paper.show();
   noise.show();
+  pixelgradient.show();
 
 
   // areaA.showBrushTemplates();
