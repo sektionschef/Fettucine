@@ -108,31 +108,31 @@ function setup() {
   paper = new Paper();
   backgroundNoise = new Noise();
 
-  // areaA = new BrushstrokeSystem({
-  //   originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
-  //   targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
-  //   originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
-  //   targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
-  //   OVERLAY: true,
-  //   densityFactor: 10,
-  //   maxSpeedMin: 15,
-  //   maxSpeedMax: 20,
-  //   minSpeed: 2,
-  //   maxForce: 2,
-  //   slowRadius: 40,
-  //   finishedRadius: 10,
-  //   targetBdistList: [50, 100, 200],
-  //   targetBDirectionList: [-1, 1],
-  //   basicSizeMin: 1,
-  //   basicSizeMax: 1.1,
-  //   brushTemplateCount: 20,
-  //   brushTemplateSize: 50,
-  //   brushTemplateStrokeSize: 1,
-  //   brushTemplateFillColor: color("#b8b8b883"),
-  //   brushTemplateFillColorDistort: 10,
-  //   brushTemplateStrokeColor: color("#6d6d6d83"),
-  //   brushTemplateStrokeColorDistort: 40,
-  // });
+  areaA = new BrushstrokeSystem({
+    originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+    targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+    originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+    targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+    OVERLAY: true,
+    brushCount: 100,
+    maxSpeedMin: 15,
+    maxSpeedMax: 20,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 40,
+    finishedRadius: 10,
+    targetBdistList: [50, 100, 200],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.1,
+    brushTemplateCount: 20,
+    brushTemplateSize: 50,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#b8b8b883"),
+    brushTemplateFillColorDistort: 10,
+    brushTemplateStrokeColor: color("#6d6d6d83"),
+    brushTemplateStrokeColorDistort: 40,
+  });
 
 
   // areaB = new BrushstrokeSystem({
@@ -250,7 +250,7 @@ function setup() {
     originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
     targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
     OVERLAY: false,
-    densityFactor: 200,
+    brushCount: 1,
     maxSpeedMin: 15,
     maxSpeedMax: 20,
     minSpeed: 2,
@@ -308,7 +308,7 @@ function draw() {
 
   overlay.show();
 
-  // areaA.show();
+  areaA.show();
   // areaB.show();
 
   example.show();

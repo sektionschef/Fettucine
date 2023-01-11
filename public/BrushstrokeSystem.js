@@ -5,7 +5,8 @@ class BrushstrokeSystem {
         this.targetA = data.targetA;
         this.originB = data.originB;
         this.targetB = data.targetB;
-        this.densityFactor = data.densityFactor;
+        // this.densityFactor = data.densityFactor;
+        this.brushCount = data.brushCount;
         this.brushTemplateCount = data.brushTemplateCount;
         this.brushTemplateSize = data.brushTemplateSize;
         this.brushTemplateStrokeSize = data.brushTemplateStrokeSize;
@@ -17,8 +18,7 @@ class BrushstrokeSystem {
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
-        this.brushCount = this.distanceAB / this.densityFactor;
-        // console.log(this.brushCount);
+        this.densityFactor = this.distanceAB / this.brushCount;
 
         this.allFinished = false;
         this.buffer = createGraphics(width, height);
