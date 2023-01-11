@@ -27,6 +27,8 @@ let EDITIONS = "100 editions";
 
 let CURRENTPIXELDENS = 1;
 
+let xoff = 0 // delete;
+
 const PALETTESYSTEM = {
   // "Judd": {
   //   "background": ["#d6d5d5", "#d80f0fff"],
@@ -104,33 +106,33 @@ function setup() {
   }
 
   paper = new Paper();
-  noise = new Noise();
+  backgroundNoise = new Noise();
 
-  areaA = new BrushstrokeSystem({
-    originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
-    targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
-    originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
-    targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
-    OVERLAY: true,
-    densityFactor: 10,
-    maxSpeedMin: 15,
-    maxSpeedMax: 20,
-    minSpeed: 2,
-    maxForce: 2,
-    slowRadius: 40,
-    finishedRadius: 10,
-    targetBdistList: [50, 100, 200],
-    targetBDirectionList: [-1, 1],
-    basicSizeMin: 1,
-    basicSizeMax: 1.1,
-    brushTemplateCount: 20,
-    brushTemplateSize: 50,
-    brushTemplateStrokeSize: 1,
-    brushTemplateFillColor: color("#b8b8b883"),
-    brushTemplateFillColorDistort: 10,
-    brushTemplateStrokeColor: color("#6d6d6d83"),
-    brushTemplateStrokeColorDistort: 40,
-  });
+  // areaA = new BrushstrokeSystem({
+  //   originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+  //   targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+  //   originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+  //   targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+  //   OVERLAY: true,
+  //   densityFactor: 10,
+  //   maxSpeedMin: 15,
+  //   maxSpeedMax: 20,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 40,
+  //   finishedRadius: 10,
+  //   targetBdistList: [50, 100, 200],
+  //   targetBDirectionList: [-1, 1],
+  //   basicSizeMin: 1,
+  //   basicSizeMax: 1.1,
+  //   brushTemplateCount: 20,
+  //   brushTemplateSize: 50,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: color("#b8b8b883"),
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: color("#6d6d6d83"),
+  //   brushTemplateStrokeColorDistort: 40,
+  // });
 
 
   // areaB = new BrushstrokeSystem({
@@ -240,9 +242,38 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 10,
   // });
 
+
+
+  example = new BrushstrokeSystem({
+    originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+    targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+    originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+    targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+    OVERLAY: false,
+    densityFactor: 200,
+    maxSpeedMin: 15,
+    maxSpeedMax: 20,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 40,
+    finishedRadius: 10,
+    targetBdistList: [50, 100, 200],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.1,
+    brushTemplateCount: 20,
+    brushTemplateSize: 50,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#b8b8b883"),
+    brushTemplateFillColorDistort: 10,
+    brushTemplateStrokeColor: color("#6d6d6d83"),
+    brushTemplateStrokeColorDistort: 40,
+  });
+
   overlay = new Overlay(color("#505050"));
 
-  pixelgradient = new PixelGradient();
+  edgePixel = new PixelGradient();
+
 }
 
 
@@ -277,14 +308,23 @@ function draw() {
 
   overlay.show();
 
-  areaA.show();
+  // areaA.show();
   // areaB.show();
 
+  example.show();
 
   paper.show();
-  noise.show();
-  pixelgradient.show();
+  backgroundNoise.show();
+  edgePixel.show();
 
+  push();
+  // blendMode(BLEND);
+  xoff = xoff + 0.01;
+  let n = noise(xoff) * width;
+  stroke("blue");
+  strokeWeight(150);
+  point(n, height / 2);
+  pop();
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();

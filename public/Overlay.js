@@ -192,6 +192,7 @@ class Overlay {
         push();
         blendMode(OVERLAY);
         image(overlay.buffer, 0, 0);
+        blendMode(BLEND);
         pop();
     }
 }

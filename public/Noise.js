@@ -66,13 +66,13 @@ class Noise {
     }
 
     show() {
+        push();
         for (var y = 0; y < this.yCount; y++) {
             for (var x = 0; x < this.xCount; x++) {
                 blendMode(OVERLAY);
                 image(this.buffer, x * this.buffer.width, y * this.buffer.height);
             }
         }
-
-
+        pop();
     }
 }
