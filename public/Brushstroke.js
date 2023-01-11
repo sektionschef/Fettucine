@@ -32,9 +32,8 @@ class Brushstroke extends Vehicle {
         this.targetBAngle = this.totalDistance.heading() + PI / 2 * this.targetBDirection; // or - PI/2
         this.targetB = p5.Vector.add(data.target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
         this.target = new Vehicle(data.target, this.targetB, data.drawBuffer, this.DEBUG);
-        this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
-
-
+        // this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
+        this.turningDistance = this.totalDistance.mag() / getRandomFromInterval(1.25, 4);  // where the target shiftsback to origin - e.g. half of the distance
     }
 
     updateTarget() {

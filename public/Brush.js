@@ -9,6 +9,9 @@ class Brush {
 
         this.buffer = createGraphics(this.size, this.size);
 
+        this.curveSexyness = 1;
+
+
         let q1X = getRandomFromInterval(0, this.buffer.width / 2);
         let q1Y = getRandomFromInterval(0, this.buffer.height / 2);
         let q2X = getRandomFromInterval(this.buffer.width / 2, this.buffer.width);
@@ -30,30 +33,31 @@ class Brush {
         // this.buffer.endShape(CLOSE);
 
         // CURVES
-        // this.buffer.fill(this.fillColor);
-        // this.buffer.stroke(this.strokeColor);
-        // this.buffer.strokeWeight(this.strokeSize);
-        // this.buffer.beginShape();
-        // this.buffer.curveVertex(q1X, q1Y);
-        // this.buffer.curveVertex(q1X, q1Y);
-        // this.buffer.curveVertex(q2X, q2Y);
-        // this.buffer.curveVertex(q4X, q4Y);
-        // this.buffer.curveVertex(q3X, q3Y);
-        // this.buffer.curveVertex(q3X, q3Y);
-        // this.buffer.endShape(CLOSE);
-
-        // LINES
+        this.buffer.curveTightness(this.curveSexyness);
         this.buffer.fill(this.fillColor);
         this.buffer.stroke(this.strokeColor);
         this.buffer.strokeWeight(this.strokeSize);
         this.buffer.beginShape();
-        this.buffer.vertex(q1X, q1Y);
-        this.buffer.vertex(q1X, q1Y);
-        this.buffer.vertex(q2X, q2Y);
-        this.buffer.vertex(q4X, q4Y);
-        this.buffer.vertex(q3X, q3Y);
-        this.buffer.vertex(q3X, q3Y);
+        this.buffer.curveVertex(q1X, q1Y);
+        this.buffer.curveVertex(q1X, q1Y);
+        this.buffer.curveVertex(q2X, q2Y);
+        this.buffer.curveVertex(q4X, q4Y);
+        this.buffer.curveVertex(q3X, q3Y);
+        this.buffer.curveVertex(q3X, q3Y);
         this.buffer.endShape(CLOSE);
+
+        // LINES
+        // this.buffer.fill(this.fillColor);
+        // this.buffer.stroke(this.strokeColor);
+        // this.buffer.strokeWeight(this.strokeSize);
+        // this.buffer.beginShape();
+        // this.buffer.vertex(q1X, q1Y);
+        // this.buffer.vertex(q1X, q1Y);
+        // this.buffer.vertex(q2X, q2Y);
+        // this.buffer.vertex(q4X, q4Y);
+        // this.buffer.vertex(q3X, q3Y);
+        // this.buffer.vertex(q3X, q3Y);
+        // this.buffer.endShape(CLOSE);
 
         // this.buffer.loadPixels();
         // var x, y, index;

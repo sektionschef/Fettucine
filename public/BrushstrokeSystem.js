@@ -15,7 +15,6 @@ class BrushstrokeSystem {
         this.brushTemplateStrokeColorDistort = data.brushTemplateStrokeColorDistort;
         this.DEBUG = false;
 
-
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
         this.brushCount = this.distanceAB / this.densityFactor;

@@ -9,8 +9,8 @@ class Overlay {
 
         this.buffer.curveTightness(this.curveSexyness);
 
-        this.offsetMin = 0.98;
-        this.offsetMax = 1.02;
+        this.offsetMin = 0.99;
+        this.offsetMax = 1.01;
         this.randomOffset1 = getRandomFromInterval(this.offsetMin, this.offsetMax);
         this.randomOffset2 = getRandomFromInterval(this.offsetMin, this.offsetMax);
         this.randomOffset3 = getRandomFromInterval(this.offsetMin, this.offsetMax);
@@ -76,7 +76,6 @@ class Overlay {
         this.buffer.noStroke();
         this.buffer.fill(this.overlayColor)
 
-        // BACKGROUND FOLD
         this.buffer.beginShape();
         this.buffer.curveVertex(this.A.x, this.A.y);
         this.buffer.curveVertex(this.A.x, this.A.y);
@@ -95,7 +94,6 @@ class Overlay {
     }
 
     createUpperLine() {
-        // UPPER LINE
         this.buffer.push();
         this.buffer.stroke(color("#111111"));
         this.buffer.strokeWeight(6);
@@ -114,7 +112,6 @@ class Overlay {
     }
 
     createLowerLine() {
-        // LOWER LINE
         this.buffer.push();
         this.buffer.stroke(color("#9e9e9e"));
         this.buffer.strokeWeight(6);

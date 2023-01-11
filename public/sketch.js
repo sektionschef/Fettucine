@@ -119,7 +119,7 @@ function setup() {
     maxForce: 2,
     slowRadius: 40,
     finishedRadius: 10,
-    targetBdistList: [50, 100],
+    targetBdistList: [50, 100, 200],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.1,
@@ -139,17 +139,17 @@ function setup() {
   //   originB: createVector(width / 3 * 2, height / 9), // right, start of brushstrokes
   //   targetB: createVector(width / 3 * 2, height / 9 * 8), // right, end of brushstrokes
   //   OVERLAY: false,
-  //   densityFactor: 1,
+  //   densityFactor: 2,
   //   maxSpeedMin: 3,
   //   maxSpeedMax: 10,
   //   minSpeed: 2,
   //   maxForce: 2,
   //   slowRadius: 100,
   //   finishedRadius: 20,
-  //   targetBdistList: [500, 600],
+  //   targetBdistList: [100, 200, 400, 600, 800],
   //   targetBDirectionList: [1, -1],
   //   basicSizeMin: 1,
-  //   basicSizeMax: 3,
+  //   basicSizeMax: 1,
   //   brushTemplateCount: 20,
   //   brushTemplateSize: 10,
   //   brushTemplateStrokeSize: 1,
@@ -278,6 +278,7 @@ function draw() {
   overlay.show();
 
   areaA.show();
+  // areaB.show();
 
 
   paper.show();
