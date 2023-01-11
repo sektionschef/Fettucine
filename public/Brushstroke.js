@@ -18,12 +18,13 @@ class Brushstroke extends Vehicle {
         // for dynamic resizing
         this.basicSizeMin = data.basicSizeMin; // getRandomFromInterval(25, 60);  // 50
         this.basicSizeMax = data.basicSizeMax; // getRandomFromInterval(80, 140);  // 100
+        this.turningFactor = data.turningFactor;
         this.OVERLAY = data.OVERLAY;
 
         this.basicSize = this.basicSizeMax;
         this.origin = data.origin;
         this.finished = false;
-        this.DEBUG = false;
+        this.DEBUG = data.DEBUG;
         this.desiredSpeed = 0;  // initial value, dynamic actual speed
         this.sprite = data.sprite;
         this.switchTarget = false;
@@ -32,8 +33,8 @@ class Brushstroke extends Vehicle {
         this.targetBAngle = this.totalDistance.heading() + PI / 2 * this.targetBDirection; // or - PI/2
         this.targetB = p5.Vector.add(data.target, p5.Vector.fromAngle(this.targetBAngle, this.targetBdist));
         this.target = new Vehicle(data.target, this.targetB, data.drawBuffer, this.DEBUG);
-        // this.turningDistance = this.totalDistance.mag() / 2;  // where the target shiftsback to origin - e.g. half of the distance
-        this.turningDistance = this.totalDistance.mag() / getRandomFromInterval(1.25, 4);  // where the target shiftsback to origin - e.g. half of the distance
+        // this.turningDistance = this.totalDistance.mag() * getRandomFromInterval(0.2, 0.8) // where the target shiftsback to origin - e.g. half of the distance
+        this.turningDistance = this.totalDistance.mag() * this.turningFactor // where the target shiftsback to origin - e.g. half of the distance
     }
 
     updateTarget() {
@@ -97,7 +98,7 @@ class Brushstroke extends Vehicle {
             this.buffer.blendMode(OVERLAY);
         }
         this.buffer.image(this.sprite, 0, 0, 0, this.basicSize);
-        this.buffer.blendMode(BLEND);
+        // this.buffer.blendMode(BLEND);
         this.buffer.pop();
     }
 

@@ -8,8 +8,8 @@ class PixelGradient {
         this.center = createVector(width / 2, height / 2);
 
         this.strokeColor = color("#272727");
-        this.strokeWeight = 7;
-        this.pointCount = 10000;
+        this.strokeWeight = 4;
+        this.pointCount = 100000;
 
         this.buffer = createGraphics(width, height);
         this.create();

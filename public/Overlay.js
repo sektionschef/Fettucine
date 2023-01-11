@@ -187,7 +187,6 @@ class Overlay {
     // this.buffer.endShape();
     // }
 
-
     show() {
         push();
         blendMode(OVERLAY);

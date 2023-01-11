@@ -4,12 +4,12 @@ class Brush {
         this.strokeSize = data.strokeSize;
         this.fillColor = data.fillColor;
         this.strokeColor = data.strokeColor;
+        this.curveSexyness = data.curveSexyness;
 
         this.pixelDistort = 20;
 
         this.buffer = createGraphics(this.size, this.size);
 
-        this.curveSexyness = 1;
 
 
         let q1X = getRandomFromInterval(0, this.buffer.width / 2);

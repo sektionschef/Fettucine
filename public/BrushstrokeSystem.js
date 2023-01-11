@@ -14,7 +14,9 @@ class BrushstrokeSystem {
         this.brushTemplateFillColorDistort = data.brushTemplateFillColorDistort;
         this.brushTemplateStrokeColor = data.brushTemplateStrokeColor;
         this.brushTemplateStrokeColorDistort = data.brushTemplateStrokeColorDistort;
-        this.DEBUG = false;
+        this.brushCurveSexyness = data.brushCurveSexyness
+        this.noiseIncrement = data.noiseIncrement;
+        this.DEBUG = data.DEBUG;
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
@@ -27,6 +29,8 @@ class BrushstrokeSystem {
 
         this.createBrushTemplates();
 
+        let increment = 0;
+
         for (var i = 0; i < this.brushCount; i++) {
 
             data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
@@ -35,9 +39,13 @@ class BrushstrokeSystem {
             data.sprite = getRandomFromList(this.brushTemplates);
             data.drawBuffer = this.buffer;
 
+            increment = increment + this.noiseIncrement;
+            data.turningFactor = noise(increment) * 1;
+
             this.brushstrokes.push(new Brushstroke(data));
         }
 
+        // DISABLE for active drawing
         this.create();
     }
 
@@ -48,7 +56,8 @@ class BrushstrokeSystem {
                 size: this.brushTemplateSize,
                 strokeSize: this.brushTemplateStrokeSize,
                 fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
-                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort)
+                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
+                curveSexyness: this.brushCurveSexyness,
             }
             this.brushTemplates.push(new Brush(BrushData).buffer);
         }
@@ -77,6 +86,7 @@ class BrushstrokeSystem {
     }
 
     create() {
+        // DISABLE for active drawing
         while (this.allFinished == false) {
             for (var i = 0; i < this.brushstrokes.length; i++) {
                 var brushNow = this.brushstrokes[i];
@@ -89,9 +99,11 @@ class BrushstrokeSystem {
             }
             this.check_all_complete();
         }
+
     }
 
     show() {
+        // DISABLE for active drawing
         if (this.allFinished) {
             push();
             // blendMode(OVERLAY);
