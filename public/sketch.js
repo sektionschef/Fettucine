@@ -107,8 +107,10 @@ function setup() {
 
   paper = new Paper();
   backgroundNoise = new Noise();
-  overlay = new Overlay(color("#505050"));
   edgePixel = new PixelGradient();
+
+  // overlay = new Overlay(color("#505050"));  // fold color
+  overlay = new Overlay(color(BACKGROUND));  // fold color
 
   areaA = new BrushstrokeSystem({
     originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
@@ -136,8 +138,10 @@ function setup() {
     brushTemplateSize: 50,
     brushTemplateStrokeSize: 1,
     brushTemplateFillColor: color("#b8b8b883"),
+    // brushTemplateFillColor: color("#cc1a1a83"),
     brushTemplateFillColorDistort: 10,
     brushTemplateStrokeColor: color("#6d6d6d83"),
+    // brushTemplateStrokeColor: color("#52000083"),
     brushTemplateStrokeColorDistort: 40,
     brushCurveSexyness: 1,
   });
@@ -218,6 +222,7 @@ function draw() {
   // background(color("#929292"));  // areaC
 
   background(color(BACKGROUND));
+  // background(color("#c95959"));
 
 
   // TEST with rects
@@ -230,10 +235,11 @@ function draw() {
   //   pop();
   // }
 
-  overlay.show();
 
   areaA.show();
   // areaB.show();
+
+  overlay.show();
 
   // example.create();
   // example.show();
