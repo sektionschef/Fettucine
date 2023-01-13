@@ -105,46 +105,48 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  paper = new Paper();
-  backgroundNoise = new Noise();
-  edgePixel = new PixelGradient();
+  grid = new Grid();
+
+  // paper = new Paper();
+  // backgroundNoise = new Noise();
+  // edgePixel = new PixelGradient();
 
   // overlay = new Overlay(color("#505050"));  // fold color
-  overlay = new Overlay(color(BACKGROUND));  // fold color
+  // overlay = new Overlay(color(BACKGROUND));  // full overlay color
 
-  areaA = new BrushstrokeSystem({
-    originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
-    targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
-    originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
-    targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
-    OVERLAY: true,
-    brushCount: 100,
-    noiseIncrement: 0.06,  // 0.06 - 0.6
-    DEBUG: false,
-    brushCount: 100,
-    maxSpeedMin: 15,
-    maxSpeedMax: 20,
-    minSpeed: 2,
-    maxForce: 2,
-    slowRadius: 40,
-    finishedRadius: 10,
-    // targetBdistList: [50, 100, 200],
-    targetBdistList: [500],
-    // targetBDirectionList: [-1, 1],
-    targetBDirectionList: [-1],
-    basicSizeMin: 1,
-    basicSizeMax: 1.1,
-    brushTemplateCount: 20,
-    brushTemplateSize: 50,
-    brushTemplateStrokeSize: 1,
-    brushTemplateFillColor: color("#b8b8b883"),
-    // brushTemplateFillColor: color("#cc1a1a83"),
-    brushTemplateFillColorDistort: 10,
-    brushTemplateStrokeColor: color("#6d6d6d83"),
-    // brushTemplateStrokeColor: color("#52000083"),
-    brushTemplateStrokeColorDistort: 40,
-    brushCurveSexyness: 1,
-  });
+  // areaA = new BrushstrokeSystem({
+  //   originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+  //   targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+  //   originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+  //   targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+  //   OVERLAY: true,
+  //   brushCount: 100,
+  //   noiseIncrement: 0.06,  // 0.06 - 0.6
+  //   DEBUG: false,
+  //   brushCount: 100,
+  //   maxSpeedMin: 15,
+  //   maxSpeedMax: 20,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 40,
+  //   finishedRadius: 10,
+  //   // targetBdistList: [50, 100, 200],
+  //   targetBdistList: [500],
+  //   // targetBDirectionList: [-1, 1],
+  //   targetBDirectionList: [-1],
+  //   basicSizeMin: 1,
+  //   basicSizeMax: 1.1,
+  //   brushTemplateCount: 20,
+  //   brushTemplateSize: 50,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: color("#b8b8b883"),
+  //   // brushTemplateFillColor: color("#cc1a1a83"),
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: color("#6d6d6d83"),
+  //   // brushTemplateStrokeColor: color("#52000083"),
+  //   brushTemplateStrokeColorDistort: 40,
+  //   brushCurveSexyness: 1,
+  // });
 
 
   // areaB = new BrushstrokeSystem({
@@ -224,6 +226,7 @@ function draw() {
   background(color(BACKGROUND));
   // background(color("#c95959"));
 
+  grid.show();
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -236,17 +239,17 @@ function draw() {
   // }
 
 
-  areaA.show();
+  // areaA.show();
   // areaB.show();
 
-  overlay.show();
+  // overlay.show();
 
   // example.create();
   // example.show();
 
-  paper.show();
-  backgroundNoise.show();
-  edgePixel.show();
+  // paper.show();
+  // backgroundNoise.show();
+  // edgePixel.show();
 
 
   // push();

@@ -130,11 +130,13 @@ function scaleDynamically() {
         if (windowHeight > windowWidth) {
             // console.log("Width is smaller than height. Width dominates")
             DOMINANTSIDE = Math.floor(windowWidth);
+            SUBSIDE = Math.floor(windowHeight);
             rescaling_width = Math.floor(windowWidth);
             rescaling_height = Math.floor(windowWidth);
         } else {
             // console.log("width is larger than height. Height dominates.")
             DOMINANTSIDE = Math.floor(windowHeight);
+            SUBSIDE = Math.floor(windowWidth);
             rescaling_width = Math.floor(windowHeight);
             rescaling_height = Math.floor(windowHeight);
         }
@@ -144,6 +146,7 @@ function scaleDynamically() {
         rescaling_width = FRAMEDWIDTH;
         rescaling_height = FRAMEDWIDTH;
         DOMINANTSIDE = FRAMEDWIDTH;
+        SUBSIDE = FRAMEDWIDTH;
 
     }
 
