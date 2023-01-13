@@ -73,8 +73,9 @@ function preload() {
   }
 
   if (FRAMED) {
-    setFrameHTML();
+    // setFrameHTML();
     // setLabelHTML();
+    setSpartaHTML();
   } else {
     setPlainHTML();
   }
@@ -93,14 +94,15 @@ function setup() {
   randomSeed(NOISESEED);
 
   rescaling_width = 4000;
-  rescaling_height = 4000;
+  rescaling_height = 5000;
   DOMINANTSIDE = 4000;
 
   canvas = createCanvas(rescaling_width, rescaling_height);
 
   canvas.id('badAssCanvas');
   if (FRAMED) {
-    canvas.parent("canvasHolderFrame");
+    // canvas.parent("canvasHolderFrame");
+    canvas.parent("centerDiv");
   } else {
     canvas.parent("canvasHolderPlain");
   }

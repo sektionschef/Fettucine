@@ -315,6 +315,12 @@ function setFrameHTML() {
     document.body.insertBefore(framesUl, document.getElementById("Konkas"));
 }
 
+function setSpartaHTML() {
+    const centerDiv = document.createElement("div");
+    centerDiv.setAttribute("id", "centerDiv");
+    document.body.insertBefore(centerDiv, document.getElementById("Konkas"));
+}
+
 function setLabelHTML() {
     const labelDiv = document.createElement("div");
     labelDiv.setAttribute("id", "Label");
