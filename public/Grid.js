@@ -104,16 +104,13 @@ class Grid {
             // }
 
             // if (box.sub >= this.third && box.sub < this.third * 2) {
-            for (var i = 0; i < 8; i++) {
-                if (box.sub >= this.stripe * i && box.sub < this.stripe * (i + 1)) {
-                    if (i % 2 == 0) {
-                        noStroke();
-                        // strokeWeight(3);
-                        fill("white");
-                        rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-                    }
+            for (var i = 0; i < 8; i += 2) {
+                if (box.sub >= (this.third + this.stripe * i) && box.sub < (this.third + this.stripe * (i + 1)) && (box.sub < this.third * 2)) {
+                    noStroke();
+                    // strokeWeight(3);
+                    fill("white");
+                    rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
                 }
-
             }
         }
     }
