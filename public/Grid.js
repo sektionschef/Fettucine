@@ -19,10 +19,10 @@ class Grid {
         // TODO center for this.margin/2;
         // console.log(this.subSide % 50 == 0);
         this.margin = this.subSide % 50;
+        // console.log("margin: " + this.margin);
 
         this.boxCount = this.subSide / 50;
-        // console.log(this.boxCount);
-        // this.boxCount = 9;
+        // console.log("boxcount: " + this.boxCount);
 
         this.boxSize = this.subSide / this.boxCount;
         this.boxCountDom = this.domSide / this.boxSize;
@@ -81,12 +81,18 @@ class Grid {
             line(0, this.margin + i * this.boxSize, width, this.margin + i * this.boxSize);
         }
     }
+
     show() {
 
-        // this.showDebug();
+        // this.showDebug()
 
-        this.third = Math.round(this.boxCount / 3);
-        this.stripe = Math.round(this.third / 8);
+        // old thing
+        // this.third = Math.round(this.boxCount / 3);
+        // console.log("third: " + this.third)
+        // this.stripe = Math.round(this.third / 8);
+
+        this.stripe = Math.round(this.boxCount * 0.01);
+        // console.log(this.stripe);
 
         for (var box of this.boxes) {
             // if (box.dominant == 4) {
@@ -103,14 +109,35 @@ class Grid {
             //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
             // }
 
-            // if (box.sub >= this.third && box.sub < this.third * 2) {
-            for (var i = 0; i < 8; i += 2) {
-                if (box.sub >= (this.third + this.stripe * i) && box.sub < (this.third + this.stripe * (i + 1)) && (box.sub < this.third * 2)) {
+            // old thing
+            // if (box.dominant > 10 && box.dominant < (this.boxCountDom - 10)) {
+            //     for (var i = 0; i < 8; i += 2) {
+            //         if (box.sub >= (this.third + this.stripe * i) && box.sub < (this.third + this.stripe * (i + 1)) && (box.sub < this.third * 2)) {
+            //             noStroke();
+            //             // strokeWeight(3);
+            //             fill("white");
+            //             rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+            //         }
+            //     }
+            // }
+
+            // margin
+            if (
+                box.dominant > this.boxCountDom / 10 &&
+                box.dominant < this.boxCountDom / 10 * 9 &&
+                box.sub > (this.boxCount / 5 * 2) &&
+                box.sub < (this.boxCount / 5 * 3)
+            ) {
+                // for (var i = 0; i < this.boxCount; i += 2) {
+                // if (box.sub >= this.stripe * i && box.sub < this.stripe * (i + 1)) {
+                if (box.index % 2 == 0) { // 2,3,4
                     noStroke();
                     // strokeWeight(3);
                     fill("white");
                     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
                 }
+                // }
+                // }
             }
         }
     }
