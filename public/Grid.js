@@ -55,6 +55,7 @@ class Grid {
                     "B": B,
                     "C": C,
                     "D": D,
+
                     "dominant": d,
                     "sub": s,
                     "index": index,
@@ -156,6 +157,99 @@ class Grid {
         this.selectColumnMasks();
     }
 
+    createNoise(start, stop1, stop2, end) {
+        this.pointCount = 600;
+        this.noiseWeight = 2;
+        this.noiseColor = color("black");
+
+        var stats1 = getSteep(start, stop1);
+        var stats2 = getSteep(stop1, stop2);
+        var stats3 = getSteep(stop2, end);
+        // var stats4 = getSteep(this.A3, this.B);
+
+
+        for (var i = 0; i < this.pointCount; i++) {
+
+            let x = getRandomFromInterval(start.x, end.x);
+
+            // ATTENTION HARD CODED VALUE - y axis
+            // let offset = randomGaussian(0, (this.A.y - this.D.y) / 4);
+            let offset = randomGaussian(0, 100);
+            // let y = height / 10 * 2 + abs(offset);
+            if (x < start.x) {
+                this.baseY = start.y;
+            } else if (x > start.x & x < stop1.x) {
+                this.baseY = stats1[0] * x + stats1[1]
+            } else if (x > stop1.x & x < stop2.x) {
+                this.baseY = stats2[0] * x + stats2[1]
+            } else {
+                this.baseY = stats3[0] * x + stats3[1]
+            }
+            let y = this.baseY + abs(offset);
+
+            this.buffer.push()
+            this.buffer.stroke(this.noiseColor);
+            this.buffer.strokeWeight(this.noiseWeight);
+            this.buffer.point(x, y);
+            this.buffer.pop();
+        }
+    }
+
+    createUpperLine() {
+        this.buffer.push();
+        this.buffer.stroke(color("#111111"));
+        this.buffer.strokeWeight(2);
+        this.buffer.noFill();
+
+        // this.buffer.line(start.x, start.y, end.x, end.y);
+
+        this.buffer.beginShape();
+        this.buffer.vertex(this.A2.x, this.A2.y);
+        this.buffer.bezierVertex(
+            this.A2A1Stop1.x,
+            this.A2A1Stop1.y,
+            this.A2A1Stop2.x,
+            this.A2A1Stop2.y,
+            this.A1.x,
+            this.A1.y
+        );
+        this.buffer.endShape();
+
+        this.buffer.stroke(color("green"));
+        this.buffer.point(this.A1.x, this.A1.y);
+        this.buffer.stroke(color("red"));
+        this.buffer.point(this.A2A1Stop1.x, this.A2A1Stop1.y);
+        this.buffer.stroke(color("blue"));
+        this.buffer.point(this.A2A1Stop2.x, this.A2A1Stop2.y);
+        this.buffer.stroke(color("orange"));
+        this.buffer.point(this.A2.x, this.A2.y);
+
+
+        this.buffer.pop();
+    }
+
+    createLowerLine() {
+        this.buffer.push();
+        this.buffer.stroke(color("#9e9e9e"));
+        this.buffer.strokeWeight(6);
+        this.buffer.noFill();
+
+        this.buffer.beginShape();
+        this.buffer.vertex(this.A4.x, this.A4.y);
+        this.buffer.bezierVertex(
+            this.A4A3Stop1.x,
+            this.A4A3Stop1.y,
+            this.A4A3Stop2.x,
+            this.A4A3Stop2.y,
+            this.A3.x,
+            this.A3.y
+        );
+        this.buffer.endShape();
+
+        this.buffer.pop();
+    }
+
+
     selectColumnMasks() {
         // columns
         // for (var box of this.boxes) {
@@ -170,7 +264,7 @@ class Grid {
         // console.log(this.rows);
 
         for (var column of this.columns) {
-            console.log(column);
+            // console.log(column);
             this.actives[column] = [];
             for (var box of this.boxes) {
                 if (box.mask && box.sub == column) {
@@ -182,11 +276,12 @@ class Grid {
 
     drawMask() {
 
-        this.bezierOffset = 20;
+        this.bezierOffset = 40;
 
         this.buffer.push();
         // translate(0, 0);
-        this.buffer.fill("blue");
+        // this.buffer.fill("blue");
+        this.buffer.fill(color(BACKGROUND));
         this.buffer.noStroke();
 
         this.buffer.beginShape();
@@ -203,56 +298,92 @@ class Grid {
             this.A3 = this.actives[column][this.actives[column].length - 1].C;
             this.A4 = this.actives[column][this.actives[column].length - 1].D;
 
-            this.createMaskElement(this.A1, this.A2, this.A3, this.A4,);
+            this.A1A4Stop1 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4);
+            this.A1A4Stop2 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4 * 3);
+            this.A4A3Stop1 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A4A3Stop2 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4 * 3, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A3A2Stop1 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4);
+            this.A3A2Stop2 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4 * 3);
+            this.A2A1Stop1 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A2A1Stop2 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4 * 3, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+
+            this.createMaskElement();
         }
-
-
 
         this.buffer.endShape(CLOSE);
         this.buffer.pop();
+
+        // extra loop outside of beginShape and endShape
+        for (var column in this.actives) {
+            // console.log(column);
+            this.A1 = this.actives[column][0].A;
+            this.A2 = this.actives[column][0].B;
+            this.A3 = this.actives[column][this.actives[column].length - 1].C;
+            this.A4 = this.actives[column][this.actives[column].length - 1].D;
+
+            this.A1A4Stop1 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4);
+            this.A1A4Stop2 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4 * 3);
+            this.A4A3Stop1 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A4A3Stop2 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4 * 3, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A3A2Stop1 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4);
+            this.A3A2Stop2 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4 * 3);
+            this.A2A1Stop1 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.A2A1Stop2 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4 * 3, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+
+            this.createUpperLine();
+            this.createLowerLine()
+        }
     }
 
-    createMaskElement(A1, A2, A3, A4) {
+    createMaskElement() {
 
         // counter-clockwise
         this.buffer.beginContour();
 
         // counter-clockwise
-        this.buffer.vertex(A1.x, A1.y);
+        this.buffer.vertex(this.A1.x, this.A1.y);
+        // A1-A4 
         this.buffer.bezierVertex(
-            A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A1.y + (A4.y - A1.y) / 4,
-            A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A1.y + (A4.y - A1.y) / 4 * 3,
-            A4.x,
-            A4.y
+            this.A1A4Stop1.x,
+            this.A1A4Stop1.y,
+            this.A1A4Stop2.x,
+            this.A1A4Stop2.y,
+            this.A4.x,
+            this.A4.y
         );
+
+        // A4-A3
         this.buffer.bezierVertex(
-            A4.x + (A3.x - A4.x) / 4,
-            A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A4.x + (A3.x - A4.x) / 4 * 3,
-            A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A3.x,
-            A3.y
+            this.A4A3Stop1.x,
+            this.A4A3Stop1.y,
+            this.A4A3Stop2.x,
+            this.A4A3Stop2.y,
+            this.A3.x,
+            this.A3.y
         );
+
+        // A3-A2
         this.buffer.bezierVertex(
-            A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A3.y + (A2.y - A3.y) / 4,
-            A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A3.y + (A2.y - A3.y) / 4 * 3,
-            A2.x,
-            A2.y
+            this.A3A2Stop1.x,
+            this.A3A2Stop1.y,
+            this.A3A2Stop2.x,
+            this.A3A2Stop2.y,
+            this.A2.x,
+            this.A2.y
         );
+
+        // A2-A1
         this.buffer.bezierVertex(
-            A2.x + (A1.x - A2.x) / 4,
-            A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A2.x + (A1.x - A2.x) / 4 * 3,
-            A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
-            A1.x,
-            A1.y
+            this.A2A1Stop1.x,
+            this.A2A1Stop1.y,
+            this.A2A1Stop2.x,
+            this.A2A1Stop2.y,
+            this.A1.x,
+            this.A1.y
         );
         this.buffer.endContour();
 
+        // this.createNoise(this.A1, this.A2A1Stop1, this.A2A1Stop2, this.A2);
     }
 
     show() {

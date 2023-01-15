@@ -225,10 +225,9 @@ function draw() {
   // background(color("#fdfdfd"));  // areaB
   // background(color("#929292"));  // areaC
 
-  background(color(BACKGROUND));
-  // background(color("#c95959"));
-
-  grid.show();
+  // background(color(BACKGROUND));
+  // background(color("white"));
+  background(color("#e92929"));
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -244,6 +243,7 @@ function draw() {
   // areaA.show();
   // areaB.show();
 
+  grid.show();
   // overlay.show();
 
   // example.create();
