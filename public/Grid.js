@@ -2,6 +2,7 @@ class Grid {
     constructor() {
         // this.margin = 0; // DOMINANTSIDE * 0.1;
         this.profile = "1/3-1/6";
+        this.bezierOffset = 40;
 
         this.opWidth = width //- this.margin * 2;
         this.opHeight = height //- this.margin * 2;
@@ -43,6 +44,15 @@ class Grid {
                 var C = p5.Vector.add(A, createVector(this.boxSize, this.boxSize));
                 var D = p5.Vector.add(A, createVector(0, this.boxSize));
 
+                var ABStop1 = createVector(B.x + (A.x - B.x) / 4, B.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+                var ABStop2 = createVector(B.x + (A.x - B.x) / 4 * 3, B.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+                var BCStop1 = createVector(C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), C.y + (B.y - C.y) / 4);
+                var BCStop2 = createVector(C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), C.y + (B.y - C.y) / 4 * 3);
+                var CDStop1 = createVector(D.x + (C.x - D.x) / 4 * 3, D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+                var CDStop2 = createVector(D.x + (C.x - D.x) / 4, D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+                var DAStop1 = createVector(A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), A.y + (D.y - A.y) / 4 * 3);
+                var DAStop2 = createVector(A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), A.y + (D.y - A.y) / 4);
+
                 // DEBUG
                 // strokeWeight(20);
                 // point(A.x, A.y);
@@ -55,7 +65,14 @@ class Grid {
                     "B": B,
                     "C": C,
                     "D": D,
-
+                    "ABStop1": ABStop1,
+                    "ABStop2": ABStop2,
+                    "BCStop1": BCStop1,
+                    "BCStop2": BCStop2,
+                    "CDStop1": CDStop1,
+                    "CDStop2": CDStop2,
+                    "DAStop1": DAStop1,
+                    "DAStop2": DAStop2,
                     "dominant": d,
                     "sub": s,
                     "index": index,
@@ -197,52 +214,42 @@ class Grid {
 
     createUpperLine() {
         this.buffer.push();
-        this.buffer.stroke(color("#111111"));
+        this.buffer.stroke(color("#3a3a3a"));
         this.buffer.strokeWeight(2);
         this.buffer.noFill();
 
         // this.buffer.line(start.x, start.y, end.x, end.y);
 
         this.buffer.beginShape();
-        this.buffer.vertex(this.A2.x, this.A2.y);
+        this.buffer.vertex(this.A.x, this.A.y);
         this.buffer.bezierVertex(
-            this.A2A1Stop1.x,
-            this.A2A1Stop1.y,
-            this.A2A1Stop2.x,
-            this.A2A1Stop2.y,
-            this.A1.x,
-            this.A1.y
+            this.ABStop1.x,
+            this.ABStop1.y,
+            this.ABStop2.x,
+            this.ABStop2.y,
+            this.B.x,
+            this.B.y
         );
         this.buffer.endShape();
-
-        this.buffer.stroke(color("green"));
-        this.buffer.point(this.A1.x, this.A1.y);
-        this.buffer.stroke(color("red"));
-        this.buffer.point(this.A2A1Stop1.x, this.A2A1Stop1.y);
-        this.buffer.stroke(color("blue"));
-        this.buffer.point(this.A2A1Stop2.x, this.A2A1Stop2.y);
-        this.buffer.stroke(color("orange"));
-        this.buffer.point(this.A2.x, this.A2.y);
-
 
         this.buffer.pop();
     }
 
     createLowerLine() {
         this.buffer.push();
-        this.buffer.stroke(color("#9e9e9e"));
+        this.buffer.stroke(color("#c2c2c2"));
         this.buffer.strokeWeight(6);
         this.buffer.noFill();
 
         this.buffer.beginShape();
-        this.buffer.vertex(this.A4.x, this.A4.y);
+        this.buffer.vertex(this.C.x, this.C.y);
         this.buffer.bezierVertex(
-            this.A4A3Stop1.x,
-            this.A4A3Stop1.y,
-            this.A4A3Stop2.x,
-            this.A4A3Stop2.y,
-            this.A3.x,
-            this.A3.y
+            this.CDStop1.x,
+            this.CDStop1.y,
+            this.CDStop2.x,
+            this.CDStop2.y,
+            this.D.x,
+            this.D.y
         );
         this.buffer.endShape();
 
@@ -276,8 +283,6 @@ class Grid {
 
     drawMask() {
 
-        this.bezierOffset = 40;
-
         this.buffer.push();
         // translate(0, 0);
         // this.buffer.fill("blue");
@@ -293,19 +298,19 @@ class Grid {
 
         for (var column in this.actives) {
             // console.log(column);
-            this.A1 = this.actives[column][0].A;
-            this.A2 = this.actives[column][0].B;
-            this.A3 = this.actives[column][this.actives[column].length - 1].C;
-            this.A4 = this.actives[column][this.actives[column].length - 1].D;
+            this.A = this.actives[column][0].A;
+            this.B = this.actives[column][0].B;
+            this.C = this.actives[column][this.actives[column].length - 1].C;
+            this.D = this.actives[column][this.actives[column].length - 1].D;
 
-            this.A1A4Stop1 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4);
-            this.A1A4Stop2 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4 * 3);
-            this.A4A3Stop1 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A4A3Stop2 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4 * 3, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A3A2Stop1 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4);
-            this.A3A2Stop2 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4 * 3);
-            this.A2A1Stop1 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A2A1Stop2 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4 * 3, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.ABStop1 = this.actives[column][0].ABStop1;
+            this.ABStop2 = this.actives[column][0].ABStop2;
+            this.BCStop1 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4);
+            this.BCStop2 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3);
+            this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
+            this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
+            this.DAStop2 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4);
+            this.DAStop1 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3);
 
             this.createMaskElement();
         }
@@ -316,22 +321,18 @@ class Grid {
         // extra loop outside of beginShape and endShape
         for (var column in this.actives) {
             // console.log(column);
-            this.A1 = this.actives[column][0].A;
-            this.A2 = this.actives[column][0].B;
-            this.A3 = this.actives[column][this.actives[column].length - 1].C;
-            this.A4 = this.actives[column][this.actives[column].length - 1].D;
+            this.A = this.actives[column][0].A;
+            this.B = this.actives[column][0].B;
+            this.C = this.actives[column][this.actives[column].length - 1].C;
+            this.D = this.actives[column][this.actives[column].length - 1].D;
 
-            this.A1A4Stop1 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4);
-            this.A1A4Stop2 = createVector(this.A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A1.y + (this.A4.y - this.A1.y) / 4 * 3);
-            this.A4A3Stop1 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A4A3Stop2 = createVector(this.A4.x + (this.A3.x - this.A4.x) / 4 * 3, this.A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A3A2Stop1 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4);
-            this.A3A2Stop2 = createVector(this.A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A3.y + (this.A2.y - this.A3.y) / 4 * 3);
-            this.A2A1Stop1 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
-            this.A2A1Stop2 = createVector(this.A2.x + (this.A1.x - this.A2.x) / 4 * 3, this.A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset));
+            this.ABStop1 = this.actives[column][0].ABStop1;
+            this.ABStop2 = this.actives[column][0].ABStop2;
+            this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
+            this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
 
             this.createUpperLine();
-            this.createLowerLine()
+            this.createLowerLine();
         }
     }
 
@@ -341,45 +342,42 @@ class Grid {
         this.buffer.beginContour();
 
         // counter-clockwise
-        this.buffer.vertex(this.A1.x, this.A1.y);
-        // A1-A4 
+        this.buffer.vertex(this.A.x, this.A.y);
         this.buffer.bezierVertex(
-            this.A1A4Stop1.x,
-            this.A1A4Stop1.y,
-            this.A1A4Stop2.x,
-            this.A1A4Stop2.y,
-            this.A4.x,
-            this.A4.y
+            this.DAStop2.x,
+            this.DAStop2.y,
+            this.DAStop1.x,
+            this.DAStop1.y,
+            this.D.x,
+            this.D.y
         );
 
-        // A4-A3
         this.buffer.bezierVertex(
-            this.A4A3Stop1.x,
-            this.A4A3Stop1.y,
-            this.A4A3Stop2.x,
-            this.A4A3Stop2.y,
-            this.A3.x,
-            this.A3.y
+            this.CDStop2.x,
+            this.CDStop2.y,
+            this.CDStop1.x,
+            this.CDStop1.y,
+            this.C.x,
+            this.C.y
         );
 
-        // A3-A2
         this.buffer.bezierVertex(
-            this.A3A2Stop1.x,
-            this.A3A2Stop1.y,
-            this.A3A2Stop2.x,
-            this.A3A2Stop2.y,
-            this.A2.x,
-            this.A2.y
+            this.BCStop2.x,
+            this.BCStop2.y,
+            this.BCStop1.x,
+            this.BCStop1.y,
+            this.B.x,
+            this.B.y
         );
 
         // A2-A1
         this.buffer.bezierVertex(
-            this.A2A1Stop1.x,
-            this.A2A1Stop1.y,
-            this.A2A1Stop2.x,
-            this.A2A1Stop2.y,
-            this.A1.x,
-            this.A1.y
+            this.ABStop2.x,
+            this.ABStop2.y,
+            this.ABStop1.x,
+            this.ABStop1.y,
+            this.A.x,
+            this.A.y
         );
         this.buffer.endContour();
 
