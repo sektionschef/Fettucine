@@ -90,6 +90,7 @@ class Grid {
     createMask() {
 
         this.showDebug()
+        this.actives = [];
 
         // old thing
         // this.third = Math.round(this.boxCount / 3);
@@ -146,6 +147,23 @@ class Grid {
                 // }
             }
         }
+
+        // columns
+        for (var box of this.boxes) {
+            if (box.mask) {
+                if (box.sub == 34) { // one Column
+                    this.actives.push(box);
+                }
+            }
+        }
+        console.log(this.actives);
+
+        this.A1 = this.actives[0].A;
+        this.A2 = this.actives[0].B;
+        this.A3 = this.actives[this.actives.length - 1].C;
+        this.A4 = this.actives[this.actives.length - 1].D;
+
+
     }
 
     drawMask() {
@@ -177,6 +195,8 @@ class Grid {
         var A4 = createVector(2500, 3500);
 
         this.createMaskElement(A1, A2, A3, A4,);
+
+        this.createMaskElement(this.A1, this.A2, this.A3, this.A4,);
 
         this.buffer.endShape(CLOSE);
         this.buffer.pop();
