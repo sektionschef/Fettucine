@@ -84,7 +84,7 @@ class Grid {
 
     show() {
 
-        // this.showDebug()
+        this.showDebug()
 
         // old thing
         // this.third = Math.round(this.boxCount / 3);
