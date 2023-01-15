@@ -14,6 +14,10 @@ class Grid {
             this.domSide = this.opWidth;
         }
 
+        this.actives = {};
+        this.columns = new Set();
+        this.rows = new Set();
+
         this.buffer = createGraphics(width, height);
 
         // only the rest
@@ -90,7 +94,6 @@ class Grid {
     createMask() {
 
         this.showDebug()
-        this.actives = [];
 
         // old thing
         // this.third = Math.round(this.boxCount / 3);
@@ -142,28 +145,39 @@ class Grid {
                     // rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
 
                     box.mask = true;
+                    this.columns.add(box.sub);
+                    this.rows.add(box.dominant);
                 }
                 // }
                 // }
             }
         }
 
+        this.selectColumnMasks();
+    }
+
+    selectColumnMasks() {
         // columns
-        for (var box of this.boxes) {
-            if (box.mask) {
-                if (box.sub == 34) { // one Column
-                    this.actives.push(box);
+        // for (var box of this.boxes) {
+        //     if (box.mask) {
+        //         if (box.sub == 34) { // one Column
+        //             this.actives.push(box);
+        //         }
+        //     }
+        // }
+        // console.log(this.actives);
+        // console.log(this.columns);
+        // console.log(this.rows);
+
+        for (var column of this.columns) {
+            console.log(column);
+            this.actives[column] = [];
+            for (var box of this.boxes) {
+                if (box.mask && box.sub == column) {
+                    this.actives[column].push(box);
                 }
             }
         }
-        console.log(this.actives);
-
-        this.A1 = this.actives[0].A;
-        this.A2 = this.actives[0].B;
-        this.A3 = this.actives[this.actives.length - 1].C;
-        this.A4 = this.actives[this.actives.length - 1].D;
-
-
     }
 
     drawMask() {
@@ -182,21 +196,17 @@ class Grid {
         this.buffer.vertex(width, height);
         this.buffer.vertex(0, height);
 
-        var A1 = createVector(1000, 1000);
-        var A2 = createVector(2000, 1000);
-        var A3 = createVector(2000, 2000);
-        var A4 = createVector(1000, 2000);
+        for (var column in this.actives) {
+            // console.log(column);
+            this.A1 = this.actives[column][0].A;
+            this.A2 = this.actives[column][0].B;
+            this.A3 = this.actives[column][this.actives[column].length - 1].C;
+            this.A4 = this.actives[column][this.actives[column].length - 1].D;
 
-        this.createMaskElement(A1, A2, A3, A4,);
+            this.createMaskElement(this.A1, this.A2, this.A3, this.A4,);
+        }
 
-        var A1 = createVector(2500, 2500);
-        var A2 = createVector(3500, 2500);
-        var A3 = createVector(3500, 3500);
-        var A4 = createVector(2500, 3500);
 
-        this.createMaskElement(A1, A2, A3, A4,);
-
-        this.createMaskElement(this.A1, this.A2, this.A3, this.A4,);
 
         this.buffer.endShape(CLOSE);
         this.buffer.pop();
