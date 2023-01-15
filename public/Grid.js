@@ -3,7 +3,6 @@ class Grid {
         // this.margin = 0; // DOMINANTSIDE * 0.1;
         this.profile = "1/3-1/6";
 
-
         this.opWidth = width //- this.margin * 2;
         this.opHeight = height //- this.margin * 2;
 
@@ -14,6 +13,8 @@ class Grid {
             this.subSide = this.opHeight;
             this.domSide = this.opWidth;
         }
+
+        this.buffer = createGraphics(width, height);
 
         // only the rest
         // TODO center for this.margin/2;
@@ -53,11 +54,15 @@ class Grid {
                     "dominant": d,
                     "sub": s,
                     "index": index,
+                    "mask": false,
                 })
 
                 index += 1;
             }
         }
+
+        this.createMask();
+        this.drawMask();
     }
 
     showDebug() {
@@ -82,7 +87,7 @@ class Grid {
         }
     }
 
-    show() {
+    createMask() {
 
         this.showDebug()
 
@@ -131,14 +136,98 @@ class Grid {
                 // for (var i = 0; i < this.boxCount; i += 2) {
                 // if (box.sub >= this.stripe * i && box.sub < this.stripe * (i + 1)) {
                 if (box.index % 2 == 0) { // 2,3,4
-                    noStroke();
-                    // strokeWeight(3);
-                    fill("white");
-                    rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+                    // noStroke();
+                    // fill("white");
+                    // rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+
+                    box.mask = true;
                 }
                 // }
                 // }
             }
         }
+    }
+
+    drawMask() {
+
+        this.bezierOffset = 20;
+
+        this.buffer.push();
+        // translate(0, 0);
+        this.buffer.fill("blue");
+        this.buffer.noStroke();
+
+        this.buffer.beginShape();
+        // clockwise
+        this.buffer.vertex(0, 0);
+        this.buffer.vertex(width, 0);
+        this.buffer.vertex(width, height);
+        this.buffer.vertex(0, height);
+
+        var A1 = createVector(1000, 1000);
+        var A2 = createVector(2000, 1000);
+        var A3 = createVector(2000, 2000);
+        var A4 = createVector(1000, 2000);
+
+        this.createMaskElement(A1, A2, A3, A4,);
+
+        var A1 = createVector(2500, 2500);
+        var A2 = createVector(3500, 2500);
+        var A3 = createVector(3500, 3500);
+        var A4 = createVector(2500, 3500);
+
+        this.createMaskElement(A1, A2, A3, A4,);
+
+        this.buffer.endShape(CLOSE);
+        this.buffer.pop();
+    }
+
+    createMaskElement(A1, A2, A3, A4) {
+
+        // counter-clockwise
+        this.buffer.beginContour();
+
+        // counter-clockwise
+        this.buffer.vertex(A1.x, A1.y);
+        this.buffer.bezierVertex(
+            A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A1.y + (A4.y - A1.y) / 4,
+            A1.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A1.y + (A4.y - A1.y) / 4 * 3,
+            A4.x,
+            A4.y
+        );
+        this.buffer.bezierVertex(
+            A4.x + (A3.x - A4.x) / 4,
+            A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A4.x + (A3.x - A4.x) / 4 * 3,
+            A4.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A3.x,
+            A3.y
+        );
+        this.buffer.bezierVertex(
+            A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A3.y + (A2.y - A3.y) / 4,
+            A3.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A3.y + (A2.y - A3.y) / 4 * 3,
+            A2.x,
+            A2.y
+        );
+        this.buffer.bezierVertex(
+            A2.x + (A1.x - A2.x) / 4,
+            A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A2.x + (A1.x - A2.x) / 4 * 3,
+            A2.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset),
+            A1.x,
+            A1.y
+        );
+        this.buffer.endContour();
+
+    }
+
+    show() {
+        push();
+        image(this.buffer, 0, 0);
+        pop();
     }
 }
