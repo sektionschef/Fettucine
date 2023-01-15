@@ -107,7 +107,7 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  grid = new Grid();
+  // grid = new Grid();
 
   // paper = new Paper();
   // backgroundNoise = new Noise();
@@ -228,7 +228,7 @@ function draw() {
   background(color(BACKGROUND));
   // background(color("#c95959"));
 
-  grid.show();
+  // grid.show();
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -264,6 +264,45 @@ function draw() {
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
+
+
+
+
+  // curveTightness(1);
+  push();
+  translate(0, 0);
+  fill("blue");
+  beginShape();
+  // Exterior part of shape, clockwise winding
+  vertex(100, 100);
+  vertex(width - 100, 100);
+  vertex(width - 100, height - 100);
+  vertex(100, height - 100);
+  // Interior part of shape, counter-clockwise winding
+  beginContour();
+  // curveTightness(2);
+
+  var A1 = createVector(1000, 1000);
+  var A2 = createVector(2000, 1000);
+  var A3 = createVector(2000, 2000);
+  var A4 = createVector(1000, 2000);
+
+  vertex(1000, 1000);
+  bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
+  // vertex(1000, 2000);
+  bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
+  vertex(2000, 2000);
+  vertex(2000, 1000);
+
+  // curveVertex(1000, 1000);
+  // curveVertex(1000, 2000);
+  // curveVertex(2000, 2000);
+  // curveVertex(2000, 1000);
+  endContour();
+  endShape(CLOSE);
+  pop();
+
+
 
   // fxpreview();
   noLoop();
