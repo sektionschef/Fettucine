@@ -282,25 +282,60 @@ function draw() {
   beginContour();
   // curveTightness(2);
 
+  // vertex(1000, 1000);
+  // bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
+  // // vertex(1000, 2000);
+  // bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
+  // vertex(2000, 2000);
+  // vertex(2000, 1000);
+
   var A1 = createVector(1000, 1000);
   var A2 = createVector(2000, 1000);
   var A3 = createVector(2000, 2000);
   var A4 = createVector(1000, 2000);
 
-  vertex(1000, 1000);
-  bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
-  // vertex(1000, 2000);
-  bezierVertex(1030, 1030, 1010, 1820, 1000, 2000);
-  vertex(2000, 2000);
-  vertex(2000, 1000);
-
-  // curveVertex(1000, 1000);
-  // curveVertex(1000, 2000);
-  // curveVertex(2000, 2000);
-  // curveVertex(2000, 1000);
+  var offset = 20;
+  // counter-clockwise
+  vertex(A1.x, A1.y);
+  bezierVertex(
+    A1.x + getRandomFromInterval(-offset, offset),
+    A1.y + (A4.y - A1.y) / 4,
+    A1.x + getRandomFromInterval(-offset, offset),
+    A1.y + (A4.y - A1.y) / 4 * 3,
+    A4.x,
+    A4.y
+  );
+  bezierVertex(
+    A4.x + (A3.x - A4.x) / 4,
+    A4.y + getRandomFromInterval(-offset, offset),
+    A4.x + (A3.x - A4.x) / 4 * 3,
+    A4.y + getRandomFromInterval(-offset, offset),
+    A3.x,
+    A3.y
+  );
+  bezierVertex(
+    A3.x + getRandomFromInterval(-offset, offset),
+    A3.y + (A2.y - A3.y) / 4,
+    A3.x + getRandomFromInterval(-offset, offset),
+    A3.y + (A2.y - A3.y) / 4 * 3,
+    A2.x,
+    A2.y
+  );
+  bezierVertex(
+    A2.x + (A1.x - A2.x) / 4,
+    A2.y + getRandomFromInterval(-offset, offset),
+    A2.x + (A1.x - A2.x) / 4 * 3,
+    A2.y + getRandomFromInterval(-offset, offset),
+    A1.x,
+    A1.y
+  );
   endContour();
   endShape(CLOSE);
   pop();
+
+  // strokeWeight(100);
+  // point(A2.x + (A1.x - A2.x) / 4, A2.y + getRandomFromInterval(-offset, offset),)
+  // point(A3.x + getRandomFromInterval(-offset, offset), A3.y + (A2.y - A3.y) / 4 * 3)
 
 
 
