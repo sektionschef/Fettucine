@@ -381,7 +381,7 @@ class Grid {
         );
         this.buffer.endContour();
 
-        // this.createNoise(this.A1, this.A2A1Stop1, this.A2A1Stop2, this.A2);
+        this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
     }
 
     show() {
