@@ -287,6 +287,25 @@ class Grid {
         //     this.createUpperLine();
         //     this.createLowerLine();
         // }
+
+        for (var stripe of this.stripes) {
+            this.A = stripe.A;
+            this.B = stripe.B;
+            this.C = stripe.C;
+            this.D = stripe.D;
+
+            this.ABStop1 = stripe.ABStop1;
+            this.ABStop2 = stripe.ABStop2;
+            this.BCStop1 = stripe.BCStop1;
+            this.BCStop2 = stripe.BCStop2;
+            this.CDStop1 = stripe.CDStop1;
+            this.CDStop2 = stripe.CDStop2;
+            this.DAStop2 = stripe.DAStop2;
+            this.DAStop1 = stripe.DAStop1;
+
+            this.createUpperLine();
+            this.createLowerLine();
+        }
     }
 
     createMaskContour() {
@@ -364,7 +383,7 @@ class Grid {
     createUpperLine() {
         this.buffer.push();
         this.buffer.stroke(color("#3a3a3a"));
-        this.buffer.strokeWeight(2);
+        this.buffer.strokeWeight(1);
         this.buffer.noFill();
 
         // this.buffer.line(start.x, start.y, end.x, end.y);
@@ -386,8 +405,8 @@ class Grid {
 
     createLowerLine() {
         this.buffer.push();
-        this.buffer.stroke(color("#c2c2c2"));
-        this.buffer.strokeWeight(6);
+        this.buffer.stroke(color("#fafafa"));
+        this.buffer.strokeWeight(1);
         this.buffer.noFill();
 
         this.buffer.beginShape();
