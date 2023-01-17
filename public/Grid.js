@@ -35,7 +35,6 @@ class Grid {
 
         this.createBoxes();
         this.createMask();
-        // this.selectColumnMasks();
         this.drawMask();
     }
 
@@ -101,6 +100,8 @@ class Grid {
     // select active boxes
     createMask() {
 
+        // this.showDebug()
+
         this.stripes = [];
 
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
@@ -153,66 +154,6 @@ class Grid {
 
         }
 
-        // this.showDebug()
-
-        // this.stripe = Math.round(this.shortBoxCount * 0.01);
-        // console.log(this.stripe);
-
-        // for (var box of this.boxes) {
-        //     // if (box.long == 4) {
-        //     //     noStroke();
-        //     //     // strokeWeight(3);
-        //     //     fill("white");
-        //     //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-        //     // }
-
-        //     // if (box.short == 1) {
-        //     //     noStroke();
-        //     //     // strokeWeight(3);
-        //     //     fill("white");
-        //     //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-        //     // }
-
-        //     // margin
-        //     if (
-        //         box.long > this.paddingY &&
-        //         box.long < this.longBoxCount - this.paddingY &&
-        //         box.short > this.paddingX && // 5* 2
-        //         box.short < this.shortBoxCount - this.paddingX  // 5*3
-        //     ) {
-        //         // for (var i = 0; i < this.shortBoxCount; i += 2) {
-        //         // if (box.short >= this.stripe * i && box.short < this.stripe * (i + 1)) {
-        //         // if (box.index % 2 == 0) { // 2,3,4
-        //         if (columnsy.includes(box.short)) {
-
-        //             // DEBUG
-        //             // noStroke();
-        //             // fill("white");
-        //             // rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-
-        //             box.mask = true;
-        //             this.columns.add(box.short);
-        //             this.rows.add(box.long);
-        //             // }
-        //             // }
-        //         }
-        //     }
-        // }
-    }
-
-
-    // restructure for columns
-    selectColumnMasks() {
-
-        for (var column of this.columns) {
-            // console.log(column);
-            this.actives[column] = [];
-            for (var box of this.boxes) {
-                if (box.mask && box.short == column) {
-                    this.actives[column].push(box);
-                }
-            }
-        }
     }
 
     drawMask() {
@@ -230,25 +171,6 @@ class Grid {
         this.buffer.vertex(width, 0);
         this.buffer.vertex(width, height);
         this.buffer.vertex(0, height);
-
-        // for (var column in this.actives) {
-        //     // console.log(column);
-        //     this.A = this.actives[column][0].A;
-        //     this.B = this.actives[column][0].B;
-        //     this.C = this.actives[column][this.actives[column].length - 1].C;
-        //     this.D = this.actives[column][this.actives[column].length - 1].D;
-
-        //     this.ABStop1 = this.actives[column][0].ABStop1;
-        //     this.ABStop2 = this.actives[column][0].ABStop2;
-        //     this.BCStop1 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4);
-        //     this.BCStop2 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3);
-        //     this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
-        //     this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
-        //     this.DAStop2 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4);
-        //     this.DAStop1 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3);
-
-        //     this.createMaskContour();
-        // }
 
         for (var stripe of this.stripes) {
             this.A = stripe.A;
@@ -272,21 +194,6 @@ class Grid {
         this.buffer.pop();
 
         // extra loop outside of beginShape and endShape
-        // for (var column in this.actives) {
-        //     // console.log(column);
-        //     this.A = this.actives[column][0].A;
-        //     this.B = this.actives[column][0].B;
-        //     this.C = this.actives[column][this.actives[column].length - 1].C;
-        //     this.D = this.actives[column][this.actives[column].length - 1].D;
-
-        //     this.ABStop1 = this.actives[column][0].ABStop1;
-        //     this.ABStop2 = this.actives[column][0].ABStop2;
-        //     this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
-        //     this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
-
-        //     this.createUpperLine();
-        //     this.createLowerLine();
-        // }
 
         for (var stripe of this.stripes) {
             this.A = stripe.A;
@@ -342,7 +249,6 @@ class Grid {
             this.B.y
         );
 
-        // A2-A1
         this.buffer.bezierVertex(
             this.ABStop2.x,
             this.ABStop2.y,
@@ -360,14 +266,13 @@ class Grid {
         this.pointCount = 1000;
         this.noiseWeight = 1;
         this.noiseColor = color("#3a3a3a");
+        this.noiseDistance = 50;
 
         for (var i = 0; i < this.pointCount; i++) {
 
             let x = getRandomFromInterval(start.x, end.x);
 
-            // ATTENTION HARD CODED VALUE - y axis
-            // let offset = randomGaussian(0, (this.A.y - this.D.y) / 4);
-            let offset = randomGaussian(0, 50);
+            let offset = randomGaussian(0, this.noiseDistance);
             let t = map(x, start.x, end.x, 0, 1);
             this.baseY = bezierPoint(start.y, stop1.y, stop2.y, end.y, t);
             let y = this.baseY + abs(offset);
@@ -385,8 +290,6 @@ class Grid {
         this.buffer.stroke(color("#3a3a3a"));
         this.buffer.strokeWeight(1);
         this.buffer.noFill();
-
-        // this.buffer.line(start.x, start.y, end.x, end.y);
 
         this.buffer.beginShape();
         this.buffer.vertex(this.A.x, this.A.y);
