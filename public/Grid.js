@@ -35,8 +35,8 @@ class Grid {
 
         this.createBoxes();
         this.createMask();
-        this.selectColumnMasks();
-        this.drawMask();
+        // this.selectColumnMasks();
+        // this.drawMask();
     }
 
     createBoxes() {
@@ -105,10 +105,33 @@ class Grid {
 
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
-        this.thickness = 2; // in boxes
+        this.thickness = 4; // in boxes
 
-        for (var column = this.paddingX; column < (this.shortBoxCount - this.paddingX); column += this.thickness) {
-            columnsy.push(column);
+        for (
+            var column = this.paddingX;
+            column < (this.shortBoxCount - this.paddingX);
+            column += this.thickness * 2) {
+            // columnsy.push(column);
+
+            // get the index of the corner boxe of each stripe.
+            let a = column + this.paddingY * this.shortBoxCount;
+            let b = a + (this.thickness - 1);
+            let d = column + (this.longBoxCount - this.paddingY) * this.shortBoxCount;
+            let c = d + (this.thickness - 1);
+
+            // DEBUG
+            this.buffer.push();
+            this.buffer.noStroke();
+            this.buffer.fill("pink");
+            this.buffer.rectMode(CORNERS);
+            this.buffer.rect(
+                this.boxes[a].A.x,
+                this.boxes[a].A.y,
+                this.boxes[c].C.x,
+                this.boxes[c].C.y
+            );
+            this.buffer.pop();
+
         }
 
         // this.showDebug()
