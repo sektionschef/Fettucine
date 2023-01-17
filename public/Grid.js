@@ -36,7 +36,7 @@ class Grid {
         this.createBoxes();
         this.createMask();
         // this.selectColumnMasks();
-        // this.drawMask();
+        this.drawMask();
     }
 
     createBoxes() {
@@ -101,17 +101,16 @@ class Grid {
     // select active boxes
     createMask() {
 
-        let columnsy = [];
+        this.stripes = [];
 
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
-        this.thickness = 4; // in boxes
+        this.thickness = 1; // in boxes
 
         for (
             var column = this.paddingX;
             column < (this.shortBoxCount - this.paddingX);
             column += this.thickness * 2) {
-            // columnsy.push(column);
 
             // get the index of the corner boxe of each stripe.
             let a = column + this.paddingY * this.shortBoxCount;
@@ -120,17 +119,37 @@ class Grid {
             let c = d + (this.thickness - 1);
 
             // DEBUG
-            this.buffer.push();
-            this.buffer.noStroke();
-            this.buffer.fill("pink");
-            this.buffer.rectMode(CORNERS);
-            this.buffer.rect(
-                this.boxes[a].A.x,
-                this.boxes[a].A.y,
-                this.boxes[c].C.x,
-                this.boxes[c].C.y
-            );
-            this.buffer.pop();
+            // this.buffer.push();
+            // this.buffer.noStroke();
+            // this.buffer.fill("pink");
+            // this.buffer.rectMode(CORNERS);
+            // this.buffer.rect(
+            //     this.boxes[a].A.x,
+            //     this.boxes[a].A.y,
+            //     this.boxes[c].C.x,
+            //     this.boxes[c].C.y
+            // );
+            // this.buffer.pop();
+
+            this.A = this.boxes[a].A;
+            this.B = this.boxes[b].B;
+            this.C = this.boxes[c].C;
+            this.D = this.boxes[d].D;
+
+            this.stripes.push({
+                "A": this.A,
+                "B": this.B,
+                "C": this.C,
+                "D": this.D,
+                "ABStop1": createVector(this.A.x + (this.B.x - this.A.x) / 4, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+                "ABStop2": createVector(this.A.x + (this.B.x - this.A.x) / 4 * 3, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+                "BCStop1": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4),
+                "BCStop2": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3),
+                "CDStop1": createVector(this.D.x + (this.C.x - this.D.x) / 4, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+                "CDStop2": createVector(this.D.x + (this.C.x - this.D.x) / 4 * 3, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+                "DAStop2": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4),
+                "DAStop1": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3),
+            })
 
         }
 
@@ -139,46 +158,46 @@ class Grid {
         // this.stripe = Math.round(this.shortBoxCount * 0.01);
         // console.log(this.stripe);
 
-        for (var box of this.boxes) {
-            // if (box.long == 4) {
-            //     noStroke();
-            //     // strokeWeight(3);
-            //     fill("white");
-            //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-            // }
+        // for (var box of this.boxes) {
+        //     // if (box.long == 4) {
+        //     //     noStroke();
+        //     //     // strokeWeight(3);
+        //     //     fill("white");
+        //     //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+        //     // }
 
-            // if (box.short == 1) {
-            //     noStroke();
-            //     // strokeWeight(3);
-            //     fill("white");
-            //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
-            // }
+        //     // if (box.short == 1) {
+        //     //     noStroke();
+        //     //     // strokeWeight(3);
+        //     //     fill("white");
+        //     //     rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+        //     // }
 
-            // margin
-            if (
-                box.long > this.paddingY &&
-                box.long < this.longBoxCount - this.paddingY &&
-                box.short > this.paddingX && // 5* 2
-                box.short < this.shortBoxCount - this.paddingX  // 5*3
-            ) {
-                // for (var i = 0; i < this.shortBoxCount; i += 2) {
-                // if (box.short >= this.stripe * i && box.short < this.stripe * (i + 1)) {
-                // if (box.index % 2 == 0) { // 2,3,4
-                if (columnsy.includes(box.short)) {
+        //     // margin
+        //     if (
+        //         box.long > this.paddingY &&
+        //         box.long < this.longBoxCount - this.paddingY &&
+        //         box.short > this.paddingX && // 5* 2
+        //         box.short < this.shortBoxCount - this.paddingX  // 5*3
+        //     ) {
+        //         // for (var i = 0; i < this.shortBoxCount; i += 2) {
+        //         // if (box.short >= this.stripe * i && box.short < this.stripe * (i + 1)) {
+        //         // if (box.index % 2 == 0) { // 2,3,4
+        //         if (columnsy.includes(box.short)) {
 
-                    // DEBUG
-                    // noStroke();
-                    // fill("white");
-                    // rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
+        //             // DEBUG
+        //             // noStroke();
+        //             // fill("white");
+        //             // rect(box.A.x, box.A.y, this.boxSize, this.boxSize);
 
-                    box.mask = true;
-                    this.columns.add(box.short);
-                    this.rows.add(box.long);
-                    // }
-                    // }
-                }
-            }
-        }
+        //             box.mask = true;
+        //             this.columns.add(box.short);
+        //             this.rows.add(box.long);
+        //             // }
+        //             // }
+        //         }
+        //     }
+        // }
     }
 
 
@@ -212,21 +231,39 @@ class Grid {
         this.buffer.vertex(width, height);
         this.buffer.vertex(0, height);
 
-        for (var column in this.actives) {
-            // console.log(column);
-            this.A = this.actives[column][0].A;
-            this.B = this.actives[column][0].B;
-            this.C = this.actives[column][this.actives[column].length - 1].C;
-            this.D = this.actives[column][this.actives[column].length - 1].D;
+        // for (var column in this.actives) {
+        //     // console.log(column);
+        //     this.A = this.actives[column][0].A;
+        //     this.B = this.actives[column][0].B;
+        //     this.C = this.actives[column][this.actives[column].length - 1].C;
+        //     this.D = this.actives[column][this.actives[column].length - 1].D;
 
-            this.ABStop1 = this.actives[column][0].ABStop1;
-            this.ABStop2 = this.actives[column][0].ABStop2;
-            this.BCStop1 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4);
-            this.BCStop2 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3);
-            this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
-            this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
-            this.DAStop2 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4);
-            this.DAStop1 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3);
+        //     this.ABStop1 = this.actives[column][0].ABStop1;
+        //     this.ABStop2 = this.actives[column][0].ABStop2;
+        //     this.BCStop1 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4);
+        //     this.BCStop2 = createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3);
+        //     this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
+        //     this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
+        //     this.DAStop2 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4);
+        //     this.DAStop1 = createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3);
+
+        //     this.createMaskContour();
+        // }
+
+        for (var stripe of this.stripes) {
+            this.A = stripe.A;
+            this.B = stripe.B;
+            this.C = stripe.C;
+            this.D = stripe.D;
+
+            this.ABStop1 = stripe.ABStop1;
+            this.ABStop2 = stripe.ABStop2;
+            this.BCStop1 = stripe.BCStop1;
+            this.BCStop2 = stripe.BCStop2;
+            this.CDStop1 = stripe.CDStop1;
+            this.CDStop2 = stripe.CDStop2;
+            this.DAStop2 = stripe.DAStop2;
+            this.DAStop1 = stripe.DAStop1;
 
             this.createMaskContour();
         }
@@ -235,21 +272,21 @@ class Grid {
         this.buffer.pop();
 
         // extra loop outside of beginShape and endShape
-        for (var column in this.actives) {
-            // console.log(column);
-            this.A = this.actives[column][0].A;
-            this.B = this.actives[column][0].B;
-            this.C = this.actives[column][this.actives[column].length - 1].C;
-            this.D = this.actives[column][this.actives[column].length - 1].D;
+        // for (var column in this.actives) {
+        //     // console.log(column);
+        //     this.A = this.actives[column][0].A;
+        //     this.B = this.actives[column][0].B;
+        //     this.C = this.actives[column][this.actives[column].length - 1].C;
+        //     this.D = this.actives[column][this.actives[column].length - 1].D;
 
-            this.ABStop1 = this.actives[column][0].ABStop1;
-            this.ABStop2 = this.actives[column][0].ABStop2;
-            this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
-            this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
+        //     this.ABStop1 = this.actives[column][0].ABStop1;
+        //     this.ABStop2 = this.actives[column][0].ABStop2;
+        //     this.CDStop1 = this.actives[column][this.actives[column].length - 1].CDStop1;
+        //     this.CDStop2 = this.actives[column][this.actives[column].length - 1].CDStop2;
 
-            this.createUpperLine();
-            this.createLowerLine();
-        }
+        //     this.createUpperLine();
+        //     this.createLowerLine();
+        // }
     }
 
     createMaskContour() {
