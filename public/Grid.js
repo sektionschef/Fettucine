@@ -35,6 +35,7 @@ class Grid {
 
         this.createBoxes();
         this.createMask();
+        this.selectColumnMasks();
         this.drawMask();
     }
 
@@ -100,6 +101,16 @@ class Grid {
     // select active boxes
     createMask() {
 
+        let columnsy = [];
+
+        this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
+        this.paddingY = this.longBoxCount / 10;
+        this.thickness = 2; // in boxes
+
+        for (var column = this.paddingX; column < (this.shortBoxCount - this.paddingX); column += this.thickness) {
+            columnsy.push(column);
+        }
+
         // this.showDebug()
 
         // this.stripe = Math.round(this.shortBoxCount * 0.01);
@@ -122,14 +133,15 @@ class Grid {
 
             // margin
             if (
-                box.long > this.longBoxCount / 10 &&
-                box.long < this.longBoxCount / 10 * 9 &&
-                box.short > (this.shortBoxCount / 5 * 2) &&
-                box.short < (this.shortBoxCount / 5 * 3)
+                box.long > this.paddingY &&
+                box.long < this.longBoxCount - this.paddingY &&
+                box.short > this.paddingX && // 5* 2
+                box.short < this.shortBoxCount - this.paddingX  // 5*3
             ) {
                 // for (var i = 0; i < this.shortBoxCount; i += 2) {
                 // if (box.short >= this.stripe * i && box.short < this.stripe * (i + 1)) {
-                if (box.index % 2 == 0) { // 2,3,4
+                // if (box.index % 2 == 0) { // 2,3,4
+                if (columnsy.includes(box.short)) {
 
                     // DEBUG
                     // noStroke();
@@ -139,13 +151,11 @@ class Grid {
                     box.mask = true;
                     this.columns.add(box.short);
                     this.rows.add(box.long);
+                    // }
+                    // }
                 }
-                // }
-                // }
             }
         }
-
-        this.selectColumnMasks();
     }
 
 
