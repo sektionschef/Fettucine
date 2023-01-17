@@ -102,58 +102,99 @@ class Grid {
 
         // this.showDebug()
 
-        this.stripes = [];
-
+        this.stripeOrientation = "x";
+        // this.stripeOrientation = "y";
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
         this.thickness = 1; // in boxes
 
-        for (
-            var column = this.paddingX;
-            column < (this.shortBoxCount - this.paddingX);
-            column += this.thickness * 2) {
+        this.stripes = [];
 
-            // get the index of the corner boxe of each stripe.
-            let a = column + this.paddingY * this.shortBoxCount;
-            let b = a + (this.thickness - 1);
-            let d = column + (this.longBoxCount - this.paddingY) * this.shortBoxCount;
-            let c = d + (this.thickness - 1);
+        if (this.stripeOrientation == "x") {
+            for (
+                var row = this.paddingY * this.shortBoxCount + this.paddingX;
+                row < (this.longBoxCount * this.shortBoxCount - this.paddingY * this.shortBoxCount);
+                row += (this.shortBoxCount * this.thickness * 2)
+            ) {
+                // console.log(row);
 
-            // DEBUG
-            // this.buffer.push();
-            // this.buffer.noStroke();
-            // this.buffer.fill("pink");
-            // this.buffer.rectMode(CORNERS);
-            // this.buffer.rect(
-            //     this.boxes[a].A.x,
-            //     this.boxes[a].A.y,
-            //     this.boxes[c].C.x,
-            //     this.boxes[c].C.y
-            // );
-            // this.buffer.pop();
+                // get the index of the corner boxe of each stripe.
+                let a = row;
+                let b = a + this.shortBoxCount - this.paddingX * 2;
+                let c = b + (this.thickness - 1) * this.shortBoxCount;
+                let d = a + (this.thickness - 1) * this.shortBoxCount;
 
-            this.A = this.boxes[a].A;
-            this.B = this.boxes[b].B;
-            this.C = this.boxes[c].C;
-            this.D = this.boxes[d].D;
+                // DEBUG
+                // this.buffer.push();
+                // this.buffer.noStroke();
+                // this.buffer.fill("pink");
+                // // this.buffer.circle(this.boxes[b].A.x, this.boxes[b].A.y, 50);
+                // this.buffer.rectMode(CORNERS);
+                // this.buffer.rect(
+                //     this.boxes[a].A.x,
+                //     this.boxes[a].A.y,
+                //     this.boxes[c].C.x,
+                //     this.boxes[c].C.y
+                // );
+                // this.buffer.pop();
 
-            this.stripes.push({
-                "A": this.A,
-                "B": this.B,
-                "C": this.C,
-                "D": this.D,
-                "ABStop1": createVector(this.A.x + (this.B.x - this.A.x) / 4, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
-                "ABStop2": createVector(this.A.x + (this.B.x - this.A.x) / 4 * 3, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
-                "BCStop1": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4),
-                "BCStop2": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3),
-                "CDStop1": createVector(this.D.x + (this.C.x - this.D.x) / 4, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
-                "CDStop2": createVector(this.D.x + (this.C.x - this.D.x) / 4 * 3, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
-                "DAStop2": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4),
-                "DAStop1": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3),
-            })
+                this.writeToStripes(a, b, c, d);
+            }
+        } else {
 
+            for (
+                var column = this.paddingX;
+                column < (this.shortBoxCount - this.paddingX);
+                column += this.thickness * 2
+            ) {
+
+                // get the index of the corner boxe of each stripe.
+                let a = column + this.paddingY * this.shortBoxCount;
+                let b = a + (this.thickness - 1);
+                let d = column + (this.longBoxCount - this.paddingY) * this.shortBoxCount;
+                let c = d + (this.thickness - 1);
+
+                // DEBUG
+                // this.buffer.push();
+                // this.buffer.noStroke();
+                // this.buffer.fill("pink");
+                // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+                // this.buffer.rectMode(CORNERS);
+                // this.buffer.rect(
+                //     this.boxes[a].A.x,
+                //     this.boxes[a].A.y,
+                //     this.boxes[c].C.x,
+                //     this.boxes[c].C.y
+                // );
+                // this.buffer.pop();
+
+                this.writeToStripes(a, b, c, d);
+
+            }
         }
 
+    }
+
+    writeToStripes(a, b, c, d) {
+        this.A = this.boxes[a].A;
+        this.B = this.boxes[b].B;
+        this.C = this.boxes[c].C;
+        this.D = this.boxes[d].D;
+
+        this.stripes.push({
+            "A": this.A,
+            "B": this.B,
+            "C": this.C,
+            "D": this.D,
+            "ABStop1": createVector(this.A.x + (this.B.x - this.A.x) / 4, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+            "ABStop2": createVector(this.A.x + (this.B.x - this.A.x) / 4 * 3, this.A.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+            "BCStop1": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4),
+            "BCStop2": createVector(this.C.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.C.y + (this.B.y - this.C.y) / 4 * 3),
+            "CDStop1": createVector(this.D.x + (this.C.x - this.D.x) / 4, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+            "CDStop2": createVector(this.D.x + (this.C.x - this.D.x) / 4 * 3, this.D.y + getRandomFromInterval(-this.bezierOffset, this.bezierOffset)),
+            "DAStop2": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4),
+            "DAStop1": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3),
+        })
     }
 
     drawMask() {
