@@ -102,11 +102,11 @@ class Grid {
 
         // this.showDebug()
 
-        this.stripeOrientation = "x";
-        // this.stripeOrientation = "y";
+        // this.stripeOrientation = "x";
+        this.stripeOrientation = "y";
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
-        this.thickness = 1; // in boxes
+        this.thickness = 3; // in boxes
 
         this.stripeColumnCount = 2;  // for oreintation x
         this.stripeRowCount = 2;  // for oreintation y
@@ -153,7 +153,7 @@ class Grid {
             }
         } else {
 
-            this.rowBoxCount = Math.round(this.longBoxCount / 3); // size of stripe in boxes
+            this.rowBoxCount = Math.round(this.longBoxCount / 2.75); // size of stripe in boxes
             this.rowGap = this.longBoxCount - this.rowBoxCount * this.stripeRowCount - this.paddingY * 2; // the loopcount
 
             for (

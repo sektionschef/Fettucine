@@ -86,9 +86,9 @@ function preload() {
 
 function setup() {
   // startTime = performance.now()
-  BACKGROUND = "#ee4949ff";
-  // BACKGROUND = "#f8cc3bff";
-  // BACKGROUND = "#525bdaff"// "#313eecff";
+  // BACKGROUND = "#ee4949ff";
+  BACKGROUND = "#f8cc3bff";
+  // BACKGROUND = "#353eb8ff"// "#252746ff";
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
@@ -122,11 +122,11 @@ function setup() {
     originB: createVector(width / 10 * 9, height / 10), // right, start of brushstrokes
     targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
     OVERLAY: true,
-    brushCount: 400,
-    noiseIncrement: 0.06,  // 0.06 - 0.6
+    brushCount: 300,  // 100
+    noiseIncrement: 0.9,  // 0.06 - 0.6
     DEBUG: false,
-    maxSpeedMin: 15,
-    maxSpeedMax: 20,
+    maxSpeedMin: 5,  // 15
+    maxSpeedMax: 10, // 20
     minSpeed: 2,
     maxForce: 2,
     slowRadius: 40,
@@ -226,7 +226,9 @@ function draw() {
 
   // background(color(BACKGROUND));
   // background(color("white"));
-  background(color("#e92929"));
+  // background(color("#e92929"));
+  // background(color("#1e1c7e"));
+  background(color("#c9a02fff"));
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {

@@ -7,7 +7,7 @@ class PixelGradient {
 
         this.center = createVector(width / 2, height / 2);
 
-        this.strokeColor = color("#1b1b1b");
+        this.strokeColor = color("#444444");
         this.strokeWeight = 6;
         this.pointCount = 100000;
 
