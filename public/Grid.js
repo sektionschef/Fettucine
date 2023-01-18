@@ -108,6 +108,8 @@ class Grid {
         this.paddingY = this.longBoxCount / 10;
         this.thickness = 1; // in boxes
 
+        this.stripeColumnCount = 2;
+
         this.stripes = [];
 
         if (this.stripeOrientation == "x") {
@@ -117,28 +119,35 @@ class Grid {
                 row += (this.shortBoxCount * this.thickness * 2)
             ) {
                 // console.log(row);
+                for (var column = 0; column < this.stripeColumnCount; column++) {
 
-                // get the index of the corner boxe of each stripe.
-                let a = row;
-                let b = a + this.shortBoxCount - this.paddingX * 2;
-                let c = b + (this.thickness - 1) * this.shortBoxCount;
-                let d = a + (this.thickness - 1) * this.shortBoxCount;
+                    this.columnBoxCount = Math.round(this.shortBoxCount / 3); // size of stripe in boxes
+                    this.columnGap = this.shortBoxCount - this.columnBoxCount * this.stripeColumnCount - this.paddingX * 2; // the loopcount
 
-                // DEBUG
-                // this.buffer.push();
-                // this.buffer.noStroke();
-                // this.buffer.fill("pink");
-                // // this.buffer.circle(this.boxes[b].A.x, this.boxes[b].A.y, 50);
-                // this.buffer.rectMode(CORNERS);
-                // this.buffer.rect(
-                //     this.boxes[a].A.x,
-                //     this.boxes[a].A.y,
-                //     this.boxes[c].C.x,
-                //     this.boxes[c].C.y
-                // );
-                // this.buffer.pop();
+                    // get the index of the corner box of each stripe.
+                    // let a = row
+                    let a = row + this.columnBoxCount * column + this.columnGap * column;
+                    // let b = a + this.shortBoxCount - this.paddingX * 2;
+                    let b = a + this.columnBoxCount;
+                    let c = b + (this.thickness - 1) * this.shortBoxCount;
+                    let d = a + (this.thickness - 1) * this.shortBoxCount;
 
-                this.writeToStripes(a, b, c, d);
+                    // DEBUG
+                    // this.buffer.push();
+                    // this.buffer.noStroke();
+                    // this.buffer.fill("pink");
+                    // // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+                    // this.buffer.rectMode(CORNERS);
+                    // this.buffer.rect(
+                    //     this.boxes[a].A.x,
+                    //     this.boxes[a].A.y,
+                    //     this.boxes[c].C.x,
+                    //     this.boxes[c].C.y
+                    // );
+                    // this.buffer.pop();
+
+                    this.writeToStripes(a, b, c, d);
+                }
             }
         } else {
 
@@ -300,14 +309,15 @@ class Grid {
         );
         this.buffer.endContour();
 
+
         this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
     }
 
     createNoise(start, stop1, stop2, end) {
-        this.pointCount = 1000;
-        this.noiseWeight = 1;
+        this.pointCount = 2 * p5.Vector.dist(this.A, this.B);
+        this.noiseWeight = 3;
         this.noiseColor = color("#3a3a3a");
-        this.noiseDistance = 50;
+        this.noiseDistance = 25;
 
         for (var i = 0; i < this.pointCount; i++) {
 
