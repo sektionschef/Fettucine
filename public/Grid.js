@@ -102,7 +102,7 @@ class Grid {
 
         // this.showDebug()
 
-        this.stripeOrientation = "y";
+        this.stripeOrientation = "x";
         // this.stripeOrientation = "y";
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
@@ -114,6 +114,7 @@ class Grid {
         this.stripes = [];
 
         if (this.stripeOrientation == "x") {
+
             this.columnBoxCount = Math.round(this.shortBoxCount / 3); // size of stripe in boxes
             this.columnGap = this.shortBoxCount - this.columnBoxCount * this.stripeColumnCount - this.paddingX * 2; // the loopcount
 
@@ -323,9 +324,9 @@ class Grid {
 
     createNoise(start, stop1, stop2, end) {
         this.pointCount = 2 * p5.Vector.dist(this.A, this.B);
-        this.noiseWeight = 3;
+        this.noiseDistance = p5.Vector.dist(this.A, this.C) * 0.01// 25;
+        this.noiseWeight = 2;
         this.noiseColor = color("#3a3a3a");
-        this.noiseDistance = 25;
 
         for (var i = 0; i < this.pointCount; i++) {
 
