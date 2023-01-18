@@ -325,7 +325,7 @@ class Grid {
     createNoise(start, stop1, stop2, end) {
         this.pointCount = 2 * p5.Vector.dist(this.A, this.B);
         this.noiseDistance = p5.Vector.dist(this.A, this.C) * 0.01// 25;
-        this.noiseWeight = 2;
+        this.noiseWeight = 1;
         this.noiseColor = color("#3a3a3a");
 
         for (var i = 0; i < this.pointCount; i++) {
