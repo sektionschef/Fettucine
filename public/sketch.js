@@ -86,8 +86,8 @@ function preload() {
 
 function setup() {
   // startTime = performance.now()
-  // BACKGROUND = "#ee4949ff";
-  BACKGROUND = "#f8cc3bff";
+  BACKGROUND = "#ee4949ff";
+  // BACKGROUND = "#f8cc3bff";
   // BACKGROUND = "#353eb8ff"// "#252746ff";
 
   noiseSeed(NOISESEED);
@@ -123,6 +123,39 @@ function setup() {
     targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
     OVERLAY: true,
     brushCount: 300,  // 100
+    noiseIncrement: 0.9,  // 0.06 - 0.6
+    DEBUG: false,
+    maxSpeedMin: 5,  // 15
+    maxSpeedMax: 10, // 20
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 40,
+    finishedRadius: 10,
+    // targetBdistList: [50, 100, 200],
+    targetBdistList: [500],
+    // targetBDirectionList: [-1, 1],
+    targetBDirectionList: [-1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.1,
+    brushTemplateCount: 20,
+    brushTemplateSize: 50,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#b8b8b883"),
+    // brushTemplateFillColor: color("#cc1a1a83"),
+    brushTemplateFillColorDistort: 10,
+    brushTemplateStrokeColor: color("#6d6d6d83"),
+    // brushTemplateStrokeColor: color("#52000083"),
+    brushTemplateStrokeColorDistort: 40,
+    brushCurveSexyness: 1,
+  });
+
+  areaAb = new BrushstrokeSystem({
+    originA: createVector(width / 10 * 1, height / 10),  // left, start of brushstrokes
+    targetA: createVector(width / 10 * 1, height / 10 * 9), // left, end of brusshtrokes
+    originB: createVector(width / 10 * 9, height / 10), // right, start of brushstrokes
+    targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
+    OVERLAY: true,
+    brushCount: 30,  // 100
     noiseIncrement: 0.9,  // 0.06 - 0.6
     DEBUG: false,
     maxSpeedMin: 5,  // 15
@@ -226,9 +259,9 @@ function draw() {
 
   // background(color(BACKGROUND));
   // background(color("white"));
-  // background(color("#e92929"));
+  background(color("#e92929"));
   // background(color("#1e1c7e"));
-  background(color("#c9a02fff"));
+  // background(color("#c9a02fff"));
 
   // TEST with rects
   // for (var i = 0; i < 1000; i++) {
@@ -249,6 +282,8 @@ function draw() {
 
   // example.create();
   // example.show();
+
+  areaAb.show();
 
   paper.show();
   backgroundNoise.show();

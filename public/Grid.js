@@ -31,6 +31,7 @@ class Grid {
         this.boxes = [];
 
         this.buffer = createGraphics(width, height);
+        this.bufferForeground = createGraphics(width, height);
 
 
         this.createBoxes();
@@ -106,7 +107,7 @@ class Grid {
         this.stripeOrientation = "y";
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
-        this.thickness = 3; // in boxes
+        this.thickness = 1; // in boxes
 
         this.stripeColumnCount = 2;  // for oreintation x
         this.stripeRowCount = 2;  // for oreintation y
