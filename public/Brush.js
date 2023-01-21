@@ -16,6 +16,7 @@ class Brush {
         // this.curveSexyness = getRandomFromInterval(1, 5);
 
         this.pixelDistort = 30;
+        this.opacityDistort = 50;
 
         this.buffer = createGraphics(this.size, this.size);
 
@@ -72,8 +73,6 @@ class Brush {
         // this.buffer.vertex(q3X, q3Y);
         // this.buffer.endShape(CLOSE);
 
-        // this.createNoise();
-
         this.buffer.loadPixels();
         var x, y, index;
         for (x = 0; x < this.buffer.width; x++) {
@@ -121,6 +120,8 @@ class Brush {
                 // ONLY NOISE
                 // map x pos to prob. of noise
                 var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
+                var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
 
                 if (this.buffer.pixels[index + 3] != 0) {
                     if (fxrand() > threshold) {
@@ -129,10 +130,10 @@ class Brush {
                         this.buffer.pixels[index + 2] = 0;
                         this.buffer.pixels[index + 3] = 0;
                     } else {
-                        this.buffer.pixels[index + 0] = red(this.noiseColor);
-                        this.buffer.pixels[index + 1] = green(this.noiseColor);
-                        this.buffer.pixels[index + 2] = blue(this.noiseColor);
-                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                        this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
+                        this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
+                        this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] + opOffset;
                     }
                 }
 
@@ -141,25 +142,4 @@ class Brush {
         this.buffer.updatePixels();
     }
 
-
-    createNoise() {
-        this.pointCount = 40 * this.buffer.width;
-        this.noiseDistance = this.buffer.width / 3;
-        this.noiseWeight = 1;
-        this.noiseColor = color("#3a3a3a");
-
-        for (var i = 0; i < this.pointCount; i++) {
-
-            let y = getRandomFromInterval(0, this.buffer.height);
-
-            let offset = randomGaussian(0, this.noiseDistance);
-            let x = abs(offset);
-
-            this.buffer.push()
-            this.buffer.stroke(this.noiseColor);
-            this.buffer.strokeWeight(this.noiseWeight);
-            this.buffer.point(x, y);
-            this.buffer.pop();
-        }
-    }
 }
