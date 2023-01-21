@@ -2,7 +2,7 @@ class Brush {
     constructor(data) {
 
         // var colorpalette = [color("#ffffff"), color("#696969")]; //getRandomFromList([[color("pink"), color("blue")], [color("red", color("green"))]]);
-        var colorpalette = getRandomFromList([[color("#8d6a6a"), color("#686060")], [color("#c0adad"), color("#251d1d")], [color("#ffffff"), color("#d4d4d4")]]);
+        var colorpalette = getRandomFromList([[color("#8d6a6a"), color("#948686")], [color("#c0adad"), color("#ffffff")], [color("#c7adad"), color("#d4d4d4")]]);
         this.baseColor = colorpalette[0];
         this.noiseColor = colorpalette[1];
         this.fillColor = this.baseColor;
@@ -18,6 +18,9 @@ class Brush {
         this.pixelDistort = 30;
 
         this.buffer = createGraphics(this.size, this.size);
+
+        this.center = createVector(this.buffer.width / 2, this.buffer.height / 2);
+        this.maxDist = Math.sqrt(this.buffer.width ** 2 + this.buffer.height ** 2);
 
         let q1X = getRandomFromInterval(0, this.buffer.width / 2);
         let q1Y = getRandomFromInterval(0, this.buffer.height / 2);
@@ -99,19 +102,38 @@ class Brush {
                 //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
                 // }
 
-                var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                var threshold = map(x, 0, this.buffer.width, 0, 1);
+                // NOISE
+                // var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                // var threshold = map(x, 0, this.buffer.width, 0, 1);
 
-                if (fxrand() > threshold) {
-                    this.buffer.pixels[index + 0] += offset;
-                    this.buffer.pixels[index + 1] += offset;
-                    this.buffer.pixels[index + 2] += offset;
-                    this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
-                } else {
-                    this.buffer.pixels[index + 0] = red(this.noiseColor);
-                    this.buffer.pixels[index + 1] = green(this.noiseColor);
-                    this.buffer.pixels[index + 2] = blue(this.noiseColor);
-                    this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                // if (fxrand() > threshold) {
+                //     this.buffer.pixels[index + 0] += offset;
+                //     this.buffer.pixels[index + 1] += offset;
+                //     this.buffer.pixels[index + 2] += offset;
+                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                // } else {
+                //     this.buffer.pixels[index + 0] = red(this.noiseColor);
+                //     this.buffer.pixels[index + 1] = green(this.noiseColor);
+                //     this.buffer.pixels[index + 2] = blue(this.noiseColor);
+                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                // }
+
+                // ONLY NOISE
+                // map x pos to prob. of noise
+                var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
+
+                if (this.buffer.pixels[index + 3] != 0) {
+                    if (fxrand() > threshold) {
+                        this.buffer.pixels[index + 0] = 0;
+                        this.buffer.pixels[index + 1] = 0;
+                        this.buffer.pixels[index + 2] = 0;
+                        this.buffer.pixels[index + 3] = 0;
+                    } else {
+                        this.buffer.pixels[index + 0] = red(this.noiseColor);
+                        this.buffer.pixels[index + 1] = green(this.noiseColor);
+                        this.buffer.pixels[index + 2] = blue(this.noiseColor);
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                    }
                 }
 
             }

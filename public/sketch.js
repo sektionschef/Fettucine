@@ -111,6 +111,7 @@ function setup() {
 
   // paper = new Paper();
   // backgroundNoise = new Noise();
+  // backgroundNoise2 = new Noise();
   // edgePixel = new PixelGradient();
 
   // overlay = new Overlay(color("#505050"));  // fold color
@@ -150,26 +151,26 @@ function setup() {
   // });
 
   layaData = {
-    originA: createVector(width / 10 * 5, height / 10),  // left, start of brushstrokes
-    targetA: createVector(width / 10 * 5, height / 10 * 9), // left, end of brusshtrokes
-    originB: createVector(width / 10 * 7, height / 10), // right, start of brushstrokes
-    targetB: createVector(width / 10 * 7, height / 10 * 9), // right, end of brushstrokes
+    originA: createVector(width / 10 * 1, height / 10),  // left, start of brushstrokes
+    targetA: createVector(width / 10 * 1, height / 10 * 9), // left, end of brusshtrokes
+    originB: createVector(width / 10 * 9, height / 10), // right, start of brushstrokes
+    targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
     OVERLAY: false,
-    brushCount: 100,  // 100
+    brushCount: 300,  // 100
     noiseIncrement: 0.06,  // 0.06 - 0.6
     DEBUG: false,
-    maxSpeedMin: 5,  // 15
+    maxSpeedMin: 10,  // 15
     maxSpeedMax: 30, // 20
     minSpeed: 2,
     maxForce: 2,
-    slowRadius: 20,
-    finishedRadius: 10,
+    slowRadius: 320,
+    finishedRadius: 40,
     // targetBdistList: [1000],
     targetBdistList: [200, 500, 750, 1000],
     // targetBDirectionList: [-1],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
-    basicSizeMax: 1.1,
+    basicSizeMax: 1.5,
     brushTemplateCount: 20,
     brushTemplateSize: 100,
     brushTemplateStrokeSize: 1,  // out
@@ -260,7 +261,7 @@ function draw() {
   // background(color("#929292"));  // areaC
 
   // background(color(BACKGROUND));
-  background(color("white"));
+  background(color("#808080"));
   // background(color("black"));
   // background(color("#e92929"));
   // background(color("#1e1c7e"));
@@ -299,6 +300,7 @@ function draw() {
 
   // paper.show();
   // backgroundNoise.show();
+  // backgroundNoise2.show();
   // edgePixel.show();
 
 
