@@ -103,8 +103,8 @@ class Grid {
 
         // this.showDebug()
 
-        // this.stripeOrientation = "x";
-        this.stripeOrientation = "y";
+        this.stripeOrientation = "x";
+        // this.stripeOrientation = "y";
         this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
         this.paddingY = this.longBoxCount / 10;
         this.thickness = 1; // in boxes
@@ -232,11 +232,24 @@ class Grid {
         this.buffer.vertex(width, height);
         this.buffer.vertex(0, height);
 
-        for (var stripe of this.stripes) {
+        // for (var stripe of this.stripes) {
+        for (var i = 0; i < this.stripes.length; i++) {
+            let stripe = this.stripes[i];
+            // NEEDS TO BE RELATIVE TO COLUMN SIZE
+            let stripeNext = this.stripes[i + 2];
+
+            // for orientation 2
+            // if (fxrand() > 0.9) {
+            //     this.A = stripe.A;
+            //     this.B = stripe.B;
+            //     this.C = stripeNext.C;
+            //     this.D = stripeNext.D;
+            // } else {
             this.A = stripe.A;
             this.B = stripe.B;
             this.C = stripe.C;
             this.D = stripe.D;
+            // }
 
             this.ABStop1 = stripe.ABStop1;
             this.ABStop2 = stripe.ABStop2;
