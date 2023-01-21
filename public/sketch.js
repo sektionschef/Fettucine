@@ -156,7 +156,7 @@ function setup() {
     originB: createVector(width / 10 * 9, height / 10), // right, start of brushstrokes
     targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
     OVERLAY: false,
-    brushCount: 500,  // 100
+    brushCount: 500, //500,  // 100
     noiseIncrement: 0.06,  // 0.06 - 0.6
     DEBUG: false,
     maxSpeedMin: 10,  // 15

@@ -41,6 +41,7 @@ class BrushstrokeSystem {
 
             increment = increment + this.noiseIncrement;
             data.turningFactor = noise(increment) * 1;
+            data.brushIndex = i;
 
             this.brushstrokes.push(new Brushstroke(data));
         }
