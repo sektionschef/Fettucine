@@ -159,7 +159,7 @@ function setup() {
     noiseIncrement: 0.06,  // 0.06 - 0.6
     DEBUG: false,
     maxSpeedMin: 5,  // 15
-    maxSpeedMax: 10, // 20
+    maxSpeedMax: 30, // 20
     minSpeed: 2,
     maxForce: 2,
     slowRadius: 20,
@@ -170,15 +170,15 @@ function setup() {
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.1,
-    brushTemplateCount: 10,
+    brushTemplateCount: 20,
     brushTemplateSize: 100,
-    brushTemplateStrokeSize: 0,
+    brushTemplateStrokeSize: 1,  // out
     brushTemplateFillColor: color("#c9c9c9ff"),
     // brushTemplateFillColor: color("#cc1a1a83"),
     brushTemplateFillColorDistort: 20,
-    brushTemplateStrokeColor: color("#131313ff"),
+    brushTemplateStrokeColor: color("#4b4b4bff"),  // out
     // brushTemplateStrokeColor: color("#52000083"),
-    brushTemplateStrokeColorDistort: 20,
+    brushTemplateStrokeColorDistort: 20,  // out
     brushCurveSexyness: 1,
   };
 
@@ -313,7 +313,7 @@ function draw() {
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
 
-  laya.showBrushTemplates();
+  // laya.showBrushTemplates();
 
 
   // fxpreview();

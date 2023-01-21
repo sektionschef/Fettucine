@@ -1,11 +1,15 @@
 class Brush {
     constructor(data) {
-        // var set = fxrand();
-        // if (set > 0.9) { var colors = color(100) } else if (set > 0.3) { var colors = color(randomGaussian(220, 20)) } else { var colors = color(230) };//[color("#6d6d6d"), color("#9c9c9c"), color("#e9e9e9")];
+
+        // var colorpalette = [color("#ffffff"), color("#696969")]; //getRandomFromList([[color("pink"), color("blue")], [color("red", color("green"))]]);
+        var colorpalette = getRandomFromList([[color("#8d6a6a"), color("#686060")], [color("#c0adad"), color("#251d1d")], [color("#ffffff"), color("#d4d4d4")]]);
+        this.baseColor = colorpalette[0];
+        this.noiseColor = colorpalette[1];
+        this.fillColor = this.baseColor;
+
         this.size = data.size;
         this.strokeSize = data.strokeSize;
-        this.fillColor = data.fillColor;
-        // this.fillColor = colors; //getRandomFromList(colors);
+        // this.fillColor = data.fillColor;
         this.strokeColor = data.strokeColor;
         // this.strokeColor = color("black");//color(randomGaussian(30, 10));
         this.curveSexyness = data.curveSexyness;
@@ -39,8 +43,9 @@ class Brush {
         this.buffer.push();
         this.buffer.curveTightness(this.curveSexyness);
         this.buffer.fill(this.fillColor);
-        this.buffer.stroke(this.strokeColor);
-        this.buffer.strokeWeight(this.strokeSize);
+        // this.buffer.stroke(this.strokeColor);
+        // this.buffer.strokeWeight(this.strokeSize);
+        this.buffer.noStroke();
         this.buffer.beginShape();
         this.buffer.curveVertex(q1X, q1Y);
         this.buffer.curveVertex(q1X, q1Y);
@@ -103,9 +108,9 @@ class Brush {
                     this.buffer.pixels[index + 2] += offset;
                     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
                 } else {
-                    this.buffer.pixels[index + 0] = 0;
-                    this.buffer.pixels[index + 1] = 0;
-                    this.buffer.pixels[index + 2] = 0;
+                    this.buffer.pixels[index + 0] = red(this.noiseColor);
+                    this.buffer.pixels[index + 1] = green(this.noiseColor);
+                    this.buffer.pixels[index + 2] = blue(this.noiseColor);
                     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
                 }
 
