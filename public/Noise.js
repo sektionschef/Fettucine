@@ -14,10 +14,13 @@ class Noise {
         this.strokeWeight = 1;
 
         this.buffer = createGraphics(this.width, this.height);
-        this.create();
+        this.masterBuffer = createGraphics(width, height);
 
         this.xCount = Math.ceil(width / this.buffer.width);
         this.yCount = Math.ceil(height / this.buffer.height);
+
+        this.create();
+        this.createMasterBuffer();
     }
 
     create() {
@@ -65,14 +68,22 @@ class Noise {
         }
     }
 
-    show() {
-        push();
+    createMasterBuffer() {
         for (var y = 0; y < this.yCount; y++) {
             for (var x = 0; x < this.xCount; x++) {
-                blendMode(OVERLAY);
-                image(this.buffer, x * this.buffer.width, y * this.buffer.height);
+                this.masterBuffer.push();
+                // this.masterBuffer.blendMode(OVERLAY);
+                this.masterBuffer.translate(x * this.buffer.width, y * this.buffer.height);
+                this.masterBuffer.image(this.buffer, 0, 0);
+                this.masterBuffer.pop();
             }
         }
+    }
+
+    show() {
+        push();
+        blendMode(OVERLAY);
+        image(this.masterBuffer, 0, 0);
         pop();
     }
 }

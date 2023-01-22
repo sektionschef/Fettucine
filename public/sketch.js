@@ -108,12 +108,24 @@ function setup() {
   }
 
 
-  // paper = new Paper();
-  // backgroundNoise = new Noise();
-  // backgroundNoise2 = new Noise();
-  // edgePixel = new PixelGradient();
+  paper = new Paper();
+  backgroundNoise = new Noise();
+  backgroundNoise2 = new Noise();
+  edgePixel = new PixelGradient();
 
-  // grid = new Grid();
+
+  gridTexture = createGraphics(width, height);
+  push();
+  gridTexture.image(paper.masterBuffer, 0, 0);
+  gridTexture.image(backgroundNoise.masterBuffer, 0, 0);
+  gridTexture.image(backgroundNoise2.masterBuffer, 0, 0);
+  gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  pop();
+
+  grid = new Grid();
+
+  // PAPER REDUCED TO SHAPE OF GRID
+  gridTexture = maskBuffers(gridTexture, grid.buffer);
 
   // overlay = new Overlay(color("#505050"));  // fold color
   // overlay = new Overlay(color(BACKGROUND));  // full overlay color
@@ -167,12 +179,12 @@ function setup() {
     slowRadius: 320,
     finishedRadius: 40,
     // targetBdistList: [1000],
-    targetBdistList: [200, 500, 750, 1000],
+    targetBdistList: [500, 750, 1000, 2000],
     // targetBDirectionList: [-1],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
-    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
+    noiseColor: [color("#808080"), color("#d1d1d1"), color("#5f5f5f")],
     brushTemplateCount: 20,
     brushTemplateSize: 200,
     // brushTemplateStrokeSize: 1,  // out
@@ -187,7 +199,7 @@ function setup() {
     brushOpacityDistort: 50,
   };
 
-  // laya = new BrushstrokeSystem(layaData);
+  laya = new BrushstrokeSystem(layaData);
 
   laybData = {
     originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
@@ -210,7 +222,7 @@ function setup() {
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
-    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
+    noiseColor: [color("#353535"), color("#cccccc"), color("#747474")],
     brushTemplateCount: 20,
     brushTemplateSize: 100,
     // brushTemplateStrokeSize: 1,  // out
@@ -225,20 +237,22 @@ function setup() {
     brushOpacityDistort: 50,
   };
 
-  // layb = new BrushstrokeSystem(laybData);
+  layb = new BrushstrokeSystem(laybData);
 
   laycData = {
-    // originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
-    // targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
-    // originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
-    // targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
-    originA: createVector(width / 2, height / 2),  // left, start of brushstrokes
-    targetA: createVector(width, height / 2), // left, end of brusshtrokes
-    originB: createVector(200, 200), // right, start of brushstrokes
-    targetB: createVector(width, 0), // right, end of brushstrokes
+    // y
+    originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+    targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+    originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+    targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+    // x
+    // originA: createVector(0, height),  // left, start of brushstrokes
+    // targetA: createVector(width, height), // left, end of brusshtrokes
+    // originB: createVector(0, 0), // right, start of brushstrokes
+    // targetB: createVector(width, 0), // right, end of brushstrokes
     OVERLAY: false,
-    brushCount: 500, //500,  // 100
-    noiseIncrement: 0.06,  // 0.06 - 0.6
+    brushCount: 300, //500,  // 100
+    noiseIncrement: 0.006,  // 0.06 - 0.6
     DEBUG: false,
     maxSpeedMin: 10,  // 15
     maxSpeedMax: 30, // 20
@@ -247,12 +261,12 @@ function setup() {
     slowRadius: 320,
     finishedRadius: 40,
     // targetBdistList: [1000],
-    targetBdistList: [200, 500, 750, 1000],
+    targetBdistList: [200, 500, 600, 750, 1000, 2000],
     // targetBDirectionList: [-1],
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
-    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
+    noiseColor: [color("#1d1d1d"), color("#c7c7c7"), color("#ffffff")],
     brushTemplateCount: 20,
     brushTemplateSize: 50,
     // brushTemplateStrokeSize: 1,  // out
@@ -329,6 +343,7 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 40,
   // brushCurveSexyness: 1,
   // });
+
 }
 
 
@@ -362,22 +377,9 @@ function draw() {
   // areaA.show();
   // areaB.show();
 
-  // laya.show();
-  // layb.show();
+  laya.show();
+  layb.show();
   layc.show();
-
-  let newy = p5.Vector.add(layc.originA, p5.Vector.mult(layc.loopGrow, 300));
-  push();
-  fill("blue")
-  circle(layc.originA.x, layc.originA.y, 50)
-
-  fill("red")
-  circle(layc.originB.x, layc.originB.y, 50)
-
-  fill("orange")
-  circle(newy.x, newy.y, 50)
-  pop();
-
 
 
   // grid.show();
@@ -402,14 +404,12 @@ function draw() {
 
   // grid.show();
 
-
   // push();
-  // xoff = xoff + 0.01;
-  // let n = noise(xoff) * width;
-  // stroke("blue");
-  // strokeWeight(150);
-  // point(n, height / 2);
+  // blendMode(OVERLAY);
+  // image(gridTexture, 0, 0);
   // pop();
+
+
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();

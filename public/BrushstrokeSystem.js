@@ -1,11 +1,10 @@
 class BrushstrokeSystem {
     constructor(data) {
-
+        // starts from origin to target, A to B is direction of parallell strokes
         this.originA = data.originA;
         this.targetA = data.targetA;
         this.originB = data.originB;
         this.targetB = data.targetB;
-        // this.densityFactor = data.densityFactor;
         this.brushCount = data.brushCount;
         this.brushTemplateCount = data.brushTemplateCount;
         this.brushTemplateSize = data.brushTemplateSize;

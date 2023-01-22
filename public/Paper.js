@@ -11,7 +11,10 @@ class Paper {
         this.yCount = Math.ceil(height / this.height);
 
         this.buffer = createGraphics(this.width, this.height);
+        this.masterBuffer = createGraphics(width, height);
         this.create();
+
+        this.createMasterBuffer();
     }
 
     create() {
@@ -42,23 +45,22 @@ class Paper {
 
 
 
-    show(buffer) {
+    createMasterBuffer() {
         for (var y = 0; y < this.yCount; y++) {
             for (var x = 0; x < this.xCount; x++) {
-                if (buffer) {
-                    buffer.push();
-                    buffer.blendMode(OVERLAY);
-                    buffer.translate(x * this.buffer.width, y * this.buffer.height);
-                    buffer.image(this.buffer, 0, 0);
-                    buffer.pop();
-                } else {
-                    push();
-                    blendMode(OVERLAY);
-                    translate(x * this.buffer.width, y * this.buffer.height);
-                    image(this.buffer, 0, 0);
-                    pop();
-                }
+                this.masterBuffer.push();
+                // this.masterBuffer.blendMode(OVERLAY);
+                this.masterBuffer.translate(x * this.buffer.width, y * this.buffer.height);
+                this.masterBuffer.image(this.buffer, 0, 0);
+                this.masterBuffer.pop();
             }
         }
+    }
+
+    show() {
+        push();
+        blendMode(OVERLAY);
+        image(this.masterBuffer, 0, 0);
+        pop();
     }
 }

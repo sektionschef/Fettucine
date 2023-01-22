@@ -12,7 +12,9 @@ class PixelGradient {
         this.pointCount = 100000;
 
         this.buffer = createGraphics(width, height);
+        this.masterBuffer = createGraphics(width, height);
         this.create();
+        this.createMasterBuffer();
     }
 
     create() {
@@ -34,14 +36,21 @@ class PixelGradient {
         }
     }
 
-    show() {
+    createMasterBuffer() {
         // move it to the edges
+        this.masterBuffer.push();
+        this.masterBuffer.blendMode(OVERLAY);
+        this.masterBuffer.image(this.buffer, -this.buffer.width / 2, -this.buffer.height / 2);
+        this.masterBuffer.image(this.buffer, this.buffer.width - this.buffer.width / 2, -this.buffer.height / 2);
+        this.masterBuffer.image(this.buffer, this.buffer.width - this.buffer.width / 2, this.buffer.height - this.buffer.height / 2);
+        this.masterBuffer.image(this.buffer, -this.buffer.width / 2, this.buffer.height - this.buffer.height / 2);
+        this.masterBuffer.pop();
+    }
+
+    show() {
         push();
         blendMode(OVERLAY);
-        image(this.buffer, -this.buffer.width / 2, -this.buffer.height / 2);
-        image(this.buffer, this.buffer.width - this.buffer.width / 2, -this.buffer.height / 2);
-        image(this.buffer, this.buffer.width - this.buffer.width / 2, this.buffer.height - this.buffer.height / 2);
-        image(this.buffer, -this.buffer.width / 2, this.buffer.height - this.buffer.height / 2);
+        image(this.masterBuffer, 0, 0);
         pop();
     }
 }

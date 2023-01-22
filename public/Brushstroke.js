@@ -3,12 +3,9 @@
 class Brushstroke extends Vehicle {
     constructor(data) {
 
-        // TEMP
-
         // adds a sprite and a moving target on top of vehicle class
         super(data.origin, data.target, data.drawBuffer, false);
 
-        this.xoff = data.brushIndex * 0.1;  // dependent on brush index of loop
         // this.buffer = drawBuffer;
 
         this.maxSpeed = getRandomFromInterval(data.maxSpeedMin, data.maxSpeedMax); // 8-20 // 15 top speed limit
@@ -45,11 +42,6 @@ class Brushstroke extends Vehicle {
         this.target.update();
         this.target.show();
         this.target.applyForce(this.target.seek());
-
-        // alternative
-        this.xoff += 0.01;
-        let n = noise(this.xoff) * width / 2;
-        this.target.pos.x = this.target.origin.x + n;
     }
 
     updateBrushstroke() {
