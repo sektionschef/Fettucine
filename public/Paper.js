@@ -1,11 +1,11 @@
 class Paper {
     constructor() {
-        this.width = 800;
-        this.height = 800;
+        this.width = DOMINANTSIDE * 0.2; // 800
+        this.height = DOMINANTSIDE * 0.2;  // 800
 
-        this.strokeColor = color("#1d1d1d");
-        this.strokeSize = 1;
-        this.lineLength = 25; // 5 +2
+        this.strokeColor = color("#000000");
+        this.strokeSize = 0.00025 * DOMINANTSIDE; // 1;
+        this.lineLength = 0.00625 * DOMINANTSIDE; // 25; // 5 +2
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);

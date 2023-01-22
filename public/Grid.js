@@ -1,8 +1,8 @@
 class Grid {
     constructor() {
         this.profile = "1/3-1/6";
-        this.boxSize = 50;
-        this.bezierOffset = 40;
+        this.boxSize = 0.0125 * DOMINANTSIDE;
+        this.bezierOffset = 0.005 * DOMINANTSIDE;
 
         this.opWidth = width;
         this.opHeight = height;
@@ -32,7 +32,6 @@ class Grid {
 
         this.buffer = createGraphics(width, height);
         this.bufferForeground = createGraphics(width, height);
-
 
         this.createBoxes();
         this.createMask();

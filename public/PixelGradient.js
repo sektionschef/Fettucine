@@ -7,9 +7,9 @@ class PixelGradient {
 
         this.center = createVector(width / 2, height / 2);
 
-        this.strokeColor = color("#444444");
-        this.strokeWeight = 6;
-        this.pointCount = 100000;
+        this.strokeColor = color("#000000");
+        this.strokeWeight = DOMINANTSIDE * 0.00125;
+        this.pointCount = TOTALPIXEL * 0.005;
 
         this.buffer = createGraphics(width, height);
         this.masterBuffer = createGraphics(width, height);
@@ -25,8 +25,8 @@ class PixelGradient {
 
         for (var i = 0; i < this.pointCount; i++) {
 
-            let x = randomGaussian(this.buffer.width / 2, DOMINANTSIDE / 8);
-            let y = randomGaussian(this.buffer.height / 2, DOMINANTSIDE / 8);
+            let x = randomGaussian(this.buffer.width / 2, DOMINANTSIDE / 6);
+            let y = randomGaussian(this.buffer.height / 2, DOMINANTSIDE / 6);
 
             this.buffer.push()
             this.buffer.stroke(this.strokeColor);
@@ -37,7 +37,7 @@ class PixelGradient {
     }
 
     createMasterBuffer() {
-        // move it to the edges
+        // move the same buffer it to the 4 edges
         this.masterBuffer.push();
         this.masterBuffer.blendMode(OVERLAY);
         this.masterBuffer.image(this.buffer, -this.buffer.width / 2, -this.buffer.height / 2);
