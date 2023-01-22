@@ -1,22 +1,18 @@
 class Brush {
     constructor(data) {
 
-        // var colorpalette = [color("#ffffff"), color("#696969")]; //getRandomFromList([[color("pink"), color("blue")], [color("red", color("green"))]]);
-        var colorpalette = getRandomFromList([[color("#8d6a6a"), color("#948686")], [color("#c0adad"), color("#ffffff")], [color("#c7adad"), color("#d4d4d4")]]);
-        this.baseColor = colorpalette[0];
-        this.noiseColor = colorpalette[1];
-        this.fillColor = this.baseColor;
+        this.noiseColor = getRandomFromList(data.noiseColor);
+        this.fillColor = color("white"); // dummy 
 
         this.size = data.size;
-        this.strokeSize = data.strokeSize;
+        // this.strokeSize = data.strokeSize;
         // this.fillColor = data.fillColor;
-        this.strokeColor = data.strokeColor;
+        // this.strokeColor = data.strokeColor;
         // this.strokeColor = color("black");//color(randomGaussian(30, 10));
         this.curveSexyness = data.curveSexyness;
         // this.curveSexyness = getRandomFromInterval(1, 5);
-
-        this.pixelDistort = 30;
-        this.opacityDistort = 50;
+        this.pixelDistort = data.pixelDistort;
+        this.opacityDistort = data.opacityDistort;
 
         this.buffer = createGraphics(this.size, this.size);
 
@@ -136,10 +132,8 @@ class Brush {
                         this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] + opOffset;
                     }
                 }
-
             }
         }
         this.buffer.updatePixels();
     }
-
 }

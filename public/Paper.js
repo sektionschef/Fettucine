@@ -42,14 +42,22 @@ class Paper {
 
 
 
-    show() {
+    show(buffer) {
         for (var y = 0; y < this.yCount; y++) {
             for (var x = 0; x < this.xCount; x++) {
-                push();
-                blendMode(OVERLAY);
-                translate(x * this.buffer.width, y * this.buffer.height);
-                image(this.buffer, 0, 0);
-                pop();
+                if (buffer) {
+                    buffer.push();
+                    buffer.blendMode(OVERLAY);
+                    buffer.translate(x * this.buffer.width, y * this.buffer.height);
+                    buffer.image(this.buffer, 0, 0);
+                    buffer.pop();
+                } else {
+                    push();
+                    blendMode(OVERLAY);
+                    translate(x * this.buffer.width, y * this.buffer.height);
+                    image(this.buffer, 0, 0);
+                    pop();
+                }
             }
         }
     }

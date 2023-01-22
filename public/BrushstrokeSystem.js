@@ -17,10 +17,14 @@ class BrushstrokeSystem {
         this.brushCurveSexyness = data.brushCurveSexyness
         this.noiseIncrement = data.noiseIncrement;
         this.DEBUG = data.DEBUG;
+        this.noiseColor = data.noiseColor;
+        this.brushPixelDistort = data.brushPixelDistort;
+        this.brushOpacityDistort = data.brushOpacityDistort;
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
         this.densityFactor = this.distanceAB / this.brushCount;
+        this.loopGrow = p5.Vector.sub(this.originB, this.originA).normalize();  // in which the direction the loop grows
 
         this.allFinished = false;
         this.buffer = createGraphics(width, height);
@@ -31,10 +35,16 @@ class BrushstrokeSystem {
 
         let increment = 0;
 
+
+
         for (var i = 0; i < this.brushCount; i++) {
 
-            data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
-            data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
+            // console.log(i * this.densityFactor);
+            // data.origin = p5.Vector.add(this.originA, i * this.densityFactor);
+            data.origin = p5.Vector.add(this.originA, p5.Vector.mult(this.loopGrow, i * this.densityFactor));
+            // console.log(data.origin);
+            // data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
+            data.target = p5.Vector.add(this.targetA, p5.Vector.mult(this.loopGrow, i * this.densityFactor));
             // specificData.sprite = data.brushBuffer;  // GLOBAL - integrate in class
             data.sprite = getRandomFromList(this.brushTemplates);
             data.drawBuffer = this.buffer;
@@ -54,11 +64,14 @@ class BrushstrokeSystem {
 
         for (var i = 0; i < this.brushTemplateCount; i++) {
             var BrushData = {
+                noiseColor: this.noiseColor,
                 size: this.brushTemplateSize,
-                strokeSize: this.brushTemplateStrokeSize,
-                fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
-                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
+                // strokeSize: this.brushTemplateStrokeSize,
+                // fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
+                // strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
                 curveSexyness: this.brushCurveSexyness,
+                pixelDistort: this.brushPixelDistort,
+                opacityDistort: this.brushOpacityDistort,
             }
             this.brushTemplates.push(new Brush(BrushData).buffer);
         }

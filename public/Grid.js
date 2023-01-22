@@ -222,6 +222,7 @@ class Grid {
 
         // this.buffer.fill("blue");
         this.buffer.fill(color(BACKGROUND));
+
         this.buffer.noStroke();
 
         // draw background shape

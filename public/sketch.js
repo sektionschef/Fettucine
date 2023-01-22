@@ -107,12 +107,13 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  // grid = new Grid();
 
   // paper = new Paper();
   // backgroundNoise = new Noise();
   // backgroundNoise2 = new Noise();
   // edgePixel = new PixelGradient();
+
+  // grid = new Grid();
 
   // overlay = new Overlay(color("#505050"));  // fold color
   // overlay = new Overlay(color(BACKGROUND));  // full overlay color
@@ -151,10 +152,90 @@ function setup() {
   // });
 
   layaData = {
-    originA: createVector(width / 10 * 1, height / 10),  // left, start of brushstrokes
-    targetA: createVector(width / 10 * 1, height / 10 * 9), // left, end of brusshtrokes
-    originB: createVector(width / 10 * 9, height / 10), // right, start of brushstrokes
-    targetB: createVector(width / 10 * 9, height / 10 * 9), // right, end of brushstrokes
+    originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+    targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+    originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+    targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+    OVERLAY: false,
+    brushCount: 100, //500,  // 100
+    noiseIncrement: 0.06,  // 0.06 - 0.6
+    DEBUG: false,
+    maxSpeedMin: 10,  // 15
+    maxSpeedMax: 30, // 20
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 320,
+    finishedRadius: 40,
+    // targetBdistList: [1000],
+    targetBdistList: [200, 500, 750, 1000],
+    // targetBDirectionList: [-1],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.5,
+    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
+    brushTemplateCount: 20,
+    brushTemplateSize: 200,
+    // brushTemplateStrokeSize: 1,  // out
+    brushTemplateFillColor: color("#c9c9c9ff"),
+    // brushTemplateFillColor: color("#cc1a1a83"),
+    brushTemplateFillColorDistort: 20,
+    // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    // brushTemplateStrokeColor: color("#52000083"),
+    // brushTemplateStrokeColorDistort: 20,  // out
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 50,
+  };
+
+  // laya = new BrushstrokeSystem(layaData);
+
+  laybData = {
+    originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+    targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+    originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+    targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+    OVERLAY: false,
+    brushCount: 100, //500,  // 100
+    noiseIncrement: 0.06,  // 0.06 - 0.6
+    DEBUG: false,
+    maxSpeedMin: 10,  // 15
+    maxSpeedMax: 30, // 20
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 320,
+    finishedRadius: 40,
+    // targetBdistList: [1000],
+    targetBdistList: [200, 500, 750, 1000],
+    // targetBDirectionList: [-1],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.5,
+    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
+    brushTemplateCount: 20,
+    brushTemplateSize: 100,
+    // brushTemplateStrokeSize: 1,  // out
+    brushTemplateFillColor: color("#c9c9c9ff"),
+    // brushTemplateFillColor: color("#cc1a1a83"),
+    brushTemplateFillColorDistort: 20,
+    // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    // brushTemplateStrokeColor: color("#52000083"),
+    // brushTemplateStrokeColorDistort: 20,  // out
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 50,
+  };
+
+  // layb = new BrushstrokeSystem(laybData);
+
+  laycData = {
+    // originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+    // targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+    // originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+    // targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+    originA: createVector(width / 2, height / 2),  // left, start of brushstrokes
+    targetA: createVector(width, height / 2), // left, end of brusshtrokes
+    originB: createVector(200, 200), // right, start of brushstrokes
+    targetB: createVector(width, 0), // right, end of brushstrokes
     OVERLAY: false,
     brushCount: 500, //500,  // 100
     noiseIncrement: 0.06,  // 0.06 - 0.6
@@ -171,20 +252,22 @@ function setup() {
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
+    noiseColor: [color("#948686"), color("#ffffff"), color("#d4d4d4")],
     brushTemplateCount: 20,
-    brushTemplateSize: 100,
-    brushTemplateStrokeSize: 1,  // out
+    brushTemplateSize: 50,
+    // brushTemplateStrokeSize: 1,  // out
     brushTemplateFillColor: color("#c9c9c9ff"),
     // brushTemplateFillColor: color("#cc1a1a83"),
     brushTemplateFillColorDistort: 20,
-    brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
     // brushTemplateStrokeColor: color("#52000083"),
-    brushTemplateStrokeColorDistort: 20,  // out
+    // brushTemplateStrokeColorDistort: 20,  // out
     brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 50,
   };
 
-  laya = new BrushstrokeSystem(layaData);
-
+  layc = new BrushstrokeSystem(laycData);
 
   // areaB = new BrushstrokeSystem({
   //   originA: createVector(width / 3, height / 9),  // left, start of brushstrokes
@@ -246,8 +329,6 @@ function setup() {
   //   brushTemplateStrokeColorDistort: 40,
   // brushCurveSexyness: 1,
   // });
-
-
 }
 
 
@@ -281,7 +362,23 @@ function draw() {
   // areaA.show();
   // areaB.show();
 
-  laya.show();
+  // laya.show();
+  // layb.show();
+  layc.show();
+
+  let newy = p5.Vector.add(layc.originA, p5.Vector.mult(layc.loopGrow, 300));
+  push();
+  fill("blue")
+  circle(layc.originA.x, layc.originA.y, 50)
+
+  fill("red")
+  circle(layc.originB.x, layc.originB.y, 50)
+
+  fill("orange")
+  circle(newy.x, newy.y, 50)
+  pop();
+
+
 
   // grid.show();
 
@@ -302,6 +399,8 @@ function draw() {
   // backgroundNoise.show();
   // backgroundNoise2.show();
   // edgePixel.show();
+
+  // grid.show();
 
 
   // push();
