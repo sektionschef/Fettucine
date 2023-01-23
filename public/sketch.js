@@ -117,6 +117,27 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
+  gridProfiles = [
+    // {
+    //   stripeOrientation: "x",
+    //   sizeStripe: 3,
+    //   paddingShortCount: 8 * 1, // 5*2
+    //   paddingLongCount: 10 * 1,
+    //   thickness: 1,
+    //   stripeColumnCount: 2,
+    //   stripeRowCount: 2,
+    // },
+    {
+      stripeOrientation: "y",
+      sizeStripe: 4, // of boxcount;
+      paddingShortCount: 10 * 1, // 5*2
+      paddingLongCount: 10 * 1,
+      thickness: 1,
+      stripeColumnCount: 2,
+      stripeRowCount: 2,
+    },
+  ]
+
 
   // paper = new Paper();
   // backgroundNoise = new Noise();
@@ -129,7 +150,7 @@ function setup() {
   // gridTexture.image(edgePixel.masterBuffer, 0, 0);
   // pop();
 
-  grid = new Grid();
+  grid = new Grid(getRandomFromList(gridProfiles));
   // // PAPER REDUCED TO SHAPE OF GRID
   // gridTexture = maskBuffers(gridTexture, grid.buffer);
 

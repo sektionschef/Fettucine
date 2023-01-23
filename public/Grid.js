@@ -1,6 +1,14 @@
 class Grid {
-    constructor() {
-        this.profile = "1/3-1/6";
+    constructor(data) {
+        this.stripeOrientation = data.stripeOrientation;
+        // this.stripeOrientation = "y";
+        this.sizeStripe = data.sizeStripe;  // for x
+        // this.sizeStripe = 2.75;  // for y
+        this.paddingShortCount = data.paddingShortCount;
+        this.paddingLongCount = data.paddingLongCount;
+        this.thickness = data.thickness; // in boxes
+        this.stripeColumnCount = data.stripeColumnCount;  // for oreintation x
+        this.stripeRowCount = data.stripeRowCount;  // for oreintation y
 
         // this.boxSize = 0.0125 * DOMINANTSIDE;
         // make sure there is no margin;
@@ -8,14 +16,6 @@ class Grid {
         this.boxSize = DOMINANTSIDE / this.boxCountDominant;
         this.bezierOffset = 0.005 * DOMINANTSIDE;
 
-        this.stripeOrientation = "x";
-        // this.stripeOrientation = "y";
-        this.paddingXCount = 8 * 1;  // 5*2
-        this.paddingYCount = 10 * 1;
-        this.thickness = 1; // in boxes
-
-        this.stripeColumnCount = 2;  // for oreintation x
-        this.stripeRowCount = 2;  // for oreintation y
 
         if (width < height) {
             this.shortSide = width;
@@ -35,8 +35,8 @@ class Grid {
         this.longBoxCount = this.longSide / this.boxSize;
         // console.log("shortBoxCount: " + this.shortBoxCount);
 
-        this.paddingX = this.shortBoxCount / this.paddingXCount;
-        this.paddingY = this.longBoxCount / this.paddingYCount;
+        this.paddingX = this.shortBoxCount / this.paddingShortCount;
+        this.paddingY = this.longBoxCount / this.paddingLongCount;
         this.columns = new Set();
         this.rows = new Set();
         this.boxes = [];
@@ -115,7 +115,7 @@ class Grid {
 
         if (this.stripeOrientation == "x") {
 
-            this.columnBoxCount = Math.round(this.shortBoxCount / 3); // size of stripe in boxes
+            this.columnBoxCount = Math.round(this.shortBoxCount / this.sizeStripe); // size of stripe in boxes
             this.columnGap = this.shortBoxCount - this.columnBoxCount * this.stripeColumnCount - this.paddingX * 2; // the loopcount
 
             for (
@@ -153,7 +153,7 @@ class Grid {
             }
         } else {
 
-            this.rowBoxCount = Math.round(this.longBoxCount / 2.75); // size of stripe in boxes
+            this.rowBoxCount = Math.round(this.longBoxCount / this.sizeStripe); // size of stripe in boxes
             this.rowGap = this.longBoxCount - this.rowBoxCount * this.stripeRowCount - this.paddingY * 2; // the loopcount
 
             for (
