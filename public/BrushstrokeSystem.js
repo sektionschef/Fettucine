@@ -45,7 +45,13 @@ class BrushstrokeSystem {
             // data.target = p5.Vector.add(this.targetA, i * this.densityFactor);
             data.target = p5.Vector.add(this.targetA, p5.Vector.mult(this.loopGrow, i * this.densityFactor));
             // specificData.sprite = data.brushBuffer;  // GLOBAL - integrate in class
+
+            // VAR A
             data.sprite = getRandomFromList(this.brushTemplates);
+            // VAR B
+            // let what = Math.round(noise(increment) * this.brushTemplates.length);
+            // data.sprite = this.brushTemplates[what];
+
             data.drawBuffer = this.buffer;
 
             increment = increment + this.noiseIncrement;

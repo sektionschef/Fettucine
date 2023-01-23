@@ -1,18 +1,28 @@
 class Grid {
     constructor() {
         this.profile = "1/3-1/6";
-        this.boxSize = 0.0125 * DOMINANTSIDE;
+
+        // this.boxSize = 0.0125 * DOMINANTSIDE;
+        // make sure there is no margin;
+        this.boxCountDominant = 80;  // 80 boxes on the shorter side
+        this.boxSize = DOMINANTSIDE / this.boxCountDominant;
         this.bezierOffset = 0.005 * DOMINANTSIDE;
 
-        this.opWidth = width;
-        this.opHeight = height;
+        this.stripeOrientation = "x";
+        // this.stripeOrientation = "y";
+        this.paddingXCount = 8 * 1;  // 5*2
+        this.paddingYCount = 10 * 1;
+        this.thickness = 1; // in boxes
 
-        if (this.opWidth < this.opHeight) {
-            this.shortSide = this.opWidth;
-            this.longSide = this.opHeight;
+        this.stripeColumnCount = 2;  // for oreintation x
+        this.stripeRowCount = 2;  // for oreintation y
+
+        if (width < height) {
+            this.shortSide = width;
+            this.longSide = height;
         } else {
-            this.shortSide = this.opHeight;
-            this.longSide = this.opWidth;
+            this.shortSide = height;
+            this.longSide = width;
         }
 
         // only the rest
@@ -25,15 +35,16 @@ class Grid {
         this.longBoxCount = this.longSide / this.boxSize;
         // console.log("shortBoxCount: " + this.shortBoxCount);
 
-        this.actives = {};
+        this.paddingX = this.shortBoxCount / this.paddingXCount;
+        this.paddingY = this.longBoxCount / this.paddingYCount;
         this.columns = new Set();
         this.rows = new Set();
         this.boxes = [];
 
         this.buffer = createGraphics(width, height);
-        this.bufferForeground = createGraphics(width, height);
 
         this.createBoxes();
+        // this.showDebug();
         this.createMask();
         this.drawMask();
     }
@@ -87,29 +98,18 @@ class Grid {
 
         // view cols and rows
         for (var i = 0; i < (this.shortBoxCount + 1); i++) {
-            strokeWeight(10);
-            line(this.margin + i * this.boxSize, 0, this.margin + i * this.boxSize, height);
+            this.buffer.strokeWeight(5);
+            this.buffer.line(this.margin + i * this.boxSize, 0, this.margin + i * this.boxSize, height);
         }
 
         for (var i = 0; i < (this.longBoxCount + 1); i++) {
-            strokeWeight(10);
-            line(0, this.margin + i * this.boxSize, width, this.margin + i * this.boxSize);
+            this.buffer.strokeWeight(5);
+            this.buffer.line(0, this.margin + i * this.boxSize, width, this.margin + i * this.boxSize);
         }
     }
 
     // select active boxes
     createMask() {
-
-        // this.showDebug()
-
-        this.stripeOrientation = "x";
-        // this.stripeOrientation = "y";
-        this.paddingX = this.shortBoxCount / 8 * 1; // 5*2
-        this.paddingY = this.longBoxCount / 10;
-        this.thickness = 1; // in boxes
-
-        this.stripeColumnCount = 2;  // for oreintation x
-        this.stripeRowCount = 2;  // for oreintation y
 
         this.stripes = [];
 
@@ -340,7 +340,7 @@ class Grid {
         this.pointCount = 3 * p5.Vector.dist(this.A, this.B);
         this.noiseDistance = p5.Vector.dist(this.A, this.C) * 0.004; // 25;
         this.noiseWeight = 0.00025 * DOMINANTSIDE;
-        this.noiseColor = color("#000000");
+        this.noiseColor = color("#7e7e7e");
 
         for (var i = 0; i < this.pointCount; i++) {
 

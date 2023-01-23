@@ -6,6 +6,7 @@ class Paper {
         this.strokeColor = color("#000000");
         this.strokeSize = 0.00025 * DOMINANTSIDE; // 1;
         this.lineLength = 0.00625 * DOMINANTSIDE; // 25; // 5 +2
+        this.lineCount = 0.0005 * TOTALPIXEL; // 10000
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);
@@ -18,7 +19,7 @@ class Paper {
     }
 
     create() {
-        for (var i = 0; i < 10000; i++) {
+        for (var i = 0; i < this.lineCount; i++) {
             let A = createVector(getRandomFromInterval(0, this.width), getRandomFromInterval(0, this.height));
             let theta = getRandomFromInterval(0, 2 * PI);
             let segmentLength = getRandomFromInterval(2, this.lineLength);  // fxrand() * 5 + 2
