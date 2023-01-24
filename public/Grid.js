@@ -113,7 +113,11 @@ class Grid {
 
         if (this.stripeOrientation == "x") {
 
-            this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.stripeColumnCount - this.paddingShortCount * 2) / (this.stripeColumnCount - 1)); // the loopcount
+            if (this.stripeColumnCount != 1) {
+                this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.stripeColumnCount - this.paddingShortCount * 2) / (this.stripeColumnCount - 1)); // the loopcount
+            } else {
+                this.columnGap = 0;
+            }
             console.log("sizeStripe: " + this.sizeStripe);
             console.log("paddingShortCount: " + this.paddingShortCount)
             console.log("Gap: " + this.columnGap);

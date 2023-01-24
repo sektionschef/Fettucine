@@ -117,7 +117,15 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  columnRowCount = getRandomFromList([1, 2, 3, 4])
+  boxCountDominantTotal = 80;
+  orientationDic = getRandomFromList(["x"]);
+  console.log("orientationDic: " + orientationDic);
+  columnRowCount = getRandomFromList([1, 2, 3, 4]);
+  console.log("columnRowCount: " + columnRowCount);
+  sizeDic = Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5));
+  console.log("sizeDic: " + sizeDic);
+  paddingShortDic = Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2));
+  console.log("paddingShortDic: " + paddingShortDic);
 
   gridProfiles = [
     // {
@@ -130,13 +138,23 @@ function setup() {
     //   paddingLongCount: 10 * 1,
     //   thickness: 1,
     // },
+    // {
+    //   stripeOrientation: "x",
+    //   boxCountDominant: 80,
+    //   stripeColumnCount: 4,
+    //   stripeRowCount: 2,
+    //   sizeStripe: 15, // of boxcount;
+    //   paddingShortCount: 5, // 5*2
+    //   paddingLongCount: 10,
+    //   thickness: 1,
+    // },
     {
-      stripeOrientation: "x",
-      boxCountDominant: 80,
-      stripeColumnCount: 4,
-      stripeRowCount: 2,
-      sizeStripe: 15, // of boxcount;
-      paddingShortCount: 5, // 5*2
+      stripeOrientation: orientationDic,
+      boxCountDominant: boxCountDominantTotal,
+      stripeColumnCount: columnRowCount,
+      stripeRowCount: columnRowCount,
+      sizeStripe: sizeDic, // of boxcount;
+      paddingShortCount: paddingShortDic,
       paddingLongCount: 10,
       thickness: 1,
     },
