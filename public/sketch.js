@@ -117,24 +117,28 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
+  columnRowCount = getRandomFromList([1, 2, 3, 4])
+
   gridProfiles = [
     // {
     //   stripeOrientation: "x",
+    // boxCountDominant: 80,
+    //   stripeColumnCount: 2,
+    //   stripeRowCount: 2,
     //   sizeStripe: 3,
     //   paddingShortCount: 8 * 1, // 5*2
     //   paddingLongCount: 10 * 1,
     //   thickness: 1,
-    //   stripeColumnCount: 2,
-    //   stripeRowCount: 2,
     // },
     {
-      stripeOrientation: "y",
-      sizeStripe: 4, // of boxcount;
-      paddingShortCount: 10 * 1, // 5*2
-      paddingLongCount: 10 * 1,
-      thickness: 1,
-      stripeColumnCount: 2,
+      stripeOrientation: "x",
+      boxCountDominant: 80,
+      stripeColumnCount: 4,
       stripeRowCount: 2,
+      sizeStripe: 15, // of boxcount;
+      paddingShortCount: 5, // 5*2
+      paddingLongCount: 10,
+      thickness: 1,
     },
   ]
 
