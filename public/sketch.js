@@ -149,15 +149,25 @@ function setup() {
     //   thickness: 1,
     // },
     {
-      stripeOrientation: orientationDic,
-      boxCountDominant: boxCountDominantTotal,
-      stripeColumnCount: columnRowCount,
-      stripeRowCount: columnRowCount,
-      sizeStripe: sizeDic, // of boxcount;
-      paddingShortCount: paddingShortDic,
+      stripeOrientation: "y",
+      boxCountDominant: 80,
+      stripeColumnCount: 4,
+      stripeRowCount: 1,
+      sizeStripe: 15, // of boxcount;
+      paddingShortCount: 5, // 5*2
       paddingLongCount: 10,
       thickness: 1,
     },
+    // {
+    //   stripeOrientation: orientationDic,
+    //   boxCountDominant: boxCountDominantTotal,
+    //   stripeColumnCount: columnRowCount,
+    //   stripeRowCount: columnRowCount,
+    //   sizeStripe: sizeDic, // of boxcount;
+    //   paddingShortCount: paddingShortDic,
+    //   paddingLongCount: 10,
+    //   thickness: 1,
+    // },
   ]
 
 
