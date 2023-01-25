@@ -2,14 +2,14 @@ class Grid {
     constructor(data) {
         this.stripeOrientation = data.stripeOrientation;
         this.sizeStripe = data.sizeStripe;
-        this.paddingShortCount = data.paddingShortCount;
-        this.paddingLongCount = data.paddingLongCount;
+        // this.paddingShortCount = data.paddingShortCount;
+        // this.paddingLongCount = data.paddingLongCount;
         this.thickness = data.thickness;
         this.countColumnOrRow = data.countColumnOrRow;
 
         // this.boxSize = 0.0125 * DOMINANTSIDE;
         // make sure there is no margin;
-        this.boxCountDominant = data.boxCountDominant;  // 80 boxes on the shorter side
+        this.boxCountDominant = 80; // data.boxCountDominant;  // 80 boxes on the shorter side
         this.boxSize = DOMINANTSIDE / this.boxCountDominant;
         this.bezierOffset = 0.005 * DOMINANTSIDE;
 
@@ -28,9 +28,11 @@ class Grid {
         this.margin = this.shortSide % this.boxSize;
         // console.log("margin: " + this.margin);
 
+        // THESE TWO NEEDED ? - got: boxCountDominant
         this.shortBoxCount = this.shortSide / this.boxSize;
         this.longBoxCount = this.longSide / this.boxSize;
-        // console.log("shortBoxCount: " + this.shortBoxCount);
+
+        this.sizeStripe = Math.floor(getRandomFromInterval(5, this.boxCountDominant / this.countColumnOrRow - 5));
 
         this.columns = new Set();
         this.rows = new Set();
@@ -113,8 +115,6 @@ class Grid {
         console.log("longBoxCount: " + this.longBoxCount);
         console.log("countColumnOrRow: " + this.countColumnOrRow);
         console.log("sizeStripe: " + this.sizeStripe);
-        console.log("paddingShortCount: " + this.paddingShortCount);
-        console.log("paddingLongCount: " + this.paddingLongCount);
         console.log("thickness: " + this.thickness);
 
         if (this.stripeOrientation == "x") {
@@ -129,8 +129,10 @@ class Grid {
                 this.columnGap = 0;
                 this.paddingShortCount = Math.floor(this.Gap / 2);
             }
+            this.paddingLongCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 3));
             console.log("columnGap: " + this.columnGap);
             console.log("paddingShortCount: " + this.paddingShortCount);
+            console.log("paddingLongCount: " + this.paddingLongCount);
 
             for (
                 var row = this.paddingLongCount * this.shortBoxCount + this.paddingShortCount;
@@ -168,6 +170,7 @@ class Grid {
         } else {
 
             this.Gap = this.longBoxCount - this.sizeStripe * this.countColumnOrRow;
+            console.log("gap: " + this.Gap);
             if (this.countColumnOrRow != 1) {
                 // this.rowGap = Math.floor((this.longBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingLongCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
                 this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
@@ -176,7 +179,10 @@ class Grid {
                 this.rowGap = 0;
                 this.paddingLongCount = Math.floor(this.Gap / 2);
             }
-            console.log("Gap: " + this.rowGap);
+            this.paddingShortCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 3));
+            console.log("rowGap: " + this.rowGap);
+            console.log("paddingShortCount: " + this.paddingShortCount);
+            console.log("paddingLongCount: " + this.paddingLongCount);
 
             for (
                 var column = this.paddingShortCount;

@@ -147,12 +147,12 @@ function setup() {
     //   thickness: 1,
     // },
     {
-      stripeOrientation: "y", // getRandomFromList(["x", "y"]),
-      boxCountDominant: 80,  // static, kinda resolution - amount of boxes for dominant side
-      countColumnOrRow: 3, // getRandomFromList([1, 2, 3, 4]),
-      sizeStripe: 20, // Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5)), // of boxcount;
-      paddingShortCount: 1, // Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2)),
-      paddingLongCount: 1, // 10,
+      stripeOrientation: getRandomFromList(["x", "y"]),
+      // boxCountDominant: 80,  // static, kinda resolution - amount of boxes for dominant side
+      countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
+      // sizeStripe: 20, // Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5)), // of boxcount;
+      // paddingShortCount: 1, // Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2)),
+      // paddingLongCount: 1, // 10,
       thickness: 1,
     },
   ]
