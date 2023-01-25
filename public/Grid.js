@@ -1,14 +1,11 @@
 class Grid {
     constructor(data) {
         this.stripeOrientation = data.stripeOrientation;
-        // this.stripeOrientation = "y";
-        this.sizeStripe = data.sizeStripe;  // for x
-        // this.sizeStripe = 2.75;  // for y
+        this.sizeStripe = data.sizeStripe;
         this.paddingShortCount = data.paddingShortCount;
         this.paddingLongCount = data.paddingLongCount;
-        this.thickness = data.thickness; // in boxes
-        this.stripeColumnCount = data.stripeColumnCount;  // for oreintation x
-        this.stripeRowCount = data.stripeRowCount;  // for oreintation y
+        this.thickness = data.thickness;
+        this.countColumnOrRow = data.countColumnOrRow;
 
         // this.boxSize = 0.0125 * DOMINANTSIDE;
         // make sure there is no margin;
@@ -111,16 +108,29 @@ class Grid {
 
         this.stripes = [];
 
+        console.log("stripeOrientation: " + this.stripeOrientation);
+        console.log("boxCountDominant: " + this.boxCountDominant);
+        console.log("longBoxCount: " + this.longBoxCount);
+        console.log("countColumnOrRow: " + this.countColumnOrRow);
+        console.log("sizeStripe: " + this.sizeStripe);
+        console.log("paddingShortCount: " + this.paddingShortCount);
+        console.log("paddingLongCount: " + this.paddingLongCount);
+        console.log("thickness: " + this.thickness);
+
         if (this.stripeOrientation == "x") {
 
-            if (this.stripeColumnCount != 1) {
-                this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.stripeColumnCount - this.paddingShortCount * 2) / (this.stripeColumnCount - 1)); // the loopcount
+            this.Gap = this.shortBoxCount - this.sizeStripe * this.countColumnOrRow; // the loopcount
+            console.log("gap: " + this.Gap);
+            if (this.countColumnOrRow != 1) {
+                // this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingShortCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
+                this.columnGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
+                this.paddingShortCount = this.columnGap;
             } else {
                 this.columnGap = 0;
+                this.paddingShortCount = Math.floor(this.Gap / 2);
             }
-            console.log("sizeStripe: " + this.sizeStripe);
-            console.log("paddingShortCount: " + this.paddingShortCount)
-            console.log("Gap: " + this.columnGap);
+            console.log("columnGap: " + this.columnGap);
+            console.log("paddingShortCount: " + this.paddingShortCount);
 
             for (
                 var row = this.paddingLongCount * this.shortBoxCount + this.paddingShortCount;
@@ -128,7 +138,7 @@ class Grid {
                 row += (this.shortBoxCount * this.thickness * 2)
             ) {
                 // console.log(row);
-                for (var column = 0; column < this.stripeColumnCount; column++) {
+                for (var column = 0; column < this.countColumnOrRow; column++) {
 
                     // get the index of the corner box of each stripe.
                     // let a = row
@@ -157,14 +167,23 @@ class Grid {
             }
         } else {
 
-            this.rowGap = (this.longBoxCount - this.sizeStripe * this.stripeRowCount - this.paddingLongCount * 2) / (this.stripeRowCount - 1); // the loopcount
+            this.Gap = this.longBoxCount - this.sizeStripe * this.countColumnOrRow;
+            if (this.countColumnOrRow != 1) {
+                // this.rowGap = Math.floor((this.longBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingLongCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
+                this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
+                this.paddingLongCount = this.rowGap;
+            } else {
+                this.rowGap = 0;
+                this.paddingLongCount = Math.floor(this.Gap / 2);
+            }
+            console.log("Gap: " + this.rowGap);
 
             for (
                 var column = this.paddingShortCount;
                 column < (this.shortBoxCount - this.paddingShortCount);
                 column += this.thickness * 2
             ) {
-                for (var row = 0; row < this.stripeRowCount; row++) {
+                for (var row = 0; row < this.countColumnOrRow; row++) {
                     // get the index of the corner boxe of each stripe.
                     // let a = column + this.paddingLongCount * this.shortBoxCount;
                     let a = column + this.paddingLongCount * this.shortBoxCount + this.sizeStripe * row * this.shortBoxCount + this.rowGap * row * this.shortBoxCount;

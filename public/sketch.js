@@ -117,22 +117,12 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  boxCountDominantTotal = 80;
-  orientationDic = getRandomFromList(["x"]);
-  console.log("orientationDic: " + orientationDic);
-  columnRowCount = getRandomFromList([1, 2, 3, 4]);
-  console.log("columnRowCount: " + columnRowCount);
-  sizeDic = Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5));
-  console.log("sizeDic: " + sizeDic);
-  paddingShortDic = Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2));
-  console.log("paddingShortDic: " + paddingShortDic);
 
   gridProfiles = [
     // {
     //   stripeOrientation: "x",
     // boxCountDominant: 80,
-    //   stripeColumnCount: 2,
-    //   stripeRowCount: 2,
+    //   countColumnOrRow: 2,
     //   sizeStripe: 3,
     //   paddingShortCount: 8 * 1, // 5*2
     //   paddingLongCount: 10 * 1,
@@ -141,33 +131,30 @@ function setup() {
     // {
     //   stripeOrientation: "x",
     //   boxCountDominant: 80,
-    //   stripeColumnCount: 4,
-    //   stripeRowCount: 2,
+    //   countColumnOrRow: 4,
     //   sizeStripe: 15, // of boxcount;
     //   paddingShortCount: 5, // 5*2
     //   paddingLongCount: 10,
     //   thickness: 1,
     // },
-    {
-      stripeOrientation: "y",
-      boxCountDominant: 80,
-      stripeColumnCount: 4,
-      stripeRowCount: 1,
-      sizeStripe: 15, // of boxcount;
-      paddingShortCount: 5, // 5*2
-      paddingLongCount: 10,
-      thickness: 1,
-    },
     // {
-    //   stripeOrientation: orientationDic,
-    //   boxCountDominant: boxCountDominantTotal,
-    //   stripeColumnCount: columnRowCount,
-    //   stripeRowCount: columnRowCount,
-    //   sizeStripe: sizeDic, // of boxcount;
-    //   paddingShortCount: paddingShortDic,
-    //   paddingLongCount: 10,
+    //   stripeOrientation: "y",
+    //   boxCountDominant: 80,
+    //   countColumnOrRow: 2,
+    //   sizeStripe: 45, // of boxcount;
+    //   paddingShortCount: 5, // 5*2
+    //   paddingLongCount: 5,
     //   thickness: 1,
     // },
+    {
+      stripeOrientation: "y", // getRandomFromList(["x", "y"]),
+      boxCountDominant: 80,  // static, kinda resolution - amount of boxes for dominant side
+      countColumnOrRow: 3, // getRandomFromList([1, 2, 3, 4]),
+      sizeStripe: 20, // Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5)), // of boxcount;
+      paddingShortCount: 1, // Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2)),
+      paddingLongCount: 1, // 10,
+      thickness: 1,
+    },
   ]
 
 
