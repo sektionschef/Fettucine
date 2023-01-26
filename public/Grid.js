@@ -123,8 +123,9 @@ class Grid {
             console.log("gap: " + this.Gap);
             if (this.countColumnOrRow != 1) {
                 // this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingShortCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
-                this.columnGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.paddingShortCount = this.columnGap;
+                // this.columnGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
+                this.columnGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
+                this.paddingShortCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
             } else {
                 this.columnGap = 0;
                 this.paddingShortCount = Math.floor(this.Gap / 2);
@@ -173,8 +174,9 @@ class Grid {
             console.log("gap: " + this.Gap);
             if (this.countColumnOrRow != 1) {
                 // this.rowGap = Math.floor((this.longBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingLongCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
-                this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.paddingLongCount = this.rowGap;
+                // this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
+                this.rowGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
+                this.paddingLongCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
             } else {
                 this.rowGap = 0;
                 this.paddingLongCount = Math.floor(this.Gap / 2);
