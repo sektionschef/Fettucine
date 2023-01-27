@@ -1,4 +1,4 @@
-// console.log("fxhash: " + fxhash);
+console.log("fxhash: " + fxhash);
 const NOISESEED = hashFnv32a(fxhash);
 // console.log("Noise seed: " + NOISESEED);
 
@@ -158,20 +158,20 @@ function setup() {
   ]
 
 
-  // paper = new Paper();
-  // backgroundNoise = new Noise();
-  // edgePixel = new PixelGradient();
+  paper = new Paper();
+  backgroundNoise = new Noise();
+  edgePixel = new PixelGradient();
 
 
-  // gridTexture = createGraphics(width, height);
-  // push();
-  // gridTexture.image(paper.masterBuffer, 0, 0);
-  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  // pop();
+  gridTexture = createGraphics(width, height);
+  push();
+  gridTexture.image(paper.masterBuffer, 0, 0);
+  gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  pop();
 
   grid = new Grid(getRandomFromList(gridProfiles));
   // // PAPER REDUCED TO SHAPE OF GRID
-  // gridTexture = maskBuffers(gridTexture, grid.buffer);
+  gridTexture = maskBuffers(gridTexture, grid.buffer);
 
 
   // areaA = new BrushstrokeSystem({
@@ -330,39 +330,39 @@ function setup() {
 
   // layc = new BrushstrokeSystem(laycData);
 
-  // areaB = new BrushstrokeSystem({
-  //   originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
-  //   targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
-  //   originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
-  //   targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
-  //   OVERLAY: false,
-  //   brushCount: 400,
-  //   noiseIncrement: 0.6,  // 0.06
-  //   DEBUG: false,
-  //   densityFactor: 2,
-  //   maxSpeedMin: 3,
-  //   maxSpeedMax: 10,
-  //   minSpeed: 2,
-  //   maxForce: 2,
-  //   slowRadius: 100,
-  //   finishedRadius: 20,
-  //   targetBdistList: [100, 200, 400, 600, 800],
-  //   targetBDirectionList: [1, -1],
-  //   basicSizeMin: 1,
-  //   basicSizeMax: 1,
-  //   // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-  //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-  //   brushTemplateCount: 20,
-  //   brushTemplateSize: 60,
-  //   brushTemplateStrokeSize: 1,
-  //   brushTemplateFillColor: color("#e2e2e2"),
-  //   brushTemplateFillColorDistort: 20,
-  //   brushTemplateStrokeColor: color("#f0f0f0"),
-  //   brushTemplateStrokeColorDistort: 20,
-  //   brushCurveSexyness: 1,
-  //   brushPixelDistort: 50,
-  //   brushOpacityDistort: 50,
-  // });
+  areaB = new BrushstrokeSystem({
+    originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
+    targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
+    originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
+    targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
+    OVERLAY: false,
+    brushCount: 400,
+    noiseIncrement: 0.6,  // 0.06
+    DEBUG: false,
+    densityFactor: 2,
+    maxSpeedMin: 3,
+    maxSpeedMax: 10,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 100,
+    finishedRadius: 20,
+    targetBdistList: [100, 200, 400, 600, 800],
+    targetBDirectionList: [1, -1],
+    basicSizeMin: 1,
+    basicSizeMax: 1,
+    // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    brushTemplateCount: 20,
+    brushTemplateSize: 60,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#e2e2e2"),
+    brushTemplateFillColorDistort: 20,
+    brushTemplateStrokeColor: color("#f0f0f0"),
+    brushTemplateStrokeColorDistort: 20,
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 50,
+  });
 
 
 
@@ -413,7 +413,7 @@ function draw() {
 
 
   // areaA.show();
-  // areaB.show();
+  areaB.show();
 
   // laya.show();
   // layb.show();
@@ -423,12 +423,12 @@ function draw() {
   // edgePixel.show();
 
   grid.show();
-  // push();
-  // blendMode(OVERLAY);
-  // image(gridTexture, 0, 0);
-  // pop();
+  push();
+  blendMode(OVERLAY);
+  image(gridTexture, 0, 0);
+  pop();
 
-  // backgroundNoise.show();
+  backgroundNoise.show();
 
 
   // areaA.showBrushTemplates();

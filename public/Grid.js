@@ -124,13 +124,14 @@ class Grid {
             if (this.countColumnOrRow != 1) {
                 // this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingShortCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
                 // this.columnGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.columnGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
+                this.possibleColumnGap = this.Gap / (this.countColumnOrRow - 1);
+                this.columnGap = Math.floor(getRandomFromInterval(this.possibleColumnGap / 10, this.possibleColumnGap / 6));  // 2 for padding right and left, 5 for some safety distance
                 this.paddingShortCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
             } else {
                 this.columnGap = 0;
                 this.paddingShortCount = Math.floor(this.Gap / 2);
             }
-            this.paddingLongCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 3));
+            this.paddingLongCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
             console.log("columnGap: " + this.columnGap);
             console.log("paddingShortCount: " + this.paddingShortCount);
             console.log("paddingLongCount: " + this.paddingLongCount);
@@ -175,13 +176,16 @@ class Grid {
             if (this.countColumnOrRow != 1) {
                 // this.rowGap = Math.floor((this.longBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingLongCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
                 // this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.rowGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
+                this.possibleRowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1));
+                // this.rowGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
+                console.log("possibleRowGap: " + this.possibleRowGap);
+                this.rowGap = Math.floor(getRandomFromInterval(this.possibleRowGap / 10, this.possibleRowGap / 6));
                 this.paddingLongCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
             } else {
                 this.rowGap = 0;
                 this.paddingLongCount = Math.floor(this.Gap / 2);
             }
-            this.paddingShortCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 3));
+            this.paddingShortCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 10));
             console.log("rowGap: " + this.rowGap);
             console.log("paddingShortCount: " + this.paddingShortCount);
             console.log("paddingLongCount: " + this.paddingLongCount);
