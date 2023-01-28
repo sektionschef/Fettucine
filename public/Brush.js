@@ -47,7 +47,7 @@ class Brush {
         // this.buffer.strokeWeight(this.strokeSize);
         // this.buffer.fill(color(150));
         this.buffer.noFill();
-        this.buffer.stroke(200 + getRandomFromInterval(-50, 50));
+        this.buffer.stroke(200 + getRandomFromInterval(-100, 100));
         this.buffer.strokeWeight(1);
         // this.buffer.noStroke();
 
@@ -74,11 +74,10 @@ class Brush {
         // this.buffer.vertex(q3X, q3Y);
         // this.buffer.endShape(CLOSE);
 
-        // this.pixelManipulation();
+        this.pixelManipulation();
     }
 
     pixelManipulation() {
-
 
         this.buffer.loadPixels();
         let x, y, index;
@@ -92,14 +91,14 @@ class Brush {
                 index = (x + y * this.buffer.width) * 4;
 
 
-                // var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
 
-                // if (this.buffer.pixels[index + 3] != 0) {
-                //     this.buffer.pixels[index + 0] += offset;
-                //     this.buffer.pixels[index + 1] += offset;
-                //     this.buffer.pixels[index + 2] += offset;
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
-                // }
+                if (this.buffer.pixels[index + 3] != 0) {
+                    this.buffer.pixels[index + 0] += offset;
+                    this.buffer.pixels[index + 1] += offset;
+                    this.buffer.pixels[index + 2] += offset;
+                    this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                }
 
 
                 // GRADIENT
@@ -150,15 +149,21 @@ class Brush {
                                 } */
 
                 // ONLY Perlin NOISE
-                let r = noise(xoff, yoff) * 55 + 200;
+                // let r = noise(xoff, yoff) * 155 + 100;
+                // let r = noise(xoff, yoff) * 50;
 
-                if (this.buffer.pixels[index + 3] != 0) {
+                // if (this.buffer.pixels[index + 3] != 0) {
 
-                    this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
-                    this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
-                    this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
-                    this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
-                }
+                // this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
+                // this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
+                // this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
+                // this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+
+                //     this.buffer.pixels[index + 0] -= r;
+                //     this.buffer.pixels[index + 1] -= r;
+                //     this.buffer.pixels[index + 2] -= r;
+                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+                // }
 
                 // COMIBNE PERLIN NOISE FOR OPACITY AND PIXEL STRUCTURE
                 // let r = noise(xoff, yoff) * 155 + 100;

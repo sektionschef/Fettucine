@@ -386,7 +386,7 @@ function setup() {
     originB: createVector(width, 0), // right, start of brushstrokes
     targetB: createVector(width, height), // right, end of brushstrokes
     OVERLAY: false,
-    brushCount: 500,
+    brushCount: 1000,
     noiseIncrement: 0.01,  // 0.009
     DEBUG: false,
     densityFactor: 2,
@@ -409,7 +409,7 @@ function setup() {
     brushTemplateStrokeColor: color("#000000"),
     brushTemplateStrokeColorDistort: 20,
     brushCurveSexyness: 1,
-    brushPixelDistort: 50,
+    brushPixelDistort: 150,
     brushOpacityDistort: 0,
   });
 
