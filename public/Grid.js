@@ -120,115 +120,115 @@ class Grid {
             console.log("thickness: " + this.thickness);
         }
 
-        // if (this.stripeOrientation == "x") {
+        if (this.stripeOrientation == "x") {
 
-        // this.Gap = this.widthBoxCount - this.sizeStripe * this.countColumnOrRow; // the remaining space without stripes
+            this.Gap = this.widthBoxCount - this.sizeStripe * this.countColumnOrRow; // the remaining space without stripes
 
-        // if (this.countColumnOrRow != 1) {
-        //     this.possibleColumnGap = this.Gap / (this.countColumnOrRow - 1);  // equal distance between stripes padding
-        //     this.columnGap = Math.floor(getRandomFromInterval(this.possibleColumnGap / 6, this.possibleColumnGap / 4));   // gap between stripes
-        //     this.paddingWidthCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
-        // } else {
-        //     this.columnGap = 0;
-        //     this.paddingWidthCount = Math.floor(this.Gap / 2);
-        // }
-
-        // this.paddingHeightCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
-
-        // if (this.DEBUG) {
-        //     console.log("gap: " + this.Gap);
-        //     console.log("columnGap: " + this.columnGap);
-        //     console.log("paddingWidthCount: " + this.paddingWidthCount);
-        //     console.log("paddingHeightCount: " + this.paddingHeightCount);
-        // }
-
-        // for (
-        //     var row = this.paddingHeightCount * this.widthBoxCount + this.paddingWidthCount;
-        //     row < (this.heightBoxCount * this.widthBoxCount - this.paddingHeightCount * this.widthBoxCount);
-        //     row += (this.widthBoxCount * this.thickness * 2)
-        // ) {
-        //     // console.log(row);
-        //     for (var column = 0; column < this.countColumnOrRow; column++) {
-
-        //         // get the index of the corner box of each stripe.
-        //         let a = row + this.sizeStripe * column + this.columnGap * column;
-        //         let b = a + this.sizeStripe;
-        //         let c = b + (this.thickness - 1) * this.widthBoxCount;
-        //         let d = a + (this.thickness - 1) * this.widthBoxCount;
-
-        //         // DEBUG
-
-        //         // this.buffer.push();
-        //         // this.buffer.noStroke();
-        //         // this.buffer.fill("pink");
-        //         // // this.buffer.circle(500, 700, 100);
-        //         // // console.log(this.boxes[a]);
-        //         // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
-        //         // // this.buffer.rectMode(CORNERS);
-        //         // // this.buffer.rect(
-        //         // //     this.boxes[a].A.x,
-        //         // //     this.boxes[a].A.y,
-        //         // //     this.boxes[c].C.x,
-        //         // //     this.boxes[c].C.y
-        //         // // );
-        //         // this.buffer.pop();
-
-        //         this.writeToStripes(a, b, c, d);
-        //     }
-        // }
-        // } else {
-
-        this.Gap = this.longBoxCount - this.sizeStripe * this.countColumnOrRow;
-        if (this.countColumnOrRow != 1) {
-            this.possibleRowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1));
-            // console.log("possibleRowGap: " + this.possibleRowGap);
-            this.rowGap = Math.floor(getRandomFromInterval(this.possibleRowGap / 6, this.possibleRowGap / 4));
-            this.paddingHeightCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
-        } else {
-            this.rowGap = 0;
-            this.paddingHeightCount = Math.floor(this.Gap / 2);
-        }
-
-        this.paddingWidthCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 10));
-        if (this.DEBUG) {
-            console.log("gap: " + this.Gap);
-            console.log("rowGap: " + this.rowGap);
-            console.log("paddingWidthCount: " + this.paddingWidthCount);
-            console.log("paddingHeightCount: " + this.paddingHeightCount);
-        }
-
-        for (
-            var column = this.paddingWidthCount;
-            column < (this.shortBoxCount - this.paddingWidthCount);
-            column += this.thickness * 2
-        ) {
-            for (var row = 0; row < this.countColumnOrRow; row++) {
-                // get the index of the corner boxe of each stripe.
-                let a = column + this.paddingHeightCount * this.shortBoxCount + this.sizeStripe * row * this.shortBoxCount + this.rowGap * row * this.shortBoxCount;
-                let b = a + (this.thickness - 1);
-                let d = a + this.sizeStripe * this.shortBoxCount;
-                let c = d + (this.thickness - 1);
-
-                // DEBUG
-                // this.buffer.push();
-                // this.buffer.noStroke();
-                // this.buffer.fill("pink");
-                // // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
-                // // this.buffer.circle(this.boxes[d].A.x, this.boxes[d].A.y, 50);
-                // this.buffer.rectMode(CORNERS);
-                // this.buffer.rect(
-                //     this.boxes[a].A.x,
-                //     this.boxes[a].A.y,
-                //     this.boxes[c].C.x,
-                //     this.boxes[c].C.y
-                // );
-                // this.buffer.pop();
-
-                this.writeToStripes(a, b, c, d);
+            if (this.countColumnOrRow != 1) {
+                this.possibleColumnGap = this.Gap / (this.countColumnOrRow - 1);  // equal distance between stripes padding
+                this.columnGap = Math.floor(getRandomFromInterval(this.possibleColumnGap / 6, this.possibleColumnGap / 4));   // gap between stripes
+                this.paddingWidthCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
+            } else {
+                this.columnGap = 0;
+                this.paddingWidthCount = Math.floor(this.Gap / 2);
             }
 
+            this.paddingHeightCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
+
+            if (this.DEBUG) {
+                console.log("gap: " + this.Gap);
+                console.log("columnGap: " + this.columnGap);
+                console.log("paddingWidthCount: " + this.paddingWidthCount);
+                console.log("paddingHeightCount: " + this.paddingHeightCount);
+            }
+
+            for (
+                var row = this.paddingHeightCount * this.widthBoxCount + this.paddingWidthCount;
+                row < (this.heightBoxCount * this.widthBoxCount - this.paddingHeightCount * this.widthBoxCount);
+                row += (this.widthBoxCount * this.thickness * 2)
+            ) {
+                // console.log(row);
+                for (var column = 0; column < this.countColumnOrRow; column++) {
+
+                    // get the index of the corner box of each stripe.
+                    let a = row + this.sizeStripe * column + this.columnGap * column;
+                    let b = a + this.sizeStripe;
+                    let c = b + (this.thickness - 1) * this.widthBoxCount;
+                    let d = a + (this.thickness - 1) * this.widthBoxCount;
+
+                    // DEBUG
+
+                    // this.buffer.push();
+                    // this.buffer.noStroke();
+                    // this.buffer.fill("pink");
+                    // // this.buffer.circle(500, 700, 100);
+                    // // console.log(this.boxes[a]);
+                    // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+                    // // this.buffer.rectMode(CORNERS);
+                    // // this.buffer.rect(
+                    // //     this.boxes[a].A.x,
+                    // //     this.boxes[a].A.y,
+                    // //     this.boxes[c].C.x,
+                    // //     this.boxes[c].C.y
+                    // // );
+                    // this.buffer.pop();
+
+                    this.writeToStripes(a, b, c, d);
+                }
+            }
+        } else {
+
+            this.Gap = this.heightBoxCount - this.sizeStripe * this.countColumnOrRow;
+            if (this.countColumnOrRow != 1) {
+                this.possibleRowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1));
+                // console.log("possibleRowGap: " + this.possibleRowGap);
+                this.rowGap = Math.floor(getRandomFromInterval(this.possibleRowGap / 6, this.possibleRowGap / 4));
+                this.paddingHeightCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
+            } else {
+                this.rowGap = 0;
+                this.paddingHeightCount = Math.floor(this.Gap / 2);
+            }
+
+            this.paddingWidthCount = Math.floor(getRandomFromInterval(5, this.widthBoxCount / 10));
+            if (this.DEBUG) {
+                console.log("gap: " + this.Gap);
+                console.log("rowGap: " + this.rowGap);
+                console.log("paddingWidthCount: " + this.paddingWidthCount);
+                console.log("paddingHeightCount: " + this.paddingHeightCount);
+            }
+
+            for (
+                var column = this.paddingWidthCount;
+                column < (this.widthBoxCount - this.paddingWidthCount);
+                column += this.thickness * 2
+            ) {
+                for (var row = 0; row < this.countColumnOrRow; row++) {
+                    // get the index of the corner boxe of each stripe.
+                    let a = column + this.paddingHeightCount * this.widthBoxCount + this.sizeStripe * row * this.widthBoxCount + this.rowGap * row * this.widthBoxCount;
+                    let b = a + (this.thickness - 1);
+                    let d = a + this.sizeStripe * this.widthBoxCount;
+                    let c = d + (this.thickness - 1);
+
+                    // DEBUG
+                    // this.buffer.push();
+                    // this.buffer.noStroke();
+                    // this.buffer.fill("pink");
+                    // // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+                    // // this.buffer.circle(this.boxes[d].A.x, this.boxes[d].A.y, 50);
+                    // this.buffer.rectMode(CORNERS);
+                    // this.buffer.rect(
+                    //     this.boxes[a].A.x,
+                    //     this.boxes[a].A.y,
+                    //     this.boxes[c].C.x,
+                    //     this.boxes[c].C.y
+                    // );
+                    // this.buffer.pop();
+
+                    this.writeToStripes(a, b, c, d);
+                }
+
+            }
         }
-        // }
 
     }
 
