@@ -12,7 +12,6 @@ let ANIMATIONSTATE = true;
 let PALETTE;
 let PALETTE_LABEL;
 let ALLDONE = false;
-let DOMINANTSIDE;  // side which is the limiting factor
 
 let FRAMEDWIDTH = 800;
 let FRAMED = false;
@@ -93,17 +92,34 @@ function setup() {
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
 
+  // 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3
+  canvasFormats = [
+    {
+      "name": "4:3",
+      "canvasWidth": 4000,
+      "canvasHeight": 3000,
+    },
+  ]
+
+  canvasFormatChosen = getRandomFromList(canvasFormats);
+  console.log("Canvas Format: " + canvasFormatChosen.name);
+
   // rescaling_width = 2400; // 4000;
   // rescaling_height = 3000; // 5000;
-  // DOMINANTSIDE = 2400; // 4000;
+  // SHORTSIDE = 2400; // 4000;
 
-  rescaling_width = 4000;
-  rescaling_height = 5000;
+  // rescaling_width = 4000;
+  // rescaling_height = 5000;
+
+  rescaling_width = canvasFormatChosen.canvasWidth;
+  rescaling_height = canvasFormatChosen.canvasHeight;
 
   if (rescaling_width <= rescaling_height) {
-    DOMINANTSIDE = rescaling_width;
+    SHORTSIDE = rescaling_width;
+    LONGSIDE = rescaling_height;
   } else {
-    DOMINANTSIDE = rescaling_height;
+    SHORTSIDE = rescaling_height;
+    LONGSIDE = rescaling_width;
   }
   TOTALPIXEL = rescaling_width * rescaling_height;
 
@@ -119,59 +135,27 @@ function setup() {
 
 
   gridProfiles = [
-    // {
-    //   stripeOrientation: "x",
-    // boxCountDominant: 80,
-    //   countColumnOrRow: 2,
-    //   sizeStripe: 3,
-    //   paddingShortCount: 8 * 1, // 5*2
-    //   paddingLongCount: 10 * 1,
-    //   thickness: 1,
-    // },
-    // {
-    //   stripeOrientation: "x",
-    //   boxCountDominant: 80,
-    //   countColumnOrRow: 4,
-    //   sizeStripe: 15, // of boxcount;
-    //   paddingShortCount: 5, // 5*2
-    //   paddingLongCount: 10,
-    //   thickness: 1,
-    // },
-    // {
-    //   stripeOrientation: "y",
-    //   boxCountDominant: 80,
-    //   countColumnOrRow: 2,
-    //   sizeStripe: 45, // of boxcount;
-    //   paddingShortCount: 5, // 5*2
-    //   paddingLongCount: 5,
-    //   thickness: 1,
-    // },
     {
       stripeOrientation: getRandomFromList(["x", "y"]),
-      // boxCountDominant: 80,  // static, kinda resolution - amount of boxes for dominant side
       countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
-      // sizeStripe: 20, // Math.floor(getRandomFromInterval(5, boxCountDominantTotal / columnRowCount - 5)), // of boxcount;
-      // paddingShortCount: 1, // Math.floor(getRandomFromInterval(5, (boxCountDominantTotal - columnRowCount * sizeDic) / 2)),
-      // paddingLongCount: 1, // 10,
       thickness: 1,
     },
   ]
 
 
-  paper = new Paper();
-  backgroundNoise = new Noise();
-  edgePixel = new PixelGradient();
+  // paper = new Paper();
+  // backgroundNoise = new Noise();
+  // edgePixel = new PixelGradient();
 
-
-  gridTexture = createGraphics(width, height);
-  push();
-  gridTexture.image(paper.masterBuffer, 0, 0);
-  gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  pop();
+  // gridTexture = createGraphics(width, height);
+  // push();
+  // gridTexture.image(paper.masterBuffer, 0, 0);
+  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  // pop();
 
   grid = new Grid(getRandomFromList(gridProfiles));
   // // PAPER REDUCED TO SHAPE OF GRID
-  gridTexture = maskBuffers(gridTexture, grid.buffer);
+  // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
 
   // areaA = new BrushstrokeSystem({
@@ -330,39 +314,39 @@ function setup() {
 
   // layc = new BrushstrokeSystem(laycData);
 
-  areaB = new BrushstrokeSystem({
-    originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
-    targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
-    originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
-    targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
-    OVERLAY: false,
-    brushCount: 400,
-    noiseIncrement: 0.6,  // 0.06
-    DEBUG: false,
-    densityFactor: 2,
-    maxSpeedMin: 3,
-    maxSpeedMax: 10,
-    minSpeed: 2,
-    maxForce: 2,
-    slowRadius: 100,
-    finishedRadius: 20,
-    targetBdistList: [100, 200, 400, 600, 800],
-    targetBDirectionList: [1, -1],
-    basicSizeMin: 1,
-    basicSizeMax: 1,
-    // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-    noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-    brushTemplateCount: 20,
-    brushTemplateSize: 60,
-    brushTemplateStrokeSize: 1,
-    brushTemplateFillColor: color("#e2e2e2"),
-    brushTemplateFillColorDistort: 20,
-    brushTemplateStrokeColor: color("#f0f0f0"),
-    brushTemplateStrokeColorDistort: 20,
-    brushCurveSexyness: 1,
-    brushPixelDistort: 50,
-    brushOpacityDistort: 50,
-  });
+  // areaB = new BrushstrokeSystem({
+  //   originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
+  //   targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
+  //   originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
+  //   targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
+  //   OVERLAY: false,
+  //   brushCount: 400,
+  //   noiseIncrement: 0.6,  // 0.06
+  //   DEBUG: false,
+  //   densityFactor: 2,
+  //   maxSpeedMin: 3,
+  //   maxSpeedMax: 10,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 100,
+  //   finishedRadius: 20,
+  //   targetBdistList: [100, 200, 400, 600, 800],
+  //   targetBDirectionList: [1, -1],
+  //   basicSizeMin: 1,
+  //   basicSizeMax: 1,
+  //   // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+  //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+  //   brushTemplateCount: 20,
+  //   brushTemplateSize: 60,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: color("#e2e2e2"),
+  //   brushTemplateFillColorDistort: 20,
+  //   brushTemplateStrokeColor: color("#f0f0f0"),
+  //   brushTemplateStrokeColorDistort: 20,
+  //   brushCurveSexyness: 1,
+  //   brushPixelDistort: 50,
+  //   brushOpacityDistort: 50,
+  // });
 
 
 
@@ -413,7 +397,7 @@ function draw() {
 
 
   // areaA.show();
-  areaB.show();
+  // areaB.show();
 
   // laya.show();
   // layb.show();
@@ -423,12 +407,12 @@ function draw() {
   // edgePixel.show();
 
   grid.show();
-  push();
-  blendMode(OVERLAY);
-  image(gridTexture, 0, 0);
-  pop();
+  // push();
+  // blendMode(OVERLAY);
+  // image(gridTexture, 0, 0);
+  // pop();
 
-  backgroundNoise.show();
+  // backgroundNoise.show();
 
 
   // areaA.showBrushTemplates();

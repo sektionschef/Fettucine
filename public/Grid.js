@@ -1,42 +1,39 @@
+
+// MARGIN IN BEIDE RICHTUNGEN, X UND Y
+
 class Grid {
     constructor(data) {
         this.stripeOrientation = data.stripeOrientation;
         this.sizeStripe = data.sizeStripe;
-        // this.paddingShortCount = data.paddingShortCount;
-        // this.paddingLongCount = data.paddingLongCount;
         this.thickness = data.thickness;
         this.countColumnOrRow = data.countColumnOrRow;
+        this.DEBUG = true;
 
-        // this.boxSize = 0.0125 * DOMINANTSIDE;
         // make sure there is no margin;
-        this.boxCountDominant = 80; // data.boxCountDominant;  // 80 boxes on the shorter side
-        this.boxSize = DOMINANTSIDE / this.boxCountDominant;
-        this.bezierOffset = 0.005 * DOMINANTSIDE;
-
+        this.shortBoxCount = 80; // 80 boxes on the shorter side
+        this.boxSize = SHORTSIDE / this.shortBoxCount;
+        this.longBoxCount = Math.floor(LONGSIDE / this.boxSize);
+        this.bezierOffset = 0.005 * SHORTSIDE;
 
         if (width < height) {
-            this.shortSide = width;
-            this.longSide = height;
+            this.widthBoxCount = this.shortBoxCount;
+            this.heightBoxCount = this.longBoxCount;
         } else {
-            this.shortSide = height;
-            this.longSide = width;
+            this.widthBoxCount = this.longBoxCount;
+            this.heightBoxCount = this.shortBoxCount;
         }
 
-        // only the rest
-        // TODO center for this.margin/2;
-        // console.log(this.shortSide % 50 == 0);
-        this.margin = this.shortSide % this.boxSize;
+
+        this.margin = SHORTSIDE % this.boxSize;
         // console.log("margin: " + this.margin);
 
-        // THESE TWO NEEDED ? - got: boxCountDominant
-        this.shortBoxCount = this.shortSide / this.boxSize;
-        this.longBoxCount = this.longSide / this.boxSize;
 
-        this.sizeStripe = Math.floor(getRandomFromInterval(5, this.boxCountDominant / this.countColumnOrRow - 5));
+        this.sizeStripe = Math.floor(getRandomFromInterval(5, this.shortBoxCount / this.countColumnOrRow - 5));
 
         this.columns = new Set();
         this.rows = new Set();
         this.boxes = [];
+        this.stripes = [];
 
         this.buffer = createGraphics(width, height);
 
@@ -49,8 +46,8 @@ class Grid {
     createBoxes() {
         var index = 0;
 
-        for (var l = 0; l < (this.longBoxCount); l++) {
-            for (var s = 0; s < (this.shortBoxCount); s++) {
+        for (var l = 0; l < (this.heightBoxCount); l++) {
+            for (var s = 0; s < (this.widthBoxCount); s++) {
 
                 // corners of the box
                 var A = createVector(this.margin + s * this.boxSize, this.margin + l * this.boxSize);
@@ -89,17 +86,19 @@ class Grid {
                 index += 1;
             }
         }
+        // console.log(this.heightBoxCount);
+        // console.log(this.boxes);
     }
 
     showDebug() {
 
         // view cols and rows
-        for (var i = 0; i < (this.shortBoxCount + 1); i++) {
+        for (var i = 0; i < (this.widthBoxCount + 1); i++) {
             this.buffer.strokeWeight(5);
             this.buffer.line(this.margin + i * this.boxSize, 0, this.margin + i * this.boxSize, height);
         }
 
-        for (var i = 0; i < (this.longBoxCount + 1); i++) {
+        for (var i = 0; i < (this.heightBoxCount + 1); i++) {
             this.buffer.strokeWeight(5);
             this.buffer.line(0, this.margin + i * this.boxSize, width, this.margin + i * this.boxSize);
         }
@@ -108,122 +107,128 @@ class Grid {
     // select active boxes
     createMask() {
 
-        this.stripes = [];
+        console.log(this.boxes.length);
 
-        console.log("stripeOrientation: " + this.stripeOrientation);
-        console.log("boxCountDominant: " + this.boxCountDominant);
-        console.log("longBoxCount: " + this.longBoxCount);
-        console.log("countColumnOrRow: " + this.countColumnOrRow);
-        console.log("sizeStripe: " + this.sizeStripe);
-        console.log("thickness: " + this.thickness);
-
-        if (this.stripeOrientation == "x") {
-
-            this.Gap = this.shortBoxCount - this.sizeStripe * this.countColumnOrRow; // the loopcount
-            console.log("gap: " + this.Gap);
-            if (this.countColumnOrRow != 1) {
-                // this.columnGap = Math.floor((this.shortBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingShortCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
-                // this.columnGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.possibleColumnGap = this.Gap / (this.countColumnOrRow - 1);
-                this.columnGap = Math.floor(getRandomFromInterval(this.possibleColumnGap / 10, this.possibleColumnGap / 6));  // 2 for padding right and left, 5 for some safety distance
-                this.paddingShortCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
-            } else {
-                this.columnGap = 0;
-                this.paddingShortCount = Math.floor(this.Gap / 2);
-            }
-            this.paddingLongCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
-            console.log("columnGap: " + this.columnGap);
-            console.log("paddingShortCount: " + this.paddingShortCount);
-            console.log("paddingLongCount: " + this.paddingLongCount);
-
-            for (
-                var row = this.paddingLongCount * this.shortBoxCount + this.paddingShortCount;
-                row < (this.longBoxCount * this.shortBoxCount - this.paddingLongCount * this.shortBoxCount);
-                row += (this.shortBoxCount * this.thickness * 2)
-            ) {
-                // console.log(row);
-                for (var column = 0; column < this.countColumnOrRow; column++) {
-
-                    // get the index of the corner box of each stripe.
-                    // let a = row
-                    let a = row + this.sizeStripe * column + this.columnGap * column;
-                    // let b = a + this.shortBoxCount - this.paddingShortCount * 2;
-                    let b = a + this.sizeStripe;
-                    let c = b + (this.thickness - 1) * this.shortBoxCount;
-                    let d = a + (this.thickness - 1) * this.shortBoxCount;
-
-                    // DEBUG
-                    // this.buffer.push();
-                    // this.buffer.noStroke();
-                    // this.buffer.fill("pink");
-                    // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
-                    // // this.buffer.rectMode(CORNERS);
-                    // // this.buffer.rect(
-                    // //     this.boxes[a].A.x,
-                    // //     this.boxes[a].A.y,
-                    // //     this.boxes[c].C.x,
-                    // //     this.boxes[c].C.y
-                    // // );
-                    // this.buffer.pop();
-
-                    this.writeToStripes(a, b, c, d);
-                }
-            }
-        } else {
-
-            this.Gap = this.longBoxCount - this.sizeStripe * this.countColumnOrRow;
-            console.log("gap: " + this.Gap);
-            if (this.countColumnOrRow != 1) {
-                // this.rowGap = Math.floor((this.longBoxCount - this.sizeStripe * this.countColumnOrRow - this.paddingLongCount * 2) / (this.countColumnOrRow - 1)); // the loopcount
-                // this.rowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1 + 2));  // 2 for padding right and left
-                this.possibleRowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1));
-                // this.rowGap = Math.floor(getRandomFromInterval(5, this.Gap / (this.countColumnOrRow - 1) - 5));  // 2 for padding right and left, 5 for some safety distance
-                console.log("possibleRowGap: " + this.possibleRowGap);
-                this.rowGap = Math.floor(getRandomFromInterval(this.possibleRowGap / 10, this.possibleRowGap / 6));
-                this.paddingLongCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
-            } else {
-                this.rowGap = 0;
-                this.paddingLongCount = Math.floor(this.Gap / 2);
-            }
-            this.paddingShortCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 10));
-            console.log("rowGap: " + this.rowGap);
-            console.log("paddingShortCount: " + this.paddingShortCount);
-            console.log("paddingLongCount: " + this.paddingLongCount);
-
-            for (
-                var column = this.paddingShortCount;
-                column < (this.shortBoxCount - this.paddingShortCount);
-                column += this.thickness * 2
-            ) {
-                for (var row = 0; row < this.countColumnOrRow; row++) {
-                    // get the index of the corner boxe of each stripe.
-                    // let a = column + this.paddingLongCount * this.shortBoxCount;
-                    let a = column + this.paddingLongCount * this.shortBoxCount + this.sizeStripe * row * this.shortBoxCount + this.rowGap * row * this.shortBoxCount;
-                    let b = a + (this.thickness - 1);
-                    // let d = column + (this.longBoxCount - this.paddingLongCount) * this.shortBoxCount;
-                    let d = a + this.sizeStripe * this.shortBoxCount;
-                    let c = d + (this.thickness - 1);
-
-                    // DEBUG
-                    // this.buffer.push();
-                    // this.buffer.noStroke();
-                    // this.buffer.fill("pink");
-                    // // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
-                    // // this.buffer.circle(this.boxes[d].A.x, this.boxes[d].A.y, 50);
-                    // this.buffer.rectMode(CORNERS);
-                    // this.buffer.rect(
-                    //     this.boxes[a].A.x,
-                    //     this.boxes[a].A.y,
-                    //     this.boxes[c].C.x,
-                    //     this.boxes[c].C.y
-                    // );
-                    // this.buffer.pop();
-
-                    this.writeToStripes(a, b, c, d);
-                }
-
-            }
+        if (this.DEBUG) {
+            console.log("stripeOrientation: " + this.stripeOrientation);
+            console.log("widthBoxCount: " + this.widthBoxCount);
+            console.log("heightBoxCount: " + this.heightBoxCount);
+            console.log("shortBoxCount: " + this.shortBoxCount);
+            console.log("longBoxCount: " + this.longBoxCount);
+            console.log("countColumnOrRow: " + this.countColumnOrRow);
+            console.log("sizeStripe: " + this.sizeStripe);
+            console.log("thickness: " + this.thickness);
         }
+
+        // if (this.stripeOrientation == "x") {
+
+        // this.Gap = this.widthBoxCount - this.sizeStripe * this.countColumnOrRow; // the remaining space without stripes
+
+        // if (this.countColumnOrRow != 1) {
+        //     this.possibleColumnGap = this.Gap / (this.countColumnOrRow - 1);  // equal distance between stripes padding
+        //     this.columnGap = Math.floor(getRandomFromInterval(this.possibleColumnGap / 6, this.possibleColumnGap / 4));   // gap between stripes
+        //     this.paddingWidthCount = Math.floor((this.Gap - this.columnGap * (this.countColumnOrRow - 1)) / 2);
+        // } else {
+        //     this.columnGap = 0;
+        //     this.paddingWidthCount = Math.floor(this.Gap / 2);
+        // }
+
+        // this.paddingHeightCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
+
+        // if (this.DEBUG) {
+        //     console.log("gap: " + this.Gap);
+        //     console.log("columnGap: " + this.columnGap);
+        //     console.log("paddingWidthCount: " + this.paddingWidthCount);
+        //     console.log("paddingHeightCount: " + this.paddingHeightCount);
+        // }
+
+        // for (
+        //     var row = this.paddingHeightCount * this.widthBoxCount + this.paddingWidthCount;
+        //     row < (this.heightBoxCount * this.widthBoxCount - this.paddingHeightCount * this.widthBoxCount);
+        //     row += (this.widthBoxCount * this.thickness * 2)
+        // ) {
+        //     // console.log(row);
+        //     for (var column = 0; column < this.countColumnOrRow; column++) {
+
+        //         // get the index of the corner box of each stripe.
+        //         let a = row + this.sizeStripe * column + this.columnGap * column;
+        //         let b = a + this.sizeStripe;
+        //         let c = b + (this.thickness - 1) * this.widthBoxCount;
+        //         let d = a + (this.thickness - 1) * this.widthBoxCount;
+
+        //         // DEBUG
+
+        //         // this.buffer.push();
+        //         // this.buffer.noStroke();
+        //         // this.buffer.fill("pink");
+        //         // // this.buffer.circle(500, 700, 100);
+        //         // // console.log(this.boxes[a]);
+        //         // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+        //         // // this.buffer.rectMode(CORNERS);
+        //         // // this.buffer.rect(
+        //         // //     this.boxes[a].A.x,
+        //         // //     this.boxes[a].A.y,
+        //         // //     this.boxes[c].C.x,
+        //         // //     this.boxes[c].C.y
+        //         // // );
+        //         // this.buffer.pop();
+
+        //         this.writeToStripes(a, b, c, d);
+        //     }
+        // }
+        // } else {
+
+        this.Gap = this.longBoxCount - this.sizeStripe * this.countColumnOrRow;
+        if (this.countColumnOrRow != 1) {
+            this.possibleRowGap = Math.floor(this.Gap / (this.countColumnOrRow - 1));
+            // console.log("possibleRowGap: " + this.possibleRowGap);
+            this.rowGap = Math.floor(getRandomFromInterval(this.possibleRowGap / 6, this.possibleRowGap / 4));
+            this.paddingHeightCount = Math.floor((this.Gap - this.rowGap * (this.countColumnOrRow - 1)) / 2);
+        } else {
+            this.rowGap = 0;
+            this.paddingHeightCount = Math.floor(this.Gap / 2);
+        }
+
+        this.paddingWidthCount = Math.floor(getRandomFromInterval(5, this.shortBoxCount / 10));
+        if (this.DEBUG) {
+            console.log("gap: " + this.Gap);
+            console.log("rowGap: " + this.rowGap);
+            console.log("paddingWidthCount: " + this.paddingWidthCount);
+            console.log("paddingHeightCount: " + this.paddingHeightCount);
+        }
+
+        for (
+            var column = this.paddingWidthCount;
+            column < (this.shortBoxCount - this.paddingWidthCount);
+            column += this.thickness * 2
+        ) {
+            for (var row = 0; row < this.countColumnOrRow; row++) {
+                // get the index of the corner boxe of each stripe.
+                let a = column + this.paddingHeightCount * this.shortBoxCount + this.sizeStripe * row * this.shortBoxCount + this.rowGap * row * this.shortBoxCount;
+                let b = a + (this.thickness - 1);
+                let d = a + this.sizeStripe * this.shortBoxCount;
+                let c = d + (this.thickness - 1);
+
+                // DEBUG
+                // this.buffer.push();
+                // this.buffer.noStroke();
+                // this.buffer.fill("pink");
+                // // this.buffer.circle(this.boxes[a].A.x, this.boxes[a].A.y, 50);
+                // // this.buffer.circle(this.boxes[d].A.x, this.boxes[d].A.y, 50);
+                // this.buffer.rectMode(CORNERS);
+                // this.buffer.rect(
+                //     this.boxes[a].A.x,
+                //     this.boxes[a].A.y,
+                //     this.boxes[c].C.x,
+                //     this.boxes[c].C.y
+                // );
+                // this.buffer.pop();
+
+                this.writeToStripes(a, b, c, d);
+            }
+
+        }
+        // }
 
     }
 
@@ -373,7 +378,7 @@ class Grid {
     createNoise(start, stop1, stop2, end) {
         this.pointCount = 3 * p5.Vector.dist(this.A, this.B);
         this.noiseDistance = p5.Vector.dist(this.A, this.C) * 0.004; // 25;
-        this.noiseWeight = 0.00025 * DOMINANTSIDE;
+        this.noiseWeight = 0.00025 * SHORTSIDE;
         this.noiseColor = color("#7e7e7e");
 
         for (var i = 0; i < this.pointCount; i++) {

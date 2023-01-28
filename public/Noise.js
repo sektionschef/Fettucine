@@ -3,15 +3,15 @@
 class Noise {
     constructor() {
 
-        this.width = DOMINANTSIDE * 0.15; // 600;
-        this.height = DOMINANTSIDE * 0.15; // 600;
+        this.width = SHORTSIDE * 0.15; // 600;
+        this.height = SHORTSIDE * 0.15; // 600;
         this.marginX = 0; //50;
         this.marginY = 0; //50;
 
         this.jCount = 1;  // 1
         this.iCount = 1;  // 6
 
-        this.strokeWeight = 0.00025 * DOMINANTSIDE;
+        this.strokeWeight = 0.00025 * SHORTSIDE;
 
         this.buffer = createGraphics(this.width, this.height);
         this.masterBuffer = createGraphics(width, height);

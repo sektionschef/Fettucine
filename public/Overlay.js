@@ -199,11 +199,11 @@ class Overlay {
 
     createCoverOverlay() {
         this.offset = 0.01;
-        this.randomOffset1 = DOMINANTSIDE * getRandomFromInterval(-this.offset, this.offset);
-        this.randomOffset2 = DOMINANTSIDE * getRandomFromInterval(-this.offset, this.offset);
-        this.randomOffset3 = DOMINANTSIDE * getRandomFromInterval(-this.offset, this.offset);
+        this.randomOffset1 = SHORTSIDE * getRandomFromInterval(-this.offset, this.offset);
+        this.randomOffset2 = SHORTSIDE * getRandomFromInterval(-this.offset, this.offset);
+        this.randomOffset3 = SHORTSIDE * getRandomFromInterval(-this.offset, this.offset);
 
-        this.offsetCanvas = DOMINANTSIDE * 0.1;
+        this.offsetCanvas = SHORTSIDE * 0.1;
 
         this.createCoverTop();
         this.createCoverLeft();
