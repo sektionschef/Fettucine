@@ -99,6 +99,36 @@ function setup() {
       "canvasWidth": 4000,
       "canvasHeight": 3000,
     },
+    {
+      "name": "3:4",
+      "canvasWidth": 3000,
+      "canvasHeight": 4000,
+    },
+    {
+      "name": "16:9",
+      "canvasWidth": 3840,
+      "canvasHeight": 2160,
+    },
+    {
+      "name": "9:16",
+      "canvasWidth": 2160,
+      "canvasHeight": 3840,
+    },
+    {
+      "name": "1:1",
+      "canvasWidth": 4000,
+      "canvasHeight": 4000,
+    },
+    {
+      "name": "3:2",
+      "canvasWidth": 3000,
+      "canvasHeight": 2000,
+    },
+    {
+      "name": "2:3",
+      "canvasWidth": 2000,
+      "canvasHeight": 3000,
+    }
   ]
 
   canvasFormatChosen = getRandomFromList(canvasFormats);
