@@ -90,6 +90,16 @@ class Brushstroke extends Vehicle {
         this.buffer.translate(this.pos.x, this.pos.y);
         this.buffer.noStroke();
         this.buffer.rotate(this.vel.heading())
+
+        // BRUSH with circle
+        /*         
+                this.buffer.stroke(170);
+                this.buffer.strokeWeight(1);
+                this.buffer.fill(color(Math.round(this.turningFactor * 75) + 180));
+                this.buffer.circle(0, 0, 50); 
+                */
+
+        // BRUSH with image
         this.buffer.imageMode(CENTER);
         // image
         // this.sprite.resize(0, this.basicSize);
@@ -100,6 +110,8 @@ class Brushstroke extends Vehicle {
         }
         this.buffer.image(this.sprite, 0, 0, 0, this.basicSize);
         // this.buffer.blendMode(BLEND);
+
+
         this.buffer.pop();
     }
 

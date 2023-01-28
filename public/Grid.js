@@ -106,9 +106,6 @@ class Grid {
 
     // select active boxes
     createMask() {
-
-        console.log(this.boxes.length);
-
         if (this.DEBUG) {
             console.log("stripeOrientation: " + this.stripeOrientation);
             console.log("widthBoxCount: " + this.widthBoxCount);

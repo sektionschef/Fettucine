@@ -42,10 +42,15 @@ class Brush {
         // CURVES
         this.buffer.push();
         this.buffer.curveTightness(this.curveSexyness);
-        this.buffer.fill(this.fillColor);
+        // this.buffer.fill(this.fillColor);
         // this.buffer.stroke(this.strokeColor);
         // this.buffer.strokeWeight(this.strokeSize);
-        this.buffer.noStroke();
+        // this.buffer.fill(color(150));
+        this.buffer.noFill();
+        this.buffer.stroke(200 + getRandomFromInterval(-50, 50));
+        this.buffer.strokeWeight(1);
+        // this.buffer.noStroke();
+
         this.buffer.beginShape();
         this.buffer.curveVertex(q1X, q1Y);
         this.buffer.curveVertex(q1X, q1Y);
@@ -68,6 +73,12 @@ class Brush {
         // this.buffer.vertex(q3X, q3Y);
         // this.buffer.vertex(q3X, q3Y);
         // this.buffer.endShape(CLOSE);
+
+        // this.pixelManipulation();
+    }
+
+    pixelManipulation() {
+
 
         this.buffer.loadPixels();
         let x, y, index;
@@ -120,34 +131,34 @@ class Brush {
 
                 // ONLY PIXEL - FOR PRODUCTION
                 // map x pos to prob. of noise
-                var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
-                var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
-
-                if (this.buffer.pixels[index + 3] != 0) {
-                    if (fxrand() > threshold) {
-                        this.buffer.pixels[index + 0] = 0;
-                        this.buffer.pixels[index + 1] = 0;
-                        this.buffer.pixels[index + 2] = 0;
-                        this.buffer.pixels[index + 3] = 0;
-                    } else {
-                        this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
-                        this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
-                        this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
-                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] + opOffset;
-                    }
-                }
+                /*                 var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
+                                var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                                var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
+                
+                                if (this.buffer.pixels[index + 3] != 0) {
+                                    if (fxrand() > threshold) {
+                                        this.buffer.pixels[index + 0] = 0;
+                                        this.buffer.pixels[index + 1] = 0;
+                                        this.buffer.pixels[index + 2] = 0;
+                                        this.buffer.pixels[index + 3] = 0;
+                                    } else {
+                                        this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
+                                        this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
+                                        this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
+                                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] + opOffset;
+                                    }
+                                } */
 
                 // ONLY Perlin NOISE
-                // let r = noise(xoff, yoff) * 155 + 100;
+                let r = noise(xoff, yoff) * 55 + 200;
 
-                // if (this.buffer.pixels[index + 3] != 0) {
+                if (this.buffer.pixels[index + 3] != 0) {
 
-                //     this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
-                //     this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
-                //     this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
-                // }
+                    this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
+                    this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
+                    this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
+                    this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+                }
 
                 // COMIBNE PERLIN NOISE FOR OPACITY AND PIXEL STRUCTURE
                 // let r = noise(xoff, yoff) * 155 + 100;
@@ -174,6 +185,7 @@ class Brush {
             xoff += inc;
         }
         this.buffer.updatePixels();
+
     }
 }
 

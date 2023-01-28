@@ -173,19 +173,19 @@ function setup() {
   ]
 
 
-  // paper = new Paper();
-  // backgroundNoise = new Noise();
-  // edgePixel = new PixelGradient();
+  paper = new Paper();
+  backgroundNoise = new Noise();
+  edgePixel = new PixelGradient();
 
-  // gridTexture = createGraphics(width, height);
-  // push();
-  // gridTexture.image(paper.masterBuffer, 0, 0);
-  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  // pop();
+  gridTexture = createGraphics(width, height);
+  push();
+  gridTexture.image(paper.masterBuffer, 0, 0);
+  gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  pop();
 
   grid = new Grid(getRandomFromList(gridProfiles));
   // // PAPER REDUCED TO SHAPE OF GRID
-  // gridTexture = maskBuffers(gridTexture, grid.buffer);
+  gridTexture = maskBuffers(gridTexture, grid.buffer);
 
 
   // areaA = new BrushstrokeSystem({
@@ -379,6 +379,40 @@ function setup() {
   // });
 
 
+  // working
+  areaC = new BrushstrokeSystem({
+    originA: createVector(0, 0),  // left, start of brushstrokes
+    targetA: createVector(0, height), // left, end of brusshtrokes
+    originB: createVector(width, 0), // right, start of brushstrokes
+    targetB: createVector(width, height), // right, end of brushstrokes
+    OVERLAY: false,
+    brushCount: 500,
+    noiseIncrement: 0.01,  // 0.009
+    DEBUG: false,
+    densityFactor: 2,
+    maxSpeedMin: 10,
+    maxSpeedMax: 50,
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 100,
+    finishedRadius: 20,
+    targetBdistList: [600],
+    targetBDirectionList: [1],
+    basicSizeMin: 1,
+    basicSizeMax: 1,
+    noiseColor: [color("#ebebeb")],
+    brushTemplateCount: 20,
+    brushTemplateSize: 100,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color("#e2e2e2"),
+    brushTemplateFillColorDistort: 20,
+    brushTemplateStrokeColor: color("#000000"),
+    brushTemplateStrokeColorDistort: 20,
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 0,
+  });
+
 
   // example = new BrushstrokeSystem({
   //   originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
@@ -419,7 +453,7 @@ function draw() {
   }
 
   // background(color(BACKGROUND));
-  background(color("#e7e7e7"));
+  background(color("#ffffff"));
   // background(color("black"));
   // background(color("#e92929"));
   // background(color("#1e1c7e"));
@@ -428,6 +462,8 @@ function draw() {
 
   // areaA.show();
   // areaB.show();
+  areaC.show();
+
 
   // laya.show();
   // layb.show();
@@ -436,17 +472,18 @@ function draw() {
   // paper.show();
   // edgePixel.show();
 
-  grid.show();
-  // push();
-  // blendMode(OVERLAY);
-  // image(gridTexture, 0, 0);
-  // pop();
 
-  // backgroundNoise.show();
+  grid.show();
+  push();
+  blendMode(OVERLAY);
+  image(gridTexture, 0, 0);
+  pop();
+  backgroundNoise.show();
 
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
+  // areaC.showBrushTemplates();
 
   // laya.showBrushTemplates();
 
