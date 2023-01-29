@@ -44,13 +44,13 @@ class NoiseStripes {
 
         if (this.orientation == "x") {
             for (var i = 0; i < this.height / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 100 + 150);
+                this.stripeBuffer.fill(random() * 75 + 175);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(0, i * this.lineHeight * this.clusterSize, this.width, this.lineHeight * this.clusterSize);
             }
         } else {
             for (var i = 0; i < this.width / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 100 + 150);
+                this.stripeBuffer.fill(random() * 75 + 175);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(i * this.lineHeight * this.clusterSize, 0, this.lineHeight * this.clusterSize, this.height);
             }
@@ -63,6 +63,7 @@ class NoiseStripes {
 
     show() {
         push();
+        tint(color(PALETTE.tint));
         image(this.masterBuffer, this.upperLeft.x, this.upperLeft.y);
         pop();
     }

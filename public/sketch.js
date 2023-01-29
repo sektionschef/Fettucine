@@ -37,9 +37,18 @@ const PALETTESYSTEM = {
   //   "background": ["#d6d5d5", "#f7f7f7ff"],
   //   "pixelColors": ["#9c9c9c3b", "#afafafff"],
   // },
-  "Only red": {
-    "background": ["#d6d5d5", "#ee4949ff"],
-    "pixelColors": ["#d3d3d33b", "#afafafff"],
+  // "Only red": {
+  //   "background": ["#d6d5d5", "#ee4949ff"],
+  //   "pixelColors": ["#d3d3d33b", "#afafafff"],
+  // }
+
+  // "Magenta Carpenter": {
+  //   "background": "#e0469bff",
+  //   "tint": "#9be1f8",
+  // },
+  "Red Baron": {
+    "background": "#ee4949ff",
+    "tint": "#ffffff",
   }
 }
 
@@ -85,9 +94,12 @@ function preload() {
 
 function setup() {
   // startTime = performance.now()
-  BACKGROUND = "#ee4949ff";
-  // BACKGROUND = "#f8cc3bff";
-  // BACKGROUND = "#353eb8ff"// "#252746ff";
+  // BACKGROUND = "#ee4949ff";
+  // BACKGROUND = "#e0bc46ff";
+  // BACKGROUND = "#314ce4ff"// "#273797ff";
+  // BACKGROUND = "#e0469bff";
+
+  BACKGROUND = PALETTE.background;
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
