@@ -19,6 +19,7 @@ class BrushstrokeSystem {
         this.noiseColor = data.noiseColor;
         this.brushPixelDistort = data.brushPixelDistort;
         this.brushOpacityDistort = data.brushOpacityDistort;
+        this.brushType = data.brushType;
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
@@ -71,12 +72,13 @@ class BrushstrokeSystem {
             var BrushData = {
                 noiseColor: this.noiseColor,
                 size: this.brushTemplateSize,
-                // strokeSize: this.brushTemplateStrokeSize,
-                // fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
-                // strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
+                strokeSize: this.brushTemplateStrokeSize,
+                fillColor: distortColorSuperNew(this.brushTemplateFillColor, this.brushTemplateFillColorDistort),
+                strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
                 curveSexyness: this.brushCurveSexyness,
                 pixelDistort: this.brushPixelDistort,
                 opacityDistort: this.brushOpacityDistort,
+                type: this.brushType,
             }
             this.brushTemplates.push(new Brush(BrushData).buffer);
         }
