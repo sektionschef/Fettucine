@@ -35,7 +35,11 @@ class Grid {
         this.boxes = [];
         this.stripes = [];
 
+
         this.buffer = createGraphics(width, height);
+        // dummy values for upper left and lower right corners
+        this.totalA = createVector(this.buffer.width / 2, this.buffer.height / 2)
+        this.totalC = createVector(this.buffer.width / 2, this.buffer.height / 2)
 
         this.createBoxes();
         // this.showDebug();
@@ -249,6 +253,14 @@ class Grid {
             "DAStop2": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4),
             "DAStop1": createVector(this.A.x + getRandomFromInterval(-this.bezierOffset, this.bezierOffset), this.A.y + (this.D.y - this.A.y) / 4 * 3),
         })
+
+        // overwrite if better
+        if (this.A.x < this.totalA.x && this.A.y < this.totalA.y) {
+            this.totalA = this.A;
+        }
+        if (this.C.x >= this.totalC.x && this.C.y >= this.totalC.y) {
+            this.totalC = this.C;
+        }
     }
 
     drawMask() {
