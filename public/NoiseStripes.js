@@ -1,10 +1,12 @@
 class NoiseStripes {
-    constructor() {
+    constructor(upperLeft, lowerRight, gridOrientation) {
 
-        this.width = width;
-        this.height = height;
-        // this.orientation = "x";
-        this.orientation = "y";
+        this.upperLeft = upperLeft;
+        this.lowerRight = lowerRight;
+        this.gridOrientation = gridOrientation;
+
+        this.width = this.lowerRight.x - this.upperLeft.x;
+        this.height = this.lowerRight.y - this.upperLeft.y;
         this.clusterSize = 2;
         this.lineHeight = SHORTSIDE / 300;
         // console.log("lineHeight: " + this.lineHeight);
@@ -12,6 +14,12 @@ class NoiseStripes {
         this.yinc = 0.005;
 
         this.masterBuffer = createGraphics(this.width, this.height);
+
+        if (this.gridOrientation == "x") {
+            this.orientation = "y";
+        } else {
+            this.orientation = "x";
+        }
 
         this.yoff = 0;
         for (var y = 0; y < this.masterBuffer.height; y += this.clusterSize) {
@@ -55,7 +63,7 @@ class NoiseStripes {
 
     show() {
         push();
-        image(this.masterBuffer, 0, 0);
+        image(this.masterBuffer, this.upperLeft.x, this.upperLeft.y);
         pop();
     }
 }

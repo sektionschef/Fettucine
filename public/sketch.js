@@ -187,7 +187,7 @@ function setup() {
   // // // PAPER REDUCED TO SHAPE OF GRID
   // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
-  // noiseStripes = new NoiseStripes();
+  noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
 
   // fillNoiseOverlay = new BrushstrokeSystem({
   //   originA: createVector(0, 0),  // left, start of brushstrokes
@@ -477,7 +477,7 @@ function draw() {
   // paper.show();
   // edgePixel.show();
 
-  // noiseStripes.show();
+  noiseStripes.show();
 
   // GRID ON TOP
   grid.show();
@@ -487,10 +487,10 @@ function draw() {
   // pop();
   // backgroundNoise.show();
 
-  fill("black");
-  circle(grid.totalA.x, grid.totalA.y, 50);
-  circle(grid.totalC.x, grid.totalC.y, 50);
 
+  // fill("black");
+  // circle(grid.totalA.x, grid.totalA.y, 50);
+  // circle(grid.totalC.x, grid.totalC.y, 50);
 
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
