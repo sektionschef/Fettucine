@@ -172,20 +172,19 @@ function setup() {
     },
   ]
 
+  paper = new Paper();
+  backgroundNoise = new Noise();
+  edgePixel = new PixelGradient();
 
-  // paper = new Paper();
-  // backgroundNoise = new Noise();
-  // edgePixel = new PixelGradient();
-
-  // gridTexture = createGraphics(width, height);
-  // push();
-  // gridTexture.image(paper.masterBuffer, 0, 0);
-  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  // pop();
+  gridTexture = createGraphics(width, height);
+  push();
+  gridTexture.image(paper.masterBuffer, 0, 0);
+  gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  pop();
 
   grid = new Grid(getRandomFromList(gridProfiles));
-  // // // PAPER REDUCED TO SHAPE OF GRID
-  // gridTexture = maskBuffers(gridTexture, grid.buffer);
+  // PAPER REDUCED TO SHAPE OF GRID
+  gridTexture = maskBuffers(gridTexture, grid.buffer);
 
   noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
 
@@ -481,11 +480,11 @@ function draw() {
 
   // GRID ON TOP
   grid.show();
-  // push();
-  // blendMode(OVERLAY);
-  // image(gridTexture, 0, 0);
-  // pop();
-  // backgroundNoise.show();
+  push();
+  blendMode(OVERLAY);
+  image(gridTexture, 0, 0);
+  pop();
+  backgroundNoise.show();
 
 
   // fill("black");
