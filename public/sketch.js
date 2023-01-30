@@ -49,7 +49,11 @@ const PALETTESYSTEM = {
   "Red Baron": {
     "background": "#ee4949ff",
     "tint": "#ffffff",
-  }
+  },
+  // "Black Susi": {
+  //   "background": "#000000ff",
+  //   "tint": "#ffffff",
+  // }
 }
 
 choosePalette();
@@ -184,21 +188,21 @@ function setup() {
     },
   ]
 
-  paper = new Paper();
+  // paper = new Paper();
   backgroundNoise = new Noise();
-  edgePixel = new PixelGradient();
+  // edgePixel = new PixelGradient();
 
-  gridTexture = createGraphics(width, height);
-  push();
-  gridTexture.image(paper.masterBuffer, 0, 0);
-  gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  pop();
+  // gridTexture = createGraphics(width, height);
+  // push();
+  // gridTexture.image(paper.masterBuffer, 0, 0);
+  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
+  // pop();
 
-  grid = new Grid(getRandomFromList(gridProfiles));
-  // PAPER REDUCED TO SHAPE OF GRID
-  gridTexture = maskBuffers(gridTexture, grid.buffer);
+  // grid = new Grid(getRandomFromList(gridProfiles));
+  // // // PAPER REDUCED TO SHAPE OF GRID
+  // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
-  noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
+  // noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
 
   // fillNoiseOverlay = new BrushstrokeSystem({
   //   originA: createVector(0, 0),  // left, start of brushstrokes
@@ -466,7 +470,7 @@ function draw() {
   }
 
   // background(color(BACKGROUND));
-  background(color("#ffffff"));
+  background(color("#d8d8d8"));
   // background(color("black"));
   // background(color("#e92929"));
   // background(color("#1e1c7e"));
@@ -484,19 +488,21 @@ function draw() {
   // laya.show();
   // layb.show();
   // layc.show();
+  // noiseStripes.show();
 
+  // DEBUG ONLY
   // paper.show();
   // edgePixel.show();
 
-  noiseStripes.show();
 
   // GRID ON TOP
-  grid.show();
-  push();
-  blendMode(OVERLAY);
-  image(gridTexture, 0, 0);
-  pop();
+  // grid.show();
+  // push();
+  // blendMode(OVERLAY);
+  // image(gridTexture, 0, 0);
+  // pop();
   backgroundNoise.show();
+
 
 
   // areaA.showBrushTemplates();
@@ -505,6 +511,126 @@ function draw() {
 
   // laya.showBrushTemplates();
 
+  // PROTOTYP
+  let changer = 30;
+  let loopCount = 20; // 20
+  let totalMargin = SHORTSIDE * 0.05;
+  for (var i = 0; i < loopCount; i++) {
+    fill(color(255, 0, 0, 20));
+    noStroke();
+
+    let A = createVector(totalMargin + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let AB1 = createVector(width / 9 * 2 + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let AB2 = createVector(width / 9 * 4 + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let AB3 = createVector(width / 9 * 5 + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let AB4 = createVector(width / 9 * 7 + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let AB5 = createVector(width / 9 * 8 + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let B = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
+    let BC1 = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 2 + getRandomFromInterval(-changer, changer));
+    let BC2 = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 3 + getRandomFromInterval(-changer, changer));
+    let BC3 = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 5 + getRandomFromInterval(-changer, changer));
+    let BC4 = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 6 + getRandomFromInterval(-changer, changer));
+    let BC5 = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 7 + getRandomFromInterval(-changer, changer));
+    let C = createVector(width - totalMargin + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let CD1 = createVector(width / 9 * 8 + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let CD2 = createVector(width / 9 * 7 + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let CD3 = createVector(width / 9 * 5 + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let CD4 = createVector(width / 9 * 4 + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let CD5 = createVector(width / 9 * 2 + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let D = createVector(totalMargin + getRandomFromInterval(-changer, changer), height - totalMargin + getRandomFromInterval(-changer, changer));
+    let DA1 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 2 + getRandomFromInterval(-changer, changer));
+    let DA2 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 3 + getRandomFromInterval(-changer, changer));
+    let DA3 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 5 + getRandomFromInterval(-changer, changer));
+    let DA4 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 6 + getRandomFromInterval(-changer, changer));
+    let DA5 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 7 + getRandomFromInterval(-changer, changer));
+
+    beginShape();
+    // A
+    vertex(A.x, A.y);
+    bezierVertex(
+      AB1.x,
+      AB1.y,
+      AB2.x,
+      AB2.y,
+      AB3.x,
+      AB3.y,
+    );
+    bezierVertex(
+      AB4.x,
+      AB4.y,
+      AB5.x,
+      AB5.y,
+      B.x,
+      B.y
+    );
+    bezierVertex(
+      BC1.x,
+      BC1.y,
+      BC2.x,
+      BC2.y,
+      BC3.x,
+      BC3.y
+    );
+    bezierVertex(
+      BC4.x,
+      BC4.y,
+      BC5.x,
+      BC5.y,
+      C.x,
+      C.y
+    );
+    bezierVertex(
+      CD1.x,
+      CD1.y,
+      CD2.x,
+      CD2.y,
+      CD3.x,
+      CD3.y
+    );
+    bezierVertex(
+      CD4.x,
+      CD4.y,
+      CD5.x,
+      CD5.y,
+      D.x,
+      D.y
+    );
+    bezierVertex(
+      DA1.x,
+      DA1.y,
+      DA2.x,
+      DA2.y,
+      DA3.x,
+      DA3.y,
+    );
+    bezierVertex(
+      DA4.x,
+      DA4.y,
+      DA5.x,
+      DA5.y,
+      A.x,
+      A.y,
+    )
+    endShape(CLOSE);
+  }
+
+
+  // PROTOTYPE SPLATTER
+  // push();
+  // let blob = createGraphics(width, height);
+  // let changer = 100;
+  // let loopCount = 40;
+  // for (var i = 0; i < loopCount; i++) {
+  //   blob.fill(color(50, 20));
+  //   blob.noStroke();
+  //   blob.beginShape();
+  //   blob.vertex(1000, 1000);
+  //   blob.bezierVertex(1200 + getRandomFromInterval(-changer, changer), 1000 + getRandomFromInterval(-changer, changer), 1300 + getRandomFromInterval(-changer, changer), 1100 + getRandomFromInterval(-changer, changer), 1500, 1500);
+  //   blob.endShape(CLOSE);
+  // }
+  // blendMode(OVERLAY);
+  // image(blob, 0, 0);
+  // pop();
 
   // fxpreview();
   noLoop();

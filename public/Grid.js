@@ -8,6 +8,7 @@ class Grid {
         this.thickness = data.thickness;
         this.countColumnOrRow = data.countColumnOrRow;
         this.DEBUG = true;
+        this.paperMargin = SHORTSIDE * 0.05;
 
         // make sure there is no margin;
         this.shortBoxCount = 80; // 80 boxes on the shorter side
@@ -275,10 +276,10 @@ class Grid {
         // draw background shape
         this.buffer.beginShape();
         // clockwise
-        this.buffer.vertex(0, 0);
-        this.buffer.vertex(width, 0);
-        this.buffer.vertex(width, height);
-        this.buffer.vertex(0, height);
+        this.buffer.vertex(0 + this.paperMargin, 0 + this.paperMargin);
+        this.buffer.vertex(width - this.paperMargin, 0 + this.paperMargin);
+        this.buffer.vertex(width - this.paperMargin, height - this.paperMargin);
+        this.buffer.vertex(0 + this.paperMargin, height - this.paperMargin);
 
         // for (var stripe of this.stripes) {
         for (var i = 0; i < this.stripes.length; i++) {
@@ -451,6 +452,7 @@ class Grid {
 
     show() {
         push();
+        // blendMode(OVERLAY);
         image(this.buffer, 0, 0);
         pop();
     }
