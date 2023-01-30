@@ -499,10 +499,6 @@ function draw() {
   backgroundNoise.show();
 
 
-  // fill("black");
-  // circle(grid.totalA.x, grid.totalA.y, 50);
-  // circle(grid.totalC.x, grid.totalC.y, 50);
-
   // areaA.showBrushTemplates();
   // areaB.showBrushTemplates();
   // areaC.showBrushTemplates();

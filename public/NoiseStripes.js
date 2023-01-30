@@ -47,12 +47,22 @@ class NoiseStripes {
                 this.stripeBuffer.fill(random() * 75 + 175);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(0, i * this.lineHeight * this.clusterSize, this.width, this.lineHeight * this.clusterSize);
+
+                // lines
+                this.stripeBuffer.stroke(random() * 75 + 75);
+                this.stripeBuffer.strokeWeight(1);
+                this.stripeBuffer.line(0, i * this.lineHeight * this.clusterSize, this.width, i * this.lineHeight * this.clusterSize);
             }
         } else {
             for (var i = 0; i < this.width / (this.clusterSize * this.lineHeight); i++) {
                 this.stripeBuffer.fill(random() * 75 + 175);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(i * this.lineHeight * this.clusterSize, 0, this.lineHeight * this.clusterSize, this.height);
+
+                // lines
+                this.stripeBuffer.stroke(random() * 75 + 75);
+                this.stripeBuffer.strokeWeight(1);
+                this.stripeBuffer.line(i * this.lineHeight * this.clusterSize, 0, i * this.lineHeight * this.clusterSize, this.height);
             }
         }
 
