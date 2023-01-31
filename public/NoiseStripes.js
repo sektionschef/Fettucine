@@ -7,7 +7,7 @@ class NoiseStripes {
 
         this.width = this.lowerRight.x - this.upperLeft.x;
         this.height = this.lowerRight.y - this.upperLeft.y;
-        this.clusterSize = 2;
+        this.clusterSize = 4;
         this.lineHeight = SHORTSIDE / 300;
         // console.log("lineHeight: " + this.lineHeight);
         this.xinc = 0.005;
@@ -28,41 +28,53 @@ class NoiseStripes {
                 this.r = noise(this.xoff, this.yoff);
 
                 if (random() < 0.5) {
-                    this.masterBuffer.fill(color(this.r * 255));
+                    this.masterBuffer.fill(color(this.r * 55 + 200));
                 } else {
-                    this.masterBuffer.fill(color(random() * 255));
+                    this.masterBuffer.fill(color(random() * 55 + 200));
                 }
 
+                // RECTS
                 this.masterBuffer.noStroke();
                 this.masterBuffer.rect(x, y, this.clusterSize, this.clusterSize);
+
+                // POINTS
+                // this.masterBuffer.strokeWeight(this.clusterSize / 2);
+                // this.masterBuffer.noStroke();
+                // this.masterBuffer.noFill();
+                // this.masterBuffer.point(x, y);
+
                 this.xoff += this.xinc;
             }
             this.yoff += this.yinc;
         }
 
+        // this.createStripes();
+    }
+
+    createStripes() {
         this.stripeBuffer = createGraphics(this.width, this.height);
 
         if (this.orientation == "x") {
             for (var i = 0; i < this.height / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 75 + 175);
+                this.stripeBuffer.fill(random() * 150);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(0, i * this.lineHeight * this.clusterSize, this.width, this.lineHeight * this.clusterSize);
 
                 // lines
-                this.stripeBuffer.stroke(random() * 75 + 75);
-                this.stripeBuffer.strokeWeight(1);
-                this.stripeBuffer.line(0, i * this.lineHeight * this.clusterSize, this.width, i * this.lineHeight * this.clusterSize);
+                // this.stripeBuffer.stroke(random() * 75 + 75);
+                // this.stripeBuffer.strokeWeight(1);
+                // this.stripeBuffer.line(0, i * this.lineHeight * this.clusterSize, this.width, i * this.lineHeight * this.clusterSize);
             }
         } else {
             for (var i = 0; i < this.width / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 75 + 175);
+                this.stripeBuffer.fill(random() * 150);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(i * this.lineHeight * this.clusterSize, 0, this.lineHeight * this.clusterSize, this.height);
 
                 // lines
-                this.stripeBuffer.stroke(random() * 75 + 75);
-                this.stripeBuffer.strokeWeight(1);
-                this.stripeBuffer.line(i * this.lineHeight * this.clusterSize, 0, i * this.lineHeight * this.clusterSize, this.height);
+                // this.stripeBuffer.stroke(random() * 75 + 75);
+                // this.stripeBuffer.strokeWeight(1);
+                // this.stripeBuffer.line(i * this.lineHeight * this.clusterSize, 0, i * this.lineHeight * this.clusterSize, this.height);
             }
         }
 
