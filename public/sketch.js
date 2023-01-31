@@ -522,12 +522,11 @@ function draw() {
   push();
   blendMode(OVERLAY);
   image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
-  // image(layc.buffer, 0, 0);
   pop();
   grid.show();
 
   // paper.show();
-  // backgroundNoise.show();
+  backgroundNoise.show();
 
 
   // noiseStripesMask.show();
