@@ -56,7 +56,7 @@ class NoiseStripes {
 
         if (this.orientation == "x") {
             for (var i = 0; i < this.height / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 50);
+                this.stripeBuffer.fill(random() * 255);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(0, i * this.lineHeight * this.clusterSize, this.width, this.lineHeight * this.clusterSize);
 
@@ -67,7 +67,7 @@ class NoiseStripes {
             }
         } else {
             for (var i = 0; i < this.width / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 50);
+                this.stripeBuffer.fill(random() * 255);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(i * this.lineHeight * this.clusterSize, 0, this.lineHeight * this.clusterSize, this.height);
 

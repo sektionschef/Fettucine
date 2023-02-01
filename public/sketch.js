@@ -188,9 +188,9 @@ function setup() {
     },
   ]
 
-  paper = new Paper();
-  backgroundNoise = new Noise();
-  edgePixel = new PixelGradient();
+  // paper = new Paper();
+  // backgroundNoise = new Noise();
+  // edgePixel = new PixelGradient();
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -492,8 +492,8 @@ function draw() {
   // noiseStripes.show();
 
   // DEBUG ONLY
-  paper.show();
-  edgePixel.show();
+  // paper.show();
+  // edgePixel.show();
   // backgroundNoise.show();
 
 
@@ -506,12 +506,14 @@ function draw() {
   // backgroundNoise.show();
 
   // PROTOTYPE
-  push();
-  // image(noiseStripesMask.masterBuffer, 0, 0);
-  blendMode(OVERLAY);
-  image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
   grid.show();
+  push();
+  // blendMode(OVERLAY);
+  // image(noiseStripesMask.masterBuffer, 0, 0);
+  tint(255, 250);
+  image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
   pop();
+  grid.show();
 
 
   // COOL MIT LAYC
