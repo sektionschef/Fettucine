@@ -28,9 +28,9 @@ class NoiseStripes {
                 this.r = noise(this.xoff, this.yoff);
 
                 if (random() < 0.5) {
-                    this.masterBuffer.fill(color(this.r * 55 + 200));
+                    this.masterBuffer.fill(color(this.r * 255));
                 } else {
-                    this.masterBuffer.fill(color(random() * 55 + 200));
+                    this.masterBuffer.fill(color(random() * 255));
                 }
 
                 // RECTS
@@ -48,7 +48,7 @@ class NoiseStripes {
             this.yoff += this.yinc;
         }
 
-        // this.createStripes();
+        this.createStripes();
     }
 
     createStripes() {
@@ -56,7 +56,7 @@ class NoiseStripes {
 
         if (this.orientation == "x") {
             for (var i = 0; i < this.height / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 150);
+                this.stripeBuffer.fill(random() * 50);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(0, i * this.lineHeight * this.clusterSize, this.width, this.lineHeight * this.clusterSize);
 
@@ -67,7 +67,7 @@ class NoiseStripes {
             }
         } else {
             for (var i = 0; i < this.width / (this.clusterSize * this.lineHeight); i++) {
-                this.stripeBuffer.fill(random() * 150);
+                this.stripeBuffer.fill(random() * 50);
                 this.stripeBuffer.noStroke();
                 this.stripeBuffer.rect(i * this.lineHeight * this.clusterSize, 0, this.lineHeight * this.clusterSize, this.height);
 

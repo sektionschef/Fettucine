@@ -190,7 +190,7 @@ function setup() {
 
   paper = new Paper();
   backgroundNoise = new Noise();
-  // edgePixel = new PixelGradient();
+  edgePixel = new PixelGradient();
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -492,8 +492,8 @@ function draw() {
   // noiseStripes.show();
 
   // DEBUG ONLY
-  // paper.show();
-  // edgePixel.show();
+  paper.show();
+  edgePixel.show();
   // backgroundNoise.show();
 
 
@@ -506,27 +506,25 @@ function draw() {
   // backgroundNoise.show();
 
   // PROTOTYPE
-  // push();
-  // FIRST TRY
-  // tint(color(PALETTE.background));
-  // image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
-  // pop();
-
-  // LAST ONE
-  //   push();
-  //   image(maskBuffers(grid.buffer, backgroundNoise.masterBuffer), 0, 0);
-  // pop();
-
-
-
   push();
+  // image(noiseStripesMask.masterBuffer, 0, 0);
   blendMode(OVERLAY);
-  image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
-  pop();
+  image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
   grid.show();
+  pop();
+
+
+  // COOL MIT LAYC
+  // push();
+  // blendMode(OVERLAY);
+  // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
+  // pop();
+  // grid.show();
 
   // paper.show();
-  backgroundNoise.show();
+  // backgroundNoise.show();
+
+  // notes - nicht zu pixelig, noise is gut, aber paper zu viel. vlt nur hintergrund.
 
 
   // noiseStripesMask.show();
