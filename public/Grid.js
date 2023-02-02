@@ -38,6 +38,7 @@ class Grid {
 
 
         this.buffer = createGraphics(width, height);
+
         // dummy values for upper left and lower right corners
         this.totalA = createVector(this.buffer.width / 2, this.buffer.height / 2)
         this.totalC = createVector(this.buffer.width / 2, this.buffer.height / 2)
@@ -317,6 +318,9 @@ class Grid {
         let loopCount = 20; // 20
         let totalMargin = SHORTSIDE * 0.05;
 
+        let greyLevel = 200;
+        let opacityLevel = 20;
+
 
         for (var i = 0; i < loopCount; i++) {
             // this.buffer.fill(color(255, 0, 0, 20));
@@ -326,6 +330,7 @@ class Grid {
 
             // this.buffer.fill(color(BACKGROUND));
             this.buffer.fill(color(255, 0, 0, 20));
+            // this.buffer.fill(color(greyLevel, opacityLevel));
 
             this.buffer.noStroke();
 
@@ -431,6 +436,21 @@ class Grid {
 
             this.buffer.endShape(CLOSE);
             this.buffer.pop();
+
+            if (i == 10 || i == 19) {
+                this.buffer.push();
+                this.buffer.blendMode(OVERLAY);
+                this.buffer.image(maskBuffers(backgroundNoise.masterBuffer, this.buffer), 0, 0);
+                this.buffer.pop();
+            }
+
+            // if (i == 19) {
+            //     this.buffer.push();
+            //     // this.buffer.blendMode(OVERLAY);
+            //     this.buffer.tint(255, 1)
+            //     this.buffer.image(maskBuffers(layc.buffer, this.buffer), 0, 0);
+            //     this.buffer.pop();
+            // }
         }
     }
 
@@ -510,7 +530,7 @@ class Grid {
             this.buffer.endContour();
 
 
-            this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
+            // this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
         }
     }
 
