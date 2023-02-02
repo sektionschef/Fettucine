@@ -323,19 +323,19 @@ class Grid {
 
 
         for (var i = 0; i < loopCount; i++) {
-            // this.buffer.fill(color(255, 0, 0, 20));
-            // this.buffer.noStroke();
 
-            this.buffer.push();
+            this.loopBuffer = createGraphics(width, height);
 
-            // this.buffer.fill(color(BACKGROUND));
-            this.buffer.fill(color(255, 0, 0, 20));
-            // this.buffer.fill(color(greyLevel, opacityLevel));
+            this.loopBuffer.push();
 
-            this.buffer.noStroke();
+            // this.loopBuffer.fill(color(BACKGROUND));
+            this.loopBuffer.fill(color(255, 0, 0, 20));
+            // this.loopBuffer.fill(color(greyLevel, opacityLevel));
+
+            this.loopBuffer.noStroke();
 
             // draw background shape
-            this.buffer.beginShape();
+            this.loopBuffer.beginShape();
             // clockwise Base
 
             let A = createVector(totalMargin + getRandomFromInterval(-changer, changer), totalMargin + getRandomFromInterval(-changer, changer));
@@ -363,10 +363,10 @@ class Grid {
             let DA4 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 6 + getRandomFromInterval(-changer, changer));
             let DA5 = createVector(totalMargin + getRandomFromInterval(-changer, changer), height / 9 * 7 + getRandomFromInterval(-changer, changer));
 
-            // this.buffer.beginShape();
+            // this.loopBuffer.beginShape();
             // A
-            this.buffer.vertex(A.x, A.y);
-            this.buffer.bezierVertex(
+            this.loopBuffer.vertex(A.x, A.y);
+            this.loopBuffer.bezierVertex(
                 AB1.x,
                 AB1.y,
                 AB2.x,
@@ -374,7 +374,7 @@ class Grid {
                 AB3.x,
                 AB3.y,
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 AB4.x,
                 AB4.y,
                 AB5.x,
@@ -382,7 +382,7 @@ class Grid {
                 B.x,
                 B.y
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 BC1.x,
                 BC1.y,
                 BC2.x,
@@ -390,7 +390,7 @@ class Grid {
                 BC3.x,
                 BC3.y
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 BC4.x,
                 BC4.y,
                 BC5.x,
@@ -398,7 +398,7 @@ class Grid {
                 C.x,
                 C.y
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 CD1.x,
                 CD1.y,
                 CD2.x,
@@ -406,7 +406,7 @@ class Grid {
                 CD3.x,
                 CD3.y
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 CD4.x,
                 CD4.y,
                 CD5.x,
@@ -414,7 +414,7 @@ class Grid {
                 D.x,
                 D.y
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 DA1.x,
                 DA1.y,
                 DA2.x,
@@ -422,7 +422,7 @@ class Grid {
                 DA3.x,
                 DA3.y,
             );
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 DA4.x,
                 DA4.y,
                 DA5.x,
@@ -430,27 +430,32 @@ class Grid {
                 A.x,
                 A.y,
             )
-            // this.buffer.endShape(CLOSE);
+            // this.loopBuffer.endShape(CLOSE);
 
             this.createMaskContour();
 
-            this.buffer.endShape(CLOSE);
-            this.buffer.pop();
+            this.loopBuffer.endShape(CLOSE);
+            this.loopBuffer.pop();
 
-            if (i == 10 || i == 19) {
-                this.buffer.push();
-                this.buffer.blendMode(OVERLAY);
-                this.buffer.image(maskBuffers(backgroundNoise.masterBuffer, this.buffer), 0, 0);
-                this.buffer.pop();
+            // if (i == 10 || i == 19) {
+            if (i % 3 == 0) {
+                this.loopBuffer.push();
+                this.loopBuffer.blendMode(OVERLAY);
+                this.loopBuffer.image(maskBuffers(backgroundNoise.masterBuffer, this.loopBuffer), 0, 0);
+                this.loopBuffer.pop();
             }
 
-            // if (i == 19) {
-            //     this.buffer.push();
-            //     // this.buffer.blendMode(OVERLAY);
-            //     this.buffer.tint(255, 1)
-            //     this.buffer.image(maskBuffers(layc.buffer, this.buffer), 0, 0);
-            //     this.buffer.pop();
-            // }
+            if (i == (loopCount - 1)) {
+                this.loopBuffer.push();
+                this.loopBuffer.blendMode(OVERLAY);
+                // this.loopBuffer.tint(255, 160)
+                this.loopBuffer.image(maskBuffers(layc.buffer, this.loopBuffer), 0, 0);
+                this.loopBuffer.pop();
+                console.log(i);
+            }
+
+            // add to the buffer
+            this.buffer.image(this.loopBuffer, 0, 0);
         }
     }
 
@@ -488,11 +493,11 @@ class Grid {
             this.DAStop1 = p5.Vector.add(stripe.DAStop1, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
 
             // counter-clockwise
-            this.buffer.beginContour();
+            this.loopBuffer.beginContour();
 
             // counter-clockwise
-            this.buffer.vertex(this.A.x, this.A.y);
-            this.buffer.bezierVertex(
+            this.loopBuffer.vertex(this.A.x, this.A.y);
+            this.loopBuffer.bezierVertex(
                 this.DAStop2.x,
                 this.DAStop2.y,
                 this.DAStop1.x,
@@ -501,7 +506,7 @@ class Grid {
                 this.D.y
             );
 
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 this.CDStop2.x,
                 this.CDStop2.y,
                 this.CDStop1.x,
@@ -510,7 +515,7 @@ class Grid {
                 this.C.y
             );
 
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 this.BCStop2.x,
                 this.BCStop2.y,
                 this.BCStop1.x,
@@ -519,7 +524,7 @@ class Grid {
                 this.B.y
             );
 
-            this.buffer.bezierVertex(
+            this.loopBuffer.bezierVertex(
                 this.ABStop2.x,
                 this.ABStop2.y,
                 this.ABStop1.x,
@@ -527,7 +532,7 @@ class Grid {
                 this.A.x,
                 this.A.y
             );
-            this.buffer.endContour();
+            this.loopBuffer.endContour();
 
 
             // this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
