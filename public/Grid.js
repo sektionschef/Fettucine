@@ -321,6 +321,10 @@ class Grid {
         let greyLevel = 200;
         let opacityLevel = 20;
 
+        // let redTone = color(255, 0, 0, 20)
+        let distortColorGain = 30;
+        let redTone = color(red(PALETTE.background), green(PALETTE.background), blue(PALETTE.background), 20);
+
 
         for (var i = 0; i < loopCount; i++) {
 
@@ -329,7 +333,8 @@ class Grid {
             this.loopBuffer.push();
 
             // this.loopBuffer.fill(color(BACKGROUND));
-            this.loopBuffer.fill(color(255, 0, 0, 20));
+            // this.loopBuffer.fill(color(255, 0, 0, 20));
+            this.loopBuffer.fill(distortColorSuperNew(redTone, distortColorGain));
             // this.loopBuffer.fill(color(greyLevel, opacityLevel));
 
             this.loopBuffer.noStroke();

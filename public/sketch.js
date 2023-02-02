@@ -46,14 +46,18 @@ const PALETTESYSTEM = {
   //   "background": "#e0469bff",
   //   "tint": "#9be1f8",
   // },
-  // "Red Baron": {
+  // "Old Red Baron": {
   //   "background": "#ee4949ff",
   //   "tint": "#ffffff",
   // },
-  "Grey Susi": {
-    "background": "#838383ff",
-    "tint": "#ffffff",
-  }
+  // "Grey Susi": {
+  //   "background": "#838383ff",
+  //   "tint": "#ffffff",
+  // },
+  "New Red Baron": {
+    "background": "#ff0000ff",
+    "tint": "#e7e7e7",
+  },
 }
 
 choosePalette();
@@ -474,11 +478,12 @@ function draw() {
   }
 
   // background(color(BACKGROUND));
-  background(color("#d8d8d8"));
+  // background(color("#d8d8d8"));
   // background(color("black"));
   // background(color("#e92929"));
   // background(color("#1e1c7e"));
   // background(color("#c9a02fff"));
+  background(PALETTE.tint);
 
 
   // fillNoiseOverlay.show();
