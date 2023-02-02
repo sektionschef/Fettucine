@@ -46,14 +46,14 @@ const PALETTESYSTEM = {
   //   "background": "#e0469bff",
   //   "tint": "#9be1f8",
   // },
-  "Red Baron": {
-    "background": "#ee4949ff",
-    "tint": "#ffffff",
-  },
-  // "Black Susi": {
-  //   "background": "#000000ff",
+  // "Red Baron": {
+  //   "background": "#ee4949ff",
   //   "tint": "#ffffff",
-  // }
+  // },
+  "Grey Susi": {
+    "background": "#838383ff",
+    "tint": "#ffffff",
+  }
 }
 
 choosePalette();
@@ -188,8 +188,8 @@ function setup() {
     },
   ]
 
-  // paper = new Paper();
-  // backgroundNoise = new Noise();
+  paper = new Paper();
+  backgroundNoise = new Noise();
   // edgePixel = new PixelGradient();
 
   // gridTexture = createGraphics(width, height);
@@ -198,12 +198,14 @@ function setup() {
   // gridTexture.image(edgePixel.masterBuffer, 0, 0);
   // pop();
 
-  grid = new Grid(getRandomFromList(gridProfiles));
+  // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), "x");
+
+  // grid = new Grid(getRandomFromList(gridProfiles));
   // PAPER REDUCED TO SHAPE OF GRID
   // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
   // noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
-  noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), grid.stripeOrientation);
+  // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), grid.stripeOrientation);
 
   // fillNoiseOverlay = new BrushstrokeSystem({
   //   originA: createVector(0, 0),  // left, start of brushstrokes
@@ -461,6 +463,7 @@ function setup() {
   //   brushCurveSexyness: 1,
   // });
 
+  grid = new Grid(getRandomFromList(gridProfiles));
 }
 
 
@@ -492,7 +495,7 @@ function draw() {
   // noiseStripes.show();
 
   // DEBUG ONLY
-  // paper.show();
+  paper.show();
   // edgePixel.show();
   // backgroundNoise.show();
 
@@ -505,23 +508,32 @@ function draw() {
   // pop();
   // backgroundNoise.show();
 
-  // PROTOTYPE
-  grid.show();
-  push();
-  // blendMode(OVERLAY);
-  // image(noiseStripesMask.masterBuffer, 0, 0);
-  tint(255, 250);
-  image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
-  pop();
-  grid.show();
+  // PROTOTYPE WITH RED COLOR
+  // grid.show();
+  // push();
+  // // blendMode(OVERLAY);
+  // // image(noiseStripesMask.masterBuffer, 0, 0);
+  // tint(255, 150);
+  // image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
+  // pop();
+  // grid.show();
 
 
   // COOL MIT LAYC
   // push();
   // blendMode(OVERLAY);
-  // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
+  // // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
+  // image(maskBuffers(layb.buffer, grid.buffer), 0, 0);
   // pop();
   // grid.show();
+
+  // TEST MIT NOISE AUF DIE EINZELNEN BLÄTTER
+  push();
+  // blendMode(OVERLAY);
+  // // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
+  // image(maskBuffers(layb.buffer, grid.buffer), 0, 0);
+  grid.show();
+  pop();
 
   // paper.show();
   // backgroundNoise.show();
