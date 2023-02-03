@@ -193,8 +193,9 @@ function setup() {
   ]
 
   paper = new Paper();
+  corny = new Corny();
   backgroundNoise = new Noise();
-  // edgePixel = new PixelGradient();
+  edgePixel = new PixelGradient();
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -243,6 +244,76 @@ function setup() {
   //   // brushTemplateStrokeColor: color("#52000083"),
   //   brushTemplateStrokeColorDistort: 40,
   //   brushType: "Fill Noise",
+  //   brushCurveSexyness: 1,
+  //   brushPixelDistort: 50,
+  //   brushOpacityDistort: 50,
+  // });
+
+  // areaA = new BrushstrokeSystem({
+  //   originA: createVector(0, 0),  // left, start of brushstrokes
+  //   targetA: createVector(0, height), // left, end of brusshtrokes
+  //   originB: createVector(width, 0), // right, start of brushstrokes
+  //   targetB: createVector(width, height), // right, end of brushstrokes
+  //   OVERLAY: true,
+  //   brushCount: 300,  // 100
+  //   noiseIncrement: 0.9,  // 0.06 - 0.6
+  //   DEBUG: false,
+  //   maxSpeedMin: 5,  // 15
+  //   maxSpeedMax: 10, // 20
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 40,
+  //   finishedRadius: 10,
+  //   // targetBdistList: [50, 100, 200],
+  //   targetBdistList: [500],
+  //   targetBDirectionList: [-1, 1],
+  //   // targetBDirectionList: [-1],
+  //   basicSizeMin: 1,
+  //   basicSizeMax: 1.1,
+  //   noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+  //   brushTemplateCount: 20,
+  //   brushTemplateSize: 50,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: color("#b8b8b883"),
+  //   // brushTemplateFillColor: color("#cc1a1a83"),
+  //   brushTemplateFillColorDistort: 10,
+  //   brushTemplateStrokeColor: color("#6d6d6d83"),
+  //   // brushTemplateStrokeColor: color("#52000083"),
+  //   brushTemplateStrokeColorDistort: 40,
+  //   brushCurveSexyness: 1,
+  //   brushPixelDistort: 50,
+  //   brushOpacityDistort: 50,
+  // });
+
+  // areaB = new BrushstrokeSystem({
+  //   originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
+  //   targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
+  //   originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
+  //   targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
+  //   OVERLAY: false,
+  //   brushCount: 400,
+  //   noiseIncrement: 0.6,  // 0.06
+  //   DEBUG: false,
+  //   densityFactor: 2,
+  //   maxSpeedMin: 3,
+  //   maxSpeedMax: 10,
+  //   minSpeed: 2,
+  //   maxForce: 2,
+  //   slowRadius: 100,
+  //   finishedRadius: 20,
+  //   targetBdistList: [100, 200, 400, 600, 800],
+  //   targetBDirectionList: [1, -1],
+  //   basicSizeMin: 1,
+  //   basicSizeMax: 1,
+  //   // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+  //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+  //   brushTemplateCount: 20,
+  //   brushTemplateSize: 60,
+  //   brushTemplateStrokeSize: 1,
+  //   brushTemplateFillColor: color("#e2e2e2"),
+  //   brushTemplateFillColorDistort: 20,
+  //   brushTemplateStrokeColor: color("#f0f0f0"),
+  //   brushTemplateStrokeColorDistort: 20,
   //   brushCurveSexyness: 1,
   //   brushPixelDistort: 50,
   //   brushOpacityDistort: 50,
@@ -351,6 +422,7 @@ function setup() {
     basicSizeMin: 1,
     basicSizeMax: 1.5,
     noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
     brushTemplateCount: 20,
     brushTemplateSize: 50,
     // brushTemplateStrokeSize: 1,  // out
@@ -492,6 +564,8 @@ function draw() {
 
   // example.show();
 
+  // areaA.show();
+  // areaB.show();
 
   // PAPER
   // laya.show();
@@ -500,7 +574,8 @@ function draw() {
   // noiseStripes.show();
 
   // DEBUG ONLY
-  paper.show();
+  // paper.show();
+  corny.show();
   // edgePixel.show();
   // backgroundNoise.show();
 
@@ -533,12 +608,7 @@ function draw() {
   // grid.show();
 
   // TEST MIT NOISE AUF DIE EINZELNEN BLÄTTER
-  push();
-  // blendMode(OVERLAY);
-  // // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
-  // image(maskBuffers(layb.buffer, grid.buffer), 0, 0);
-  grid.show();
-  pop();
+  // grid.show();
 
   // paper.show();
   // backgroundNoise.show();
