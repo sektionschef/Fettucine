@@ -574,9 +574,10 @@ function draw() {
   // noiseStripes.show();
 
   // DEBUG ONLY
-  // paper.show();
   corny.show();
-  // edgePixel.show();
+  paper.show();
+  edgePixel.show();
+
   // backgroundNoise.show();
 
 

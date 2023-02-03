@@ -4,7 +4,7 @@ class Corny {
         this.height = SHORTSIDE * 0.25;  // 800
 
         this.dotcCount = 0.005 * TOTALPIXEL;
-        this.diameter = 2;
+        this.diameter = 3;
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);
