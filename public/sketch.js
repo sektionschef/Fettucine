@@ -609,7 +609,7 @@ function draw() {
   // grid.show();
 
   // TEST MIT NOISE AUF DIE EINZELNEN BLÄTTER
-  // grid.show();
+  grid.show();
 
   // paper.show();
   // backgroundNoise.show();
