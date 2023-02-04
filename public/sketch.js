@@ -56,7 +56,7 @@ const PALETTESYSTEM = {
   // },
   "New Red Baron": {
     "background": "#ff0000ff",
-    "tint": "#e7e7e7",
+    "tint": "#fafafa", // "#e7e7e7",
   },
 }
 
@@ -192,10 +192,11 @@ function setup() {
     },
   ]
 
-  paper = new Paper();
-  corny = new Corny();
+  // paper = new Paper();
+  // corny = new Corny();
+  // edgePixel = new PixelGradient();
+
   backgroundNoise = new Noise();
-  edgePixel = new PixelGradient();
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -573,16 +574,17 @@ function draw() {
   // layc.show();
   // noiseStripes.show();
 
-  // DEBUG ONLY
-  corny.show();
-  paper.show();
-  edgePixel.show();
+  // PAPER
+  // corny.show();
+  // paper.show();
+  // edgePixel.show();
 
   // backgroundNoise.show();
 
 
   // GRID ON TOP
-  // grid.show();
+  grid.show();
+
   // push();
   // blendMode(OVERLAY);
   // image(gridTexture, 0, 0);
@@ -609,7 +611,7 @@ function draw() {
   // grid.show();
 
   // TEST MIT NOISE AUF DIE EINZELNEN BLÄTTER
-  grid.show();
+  // grid.show();
 
   // paper.show();
   // backgroundNoise.show();

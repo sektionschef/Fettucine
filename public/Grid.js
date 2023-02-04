@@ -9,6 +9,13 @@ class Grid {
         this.countColumnOrRow = data.countColumnOrRow;
         this.DEBUG = true;
         this.paperMargin = SHORTSIDE * 0.05;
+        this.sizeStripeMin = 10;  // minimum length of stripe, in boxes
+        // for x
+        this.paddingHeightCountMin = 5;
+        this.paddingHeightCountMax = 10;
+        // for y
+        this.paddingWidthCountMin = 5;
+        this.paddingWidthCountMax = 10;
 
         // make sure there is no margin;
         this.shortBoxCount = 80; // 80 boxes on the shorter side
@@ -28,8 +35,8 @@ class Grid {
         this.margin = SHORTSIDE % this.boxSize;
         // console.log("margin: " + this.margin);
 
-
-        this.sizeStripe = Math.floor(getRandomFromInterval(5, this.shortBoxCount / this.countColumnOrRow - 5));
+        // length of stripe
+        this.sizeStripe = Math.floor(getRandomFromInterval(this.sizeStripeMin, this.shortBoxCount / this.countColumnOrRow - this.sizeStripeMin));
 
         this.columns = new Set();
         this.rows = new Set();
@@ -136,7 +143,8 @@ class Grid {
                 this.paddingWidthCount = Math.floor(this.Gap / 2);
             }
 
-            this.paddingHeightCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
+            // this.paddingHeightCount = Math.floor(getRandomFromInterval(5, this.longBoxCount / 10));
+            this.paddingHeightCount = Math.floor(getRandomFromInterval(this.longBoxCount / this.paddingHeightCountMin, this.longBoxCount / this.paddingHeightCountMax));
 
             if (this.DEBUG) {
                 console.log("gap: " + this.Gap);
@@ -192,7 +200,9 @@ class Grid {
                 this.paddingHeightCount = Math.floor(this.Gap / 2);
             }
 
-            this.paddingWidthCount = Math.floor(getRandomFromInterval(5, this.widthBoxCount / 10));
+            // this.paddingWidthCount = Math.floor(getRandomFromInterval(5, this.widthBoxCount / 10));
+            this.paddingWidthCount = Math.floor(getRandomFromInterval(this.widthBoxCount / this.paddingWidthCountMin, this.widthBoxCount / this.paddingWidthCountMax));
+
             if (this.DEBUG) {
                 console.log("gap: " + this.Gap);
                 console.log("rowGap: " + this.rowGap);

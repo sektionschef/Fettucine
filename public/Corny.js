@@ -5,6 +5,7 @@ class Corny {
 
         this.dotcCount = 0.005 * TOTALPIXEL;
         this.diameter = 3;
+        this.colorDistort = 10;
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);
@@ -19,7 +20,7 @@ class Corny {
     create() {
         for (var i = 0; i < this.dotcCount; i++) {
 
-            this.fillColor = distortColorSuperNew(color(PALETTE.tint), 10);
+            this.fillColor = distortColorSuperNew(color(PALETTE.tint), this.colorDistort);
             this.pos = createVector(getRandomFromInterval(0, this.width), getRandomFromInterval(0, this.height));
 
             this.buffer.noStroke();
