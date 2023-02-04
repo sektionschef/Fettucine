@@ -66,8 +66,8 @@ class Grid {
         this.createBoxes();
         // this.showDebug();
         this.createMask();
-        this.drawMask();
         this.createNoise();
+        this.drawMask();
     }
 
     createBoxes() {
@@ -589,15 +589,16 @@ class Grid {
     }
 
     createNoise() {
-        // stripe.A, stripe.ABStop1, stripe.ABStop2, stripe.B
+
+        this.bufferNoise = createGraphics(width, height);
 
         for (var s = 0; s < this.stripes.length; s++) {
             let stripe = this.stripes[s];
 
             this.pointCount = 4 * p5.Vector.dist(stripe.A, stripe.B);
-            this.noiseDistance = p5.Vector.dist(stripe.A, stripe.C) * 0.01; // 25;
+            this.noiseDistance = p5.Vector.dist(stripe.A, stripe.C) * 0.02; // 25;
             this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-            this.noiseColor = color("#000000");
+            this.noiseColor = color("#8f8f8f");
 
             for (var i = 0; i < this.pointCount; i++) {
 
@@ -610,13 +611,18 @@ class Grid {
                 // let y = this.baseY + abs(offset);
                 let y = stripe.A.y + abs(offset) - this.noiseDistance / 3;
 
-                this.buffer.push()
-                this.buffer.stroke(this.noiseColor);
-                this.buffer.strokeWeight(this.noiseWeight);
-                this.buffer.point(x, y);
-                this.buffer.pop();
+                this.bufferNoise.push()
+                this.bufferNoise.stroke(this.noiseColor);
+                this.bufferNoise.strokeWeight(this.noiseWeight);
+                this.bufferNoise.point(x, y);
+                this.bufferNoise.pop();
             }
         }
+
+        this.buffer.push();
+        this.buffer.blendMode(OVERLAY);
+        this.buffer.image(this.bufferNoise, 0, 0);
+        this.buffer.pop();
     }
 
     createUpperLine() {

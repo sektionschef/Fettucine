@@ -191,9 +191,9 @@ function setup() {
     spacing: getRandomFromList([1, 2, 3]),
   }
 
-  // paper = new Paper();
-  // corny = new Corny();
-  // edgePixel = new PixelGradient();
+  paper = new Paper();
+  corny = new Corny();
+  edgePixel = new PixelGradient();
 
   backgroundNoise = new Noise();
 
@@ -604,9 +604,9 @@ function draw() {
   // noiseStripes.show();
 
   // PAPER
-  // corny.show();
-  // paper.show();
-  // edgePixel.show();
+  corny.show();
+  paper.show();
+  edgePixel.show();
 
   // backgroundNoise.show();
 
