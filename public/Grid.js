@@ -4,36 +4,48 @@
 class Grid {
     constructor(data) {
         this.stripeOrientation = data.stripeOrientation;
-        this.sizeStripe = data.sizeStripe;
         this.thickness = data.thickness;
         this.countColumnOrRow = data.countColumnOrRow;
-        this.DEBUG = true;
+        this.bezierFactor = data.bezierFactor;
+
+        this.DEBUG = false;
         this.paperMargin = SHORTSIDE * 0.05;
-        this.sizeStripeMin = 10;  // minimum length of stripe, in boxes
+        this.sizeStripeMin = 7;  // minimum length of stripe, in boxes
         // for x
-        this.paddingHeightCountMin = 5;
-        this.paddingHeightCountMax = 10;
+        this.paddingHeightCountMin = 5;  // at least x boxes
+        this.paddingHeightCountMax = 5;
         // for y
         this.paddingWidthCountMin = 5;
-        this.paddingWidthCountMax = 10;
+        this.paddingWidthCountMax = 5;
 
-        // make sure there is no margin;
         this.shortBoxCount = 80; // 80 boxes on the shorter side
         this.boxSize = SHORTSIDE / this.shortBoxCount;
         this.longBoxCount = Math.floor(LONGSIDE / this.boxSize);
-        this.bezierOffset = 0.005 * SHORTSIDE;
+        this.bezierOffset = this.bezierFactor * SHORTSIDE;
+
+        // there should be no margin
+        this.shortMargin = SHORTSIDE % this.boxSize;
+        // this.shortMargin = 1
+        if (this.shortMargin != 0) {
+            throw new Error('wtf, there is a margin!');
+        }
+        this.longMargin = (LONGSIDE % this.boxSize) / 2;
+        console.log("longMargin: " + this.longMargin);
 
         if (width < height) {
             this.widthBoxCount = this.shortBoxCount;
             this.heightBoxCount = this.longBoxCount;
+            this.widthMargin = this.shortMargin;
+            this.heightMargin = this.longMargin;
         } else {
             this.widthBoxCount = this.longBoxCount;
             this.heightBoxCount = this.shortBoxCount;
+            this.widthMargin = this.longMargin;
+            this.heightMargin = this.shortMargin;
         }
 
 
-        this.margin = SHORTSIDE % this.boxSize;
-        // console.log("margin: " + this.margin);
+
 
         // length of stripe
         this.sizeStripe = Math.floor(getRandomFromInterval(this.sizeStripeMin, this.shortBoxCount / this.countColumnOrRow - this.sizeStripeMin));
@@ -63,7 +75,7 @@ class Grid {
             for (var s = 0; s < (this.widthBoxCount); s++) {
 
                 // corners of the box
-                var A = createVector(this.margin + s * this.boxSize, this.margin + l * this.boxSize);
+                var A = createVector(this.widthMargin + s * this.boxSize, this.heightMargin + l * this.boxSize);
                 var B = p5.Vector.add(A, createVector(this.boxSize, 0));
                 var C = p5.Vector.add(A, createVector(this.boxSize, this.boxSize));
                 var D = p5.Vector.add(A, createVector(0, this.boxSize));
@@ -106,14 +118,32 @@ class Grid {
     showDebug() {
 
         // view cols and rows
-        for (var i = 0; i < (this.widthBoxCount + 1); i++) {
-            this.buffer.strokeWeight(5);
-            this.buffer.line(this.margin + i * this.boxSize, 0, this.margin + i * this.boxSize, height);
-        }
+        // for (var i = 0; i < (this.widthBoxCount + 1); i++) {
+        //     this.buffer.strokeWeight(5);
+        //     this.buffer.line(i * this.boxSize, 0, i * this.boxSize, height);
+        // }
 
-        for (var i = 0; i < (this.heightBoxCount + 1); i++) {
-            this.buffer.strokeWeight(5);
-            this.buffer.line(0, this.margin + i * this.boxSize, width, this.margin + i * this.boxSize);
+        // for (var i = 0; i < (this.heightBoxCount + 1); i++) {
+        //     this.buffer.strokeWeight(5);
+        //     this.buffer.line(0, i * this.boxSize, width, i * this.boxSize);
+        // }
+
+
+        for (var i = 0; i < this.boxes.length; i++) {
+            this.buffer.push();
+            // this.buffer.noFill();
+            this.buffer.fill(random() * 255, 20)
+            // this.buffer.stroke(color("black"));
+            // this.buffer.strokeWeight(1);
+            this.buffer.noStroke();
+            this.buffer.rectMode(CORNERS);
+            this.buffer.rect(
+                this.boxes[i].A.x,
+                this.boxes[i].A.y,
+                this.boxes[i].C.x,
+                this.boxes[i].C.y
+            );
+            this.buffer.pop();
         }
     }
 
@@ -466,7 +496,6 @@ class Grid {
                 // this.loopBuffer.tint(255, 160)
                 this.loopBuffer.image(maskBuffers(layc.buffer, this.loopBuffer), 0, 0);
                 this.loopBuffer.pop();
-                console.log(i);
             }
 
             // add to the buffer

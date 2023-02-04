@@ -188,6 +188,7 @@ function setup() {
     {
       stripeOrientation: getRandomFromList(["x", "y"]),
       countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
+      bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
       thickness: 1,
     },
   ]
