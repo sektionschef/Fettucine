@@ -29,11 +29,12 @@
 // } else { }
 // console.log("Element types: " + PICKER_LABEL);
 
-window.$fxhashFeatures = {
+// window.$fxhashFeatures = {
+    // "Format": canvasFormatChosen,
     // "Palette": PALETTE_LABEL,
     // "Element Count": TRIANGLECOUNT_LABEL,
     // "Element types": PICKER_LABEL,
-}
+// }
 
 // console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
 // console.log('');

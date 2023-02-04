@@ -5,6 +5,7 @@ class Grid {
     constructor(data) {
         this.stripeOrientation = data.stripeOrientation;
         this.thickness = data.thickness;
+        this.spacing = data.spacing;
         this.countColumnOrRow = data.countColumnOrRow;
         this.bezierFactor = data.bezierFactor;
 
@@ -66,6 +67,7 @@ class Grid {
         // this.showDebug();
         this.createMask();
         this.drawMask();
+        this.createNoise();
     }
 
     createBoxes() {
@@ -158,6 +160,7 @@ class Grid {
             console.log("countColumnOrRow: " + this.countColumnOrRow);
             console.log("sizeStripe: " + this.sizeStripe);
             console.log("thickness: " + this.thickness);
+            console.log("spacing: " + this.spacing);
         }
 
         if (this.stripeOrientation == "x") {
@@ -186,7 +189,8 @@ class Grid {
             for (
                 var row = this.paddingHeightCount * this.widthBoxCount + this.paddingWidthCount;
                 row < (this.heightBoxCount * this.widthBoxCount - this.paddingHeightCount * this.widthBoxCount);
-                row += (this.widthBoxCount * this.thickness * 2)
+                // row += (this.widthBoxCount * this.thickness * 2)
+                row += (this.widthBoxCount * this.thickness * this.spacing)
             ) {
                 // console.log(row);
                 for (var column = 0; column < this.countColumnOrRow; column++) {
@@ -243,7 +247,8 @@ class Grid {
             for (
                 var column = this.paddingWidthCount;
                 column < (this.widthBoxCount - this.paddingWidthCount);
-                column += this.thickness * 2
+                // column += this.thickness * 2
+                column += this.thickness + this.spacing
             ) {
                 for (var row = 0; row < this.countColumnOrRow; row++) {
                     // get the index of the corner boxe of each stripe.
@@ -578,31 +583,39 @@ class Grid {
             );
             this.loopBuffer.endContour();
 
-
+            // original position
             // this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
         }
     }
 
-    createNoise(start, stop1, stop2, end) {
-        this.pointCount = 1 * p5.Vector.dist(this.A, this.B);
-        this.noiseDistance = p5.Vector.dist(this.A, this.C) * 0.004; // 25;
-        this.noiseWeight = 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#7e7e7e");
+    createNoise() {
+        // stripe.A, stripe.ABStop1, stripe.ABStop2, stripe.B
 
-        for (var i = 0; i < this.pointCount; i++) {
+        for (var s = 0; s < this.stripes.length; s++) {
+            let stripe = this.stripes[s];
 
-            let x = getRandomFromInterval(start.x, end.x);
+            this.pointCount = 4 * p5.Vector.dist(stripe.A, stripe.B);
+            this.noiseDistance = p5.Vector.dist(stripe.A, stripe.C) * 0.01; // 25;
+            this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
+            this.noiseColor = color("#000000");
 
-            let offset = randomGaussian(0, this.noiseDistance);
-            let t = map(x, start.x, end.x, 0, 1);
-            this.baseY = bezierPoint(start.y, stop1.y, stop2.y, end.y, t);
-            let y = this.baseY + abs(offset);
+            for (var i = 0; i < this.pointCount; i++) {
 
-            this.buffer.push()
-            this.buffer.stroke(this.noiseColor);
-            this.buffer.strokeWeight(this.noiseWeight);
-            this.buffer.point(x, y);
-            this.buffer.pop();
+                let x = getRandomFromInterval(stripe.A.x, stripe.B.x);
+
+                let offset = randomGaussian(0, this.noiseDistance);
+                // FOR BEZIER CURVE
+                // let t = map(x, stripe.A.x, stripe.B.x, 0, 1);
+                // this.baseY = bezierPoint(stripe.A.y, stop1.y, stop2.y, stripe.B.y, t);
+                // let y = this.baseY + abs(offset);
+                let y = stripe.A.y + abs(offset) - this.noiseDistance / 3;
+
+                this.buffer.push()
+                this.buffer.stroke(this.noiseColor);
+                this.buffer.strokeWeight(this.noiseWeight);
+                this.buffer.point(x, y);
+                this.buffer.pop();
+            }
         }
     }
 
