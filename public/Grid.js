@@ -66,7 +66,7 @@ class Grid {
         this.createBoxes();
         // this.showDebug();
         this.createMask();
-        this.createNoise();
+        // this.createNoise();
         this.drawMask();
     }
 
@@ -584,48 +584,48 @@ class Grid {
             this.loopBuffer.endContour();
 
             // original position
-            // this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
+            this.createNoise(this.A, this.ABStop1, this.ABStop2, this.B);
         }
     }
 
-    createNoise() {
+    createNoise(A, ABStop1, ABStop2, B) {
 
-        this.bufferNoise = createGraphics(width, height);
+        // this.bufferNoise = createGraphics(width, height);
         this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#8f8f8f");
+        this.noiseColor = color("#979797");
 
-        for (var s = 0; s < this.stripes.length; s++) {
-            let stripe = this.stripes[s];
+        // for (var s = 0; s < this.stripes.length; s++) {
+        // let stripe = this.stripes[s];
 
-            this.pointCount = 4 * p5.Vector.dist(stripe.A, stripe.B);
-            this.noiseDistance = p5.Vector.dist(stripe.A, stripe.C) * 0.02; // 25;
+        this.pointCount = 0.1 * p5.Vector.dist(A, B);
+        this.noiseDistance = 3 // p5.Vector.dist(A, C) * 0.02; // 25;
 
-            for (var i = 0; i < this.pointCount; i++) {
+        for (var i = 0; i < this.pointCount; i++) {
 
-                let x = getRandomFromInterval(stripe.A.x, stripe.B.x);
+            let x = getRandomFromInterval(A.x, B.x);
 
-                let offset = randomGaussian(0, this.noiseDistance);
-                // FOR BEZIER CURVE
-                // let t = map(x, stripe.A.x, stripe.B.x, 0, 1);
-                // this.baseY = bezierPoint(stripe.A.y, stop1.y, stop2.y, stripe.B.y, t);
-                // let y = this.baseY + abs(offset);
+            let offset = randomGaussian(0, this.noiseDistance);
+            // FOR BEZIER CURVE
+            let t = map(x, A.x, B.x, 0, 1);
+            this.baseY = bezierPoint(A.y, ABStop1.y, ABStop2.y, B.y, t);
+            let y = this.baseY + abs(offset);
 
-                // let y = stripe.A.y + abs(offset) - this.noiseDistance / 3;
+            // let y = A.y + abs(offset) - this.noiseDistance / 3;
 
-                this.bufferNoise.push()
-                this.bufferNoise.stroke(this.noiseColor);
-                this.bufferNoise.strokeWeight(this.noiseWeight);
-                this.bufferNoise.point(x, y);
-                this.bufferNoise.pop();
-            }
+            this.loopBuffer.push()
+            this.loopBuffer.stroke(this.noiseColor);
+            this.loopBuffer.strokeWeight(this.noiseWeight);
+            this.loopBuffer.point(x, y);
+            this.loopBuffer.pop();
         }
+        // }
         // this.bufferNoise.fill("blue");
         // this.bufferNoise.circle(2200, 1200, 500);
 
-        this.buffer.push();
+        // this.buffer.push();
         // this.buffer.blendMode(OVERLAY);
-        this.buffer.image(this.bufferNoise, 0, 0);
-        this.buffer.pop();
+        // this.buffer.image(this.bufferNoise, 0, 0);
+        // this.buffer.pop();
     }
 
     createUpperLine() {
