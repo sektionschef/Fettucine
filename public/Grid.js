@@ -591,14 +591,14 @@ class Grid {
     createNoise() {
 
         this.bufferNoise = createGraphics(width, height);
+        this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
+        this.noiseColor = color("#8f8f8f");
 
         for (var s = 0; s < this.stripes.length; s++) {
             let stripe = this.stripes[s];
 
             this.pointCount = 4 * p5.Vector.dist(stripe.A, stripe.B);
             this.noiseDistance = p5.Vector.dist(stripe.A, stripe.C) * 0.02; // 25;
-            this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-            this.noiseColor = color("#8f8f8f");
 
             for (var i = 0; i < this.pointCount; i++) {
 
@@ -609,7 +609,8 @@ class Grid {
                 // let t = map(x, stripe.A.x, stripe.B.x, 0, 1);
                 // this.baseY = bezierPoint(stripe.A.y, stop1.y, stop2.y, stripe.B.y, t);
                 // let y = this.baseY + abs(offset);
-                let y = stripe.A.y + abs(offset) - this.noiseDistance / 3;
+
+                // let y = stripe.A.y + abs(offset) - this.noiseDistance / 3;
 
                 this.bufferNoise.push()
                 this.bufferNoise.stroke(this.noiseColor);
@@ -618,9 +619,11 @@ class Grid {
                 this.bufferNoise.pop();
             }
         }
+        // this.bufferNoise.fill("blue");
+        // this.bufferNoise.circle(2200, 1200, 500);
 
         this.buffer.push();
-        this.buffer.blendMode(OVERLAY);
+        // this.buffer.blendMode(OVERLAY);
         this.buffer.image(this.bufferNoise, 0, 0);
         this.buffer.pop();
     }
