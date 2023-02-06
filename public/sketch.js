@@ -29,35 +29,34 @@ let CURRENTPIXELDENS = 1;
 let xoff = 0 // delete;
 
 const PALETTESYSTEM = {
-  // "Judd": {
-  //   "background": ["#d6d5d5", "#d80f0fff"],
-  //   "pixelColors": ["#dadada3b", "#afafafff"],
-  // },
-  // "Only white": {
-  //   "background": ["#d6d5d5", "#f7f7f7ff"],
-  //   "pixelColors": ["#9c9c9c3b", "#afafafff"],
-  // },
-  // "Only red": {
-  //   "background": ["#d6d5d5", "#ee4949ff"],
-  //   "pixelColors": ["#d3d3d33b", "#afafafff"],
-  // }
-
-  // "Magenta Carpenter": {
-  //   "background": "#e0469bff",
-  //   "tint": "#9be1f8",
-  // },
-  // "Old Red Baron": {
-  //   "background": "#ee4949ff",
-  //   "tint": "#ffffff",
-  // },
-  // "Grey Susi": {
-  //   "background": "#838383ff",
-  //   "tint": "#ffffff",
-  // },
-  "New Red Baron": {
-    "background": "#ff0000ff",
-    "tint": "#fafafa", // "#e7e7e7",
+  "Judd": {
+    "background": "#d80f0fff",
+    "tint": "#fafafa",
   },
+  // "Grey Susi": {
+  //   "background": "#3a3939ff",
+  //   "tint": "#fafafa",
+  // },
+  // "New Red Baron": {
+  //   "background": "#ff0000ff",
+  //   "tint": "#fafafa", // "#e7e7e7",
+  // },
+  // "Yellow Mowy": {
+  //   "background": "#ffba39ff",
+  //   "tint": "#fafafa", // "#e7e7e7",
+  // },
+  // "Hasenhüttl": {
+  //   "background": "#ffa600ff",
+  //   "tint": "#fafafa", // "#e7e7e7",
+  // },
+  // "Grind": {
+  //   "background": "#314ce4ff",
+  //   "tint": "#fafafa", // "#e7e7e7",
+  // },
+  // "Alles gut mein Kind": {
+  //   "background": "#273797ff",
+  //   "tint": "#fafafa", // "#e7e7e7",
+  // },
 }
 
 choosePalette();
