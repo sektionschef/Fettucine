@@ -1,4 +1,3 @@
-
 // MARGIN IN BEIDE RICHTUNGEN, X UND Y
 
 class Grid {
@@ -70,10 +69,9 @@ class Grid {
         this.drawMask();
         this.drawNoise();
 
-        // DRAW LINES
         // extra loop outside of beginShape and endShape
-        this.createUpperLine();
-        this.createLowerLine();
+        // this.createUpperLine();
+        // this.createLowerLine();
     }
 
     createBoxes() {
@@ -613,7 +611,7 @@ class Grid {
     createNoise(A, ABStop1, ABStop2, B) {
 
         this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#bdbdbd");
+        this.noiseColor = color("#9b9b9b");
         this.pointCount = 0.1 * p5.Vector.dist(A, B);
         this.noiseDistance = 3 // p5.Vector.dist(A, C) * 0.02; // 25;
 
@@ -636,21 +634,23 @@ class Grid {
     }
 
     createUpperLine() {
+        this.lowerUpperBuffer = createGraphics(width, height);
+
         for (var l = 0; l < this.stripeLines.length; l++) {
-            if (l > (this.stripeLines.length - this.stripes.length * 2)) {
+            if (l > (this.stripeLines.length - this.stripes.length * 3)) {
                 let A = this.stripeLines[l].A;
                 let ABStop1 = this.stripeLines[l].ABStop1;
                 let ABStop2 = this.stripeLines[l].ABStop2;
                 let B = this.stripeLines[l].B;
 
-                this.buffer.push();
-                this.buffer.stroke(color("#3a3a3a2d"));
-                this.buffer.strokeWeight(1);
-                this.buffer.noFill();
+                this.lowerUpperBuffer.push();
+                this.lowerUpperBuffer.stroke(color("#7c7c7c7e"));
+                this.lowerUpperBuffer.strokeWeight(1);
+                this.lowerUpperBuffer.noFill();
 
-                this.buffer.beginShape();
-                this.buffer.vertex(A.x, A.y);
-                this.buffer.bezierVertex(
+                this.lowerUpperBuffer.beginShape();
+                this.lowerUpperBuffer.vertex(A.x, A.y);
+                this.lowerUpperBuffer.bezierVertex(
                     ABStop1.x,
                     ABStop1.y,
                     ABStop2.x,
@@ -658,30 +658,36 @@ class Grid {
                     B.x,
                     B.y
                 );
-                this.buffer.endShape();
+                this.lowerUpperBuffer.endShape();
 
-                this.buffer.pop();
+                this.lowerUpperBuffer.pop();
             }
         }
+
+        this.buffer.push();
+        this.buffer.blendMode(OVERLAY);
+        this.buffer.image(this.lowerUpperBuffer, 0, 0);
+        this.buffer.pop();
     }
 
     createLowerLine() {
+        this.lowerLineBuffer = createGraphics(width, height);
 
         for (var l = 0; l < this.stripeLines.length; l++) {
-            if (l > (this.stripeLines.length - this.stripes.length * 2)) {
+            if (l > (this.stripeLines.length - this.stripes.length * 3)) {
                 let C = this.stripeLines[l].C;
                 let CDStop1 = this.stripeLines[l].CDStop1;
                 let CDStop2 = this.stripeLines[l].CDStop2;
                 let D = this.stripeLines[l].D;
 
-                this.buffer.push();
-                this.buffer.stroke(color("#fafafa4b"));
-                this.buffer.strokeWeight(1);
-                this.buffer.noFill();
+                this.lowerLineBuffer.push();
+                this.lowerLineBuffer.stroke(color("#eeeeee63"));
+                this.lowerLineBuffer.strokeWeight(1);
+                this.lowerLineBuffer.noFill();
 
-                this.buffer.beginShape();
-                this.buffer.vertex(C.x, C.y);
-                this.buffer.bezierVertex(
+                this.lowerLineBuffer.beginShape();
+                this.lowerLineBuffer.vertex(C.x, C.y);
+                this.lowerLineBuffer.bezierVertex(
                     CDStop1.x,
                     CDStop1.y,
                     CDStop2.x,
@@ -689,11 +695,16 @@ class Grid {
                     D.x,
                     D.y
                 );
-                this.buffer.endShape();
+                this.lowerLineBuffer.endShape();
 
-                this.buffer.pop();
+                this.lowerLineBuffer.pop();
             }
         }
+
+        this.buffer.push();
+        // this.buffer.blendMode(OVERLAY);
+        this.buffer.image(this.lowerLineBuffer, 0, 0);
+        this.buffer.pop();
     }
 
     drawNoise() {
