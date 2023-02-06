@@ -45,9 +45,6 @@ class Grid {
             this.heightMargin = this.shortMargin;
         }
 
-
-
-
         // length of stripe
         this.sizeStripe = Math.floor(getRandomFromInterval(this.sizeStripeMin, this.shortBoxCount / this.countColumnOrRow - this.sizeStripeMin));
 
@@ -55,9 +52,11 @@ class Grid {
         this.rows = new Set();
         this.boxes = [];
         this.stripes = [];
+        this.stripeLines = [];
 
 
         this.buffer = createGraphics(width, height);
+        this.bufferNoise = createGraphics(width, height);
 
         // dummy values for upper left and lower right corners
         this.totalA = createVector(this.buffer.width / 2, this.buffer.height / 2)
@@ -66,8 +65,15 @@ class Grid {
         this.createBoxes();
         // this.showDebug();
         this.createMask();
-        // this.createNoise();
+
+
         this.drawMask();
+        this.drawNoise();
+
+        // DRAW LINES
+        // extra loop outside of beginShape and endShape
+        this.createUpperLine();
+        this.createLowerLine();
     }
 
     createBoxes() {
@@ -360,7 +366,7 @@ class Grid {
     createComplexBase() {
 
         let changer = 30;
-        let loopCount = 20; // 20
+        this.loopLayerCount = 20; // 20
         let totalMargin = SHORTSIDE * 0.05;
 
         let greyLevel = 200;
@@ -371,7 +377,7 @@ class Grid {
         let redTone = color(red(PALETTE.background), green(PALETTE.background), blue(PALETTE.background), 20);
 
 
-        for (var i = 0; i < loopCount; i++) {
+        for (var i = 0; i < this.loopLayerCount; i++) {
 
             this.loopBuffer = createGraphics(width, height);
 
@@ -495,7 +501,7 @@ class Grid {
                 this.loopBuffer.pop();
             }
 
-            if (i == (loopCount - 1)) {
+            if (i == (this.loopLayerCount - 1)) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
                 // this.loopBuffer.tint(255, 160)
@@ -540,6 +546,22 @@ class Grid {
             this.CDStop2 = p5.Vector.add(stripe.CDStop2, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
             this.DAStop2 = p5.Vector.add(stripe.DAStop2, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
             this.DAStop1 = p5.Vector.add(stripe.DAStop1, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
+
+            // # sau
+            this.stripeLines.push({
+                "A": this.A,
+                "B": this.B,
+                "C": this.C,
+                "D": this.D,
+                "ABStop1": this.ABStop1,
+                "ABStop2": this.ABStop2,
+                "BCStop1": this.BCStop1,
+                "BCStop2": this.BCStop2,
+                "CDStop1": this.CDStop1,
+                "CDStop2": this.CDStop2,
+                "DAStop2": this.DAStop2,
+                "DAStop1": this.DAStop1,
+            })
 
             // counter-clockwise
             this.loopBuffer.beginContour();
@@ -590,13 +612,8 @@ class Grid {
 
     createNoise(A, ABStop1, ABStop2, B) {
 
-        // this.bufferNoise = createGraphics(width, height);
         this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#979797");
-
-        // for (var s = 0; s < this.stripes.length; s++) {
-        // let stripe = this.stripes[s];
-
+        this.noiseColor = color("#bdbdbd");
         this.pointCount = 0.1 * p5.Vector.dist(A, B);
         this.noiseDistance = 3 // p5.Vector.dist(A, C) * 0.02; // 25;
 
@@ -610,63 +627,79 @@ class Grid {
             this.baseY = bezierPoint(A.y, ABStop1.y, ABStop2.y, B.y, t);
             let y = this.baseY + abs(offset);
 
-            // let y = A.y + abs(offset) - this.noiseDistance / 3;
-
-            this.loopBuffer.push()
-            this.loopBuffer.stroke(this.noiseColor);
-            this.loopBuffer.strokeWeight(this.noiseWeight);
-            this.loopBuffer.point(x, y);
-            this.loopBuffer.pop();
+            this.bufferNoise.push()
+            this.bufferNoise.stroke(this.noiseColor);
+            this.bufferNoise.strokeWeight(this.noiseWeight);
+            this.bufferNoise.point(x, y);
+            this.bufferNoise.pop();
         }
-        // }
-        // this.bufferNoise.fill("blue");
-        // this.bufferNoise.circle(2200, 1200, 500);
-
-        // this.buffer.push();
-        // this.buffer.blendMode(OVERLAY);
-        // this.buffer.image(this.bufferNoise, 0, 0);
-        // this.buffer.pop();
     }
 
     createUpperLine() {
-        this.buffer.push();
-        this.buffer.stroke(color("#3a3a3a"));
-        this.buffer.strokeWeight(1);
-        this.buffer.noFill();
+        for (var l = 0; l < this.stripeLines.length; l++) {
+            if (l > (this.stripeLines.length - this.stripes.length * 2)) {
+                let A = this.stripeLines[l].A;
+                let ABStop1 = this.stripeLines[l].ABStop1;
+                let ABStop2 = this.stripeLines[l].ABStop2;
+                let B = this.stripeLines[l].B;
 
-        this.buffer.beginShape();
-        this.buffer.vertex(this.A.x, this.A.y);
-        this.buffer.bezierVertex(
-            this.ABStop1.x,
-            this.ABStop1.y,
-            this.ABStop2.x,
-            this.ABStop2.y,
-            this.B.x,
-            this.B.y
-        );
-        this.buffer.endShape();
+                this.buffer.push();
+                this.buffer.stroke(color("#3a3a3a2d"));
+                this.buffer.strokeWeight(1);
+                this.buffer.noFill();
 
-        this.buffer.pop();
+                this.buffer.beginShape();
+                this.buffer.vertex(A.x, A.y);
+                this.buffer.bezierVertex(
+                    ABStop1.x,
+                    ABStop1.y,
+                    ABStop2.x,
+                    ABStop2.y,
+                    B.x,
+                    B.y
+                );
+                this.buffer.endShape();
+
+                this.buffer.pop();
+            }
+        }
     }
 
     createLowerLine() {
+
+        for (var l = 0; l < this.stripeLines.length; l++) {
+            if (l > (this.stripeLines.length - this.stripes.length * 2)) {
+                let C = this.stripeLines[l].C;
+                let CDStop1 = this.stripeLines[l].CDStop1;
+                let CDStop2 = this.stripeLines[l].CDStop2;
+                let D = this.stripeLines[l].D;
+
+                this.buffer.push();
+                this.buffer.stroke(color("#fafafa4b"));
+                this.buffer.strokeWeight(1);
+                this.buffer.noFill();
+
+                this.buffer.beginShape();
+                this.buffer.vertex(C.x, C.y);
+                this.buffer.bezierVertex(
+                    CDStop1.x,
+                    CDStop1.y,
+                    CDStop2.x,
+                    CDStop2.y,
+                    D.x,
+                    D.y
+                );
+                this.buffer.endShape();
+
+                this.buffer.pop();
+            }
+        }
+    }
+
+    drawNoise() {
         this.buffer.push();
-        this.buffer.stroke(color("#fafafa"));
-        this.buffer.strokeWeight(1);
-        this.buffer.noFill();
-
-        this.buffer.beginShape();
-        this.buffer.vertex(this.C.x, this.C.y);
-        this.buffer.bezierVertex(
-            this.CDStop1.x,
-            this.CDStop1.y,
-            this.CDStop2.x,
-            this.CDStop2.y,
-            this.D.x,
-            this.D.y
-        );
-        this.buffer.endShape();
-
+        this.buffer.blendMode(OVERLAY);
+        this.buffer.image(this.bufferNoise, 0, 0);
         this.buffer.pop();
     }
 
