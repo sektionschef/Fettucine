@@ -30,10 +30,10 @@
 // console.log("Element types: " + PICKER_LABEL);
 
 // window.$fxhashFeatures = {
-    // "Format": canvasFormatChosen,
-    // "Palette": PALETTE_LABEL,
-    // "Element Count": TRIANGLECOUNT_LABEL,
-    // "Element types": PICKER_LABEL,
+// "Format": canvasFormatChosen,
+// "Palette": PALETTE_LABEL,
+// "Element Count": TRIANGLECOUNT_LABEL,
+// "Element types": PICKER_LABEL,
 // }
 
 // console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
@@ -60,4 +60,45 @@
 //   some pseudo random values: [${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ... ]\n
 // `
 // document.body.prepend(containero)
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+// console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
+
+// if (urlParams.has('infinity')) {
+//   INFINITYSTRING = urlParams.get('infinity');
+//   INFINITY = (INFINITYSTRING === 'true');
+// }
+// console.log("INFINITY: " + INFINITY);
+
+if (urlParams.has('framed')) {
+    if (urlParams.get("framed") === "true") {
+        // setFrameHTML();
+        // setLabelHTML();
+        setSpartaHTML();
+        console.log("oida");
+    }
+} else {
+    setPlainHTML();
+}
+setTagsHTML();
+
+if (urlParams.has('senza')) {
+    if (urlParams.get("senza") === "true") {
+
+    }
+} else {
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = "styles.css";
+    document.head.appendChild(link);
+}
+
+if (urlParams.has('animated')) {
+    if (urlParams.get("animated") === "false") {
+        ANIMATIONSTATE = false;
+    }
+}
 

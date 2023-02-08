@@ -1,6 +1,4 @@
-// console.log("fxhash: " + fxhash);
 const NOISESEED = hashFnv32a(fxhash);
-// console.log("Noise seed: " + NOISESEED);
 
 let startTime, endTime;
 let canvas;
@@ -17,17 +15,15 @@ let FRAMEDWIDTH = 800;
 let FRAMED = false;  // fixed width
 let SENZA = false;  // no stylesheet, close inspection
 
-let TITLE = "Fettucine";
+let TITLE = "Härte des Gesetzes";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
 let URL = "https://digitalitility.com";
 let YEAR = "2023";
-let PRICE = "ꜩ 1";
+let PRICE = "ꜩ 3";
 let EDITIONS = "100 editions";
 
 let CURRENTPIXELDENS = 1;
-
-let xoff = 0 // delete;
 
 const PALETTESYSTEM = {
   "Judd": {
@@ -64,56 +60,6 @@ choosePalette();
 
 
 function preload() {
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-
-  // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
-
-  // if (urlParams.has('infinity')) {
-  //   INFINITYSTRING = urlParams.get('infinity');
-  //   INFINITY = (INFINITYSTRING === 'true');
-  // }
-  // console.log("INFINITY: " + INFINITY);
-
-  if (urlParams.has('framed')) {
-    if (urlParams.get("framed") === "true") {
-      FRAMED = true;
-    }
-  }
-
-  if (urlParams.has('senza')) {
-    if (urlParams.get("senza") === "true") {
-      SENZA = true;
-    }
-  }
-
-  if (urlParams.has('animated')) {
-    if (urlParams.get("animated") === "false") {
-      ANIMATIONSTATE = false;
-    }
-  }
-
-  if (SENZA == false) {
-    // var w = window.screen.width;
-    var link = document.createElement("link");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = "styles.css";
-    document.head.appendChild(link);
-  }
-
-  if (FRAMED) {
-    // setFrameHTML();
-    // setLabelHTML();
-    setSpartaHTML();
-  } else {
-    setPlainHTML();
-  }
-  setTagsHTML();
-
-
-
 
 }
 
@@ -192,7 +138,8 @@ function setup() {
   canvas = createCanvas(rescaling_width, rescaling_height);
 
   canvas.id('badAssCanvas');
-  if (FRAMED) {
+  // if (FRAMED) {
+  if (document.getElementById('centerDiv')) {
     // canvas.parent("canvasHolderFrame");
     canvas.parent("centerDiv");
   } else {
@@ -559,7 +506,7 @@ function setup() {
   grid = new Grid(gridProfile);
 
   window.$fxhashFeatures = {
-    "Format": canvasFormatChosen,
+    "Format": canvasFormatChosen.name,
     // "Palette": PALETTE_LABEL,
     // "Element Count": TRIANGLECOUNT_LABEL,
     // "Element types": PICKER_LABEL,
