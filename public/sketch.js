@@ -14,7 +14,8 @@ let PALETTE_LABEL;
 let ALLDONE = false;
 
 let FRAMEDWIDTH = 800;
-let FRAMED = false;
+let FRAMED = false;  // fixed width
+let SENZA = false;  // no stylesheet, close inspection
 
 let TITLE = "Fettucine";
 let ARTIST = "Stefan Schwaha, @sektionschef";
@@ -81,10 +82,25 @@ function preload() {
     }
   }
 
+  if (urlParams.has('senza')) {
+    if (urlParams.get("senza") === "true") {
+      SENZA = true;
+    }
+  }
+
   if (urlParams.has('animated')) {
     if (urlParams.get("animated") === "false") {
       ANIMATIONSTATE = false;
     }
+  }
+
+  if (SENZA == false) {
+    // var w = window.screen.width;
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = "styles.css";
+    document.head.appendChild(link);
   }
 
   if (FRAMED) {
@@ -95,6 +111,8 @@ function preload() {
     setPlainHTML();
   }
   setTagsHTML();
+
+
 
 
 }
