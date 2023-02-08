@@ -143,11 +143,14 @@ function setup() {
     spacing: getRandomFromList([1, 2, 3]),
   }
 
-  paper = new Paper();
-  corny = new Corny();
-  edgePixel = new PixelGradient();
+  // Paper
+  // paper = new Paper();
+  // corny = new Corny();
+  // edgePixel = new PixelGradient();
 
+  // Printthing
   backgroundNoise = new Noise();
+
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -346,17 +349,9 @@ function setup() {
   //   brushOpacityDistort: 50,
   // });
 
+  // DAS WARS
   layc = new BrushstrokeSystem({
-    // y
-    originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
-    targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
-    originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
-    targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
-    // x
-    // originA: createVector(0, height),  // left, start of brushstrokes
-    // targetA: createVector(width, height), // left, end of brusshtrokes
-    // originB: createVector(0, 0), // right, start of brushstrokes
-    // targetB: createVector(width, 0), // right, end of brushstrokes
+    orientation: getRandomFromList(["x", "y"]),
     OVERLAY: false,
     brushCount: 300, //500,  // 100
     noiseIncrement: 0.006,  // 0.06 - 0.6
@@ -493,6 +488,7 @@ function setup() {
 
   grid = new Grid(gridProfile);
 
+  // FEATURES
   window.$fxhashFeatures = {
     "Format": canvasFormatChosen.name,
     // "Palette": PALETTE_LABEL,
@@ -556,9 +552,9 @@ function draw() {
   // noiseStripes.show();
 
   // PAPER
-  corny.show();
-  paper.show();
-  edgePixel.show();
+  // corny.show();
+  // paper.show();
+  // edgePixel.show();
 
   // backgroundNoise.show();
 
@@ -626,7 +622,7 @@ function draw() {
   // image(blob, 0, 0);
   // pop();
 
-  // fxpreview();
+  fxpreview();
   noLoop();
 }
 

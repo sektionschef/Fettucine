@@ -1,10 +1,6 @@
 class BrushstrokeSystem {
     constructor(data) {
-        // starts from origin to target, A to B is direction of parallell strokes
-        this.originA = data.originA;
-        this.targetA = data.targetA;
-        this.originB = data.originB;
-        this.targetB = data.targetB;
+        this.orientation = data.orientation;
         this.brushCount = data.brushCount;
         this.brushTemplateCount = data.brushTemplateCount;
         this.brushTemplateSize = data.brushTemplateSize;
@@ -20,6 +16,20 @@ class BrushstrokeSystem {
         this.brushPixelDistort = data.brushPixelDistort;
         this.brushOpacityDistort = data.brushOpacityDistort;
         this.brushType = data.brushType;
+
+        if (this.orientation == "x") {
+            // starts from origin to target, A to B is direction of parallell strokes
+            this.originA = createVector(0, height);  // left, start of brushstrokes
+            this.targetA = createVector(width, height); // left, end of brusshtrokes
+            this.originB = createVector(0, 0); // right, start of brushstrokes
+            this.targetB = createVector(width, 0); // right, end of brushstrokes
+        } else {
+            // y
+            this.originA = createVector(width / 10 * 0, height / 10 * 0);  // left, start of brushstrokes
+            this.targetA = createVector(width / 10 * 0, height / 10 * 10); // left, end of brusshtrokes
+            this.originB = createVector(width / 10 * 10, height / 10 * 0); // right, start of brushstrokes
+            this.targetB = createVector(width / 10 * 10, height / 10 * 10); // right, end of brushstrokes
+        }
 
         // calc for loop
         this.distanceAB = p5.Vector.dist(this.originA, this.originB);
