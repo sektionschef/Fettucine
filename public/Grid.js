@@ -7,6 +7,8 @@ class Grid {
         this.spacing = data.spacing;
         this.countColumnOrRow = data.countColumnOrRow;
         this.bezierFactor = data.bezierFactor;
+        this.pattern = data.pattern.buffer;
+        this.backgroundNoise = data.backgroundNoise;
 
         this.DEBUG = false;
         this.paperMargin = SHORTSIDE * 0.05;
@@ -64,7 +66,6 @@ class Grid {
         this.createBoxes();
         // this.showDebug();
         this.createMask();
-
 
         this.drawMask();
         this.drawNoise();
@@ -495,7 +496,7 @@ class Grid {
             if (i % 3 == 0) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
-                this.loopBuffer.image(maskBuffers(backgroundNoise.masterBuffer, this.loopBuffer), 0, 0);
+                this.loopBuffer.image(maskBuffers(this.backgroundNoise.masterBuffer, this.loopBuffer), 0, 0);
                 this.loopBuffer.pop();
             }
 
@@ -503,7 +504,7 @@ class Grid {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
                 // this.loopBuffer.tint(255, 160)
-                this.loopBuffer.image(maskBuffers(layc.buffer, this.loopBuffer), 0, 0);
+                this.loopBuffer.image(maskBuffers(this.pattern, this.loopBuffer), 0, 0);
                 this.loopBuffer.pop();
             }
 
