@@ -461,7 +461,6 @@ function setup() {
 
   grid = new Grid(gridProfile);
 
-
   // gridTexture = createGraphics(width, height);
   // push();
   // gridTexture.image(paper.masterBuffer, 0, 0);
@@ -476,7 +475,6 @@ function setup() {
 
   // noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
   // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), grid.stripeOrientation);
-
 
 
   // FEATURES

@@ -135,6 +135,7 @@ class Brush {
                 //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
                 // }
 
+                // SELECTION
                 if (this.type == "Fill Noise") {
                     // ONLY PIXEL - FOR PRODUCTION
                     // map x pos to prob. of noise
@@ -159,14 +160,14 @@ class Brush {
 
                 // ONLY Perlin NOISE
                 // let r = noise(xoff, yoff) * 155 + 100;
-                // let r = noise(xoff, yoff) * 50;
+                // // let r = noise(xoff, yoff) * 50;
 
                 // if (this.buffer.pixels[index + 3] != 0) {
 
-                // this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
-                // this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
-                // this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
-                // this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+                //     // this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
+                //     // this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
+                //     // this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
+                //     // this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
 
                 //     this.buffer.pixels[index + 0] -= r;
                 //     this.buffer.pixels[index + 1] -= r;

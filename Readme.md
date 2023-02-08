@@ -1,7 +1,6 @@
 # Fettucine
 
 http://localhost:8080/ - to largest size
-http://localhost:8080/?framed=true - total size - reduced to smallest size
 http://localhost:8080/?senza=true - no resizing - inspecting details
 
 Press *Space bar* to stop and restart the animation.
