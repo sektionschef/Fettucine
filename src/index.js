@@ -64,6 +64,19 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
+setSpartaHTML();
+setTagsHTML();
+
+if (urlParams.has('senza')) {
+    if (urlParams.get("senza") === "true") {
+        addStyleSheet("styles_senza.css");
+    } else {
+        addStyleSheet("styles.css");
+    }
+} else {
+    addStyleSheet("styles.css");
+}
+
 // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
 
 // if (urlParams.has('infinity')) {
@@ -72,33 +85,9 @@ const urlParams = new URLSearchParams(queryString);
 // }
 // console.log("INFINITY: " + INFINITY);
 
-if (urlParams.has('framed')) {
-    if (urlParams.get("framed") === "true") {
-        // setFrameHTML();
-        // setLabelHTML();
-        setSpartaHTML();
-        console.log("oida");
-    }
-} else {
-    setPlainHTML();
-}
-setTagsHTML();
-
-if (urlParams.has('senza')) {
-    if (urlParams.get("senza") === "true") {
-
-    }
-} else {
-    var link = document.createElement("link");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = "styles.css";
-    document.head.appendChild(link);
-}
-
-if (urlParams.has('animated')) {
-    if (urlParams.get("animated") === "false") {
-        ANIMATIONSTATE = false;
-    }
-}
+// if (urlParams.has('animated')) {
+//     if (urlParams.get("animated") === "false") {
+//         ANIMATIONSTATE = false;
+//     }
+// }
 

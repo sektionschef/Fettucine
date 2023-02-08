@@ -294,13 +294,14 @@ function choosePalette() {
 }
 
 
-function setPlainHTML() {
-    const badAssCanvasDiv = document.createElement("div");
-    badAssCanvasDiv.setAttribute("id", "canvasHolderPlain");
-    // const newContent = document.createTextNode("Hi there and greetings!");
-    // badAssCanvasDiv.appendChild(newContent);
-    document.body.insertBefore(badAssCanvasDiv, document.getElementById("Konkas"));
-}
+// ARCHIVE
+// function setPlainHTML() {
+//     const badAssCanvasDiv = document.createElement("div");
+//     badAssCanvasDiv.setAttribute("id", "canvasHolderPlain");
+//     // const newContent = document.createTextNode("Hi there and greetings!");
+//     // badAssCanvasDiv.appendChild(newContent);
+//     document.body.insertBefore(badAssCanvasDiv, document.getElementById("Konkas"));
+// }
 
 
 function setFrameHTML() {
@@ -358,6 +359,15 @@ function setTagsHTML() {
     document.querySelector('meta[property="og:type"]').setAttribute("content", "website");
     document.querySelector('meta[property="og:url"]').setAttribute("content", URL);
     document.querySelector('meta[property="og:description"]').setAttribute("content", DESCRIPTION);
+}
+
+function addStyleSheet(filepath) {
+    let link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    // link.href = "styles_senza.css";
+    link.href = filepath;
+    document.head.appendChild(link);
 }
 
 
