@@ -11,10 +11,6 @@ let PALETTE;
 let PALETTE_LABEL;
 let ALLDONE = false;
 
-let FRAMEDWIDTH = 800;
-let FRAMED = false;  // fixed width
-let SENZA = false;  // no stylesheet, close inspection
-
 let TITLE = "Härte des Gesetzes";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
@@ -60,17 +56,10 @@ choosePalette();
 
 
 function preload() {
-
 }
 
 function setup() {
   // startTime = performance.now()
-  // BACKGROUND = "#ee4949ff";
-  // BACKGROUND = "#e0bc46ff";
-  // BACKGROUND = "#314ce4ff"// "#273797ff";
-  // BACKGROUND = "#e0469bff";
-
-  BACKGROUND = PALETTE.background;
 
   noiseSeed(NOISESEED);
   randomSeed(NOISESEED);
@@ -114,7 +103,7 @@ function setup() {
   ]
 
   canvasFormatChosen = getRandomFromList(canvasFormats);
-  console.log("Canvas Format: " + canvasFormatChosen.name);
+  // console.log("Canvas Format: " + canvasFormatChosen.name);
 
   // rescaling_width = 2400; // 4000;
   // rescaling_height = 3000; // 5000;
@@ -123,6 +112,7 @@ function setup() {
   // rescaling_width = 4000;
   // rescaling_height = 5000;
 
+  // CLEANUP HERE
   rescaling_width = canvasFormatChosen.canvasWidth;
   rescaling_height = canvasFormatChosen.canvasHeight;
 
@@ -138,14 +128,12 @@ function setup() {
   canvas = createCanvas(rescaling_width, rescaling_height);
 
   canvas.id('badAssCanvas');
-  // if (FRAMED) {
+
   if (document.getElementById('centerDiv')) {
-    // canvas.parent("canvasHolderFrame");
     canvas.parent("centerDiv");
   } else {
     canvas.parent("canvasHolderPlain");
   }
-
 
   gridProfile = {
     stripeOrientation: getRandomFromList(["x", "y"]),
