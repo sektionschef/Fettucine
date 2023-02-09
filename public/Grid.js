@@ -499,9 +499,9 @@ class Grid {
                 this.loopBuffer.pop();
             }
 
-            // if (i == (this.loopLayerCount - 1)) {
-            // if (i >= (this.loopLayerCount - 2)) {
-            if (i >= (this.loopLayerCount - 3)) {
+            if (i == (this.loopLayerCount - 1)) {
+                // if (i >= (this.loopLayerCount - 2)) {
+                // if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
                 // this.loopBuffer.blendMode(MULTIPLY);

@@ -135,7 +135,7 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  // size, and count and
+  // size, and count and looplayer count and type
   patternProfiles = [
     // {
     //   name: "laya",
@@ -163,7 +163,7 @@ function setup() {
     //   noiseColor: [color("#b4b4b4"), color("#fcfcfc"), color("#cacaca")],
     //   brushTemplateCount: 20,
     //   brushTemplateSize: 200,
-    //   // brushTemplateStrokeSize: 1,  // out
+    //   brushTemplateStrokeSize: 1,  // out
     //   brushTemplateFillColor: color("#c9c9c9ff"),
     //   // brushTemplateFillColor: color("#cc1a1a83"),
     //   brushTemplateFillColorDistort: 20,
@@ -197,7 +197,7 @@ function setup() {
     //   noiseColor: [color("#888787"), color("#cccccc"), color("#ffffff")],
     //   brushTemplateCount: 20,
     //   brushTemplateSize: 100,
-    //   // brushTemplateStrokeSize: 1,  // out
+    //   brushTemplateStrokeSize: 1,  // out
     //   brushTemplateFillColor: color("#c9c9c9ff"),
     //   // brushTemplateFillColor: color("#cc1a1a83"),
     //   brushTemplateFillColorDistort: 20,
@@ -232,7 +232,7 @@ function setup() {
     //   // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
     //   brushTemplateCount: 20,
     //   brushTemplateSize: 50,
-    //   // brushTemplateStrokeSize: 1,  // out
+    //   brushTemplateStrokeSize: 1,  // out
     //   brushTemplateFillColor: color("#c9c9c9ff"),
     //   // brushTemplateFillColor: color("#cc1a1a83"),
     //   brushTemplateFillColorDistort: 20,
@@ -443,7 +443,7 @@ function setup() {
       name: "esperimentO",
       orientation: getRandomFromList(["x", "y"]),
       OVERLAY: false,
-      brushCount: 300, //500,  // 100
+      brushCount: 300, //500,  // 100 | good one 1300
       noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
       DEBUG: false,
       maxSpeedMin: 20,  // 15
@@ -461,17 +461,20 @@ function setup() {
       // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
       noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
       brushTemplateCount: 20,
-      brushTemplateSize: 150,
-      // brushTemplateStrokeSize: 1,  // out
+      brushTemplateSize: 50,   // 50
+      brushTemplateStrokeSize: 5,
       brushTemplateFillColor: color("#c9c9c9ff"),
       // brushTemplateFillColor: color("#cc1a1a83"),
       brushTemplateFillColorDistort: 20,
       // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
       brushTemplateStrokeColor: color("#52000083"),
       // brushTemplateStrokeColorDistort: 20,  // out
+      brushType: "Stroke Noise",
+      // brushType: "Gradient",  // cool
+      // brushType: "Noise",  // 1 loop
       // brushType: "Fill Noise",
       // brushType: "Only Perlin",
-      brushType: "Combined Perlin",
+      // brushType: "Combined Perlin",  // 3 loops
       brushCurveSexyness: 1,
       brushPixelDistort: 50,
       brushOpacityDistort: 50,

@@ -49,11 +49,12 @@ class Brush {
 
         if (this.type == "Stroke Noise") {
             this.buffer.noFill();
+            this.buffer.stroke(this.strokeColor);
+            this.buffer.strokeWeight(this.strokeSize);
         } else {
             this.buffer.fill(this.fillColor);
+            this.buffer.noStroke();
         }
-        this.buffer.stroke(this.strokeColor);
-        this.buffer.strokeWeight(this.strokeSize);
 
 
         this.buffer.beginShape();
@@ -109,31 +110,35 @@ class Brush {
 
 
                 // GRADIENT
-                // let inter = map(x, 0, this.buffer.width, 0, 1);
-                // let c = lerpColor(color("#353535"), color("#dddddd"), inter);
+                if (this.type == "Gradient") {
+                    let inter = map(x, 0, this.buffer.width, 0, 1);
+                    let c = lerpColor(color("#353535"), color("#dddddd"), inter);
 
-                // if (this.buffer.pixels[index + 3] != 0) {
-                //     this.buffer.pixels[index + 0] = red(c);
-                //     this.buffer.pixels[index + 1] = green(c);
-                //     this.buffer.pixels[index + 2] = blue(c);
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
-                // }
+                    if (this.buffer.pixels[index + 3] != 0) {
+                        this.buffer.pixels[index + 0] = red(c);
+                        this.buffer.pixels[index + 1] = green(c);
+                        this.buffer.pixels[index + 2] = blue(c);
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                    }
+                }
 
                 // NOISE
-                // var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                // var threshold = map(x, 0, this.buffer.width, 0, 1);
+                if (this.type == "Noise") {
+                    var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                    var threshold = map(x, 0, this.buffer.width, 0, 1);
 
-                // if (fxrand() > threshold) {
-                //     this.buffer.pixels[index + 0] += offset;
-                //     this.buffer.pixels[index + 1] += offset;
-                //     this.buffer.pixels[index + 2] += offset;
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
-                // } else {
-                //     this.buffer.pixels[index + 0] = red(this.noiseColor);
-                //     this.buffer.pixels[index + 1] = green(this.noiseColor);
-                //     this.buffer.pixels[index + 2] = blue(this.noiseColor);
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
-                // }
+                    if (fxrand() > threshold) {
+                        this.buffer.pixels[index + 0] += offset;
+                        this.buffer.pixels[index + 1] += offset;
+                        this.buffer.pixels[index + 2] += offset;
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                    } else {
+                        this.buffer.pixels[index + 0] = red(this.noiseColor);
+                        this.buffer.pixels[index + 1] = green(this.noiseColor);
+                        this.buffer.pixels[index + 2] = blue(this.noiseColor);
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
+                    }
+                }
 
                 // SELECTION
                 if (this.type == "Fill Noise") {
