@@ -16,8 +16,8 @@ let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
 let URL = "https://digitalitility.com";
 let YEAR = "2023";
-let PRICE = "ꜩ 3";
-let EDITIONS = "100 editions";
+let PRICE = "ꜩ 4";
+let EDITIONS = "256 editions";
 
 let CURRENTPIXELDENS = 1;
 
@@ -135,6 +135,7 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
+  // size, and count and
   patternProfiles = [
     // {
     //   name: "laya",
@@ -407,37 +408,74 @@ function setup() {
     //   brushPixelDistort: 150,
     //   brushOpacityDistort: 0,
     // },
+    // {
+    //   name: "example",
+    //   // originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+    //   // targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+    //   // originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+    //   // targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+    //   orientation: getRandomFromList(["x", "y"]),
+    //   OVERLAY: false,
+    //   brushCount: 100,
+    //   noiseIncrement: 0.6,  // 0.06
+    //   DEBUG: false,
+    //   maxSpeedMin: 15,
+    //   maxSpeedMax: 20,
+    //   minSpeed: 2,
+    //   maxForce: 2,
+    //   slowRadius: 40,
+    //   finishedRadius: 10,
+    //   targetBdistList: [500],
+    //   targetBDirectionList: [1],
+    //   basicSizeMin: 1,
+    //   basicSizeMax: 1.1,
+    //   noiseColor: [color("#727272")],
+    //   brushTemplateCount: 20,
+    //   brushTemplateSize: 50,
+    //   brushTemplateStrokeSize: 1,
+    //   brushTemplateFillColor: color("#b8b8b883"),
+    //   brushTemplateFillColorDistort: 10,
+    //   brushTemplateStrokeColor: color("#6d6d6d83"),
+    //   brushTemplateStrokeColorDistort: 40,
+    //   brushCurveSexyness: 1,
+    // },
     {
-      name: "example",
-      // originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
-      // targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
-      // originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
-      // targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+      name: "esperimentO",
       orientation: getRandomFromList(["x", "y"]),
       OVERLAY: false,
-      brushCount: 100,
-      noiseIncrement: 0.6,  // 0.06
+      brushCount: 300, //500,  // 100
+      noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
       DEBUG: false,
-      maxSpeedMin: 15,
-      maxSpeedMax: 20,
+      maxSpeedMin: 20,  // 15
+      maxSpeedMax: 50, // 20
       minSpeed: 2,
       maxForce: 2,
-      slowRadius: 40,
-      finishedRadius: 10,
-      targetBdistList: [500],
-      targetBDirectionList: [1],
+      slowRadius: 320,
+      finishedRadius: 40,
+      // targetBdistList: [1000],
+      targetBdistList: [200, 500, 600, 750, 1000, 2000],
+      targetBDirectionList: [-1],  // oida
+      // targetBDirectionList: [-1, 1],  
       basicSizeMin: 1,
-      basicSizeMax: 1.1,
-      noiseColor: [color("#727272")],
+      basicSizeMax: 1.5,
+      // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+      noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
       brushTemplateCount: 20,
-      brushTemplateSize: 50,
-      brushTemplateStrokeSize: 1,
-      brushTemplateFillColor: color("#b8b8b883"),
-      brushTemplateFillColorDistort: 10,
-      brushTemplateStrokeColor: color("#6d6d6d83"),
-      brushTemplateStrokeColorDistort: 40,
+      brushTemplateSize: 150,
+      // brushTemplateStrokeSize: 1,  // out
+      brushTemplateFillColor: color("#c9c9c9ff"),
+      // brushTemplateFillColor: color("#cc1a1a83"),
+      brushTemplateFillColorDistort: 20,
+      // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+      brushTemplateStrokeColor: color("#52000083"),
+      // brushTemplateStrokeColorDistort: 20,  // out
+      // brushType: "Fill Noise",
+      // brushType: "Only Perlin",
+      brushType: "Combined Perlin",
       brushCurveSexyness: 1,
-    }
+      brushPixelDistort: 50,
+      brushOpacityDistort: 50,
+    },
   ]
 
   chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
@@ -451,7 +489,10 @@ function setup() {
     spacing: getRandomFromList([1, 2, 3]),
     pattern: chosenPattern,
     backgroundNoise: chosenNoise,
+    // how many loopLayers with pattern
   }
+
+  grid = new Grid(gridProfile);
 
   // Paper
   // paper = new Paper();
@@ -459,7 +500,6 @@ function setup() {
   // edgePixel = new PixelGradient();
 
 
-  grid = new Grid(gridProfile);
 
   // gridTexture = createGraphics(width, height);
   // push();
@@ -553,6 +593,10 @@ function draw() {
   // GRID ON TOP
   grid.show();
 
+  // chosenPattern.show();
+  // chosenPattern.showBrushTemplates();
+
+
   // push();
   // blendMode(OVERLAY);
   // image(gridTexture, 0, 0);
@@ -588,12 +632,6 @@ function draw() {
 
 
   // noiseStripesMask.show();
-
-  // areaA.showBrushTemplates();
-  // areaB.showBrushTemplates();
-  // areaC.showBrushTemplates();
-
-  // laya.showBrushTemplates();
 
 
   // PROTOTYPE SPLATTER

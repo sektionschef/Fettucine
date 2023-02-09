@@ -492,7 +492,6 @@ class Grid {
             this.loopBuffer.endShape(CLOSE);
             this.loopBuffer.pop();
 
-            // if (i == 10 || i == 19) {
             if (i % 3 == 0) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
@@ -500,10 +499,14 @@ class Grid {
                 this.loopBuffer.pop();
             }
 
-            if (i == (this.loopLayerCount - 1)) {
+            // if (i == (this.loopLayerCount - 1)) {
+            // if (i >= (this.loopLayerCount - 2)) {
+            if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
-                // this.loopBuffer.tint(255, 160)
+                // this.loopBuffer.blendMode(MULTIPLY);
+                // this.loopBuffer.blendMode(LIGHTEST);
+                // this.loopBuffer.tint(255, 200)
                 this.loopBuffer.image(maskBuffers(this.pattern, this.loopBuffer), 0, 0);
                 this.loopBuffer.pop();
             }

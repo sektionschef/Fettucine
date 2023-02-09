@@ -159,41 +159,45 @@ class Brush {
                 }
 
                 // ONLY Perlin NOISE
-                // let r = noise(xoff, yoff) * 155 + 100;
-                // // let r = noise(xoff, yoff) * 50;
+                if (this.type == "Only Perlin") {
+                    // let r = noise(xoff, yoff) * 155 + 100;
+                    let r = noise(xoff, yoff) * 50;
 
-                // if (this.buffer.pixels[index + 3] != 0) {
+                    if (this.buffer.pixels[index + 3] != 0) {
 
-                //     // this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
-                //     // this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
-                //     // this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
-                //     // this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+                        // this.buffer.pixels[index + 0] = r // red(this.noiseColor) + offset;
+                        // this.buffer.pixels[index + 1] = r // green(this.noiseColor) + offset;
+                        // this.buffer.pixels[index + 2] = r // blue(this.noiseColor) + offset;
+                        // this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
 
-                //     this.buffer.pixels[index + 0] -= r;
-                //     this.buffer.pixels[index + 1] -= r;
-                //     this.buffer.pixels[index + 2] -= r;
-                //     this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
-                // }
+                        this.buffer.pixels[index + 0] -= r;
+                        this.buffer.pixels[index + 1] -= r;
+                        this.buffer.pixels[index + 2] -= r;
+                        this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] // this.buffer.pixels[index + 3] + opOffset;
+                    }
+                }
 
                 // COMIBNE PERLIN NOISE FOR OPACITY AND PIXEL STRUCTURE
-                // let r = noise(xoff, yoff) * 155 + 100;
-                // var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
-                // var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                // var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
+                if (this.type == "Combined Perlin") {
+                    let r = noise(xoff, yoff) * 155 + 100;
+                    var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
+                    var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
+                    // var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
 
-                // if (this.buffer.pixels[index + 3] != 0) {
-                //     if (fxrand() > threshold) {
-                //         this.buffer.pixels[index + 0] = 0;
-                //         this.buffer.pixels[index + 1] = 0;
-                //         this.buffer.pixels[index + 2] = 0;
-                //         this.buffer.pixels[index + 3] = 0;
-                //     } else {
-                //         this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
-                //         this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
-                //         this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
-                //         this.buffer.pixels[index + 3] = r;
-                //     }
-                // }
+                    if (this.buffer.pixels[index + 3] != 0) {
+                        if (fxrand() > threshold) {
+                            this.buffer.pixels[index + 0] = 0;
+                            this.buffer.pixels[index + 1] = 0;
+                            this.buffer.pixels[index + 2] = 0;
+                            this.buffer.pixels[index + 3] = 0;
+                        } else {
+                            this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
+                            this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
+                            this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
+                            this.buffer.pixels[index + 3] = r;
+                        }
+                    }
+                }
 
                 yoff += inc;
             }
