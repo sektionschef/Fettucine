@@ -7,9 +7,9 @@ class PixelGradient {
 
         this.center = createVector(width / 2, height / 2);
 
-        this.strokeColor = color("#000000");
-        this.strokeWeight = SHORTSIDE * 0.001;
-        this.pointCount = TOTALPIXEL * 0.005;
+        this.strokeColor = color("#a8a8a8");
+        this.strokeWeight = TOTALPIXEL * 0.0000003;
+        this.pointCount = TOTALPIXEL * 0.001;
 
         this.buffer = createGraphics(width, height);
         this.masterBuffer = createGraphics(width, height);
@@ -49,7 +49,7 @@ class PixelGradient {
 
     show() {
         push();
-        blendMode(OVERLAY);
+        // blendMode(OVERLAY);
         image(this.masterBuffer, 0, 0);
         pop();
     }

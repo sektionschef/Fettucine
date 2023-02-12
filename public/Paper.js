@@ -3,10 +3,11 @@ class Paper {
         this.width = SHORTSIDE * 0.2; // 800
         this.height = SHORTSIDE * 0.2;  // 800
 
-        this.strokeColor = distortColorSuperNew(color(PALETTE.tint), 10);
-        this.strokeSize = 0.00025 * SHORTSIDE; // 1;
-        this.lineLength = 0.00625 * SHORTSIDE; // 25; // 5 +2
-        this.lineCount = 0.0005 * TOTALPIXEL; // 10000
+        this.strokeColor = distortColorSuperNew(color("#6b6b6b"), 30);
+        // this.strokeColor = distortColorSuperNew(color(PALETTE.tint), 10);
+        this.strokeSize = 0.00005 * SHORTSIDE; // 1;
+        this.lineLength = 0.0055 * SHORTSIDE; // 25; // 5 +2
+        this.lineCount = 0.002 * TOTALPIXEL; // 10000
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);

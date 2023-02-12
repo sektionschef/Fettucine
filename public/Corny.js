@@ -3,8 +3,8 @@ class Corny {
         this.width = SHORTSIDE * 0.25; // 800
         this.height = SHORTSIDE * 0.25;  // 800
 
-        this.dotcCount = 0.005 * TOTALPIXEL;
-        this.diameter = 3;
+        this.dotcCount = 0.0005 * TOTALPIXEL;
+        this.diameter = 0.000001 * TOTALPIXEL;
         this.colorDistort = 10;
 
         this.xCount = Math.ceil(width / this.width);

@@ -136,14 +136,14 @@ function setup() {
   }
 
   // base color: #d80f0fff
-  let darkColor = color("#c70303ff");
-  let lightColor = color("#f51c1cff");
+  // let darkColor = color("#c70303ff");
+  // let lightColor = color("#f51c1cff");
   // less spread
   // let darkColor = color("#af0606ff");
   // let lightColor = color("#f02626ff");
   // higher spread
-  // let darkColor = color("#860202ff");
-  // let lightColor = color("#f53c3cff");
+  let darkColor = color("#860202ff");
+  let lightColor = color("#f53c3cff");
 
   // size, and count and looplayer count and type
   patternProfiles = [
@@ -493,7 +493,7 @@ function setup() {
     },
   ]
 
-  pattern2 = new BrushstrokeSystem({
+  pattern2Data = {
     name: "ehemals layc",
     // orientation: getRandomFromList(["x", "y"]),
     orientation: getRandomFromList(["y"]),
@@ -529,9 +529,10 @@ function setup() {
     brushCurveSexyness: 1,
     brushPixelDistort: 50,
     brushOpacityDistort: 50,
-  })
+  }
 
   chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
+  pattern2 = new BrushstrokeSystem(pattern2Data);
   chosenNoise = new Noise();
 
   gridProfile = {
@@ -579,14 +580,15 @@ function setup() {
     // "Element types": PICKER_LABEL,
   }
 
-  console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
-  console.info(`Format: %c${canvasFormatChosen.name}`, 'font-weight: bold');
-  console.info(`Stripe Orientation: %c${gridProfile.stripeOrientation}`, 'font-weight: bold');
-  console.info(`Number of rows or columns: %c${gridProfile.countColumnOrRow}`, 'font-weight: bold');
-  console.info(`Wobbly factor: %c${gridProfile.bezierFactor}`, 'font-weight: bold');
-  console.info(`Stripe thickness: %c${gridProfile.thickness}`, 'font-weight: bold');
-  console.info(`Stripe spacing: %c${gridProfile.spacing}`, 'font-weight: bold');
-  console.log('');
+  // console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
+  // console.info(`Format: %c${canvasFormatChosen.name}`, 'font-weight: bold');
+  // console.info(`Stripe Orientation: %c${gridProfile.stripeOrientation}`, 'font-weight: bold');
+  // console.info(`Number of rows or columns: %c${gridProfile.countColumnOrRow}`, 'font-weight: bold');
+  // console.info(`Wobbly factor: %c${gridProfile.bezierFactor}`, 'font-weight: bold');
+  // console.info(`Stripe thickness: %c${gridProfile.thickness}`, 'font-weight: bold');
+  // console.info(`Stripe spacing: %c${gridProfile.spacing}`, 'font-weight: bold');
+  // console.log('');
+
   // console.group(`Palette: %c${PALETTE_LABEL} `, 'font-weight: bold');
   // console.log(`background: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['background']}; `);
   // console.log(`primaries: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['primaries'][0]}; `);
