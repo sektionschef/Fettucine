@@ -135,8 +135,12 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  let darkColor = color("#860202ff");
-  let lightColor = color("#f53c3cff");
+  // less
+  let darkColor = color("#af0606ff");
+  let lightColor = color("#f02626ff");
+  // more
+  // let darkColor = color("#860202ff");
+  // let lightColor = color("#f53c3cff");
 
   // size, and count and looplayer count and type
   patternProfiles = [
