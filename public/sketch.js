@@ -135,6 +135,9 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
+  let darkColor = color("#860202ff");
+  let lightColor = color("#f53c3cff");
+
   // size, and count and looplayer count and type
   patternProfiles = [
     // {
@@ -444,7 +447,7 @@ function setup() {
       // orientation: getRandomFromList(["x", "y"]),
       orientation: getRandomFromList(["x"]),
       OVERLAY: false,
-      brushCount: 300, //500,  // 100 | good one 1300
+      brushCount: 200, //500,  // 100 | good one 1300
       noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
       DEBUG: false,
       maxSpeedMin: 20,  // 15
@@ -459,7 +462,7 @@ function setup() {
       targetBDirectionList: [-1, 1],
       basicSizeMin: 1,
       basicSizeMax: 1.5,
-      noiseColor: [color("#af0606ff"), color("#f02626ff")],
+      noiseColor: [darkColor, lightColor],
       // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
       // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
       brushTemplateCount: 20,
@@ -488,7 +491,7 @@ function setup() {
     // orientation: getRandomFromList(["x", "y"]),
     orientation: getRandomFromList(["y"]),
     OVERLAY: false,
-    brushCount: 300, //500,  // 100
+    brushCount: 200, //500,  // 100
     noiseIncrement: 0.006,  // 0.06 - 0.6
     DEBUG: false,
     maxSpeedMin: 10,  // 15
@@ -503,7 +506,7 @@ function setup() {
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
-    noiseColor: [color("#af0606ff"), color("#f02626ff")],
+    noiseColor: [darkColor, lightColor],
     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
     // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
     brushTemplateCount: 20,
@@ -539,9 +542,9 @@ function setup() {
   grid = new Grid(gridProfile);
 
   // Paper
-  // paper = new Paper();
-  // corny = new Corny();
-  // edgePixel = new PixelGradient();
+  paper = new Paper();
+  corny = new Corny();
+  edgePixel = new PixelGradient();
 
 
 
@@ -627,9 +630,9 @@ function draw() {
   // chosenPattern.show();
 
   // PAPER
-  // corny.show();
-  // paper.show();
-  // edgePixel.show();
+  corny.show();
+  paper.show();
+  edgePixel.show();
 
   // backgroundNoise.show();
 
