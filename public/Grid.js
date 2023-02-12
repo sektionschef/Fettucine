@@ -369,11 +369,11 @@ class Grid {
         let totalMargin = SHORTSIDE * 0.05;
 
         let greyLevel = 200;
-        let opacityLevel = 20;
+        let opacityLevel = 20;  // 20
 
         // let redTone = color(255, 0, 0, 20)
         let distortColorGain = 30;
-        let redTone = color(red(PALETTE.background), green(PALETTE.background), blue(PALETTE.background), 20);
+        let redTone = color(red(PALETTE.background), green(PALETTE.background), blue(PALETTE.background), opacityLevel);
 
 
         for (var i = 0; i < this.loopLayerCount; i++) {
@@ -492,7 +492,9 @@ class Grid {
             this.loopBuffer.endShape(CLOSE);
             this.loopBuffer.pop();
 
+            // DANGER - REACTIVATE
             if (i % 3 == 0) {
+                // if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
                 this.loopBuffer.image(maskBuffers(this.backgroundNoise.masterBuffer, this.loopBuffer), 0, 0);
@@ -503,11 +505,15 @@ class Grid {
                 // if (i >= (this.loopLayerCount - 2)) {
                 // if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
-                this.loopBuffer.blendMode(OVERLAY);
+                // this.loopBuffer.blendMode(OVERLAY);
                 // this.loopBuffer.blendMode(MULTIPLY);
                 // this.loopBuffer.blendMode(LIGHTEST);
                 // this.loopBuffer.tint(255, 200)
+
+                // SECOND LAYER
+                this.loopBuffer.image(maskBuffers(ontop.buffer, this.loopBuffer), 0, 0);
                 this.loopBuffer.image(maskBuffers(this.pattern, this.loopBuffer), 0, 0);
+
                 this.loopBuffer.pop();
             }
 

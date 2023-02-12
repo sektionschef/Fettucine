@@ -441,7 +441,8 @@ function setup() {
     // },
     {
       name: "esperimentO",
-      orientation: getRandomFromList(["x", "y"]),
+      // orientation: getRandomFromList(["x", "y"]),
+      orientation: getRandomFromList(["x"]),
       OVERLAY: false,
       brushCount: 300, //500,  // 100 | good one 1300
       noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
@@ -454,14 +455,15 @@ function setup() {
       finishedRadius: 40,
       // targetBdistList: [1000],
       targetBdistList: [200, 500, 600, 750, 1000, 2000],
-      targetBDirectionList: [-1],  // oida
-      // targetBDirectionList: [-1, 1],  
+      // targetBDirectionList: [-1],  // oida
+      targetBDirectionList: [-1, 1],
       basicSizeMin: 1,
       basicSizeMax: 1.5,
+      noiseColor: [color("#af0606ff"), color("#f02626ff")],
       // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-      noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
+      // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
       brushTemplateCount: 20,
-      brushTemplateSize: 50,   // 50
+      brushTemplateSize: 190,   // 50
       brushTemplateStrokeSize: 5,
       brushTemplateFillColor: color("#c9c9c9ff"),
       // brushTemplateFillColor: color("#cc1a1a83"),
@@ -469,10 +471,10 @@ function setup() {
       // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
       brushTemplateStrokeColor: color("#52000083"),
       // brushTemplateStrokeColorDistort: 20,  // out
-      brushType: "Stroke Noise",
+      // brushType: "Stroke Noise",
       // brushType: "Gradient",  // cool
       // brushType: "Noise",  // 1 loop
-      // brushType: "Fill Noise",
+      brushType: "Fill Noise",
       // brushType: "Only Perlin",
       // brushType: "Combined Perlin",  // 3 loops
       brushCurveSexyness: 1,
@@ -481,7 +483,46 @@ function setup() {
     },
   ]
 
+  ontop = new BrushstrokeSystem({
+    name: "ehemals layc",
+    // orientation: getRandomFromList(["x", "y"]),
+    orientation: getRandomFromList(["y"]),
+    OVERLAY: false,
+    brushCount: 300, //500,  // 100
+    noiseIncrement: 0.006,  // 0.06 - 0.6
+    DEBUG: false,
+    maxSpeedMin: 10,  // 15
+    maxSpeedMax: 30, // 20
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 320,
+    finishedRadius: 40,
+    // targetBdistList: [1000],
+    targetBdistList: [200, 500, 600, 750, 1000, 2000],
+    // targetBDirectionList: [-1],
+    targetBDirectionList: [-1, 1],
+    basicSizeMin: 1,
+    basicSizeMax: 1.5,
+    noiseColor: [color("#af0606ff"), color("#f02626ff")],
+    // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
+    brushTemplateCount: 20,
+    brushTemplateSize: 190,
+    brushTemplateStrokeSize: 1,  // out
+    brushTemplateFillColor: color("#c9c9c9ff"),
+    // brushTemplateFillColor: color("#cc1a1a83"),
+    brushTemplateFillColorDistort: 20,
+    // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    brushTemplateStrokeColor: color("#52000083"),
+    // brushTemplateStrokeColorDistort: 20,  // out
+    brushType: "Fill Noise",
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+    brushOpacityDistort: 50,
+  })
+
   chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
+
   chosenNoise = new Noise();
 
   gridProfile = {
