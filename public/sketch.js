@@ -135,10 +135,13 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  // less
-  let darkColor = color("#af0606ff");
-  let lightColor = color("#f02626ff");
-  // more
+  // base color: #d80f0fff
+  let darkColor = color("#c70303ff");
+  let lightColor = color("#f51c1cff");
+  // less spread
+  // let darkColor = color("#af0606ff");
+  // let lightColor = color("#f02626ff");
+  // higher spread
   // let darkColor = color("#860202ff");
   // let lightColor = color("#f53c3cff");
 
