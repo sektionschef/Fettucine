@@ -8,6 +8,7 @@ class Grid {
         this.countColumnOrRow = data.countColumnOrRow;
         this.bezierFactor = data.bezierFactor;
         this.pattern = data.pattern.buffer;
+        this.pattern2 = data.pattern2.buffer;
         this.backgroundNoise = data.backgroundNoise;
 
         this.DEBUG = false;
@@ -511,7 +512,7 @@ class Grid {
                 // this.loopBuffer.tint(255, 200)
 
                 // SECOND LAYER
-                this.loopBuffer.image(maskBuffers(ontop.buffer, this.loopBuffer), 0, 0);
+                this.loopBuffer.image(maskBuffers(this.pattern2, this.loopBuffer), 0, 0);
                 this.loopBuffer.image(maskBuffers(this.pattern, this.loopBuffer), 0, 0);
 
                 this.loopBuffer.pop();

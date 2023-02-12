@@ -493,7 +493,7 @@ function setup() {
     },
   ]
 
-  ontop = new BrushstrokeSystem({
+  pattern2 = new BrushstrokeSystem({
     name: "ehemals layc",
     // orientation: getRandomFromList(["x", "y"]),
     orientation: getRandomFromList(["y"]),
@@ -532,7 +532,6 @@ function setup() {
   })
 
   chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
-
   chosenNoise = new Noise();
 
   gridProfile = {
@@ -542,6 +541,7 @@ function setup() {
     thickness: 1,
     spacing: getRandomFromList([1, 2, 3]),
     pattern: chosenPattern,
+    pattern2: pattern2,
     backgroundNoise: chosenNoise,
     // how many loopLayers with pattern
   }
