@@ -4,8 +4,14 @@ class Corny {
         this.height = SHORTSIDE * 0.25;  // 800
 
         this.dotcCount = 0.0005 * TOTALPIXEL;
-        this.diameter = 0.000001 * TOTALPIXEL;
-        this.colorDistort = 10;
+        this.diameter = 2;
+        this.colorBase = color(
+            red(PALETTE.tint) - 20,
+            green(PALETTE.tint) - 20,
+            blue(PALETTE.tint) - 20,
+            alpha(PALETTE.tint),
+        );
+        this.colorDistort = 20;
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);
@@ -20,7 +26,7 @@ class Corny {
     create() {
         for (var i = 0; i < this.dotcCount; i++) {
 
-            this.fillColor = distortColorSuperNew(color(PALETTE.tint), this.colorDistort);
+            this.fillColor = distortColorSuperNew(this.colorBase, this.colorDistort);
             this.pos = createVector(getRandomFromInterval(0, this.width), getRandomFromInterval(0, this.height));
 
             this.buffer.noStroke();
