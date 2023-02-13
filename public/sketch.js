@@ -11,7 +11,7 @@ let PALETTE;
 let PALETTE_LABEL;
 let ALLDONE = false;
 
-let TITLE = "Härte des Gesetzes";
+let TITLE = "Materialista";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
 let URL = "https://digitalitility.com";
@@ -531,28 +531,28 @@ function setup() {
     brushOpacityDistort: 50,
   }
 
-  // chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
-  // pattern2 = new BrushstrokeSystem(pattern2Data);
-  // chosenNoise = new Noise();
+  chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
+  pattern2 = new BrushstrokeSystem(pattern2Data);
+  chosenNoise = new Noise();
 
-  // gridProfile = {
-  //   stripeOrientation: getRandomFromList(["x", "y"]),
-  //   countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
-  //   bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
-  //   thickness: 1,
-  //   spacing: getRandomFromList([1, 2, 3]),
-  //   pattern: chosenPattern,
-  //   pattern2: pattern2,
-  //   backgroundNoise: chosenNoise,
-  //   // how many loopLayers with pattern
-  // }
+  gridProfile = {
+    stripeOrientation: getRandomFromList(["x", "y"]),
+    countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
+    bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
+    thickness: 1,
+    spacing: getRandomFromList([1, 2, 3]),
+    pattern: chosenPattern,
+    pattern2: pattern2,
+    backgroundNoise: chosenNoise,
+    // how many loopLayers with pattern
+  }
 
-  // grid = new Grid(gridProfile);
+  grid = new Grid(gridProfile);
 
   // Paper
   paper = new Paper();
   corny = new Corny();
-  // edgePixel = new PixelGradient();
+  edgePixel = new PixelGradient();
 
 
 
@@ -565,6 +565,7 @@ function setup() {
   // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), "x");
 
   // grid = new Grid(getRandomFromList(gridProfiles));
+
   // PAPER REDUCED TO SHAPE OF GRID
   // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
@@ -641,13 +642,13 @@ function draw() {
   // PAPER
   paper.show();
   corny.show();
-  // edgePixel.show();
+  edgePixel.show();
 
   // backgroundNoise.show();
 
 
   // GRID ON TOP
-  // grid.show();
+  grid.show();
 
   // chosenPattern.show();
   // chosenPattern.showBrushTemplates();

@@ -68,8 +68,11 @@ class Grid {
         // this.showDebug();
         this.createMask();
 
-        this.drawMask();
+        // this.createBasicBase();
+        this.createComplexBase();
+
         this.drawNoise();
+        this.drawMask();
 
         // extra loop outside of beginShape and endShape
         // this.createUpperLine();
@@ -318,8 +321,10 @@ class Grid {
 
     drawMask() {
 
-        // this.createBasicBase();
-        this.createComplexBase();
+        this.buffer.push();
+        // this.buffer.blendMode(OVERLAY);
+        this.buffer.image(this.complexBaseBuffer, 0, 0);
+        this.buffer.pop();
 
         // DRAW LINES
         // extra loop outside of beginShape and endShape
@@ -365,6 +370,7 @@ class Grid {
 
     createComplexBase() {
 
+        this.complexBaseBuffer = createGraphics(width, height);
         let changer = 30;
         this.loopLayerCount = 20; // 20
         let totalMargin = SHORTSIDE * 0.05;
@@ -519,7 +525,7 @@ class Grid {
             }
 
             // add to the buffer
-            this.buffer.image(this.loopBuffer, 0, 0);
+            this.complexBaseBuffer.image(this.loopBuffer, 0, 0);
         }
     }
 
@@ -622,9 +628,9 @@ class Grid {
     createNoise(A, ABStop1, ABStop2, B) {
 
         this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#9b9b9b");
-        this.pointCount = 0.1 * p5.Vector.dist(A, B);
-        this.noiseDistance = 3 // p5.Vector.dist(A, C) * 0.02; // 25;
+        this.noiseColor = color("#8a8a8a");
+        this.pointCount = 0.2 * p5.Vector.dist(A, B);
+        this.noiseDistance = 1 // p5.Vector.dist(A, C) * 0.02; // 25;
 
         for (var i = 0; i < this.pointCount; i++) {
 
@@ -720,7 +726,7 @@ class Grid {
 
     drawNoise() {
         this.buffer.push();
-        this.buffer.blendMode(OVERLAY);
+        // this.buffer.blendMode(OVERLAY);
         this.buffer.image(this.bufferNoise, 0, 0);
         this.buffer.pop();
     }

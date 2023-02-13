@@ -11,7 +11,7 @@ class Corny {
             blue(PALETTE.tint) - 20,
             alpha(PALETTE.tint),
         );
-        this.colorDistort = 20;
+        this.colorDistort = 10;
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);

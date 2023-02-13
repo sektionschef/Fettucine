@@ -6,15 +6,15 @@ class Paper {
         // this.strokeColor = distortColorSuperNew(color("#8a8a8a"), 30);
         // this.strokeColorBase = color(PALETTE.tint);
         this.strokeColorBase = color(
-            red(PALETTE.tint) + 50,
-            green(PALETTE.tint) + 50,
-            blue(PALETTE.tint) + 50,
+            red(PALETTE.tint) + 30,
+            green(PALETTE.tint) + 30,
+            blue(PALETTE.tint) + 30,
             alpha(PALETTE.tint),
         );
-        this.strokeColorOffset = 10;
+        this.strokeColorOffset = 20;
         this.strokeSize = 1; // 1;
         this.lineLength = 25; // 25; // 5 +2
-        this.lineCount = 0.02 * TOTALPIXEL; // 10000
+        this.lineCount = 0.002 * TOTALPIXEL; // 10000
 
         this.xCount = Math.ceil(width / this.width);
         this.yCount = Math.ceil(height / this.height);
