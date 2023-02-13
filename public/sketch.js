@@ -551,8 +551,8 @@ function setup() {
 
   // Paper
   paper = new Paper();
-  corny = new Corny();
-  edgePixel = new PixelGradient();
+  // corny = new Corny();
+  // edgePixel = new PixelGradient();
 
 
 
@@ -639,9 +639,9 @@ function draw() {
   // chosenPattern.show();
 
   // PAPER
-  corny.show();
+  // corny.show();
   paper.show();
-  edgePixel.show();
+  // edgePixel.show();
 
   // backgroundNoise.show();
 

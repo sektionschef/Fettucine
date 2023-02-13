@@ -64,7 +64,7 @@ function distortColorNew(colorObject, diff, strict = true) {
 
 
 function distortColorSuperNew(colorObject, gain) {
-    var distort = + randomGaussian(0, gain);
+    var distort = randomGaussian(0, gain);
     return color(
         red(colorObject) + distort,
         green(colorObject) + distort,
