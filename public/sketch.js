@@ -54,13 +54,13 @@ const PALETTESYSTEM = {
   },
   "Yellow Mowy": {
     "cardboard": "#ffba39ff",
-    "paper": "#fafafa", // "#e7e7e7",
+    "paper": "#fafafa",
     "darkColor": "#f5885cff",
     "lightColor": "#fcb073ff",
   },
   "Hasenhüttl": {
     "cardboard": "#ffa600ff",
-    "paper": "#fafafa", // "#e7e7e7",
+    "paper": "#fafafa",
     "darkColor": "#a76c00ff",
     "lightColor": "#fdd281ff",
   },
@@ -131,14 +131,6 @@ function setup() {
   canvasFormatChosen = getRandomFromList(canvasFormats);
   // console.log("Canvas Format: " + canvasFormatChosen.name);
 
-  // rescaling_width = 2400; // 4000;
-  // rescaling_height = 3000; // 5000;
-  // SHORTSIDE = 2400; // 4000;
-
-  // rescaling_width = 4000;
-  // rescaling_height = 5000;
-
-  // CLEANUP HERE
   rescaling_width = canvasFormatChosen.canvasWidth;
   rescaling_height = canvasFormatChosen.canvasHeight;
 
@@ -571,19 +563,7 @@ function setup() {
   edgePixel = new PixelGradient();
 
 
-
-  // gridTexture = createGraphics(width, height);
-  // push();
-  // gridTexture.image(paper.masterBuffer, 0, 0);
-  // gridTexture.image(edgePixel.masterBuffer, 0, 0);
-  // pop();
-
   // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), "x");
-
-  // grid = new Grid(getRandomFromList(gridProfiles));
-
-  // PAPER REDUCED TO SHAPE OF GRID
-  // gridTexture = maskBuffers(gridTexture, grid.buffer);
 
   // noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
   // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), grid.stripeOrientation);
@@ -629,100 +609,63 @@ function draw() {
     pixelDensity(CURRENTPIXELDENS);
   }
 
-  // background(color(BACKGROUND));
-  // background(color("#d8d8d8"));
-  // background(color("black"));
-  // background(color("#e92929"));
-  // background(color("#1e1c7e"));
-  // background(color("#c9a02fff"));
   background(PALETTE.paper);
 
-
-  // fillNoiseOverlay.show();
-  // fillNoisePart.show();
-  // strokeNoise.show();
-
-  // example.show();
-
-  // areaA.show();
-  // areaB.show();
-
-  // PAPER
-  // laya.show();
-  // layb.show();
-  // layc.show();
-  // noiseStripes.show();
-
-  // chosenPattern.show();
 
   // PAPER
   paper.show();
   corny.show();
   edgePixel.show();
 
+
+  // fillNoiseOverlay.show();
+  // fillNoisePart.show();
+  // strokeNoise.show();
+
+  // noiseStripes.show();
   // backgroundNoise.show();
-
-
-  // GRID ON TOP
-  grid.show();
 
   // chosenPattern.show();
   // chosenPattern.showBrushTemplates();
 
-
-  // push();
-  // blendMode(OVERLAY);
-  // image(gridTexture, 0, 0);
-  // pop();
-  // backgroundNoise.show();
-
-  // PROTOTYPE WITH RED COLOR
-  // grid.show();
-  // push();
-  // // blendMode(OVERLAY);
-  // // image(noiseStripesMask.masterBuffer, 0, 0);
-  // tint(255, 150);
-  // image(maskBuffers(noiseStripesMask.masterBuffer, grid.buffer), 0, 0);
-  // pop();
-  // grid.show();
-
-
-  // COOL MIT LAYC
-  // push();
-  // blendMode(OVERLAY);
-  // // image(maskBuffers(layc.buffer, grid.buffer), 0, 0);
-  // image(maskBuffers(layb.buffer, grid.buffer), 0, 0);
-  // pop();
-  // grid.show();
-
-  // TEST MIT NOISE AUF DIE EINZELNEN BLÄTTER
-  // grid.show();
-
-  // paper.show();
-  // backgroundNoise.show();
-
-  // notes - nicht zu pixelig, noise is gut, aber paper zu viel. vlt nur hintergrund.
-
-
-  // noiseStripesMask.show();
+  // CARDBOARD ON TOP
+  grid.show();
 
 
   // PROTOTYPE SPLATTER
-  // push();
-  // let blob = createGraphics(width, height);
-  // let changer = 100;
-  // let loopCount = 40;
-  // for (var i = 0; i < loopCount; i++) {
-  //   blob.fill(color(50, 20));
-  //   blob.noStroke();
-  //   blob.beginShape();
-  //   blob.vertex(1000, 1000);
-  //   blob.bezierVertex(1200 + getRandomFromInterval(-changer, changer), 1000 + getRandomFromInterval(-changer, changer), 1300 + getRandomFromInterval(-changer, changer), 1100 + getRandomFromInterval(-changer, changer), 1500, 1500);
-  //   blob.endShape(CLOSE);
-  // }
+  push();
+  let blob = createGraphics(width, height);
+  let changer = 100;
+  let loopCount = 1;
+  for (var i = 0; i < loopCount; i++) {
+
+    let pointX = createVector(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
+    let pointA = p5.Vector.sub(pointX, createVector(-200, -300));
+    let pointB = p5.Vector.sub(pointX, createVector(200, -300));
+    let pointC = p5.Vector.sub(pointX, createVector(200, 300));
+    let pointD = p5.Vector.sub(pointX, createVector(-200, 300));
+
+    // DEBUG
+    // strokeWeight(50);
+    // point(pointX.x, pointX.y);
+    // point(pointA.x, pointA.y);
+    // point(pointB.x, pointB.y);
+    // point(pointC.x, pointC.y);
+    // point(pointD.x, pointD.y);
+
+    // blob.fill(color(50, 255));
+    // blob.noStroke();
+
+
+    // blob.beginShape();
+
+    // blob.vertex(1000, 1000);
+    // blob.bezierVertex(1200 + getRandomFromInterval(-changer, changer), 1000 + getRandomFromInterval(-changer, changer), 1300 + getRandomFromInterval(-changer, changer), 1100 + getRandomFromInterval(-changer, changer), 1500, 1500);
+    // blob.endShape(CLOSE);
+  }
   // blendMode(OVERLAY);
-  // image(blob, 0, 0);
-  // pop();
+  image(blob, 0, 0);
+  pop();
 
   fxpreview();
   noLoop();
