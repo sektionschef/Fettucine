@@ -1,3 +1,6 @@
+// setup: noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
+// draw: noiseStripes.show();
+
 class NoiseStripes {
     constructor(upperLeft, lowerRight, gridOrientation) {
 

@@ -563,12 +563,6 @@ function setup() {
   edgePixel = new PixelGradient();
 
 
-  // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), "x");
-
-  // noiseStripes = new NoiseStripes(p5.Vector.sub(grid.totalA, createVector(50, 50)), p5.Vector.add(grid.totalC, createVector(50, 50)), grid.stripeOrientation);
-  // noiseStripesMask = new NoiseStripes(createVector(0, 0), createVector(width, height), grid.stripeOrientation);
-
-
   // FEATURES
   window.$fxhashFeatures = {
     "Format": canvasFormatChosen.name,
@@ -618,13 +612,6 @@ function draw() {
   edgePixel.show();
 
 
-  // fillNoiseOverlay.show();
-  // fillNoisePart.show();
-  // strokeNoise.show();
-
-  // noiseStripes.show();
-  // backgroundNoise.show();
-
   // chosenPattern.show();
   // chosenPattern.showBrushTemplates();
 
@@ -634,36 +621,42 @@ function draw() {
 
   // PROTOTYPE SPLATTER
   push();
+  let lengthFromCenterMin = 2;
+  let lengthFromCenterMax = 8;
+  // let changer = 100;
+  let loopCount = 1000;
+
   let blob = createGraphics(width, height);
-  let changer = 100;
-  let loopCount = 1;
   for (var i = 0; i < loopCount; i++) {
 
     let pointX = createVector(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
-    let pointA = p5.Vector.sub(pointX, createVector(-200, -300));
-    let pointB = p5.Vector.sub(pointX, createVector(200, -300));
-    let pointC = p5.Vector.sub(pointX, createVector(200, 300));
-    let pointD = p5.Vector.sub(pointX, createVector(-200, 300));
+    let pointA = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
+    let pointB = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
+    let pointC = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
+    let pointD = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
 
     // DEBUG
-    // strokeWeight(50);
+    // strokeWeight(40);
     // point(pointX.x, pointX.y);
     // point(pointA.x, pointA.y);
     // point(pointB.x, pointB.y);
     // point(pointC.x, pointC.y);
     // point(pointD.x, pointD.y);
 
-    // blob.fill(color(50, 255));
-    // blob.noStroke();
+    blob.fill(color(130, 255));
+    // blob.fill(PALETTE.cardboard);
+    blob.noStroke();
 
+    blob.beginShape();
 
-    // blob.beginShape();
-
-    // blob.vertex(1000, 1000);
-    // blob.bezierVertex(1200 + getRandomFromInterval(-changer, changer), 1000 + getRandomFromInterval(-changer, changer), 1300 + getRandomFromInterval(-changer, changer), 1100 + getRandomFromInterval(-changer, changer), 1500, 1500);
-    // blob.endShape(CLOSE);
+    blob.vertex(pointA.x, pointA.y);
+    // blob.bezierVertex(pointB.x, pointB.y, pointB.x, pointB.y, pointB.x, pointB.y);
+    blob.vertex(pointB.x, pointB.y);
+    blob.vertex(pointC.x, pointC.y);
+    blob.vertex(pointD.x, pointD.y);
+    blob.endShape(CLOSE);
   }
-  // blendMode(OVERLAY);
+  blendMode(OVERLAY);
   image(blob, 0, 0);
   pop();
 
