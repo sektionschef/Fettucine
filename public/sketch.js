@@ -22,54 +22,60 @@ let EDITIONS = "256 editions";
 let CURRENTPIXELDENS = 1;
 
 const PALETTESYSTEM = {
-  // "Judd": {
-  //   "background": "#d80f0fff",
-  //   "tint": "#fafafa",
-  //   // "darkColor": "#c70303ff",
-  //   // "lightColor": "#f51c1cff",
-  //   // less spread
-  //   // "darkColor": "#af0606ff",
-  //   // "lightColor": "#f02626ff",
-  //   // higher spread
-  //   "darkColor": "#860202ff",
-  //   "lightColor": "#f53c3cff",
-  // },
-  // "Emmerald": {
-  //   "background": "#edb0ffff",
-  //   "tint": "#fafafa",
-  //   "darkColor": "#f575b5ff",
-  //   "lightColor": "#5858e4ff",
-  // },
-  // "New Red Baron": {
-  //   "background": "#ff0000ff",
-  //   "tint": "#fafafa",
-  //   "darkColor": "#860202ff",
-  //   "lightColor": "#f53c3cff",
-  // },
+  "Papa": {
+    "cardboard": "#d80f0fff",
+    "paper": "#fafafa",
+    "darkColor": "#c70303ff",
+    "lightColor": "#f51c1cff",
+  },
+  "Suburban": {
+    "cardboard": "#d80f0fff",
+    "paper": "#fafafa",
+    "darkColor": "#af0606ff",
+    "lightColor": "#f02626ff",
+  },
+  "Wake Board": {
+    "cardboard": "#d80f0fff",
+    "paper": "#fafafa",
+    "darkColor": "#860202ff",
+    "lightColor": "#f53c3cff",
+  },
+  "Emmerald": {
+    "cardboard": "#edb0ffff",
+    "paper": "#fafafa",
+    "darkColor": "#f575b5ff",
+    "lightColor": "#5858e4ff",
+  },
+  "New Red Baron": {
+    "cardboard": "#ff0000ff",
+    "paper": "#fafafa",
+    "darkColor": "#860202ff",
+    "lightColor": "#f53c3cff",
+  },
   "Yellow Mowy": {
-    "background": "#ffba39ff",
-    "tint": "#fafafa", // "#e7e7e7",
+    "cardboard": "#ffba39ff",
+    "paper": "#fafafa", // "#e7e7e7",
     "darkColor": "#f5885cff",
     "lightColor": "#fcb073ff",
   },
-  // "Hasenhüttl": {
-  //   "background": "#ffa600ff",
-  //   "tint": "#fafafa", // "#e7e7e7",
-  //   "darkColor": "#a76c00ff",
-  //   "lightColor": "#fdd281ff",
-  // },
-  // "Grind": {
-  //   "background": "#314ce4ff",
-  //   "tint": "#fafafa",
-  //   "darkColor": "#0d1a63ff",
-  //   "lightColor": "#3047ceff",
-  // },
-  // "Alles gut mein Kind": {
-  //   "background": "#273797ff",
-  //   "tint": "#fafafa",
-  //   "darkColor": "#0d1a63ff",
-  //   "lightColor": "#3047ceff",
-  // },
+  "Hasenhüttl": {
+    "cardboard": "#ffa600ff",
+    "paper": "#fafafa", // "#e7e7e7",
+    "darkColor": "#a76c00ff",
+    "lightColor": "#fdd281ff",
+  },
+  "Grind": {
+    "cardboard": "#314ce4ff",
+    "paper": "#fafafa",
+    "darkColor": "#0d1a63ff",
+    "lightColor": "#3047ceff",
+  },
+  "Alles gut mein Kind": {
+    "cardboard": "#273797ff",
+    "paper": "#fafafa",
+    "darkColor": "#0d1a63ff",
+    "lightColor": "#3047ceff",
+  },
 }
 
 choosePalette();
@@ -629,7 +635,7 @@ function draw() {
   // background(color("#e92929"));
   // background(color("#1e1c7e"));
   // background(color("#c9a02fff"));
-  background(PALETTE.tint);
+  background(PALETTE.paper);
 
 
   // fillNoiseOverlay.show();

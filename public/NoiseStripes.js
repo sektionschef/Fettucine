@@ -85,7 +85,7 @@ class NoiseStripes {
 
     show() {
         push();
-        tint(color(PALETTE.tint));
+        tint(color(PALETTE.paper));
         image(this.masterBuffer, this.upperLeft.x, this.upperLeft.y);
         pop();
     }

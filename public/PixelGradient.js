@@ -9,10 +9,10 @@ class PixelGradient {
 
         // this.strokeColor = color("#a8a8a8");
         this.strokeColor = color(
-            red(PALETTE.tint) - 60,
-            green(PALETTE.tint) - 60,
-            blue(PALETTE.tint) - 60,
-            alpha(PALETTE.tint),
+            red(PALETTE.paper) - 60,
+            green(PALETTE.paper) - 60,
+            blue(PALETTE.paper) - 60,
+            alpha(PALETTE.paper),
         );
         this.strokeWeight = 1;
         this.pointCount = TOTALPIXEL * 0.005;

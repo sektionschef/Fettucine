@@ -380,7 +380,7 @@ class Grid {
 
         // let redTone = color(255, 0, 0, 20)
         let distortColorGain = 30;
-        let redTone = color(red(PALETTE.background), green(PALETTE.background), blue(PALETTE.background), opacityLevel);
+        let redTone = color(red(PALETTE.cardboard), green(PALETTE.cardboard), blue(PALETTE.cardboard), opacityLevel);
 
 
         for (var i = 0; i < this.loopLayerCount; i++) {

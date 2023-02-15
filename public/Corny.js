@@ -6,10 +6,10 @@ class Corny {
         this.dotcCount = 0.0005 * TOTALPIXEL;
         this.diameter = 2;
         this.colorBase = color(
-            red(PALETTE.tint) - 20,
-            green(PALETTE.tint) - 20,
-            blue(PALETTE.tint) - 20,
-            alpha(PALETTE.tint),
+            red(PALETTE.paper) - 20,
+            green(PALETTE.paper) - 20,
+            blue(PALETTE.paper) - 20,
+            alpha(PALETTE.paper),
         );
         this.colorDistort = 10;
 

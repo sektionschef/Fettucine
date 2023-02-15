@@ -4,12 +4,12 @@ class Paper {
         this.height = SHORTSIDE * 0.2;  // 800
 
         // this.strokeColor = distortColorSuperNew(color("#8a8a8a"), 30);
-        // this.strokeColorBase = color(PALETTE.tint);
+        // this.strokeColorBase = color(PALETTE.paper);
         this.strokeColorBase = color(
-            red(PALETTE.tint) + 30,
-            green(PALETTE.tint) + 30,
-            blue(PALETTE.tint) + 30,
-            alpha(PALETTE.tint),
+            red(PALETTE.paper) + 30,
+            green(PALETTE.paper) + 30,
+            blue(PALETTE.paper) + 30,
+            alpha(PALETTE.paper),
         );
         this.strokeColorOffset = 20;
         this.strokeSize = 1; // 1;
