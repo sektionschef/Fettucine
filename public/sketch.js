@@ -22,33 +22,53 @@ let EDITIONS = "256 editions";
 let CURRENTPIXELDENS = 1;
 
 const PALETTESYSTEM = {
-  "Judd": {
-    "background": "#d80f0fff",
-    "tint": "#fafafa",
-  },
-  // "Grey Susi": {
-  //   "background": "#3a3939ff",
+  // "Judd": {
+  //   "background": "#d80f0fff",
   //   "tint": "#fafafa",
+  //   // "darkColor": "#c70303ff",
+  //   // "lightColor": "#f51c1cff",
+  //   // less spread
+  //   // "darkColor": "#af0606ff",
+  //   // "lightColor": "#f02626ff",
+  //   // higher spread
+  //   "darkColor": "#860202ff",
+  //   "lightColor": "#f53c3cff",
+  // },
+  // "Emmerald": {
+  //   "background": "#edb0ffff",
+  //   "tint": "#fafafa",
+  //   "darkColor": "#f575b5ff",
+  //   "lightColor": "#5858e4ff",
   // },
   // "New Red Baron": {
   //   "background": "#ff0000ff",
-  //   "tint": "#fafafa", // "#e7e7e7",
+  //   "tint": "#fafafa",
+  //   "darkColor": "#860202ff",
+  //   "lightColor": "#f53c3cff",
   // },
-  // "Yellow Mowy": {
-  //   "background": "#ffba39ff",
-  //   "tint": "#fafafa", // "#e7e7e7",
-  // },
+  "Yellow Mowy": {
+    "background": "#ffba39ff",
+    "tint": "#fafafa", // "#e7e7e7",
+    "darkColor": "#f5885cff",
+    "lightColor": "#fcb073ff",
+  },
   // "Hasenhüttl": {
   //   "background": "#ffa600ff",
   //   "tint": "#fafafa", // "#e7e7e7",
+  //   "darkColor": "#a76c00ff",
+  //   "lightColor": "#fdd281ff",
   // },
   // "Grind": {
   //   "background": "#314ce4ff",
-  //   "tint": "#fafafa", // "#e7e7e7",
+  //   "tint": "#fafafa",
+  //   "darkColor": "#0d1a63ff",
+  //   "lightColor": "#3047ceff",
   // },
   // "Alles gut mein Kind": {
   //   "background": "#273797ff",
-  //   "tint": "#fafafa", // "#e7e7e7",
+  //   "tint": "#fafafa",
+  //   "darkColor": "#0d1a63ff",
+  //   "lightColor": "#3047ceff",
   // },
 }
 
@@ -134,16 +154,6 @@ function setup() {
   } else {
     canvas.parent("canvasHolderPlain");
   }
-
-  // base color: #d80f0fff
-  // let darkColor = color("#c70303ff");
-  // let lightColor = color("#f51c1cff");
-  // less spread
-  // let darkColor = color("#af0606ff");
-  // let lightColor = color("#f02626ff");
-  // higher spread
-  let darkColor = color("#860202ff");
-  let lightColor = color("#f53c3cff");
 
   // size, and count and looplayer count and type
   patternProfiles = [
@@ -469,7 +479,7 @@ function setup() {
       targetBDirectionList: [-1, 1],
       basicSizeMin: 1,
       basicSizeMax: 1.5,
-      noiseColor: [darkColor, lightColor],
+      noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
       // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
       // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
       brushTemplateCount: 20,
@@ -513,7 +523,7 @@ function setup() {
     targetBDirectionList: [-1, 1],
     basicSizeMin: 1,
     basicSizeMax: 1.5,
-    noiseColor: [darkColor, lightColor],
+    noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
     // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
     brushTemplateCount: 20,
