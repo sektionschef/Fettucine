@@ -94,47 +94,87 @@ function setup() {
 
   // size, and count and looplayer count and type
   patternProfiles = [
-    // {
-    //   name: "laya",
-    //   // originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
-    //   // targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
-    //   // originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
-    //   // targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
-    //   orientation: getRandomFromList(["x", "y"]),
-    //   OVERLAY: false,
-    //   brushCount: 100, //500,  // 100
-    //   noiseIncrement: 0.06,  // 0.06 - 0.6
-    //   DEBUG: false,
-    //   maxSpeedMin: 10,  // 15
-    //   maxSpeedMax: 30, // 20
-    //   minSpeed: 2,
-    //   maxForce: 2,
-    //   slowRadius: 320,
-    //   finishedRadius: 40,
-    //   // targetBdistList: [1000],
-    //   targetBdistList: [500, 750, 1000, 2000],
-    //   // targetBDirectionList: [-1],
-    //   targetBDirectionList: [-1, 1],
-    //   basicSizeMin: 1,
-    //   basicSizeMax: 1.5,
-    //   noiseColor: [color("#b4b4b4"), color("#fcfcfc"), color("#cacaca")],
-    //   brushTemplateCount: 20,
-    //   brushTemplateSize: 200,
-    //   brushTemplateStrokeSize: 1,  // out
-    //   brushTemplateFillColor: color("#c9c9c9ff"),
-    //   // brushTemplateFillColor: color("#cc1a1a83"),
-    //   brushTemplateFillColorDistort: 20,
-    //   // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
-    //   brushTemplateStrokeColor: color("#52000083"),
-    //   // brushTemplateStrokeColorDistort: 20,  // out
-    //   brushType: "Fill Noise",
-    //   brushCurveSexyness: 1,
-    //   brushPixelDistort: 50,
-    //   brushOpacityDistort: 50,
-    // },
-    // {
+    [{
+      name: "laya",
+      // originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+      // targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+      // originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+      // targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+      orientation: getRandomFromList(["x"]),
+      OVERLAY: false,
+      brushCount: 100, //500,  // 100
+      noiseIncrement: 0.06,  // 0.06 - 0.6
+      DEBUG: false,
+      maxSpeedMin: 10,  // 15
+      maxSpeedMax: 30, // 20
+      minSpeed: 2,
+      maxForce: 2,
+      slowRadius: 320,
+      finishedRadius: 40,
+      // targetBdistList: [1000],
+      targetBdistList: [500, 750, 1000, 2000],
+      // targetBDirectionList: [-1],
+      targetBDirectionList: [-1, 1],
+      basicSizeMin: 1,
+      basicSizeMax: 1.5,
+      noiseColor: [color("#b4b4b4"), color("#fcfcfc"), color("#cacaca")],
+      brushTemplateCount: 20,
+      brushTemplateSize: 200,
+      brushTemplateStrokeSize: 1,  // out
+      brushTemplateFillColor: color("#c9c9c9ff"),
+      // brushTemplateFillColor: color("#cc1a1a83"),
+      brushTemplateFillColorDistort: 20,
+      // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+      brushTemplateStrokeColor: color("#52000083"),
+      // brushTemplateStrokeColorDistort: 20,  // out
+      brushType: "Fill Noise",
+      brushCurveSexyness: 1,
+      brushPixelDistort: 50,
+      brushOpacityDistort: 50,
+    },
+    {
+      name: "laya",
+      // originA: createVector(width / 10 * 0, height / 10 * 0),  // left, start of brushstrokes
+      // targetA: createVector(width / 10 * 0, height / 10 * 10), // left, end of brusshtrokes
+      // originB: createVector(width / 10 * 10, height / 10 * 0), // right, start of brushstrokes
+      // targetB: createVector(width / 10 * 10, height / 10 * 10), // right, end of brushstrokes
+      orientation: getRandomFromList(["y"]),
+      OVERLAY: false,
+      brushCount: 100, //500,  // 100
+      noiseIncrement: 0.06,  // 0.06 - 0.6
+      DEBUG: false,
+      maxSpeedMin: 10,  // 15
+      maxSpeedMax: 30, // 20
+      minSpeed: 2,
+      maxForce: 2,
+      slowRadius: 320,
+      finishedRadius: 40,
+      // targetBdistList: [1000],
+      targetBdistList: [500, 750, 1000, 2000],
+      // targetBDirectionList: [-1],
+      targetBDirectionList: [-1, 1],
+      basicSizeMin: 1,
+      basicSizeMax: 1.5,
+      noiseColor: [color("#b4b4b4"), color("#fcfcfc"), color("#cacaca")],
+      brushTemplateCount: 20,
+      brushTemplateSize: 200,
+      brushTemplateStrokeSize: 1,  // out
+      brushTemplateFillColor: color("#c9c9c9ff"),
+      // brushTemplateFillColor: color("#cc1a1a83"),
+      brushTemplateFillColorDistort: 20,
+      // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+      brushTemplateStrokeColor: color("#52000083"),
+      // brushTemplateStrokeColorDistort: 20,  // out
+      brushType: "Fill Noise",
+      brushCurveSexyness: 1,
+      brushPixelDistort: 50,
+      brushOpacityDistort: 50,
+    },
+    ]
+
+    // [{
     //   name: "layb",
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   orientation: getRandomFromList(["x"]),
     //   OVERLAY: false,
     //   brushCount: 100, //500,  // 100
     //   noiseIncrement: 0.06,  // 0.06 - 0.6
@@ -167,8 +207,43 @@ function setup() {
     //   brushOpacityDistort: 50,
     // },
     // {
+    //   name: "layb",
+    //   orientation: getRandomFromList(["y"]),
+    //   OVERLAY: false,
+    //   brushCount: 100, //500,  // 100
+    //   noiseIncrement: 0.06,  // 0.06 - 0.6
+    //   DEBUG: false,
+    //   maxSpeedMin: 10,  // 15
+    //   maxSpeedMax: 30, // 20
+    //   minSpeed: 2,
+    //   maxForce: 2,
+    //   slowRadius: 320,
+    //   finishedRadius: 40,
+    //   // targetBdistList: [1000],
+    //   targetBdistList: [200, 500, 750, 1000],
+    //   // targetBDirectionList: [-1],
+    //   targetBDirectionList: [-1, 1],
+    //   basicSizeMin: 1,
+    //   basicSizeMax: 1.5,
+    //   noiseColor: [color("#888787"), color("#cccccc"), color("#ffffff")],
+    //   brushTemplateCount: 20,
+    //   brushTemplateSize: 100,
+    //   brushTemplateStrokeSize: 1,  // out
+    //   brushTemplateFillColor: color("#c9c9c9ff"),
+    //   // brushTemplateFillColor: color("#cc1a1a83"),
+    //   brushTemplateFillColorDistort: 20,
+    //   // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    //   brushTemplateStrokeColor: color("#52000083"),
+    //   // brushTemplateStrokeColorDistort: 20,  // out
+    //   brushType: "Fill Noise",
+    //   brushCurveSexyness: 1,
+    //   brushPixelDistort: 50,
+    //   brushOpacityDistort: 50,
+    // },
+    // ],
+    // [{
     //   name: "ehemals layc",
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   orientation: getRandomFromList(["x"]),
     //   OVERLAY: false,
     //   brushCount: 300, //500,  // 100
     //   noiseIncrement: 0.006,  // 0.06 - 0.6
@@ -202,110 +277,250 @@ function setup() {
     //   brushOpacityDistort: 50,
     // },
     // {
-    //   name: "areaA",
-    //   orientation: getRandomFromList(["x", "y"]),
-    //   OVERLAY: true,
-    //   brushCount: 300,  // 100
-    //   noiseIncrement: 0.9,  // 0.06 - 0.6
-    //   DEBUG: false,
-    //   maxSpeedMin: 5,  // 15
-    //   maxSpeedMax: 10, // 20
-    //   minSpeed: 2,
-    //   maxForce: 2,
-    //   slowRadius: 40,
-    //   finishedRadius: 10,
-    //   // targetBdistList: [50, 100, 200],
-    //   targetBdistList: [500],
-    //   targetBDirectionList: [-1, 1],
-    //   // targetBDirectionList: [-1],
-    //   basicSizeMin: 1,
-    //   basicSizeMax: 1.1,
-    //   noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
-    //   brushTemplateCount: 20,
-    //   brushTemplateSize: 50,
-    //   brushTemplateStrokeSize: 1,
-    //   brushTemplateFillColor: color("#b8b8b883"),
-    //   // brushTemplateFillColor: color("#cc1a1a83"),
-    //   brushTemplateFillColorDistort: 10,
-    //   brushTemplateStrokeColor: color("#6d6d6d83"),
-    //   // brushTemplateStrokeColor: color("#52000083"),
-    //   brushTemplateStrokeColorDistort: 40,
-    //   brushCurveSexyness: 1,
-    //   brushPixelDistort: 50,
-    //   brushOpacityDistort: 50,
-    // },
-    // {
-    //   name: "areaB",
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   name: "ehemals layc",
+    //   orientation: getRandomFromList(["y"]),
     //   OVERLAY: false,
-    //   brushCount: 400,
-    //   noiseIncrement: 0.6,  // 0.06
+    //   brushCount: 300, //500,  // 100
+    //   noiseIncrement: 0.006,  // 0.06 - 0.6
     //   DEBUG: false,
-    //   densityFactor: 2,
-    //   maxSpeedMin: 3,
-    //   maxSpeedMax: 10,
+    //   maxSpeedMin: 10,  // 15
+    //   maxSpeedMax: 30, // 20
     //   minSpeed: 2,
     //   maxForce: 2,
-    //   slowRadius: 100,
-    //   finishedRadius: 20,
-    //   targetBdistList: [100, 200, 400, 600, 800],
-    //   targetBDirectionList: [1, -1],
-    //   basicSizeMin: 1,
-    //   basicSizeMax: 1,
-    //   // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-    //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-    //   brushTemplateCount: 20,
-    //   brushTemplateSize: 60,
-    //   brushTemplateStrokeSize: 1,
-    //   brushTemplateFillColor: color("#e2e2e2"),
-    //   brushTemplateFillColorDistort: 20,
-    //   brushTemplateStrokeColor: color("#f0f0f0"),
-    //   brushTemplateStrokeColorDistort: 20,
-    //   brushCurveSexyness: 1,
-    //   brushPixelDistort: 50,
-    //   brushOpacityDistort: 50,
-    // },
-    // {
-    //   name: "fillNoiseOverlay",
-    //   orientation: getRandomFromList(["x", "y"]),
-    //   OVERLAY: true,
-    //   brushCount: 300,  // 100
-    //   noiseIncrement: 0.9,  // 0.06 - 0.6
-    //   DEBUG: false,
-    //   maxSpeedMin: 5,  // 15
-    //   maxSpeedMax: 10, // 20
-    //   minSpeed: 2,
-    //   maxForce: 2,
-    //   slowRadius: 40,
-    //   finishedRadius: 10,
-    //   // targetBdistList: [50, 100, 200],
-    //   targetBdistList: [500],
-    //   targetBDirectionList: [-1, 1],
+    //   slowRadius: 320,
+    //   finishedRadius: 40,
+    //   // targetBdistList: [1000],
+    //   targetBdistList: [200, 500, 600, 750, 1000, 2000],
     //   // targetBDirectionList: [-1],
+    //   targetBDirectionList: [-1, 1],
     //   basicSizeMin: 1,
-    //   basicSizeMax: 1.1,
-    //   noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+    //   basicSizeMax: 1.5,
+    //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //   // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
     //   brushTemplateCount: 20,
     //   brushTemplateSize: 50,
-    //   brushTemplateStrokeSize: 1,
-    //   brushTemplateFillColor: color("#b8b8b883"),
+    //   brushTemplateStrokeSize: 1,  // out
+    //   brushTemplateFillColor: color("#c9c9c9ff"),
     //   // brushTemplateFillColor: color("#cc1a1a83"),
-    //   brushTemplateFillColorDistort: 10,
-    //   brushTemplateStrokeColor: color("#6d6d6d83"),
-    //   // brushTemplateStrokeColor: color("#52000083"),
-    //   brushTemplateStrokeColorDistort: 40,
+    //   brushTemplateFillColorDistort: 20,
+    //   // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    //   brushTemplateStrokeColor: color("#52000083"),
+    //   // brushTemplateStrokeColorDistort: 20,  // out
     //   brushType: "Fill Noise",
     //   brushCurveSexyness: 1,
     //   brushPixelDistort: 50,
     //   brushOpacityDistort: 50,
-    // },
-    // {
-    //   name: "fillNoisePart",
+    // }
+    // ],
+    // [
+    //   {
+    //     name: "areaA",
+    //     orientation: getRandomFromList(["x"]),
+    //     OVERLAY: true,
+    //     brushCount: 300,  // 100
+    //     noiseIncrement: 0.9,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 5,  // 15
+    //     maxSpeedMax: 10, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 40,
+    //     finishedRadius: 10,
+    //     // targetBdistList: [50, 100, 200],
+    //     targetBdistList: [500],
+    //     targetBDirectionList: [-1, 1],
+    //     // targetBDirectionList: [-1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.1,
+    //     noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 50,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#b8b8b883"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 10,
+    //     brushTemplateStrokeColor: color("#6d6d6d83"),
+    //     // brushTemplateStrokeColor: color("#52000083"),
+    //     brushTemplateStrokeColorDistort: 40,
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    //   {
+    //     name: "areaA",
+    //     orientation: getRandomFromList(["y"]),
+    //     OVERLAY: true,
+    //     brushCount: 300,  // 100
+    //     noiseIncrement: 0.9,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 5,  // 15
+    //     maxSpeedMax: 10, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 40,
+    //     finishedRadius: 10,
+    //     // targetBdistList: [50, 100, 200],
+    //     targetBdistList: [500],
+    //     targetBDirectionList: [-1, 1],
+    //     // targetBDirectionList: [-1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.1,
+    //     noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 50,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#b8b8b883"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 10,
+    //     brushTemplateStrokeColor: color("#6d6d6d83"),
+    //     // brushTemplateStrokeColor: color("#52000083"),
+    //     brushTemplateStrokeColorDistort: 40,
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    // ],
+    // [
+    //   {
+    //     name: "areaB",
+    //     orientation: getRandomFromList(["x"]),
+    //     OVERLAY: false,
+    //     brushCount: 400,
+    //     noiseIncrement: 0.6,  // 0.06
+    //     DEBUG: false,
+    //     densityFactor: 2,
+    //     maxSpeedMin: 3,
+    //     maxSpeedMax: 10,
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 100,
+    //     finishedRadius: 20,
+    //     targetBdistList: [100, 200, 400, 600, 800],
+    //     targetBDirectionList: [1, -1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1,
+    //     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 60,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#e2e2e2"),
+    //     brushTemplateFillColorDistort: 20,
+    //     brushTemplateStrokeColor: color("#f0f0f0"),
+    //     brushTemplateStrokeColorDistort: 20,
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    //   {
+    //     name: "areaB",
+    //     orientation: getRandomFromList(["y"]),
+    //     OVERLAY: false,
+    //     brushCount: 400,
+    //     noiseIncrement: 0.6,  // 0.06
+    //     DEBUG: false,
+    //     densityFactor: 2,
+    //     maxSpeedMin: 3,
+    //     maxSpeedMax: 10,
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 100,
+    //     finishedRadius: 20,
+    //     targetBdistList: [100, 200, 400, 600, 800],
+    //     targetBDirectionList: [1, -1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1,
+    //     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 60,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#e2e2e2"),
+    //     brushTemplateFillColorDistort: 20,
+    //     brushTemplateStrokeColor: color("#f0f0f0"),
+    //     brushTemplateStrokeColorDistort: 20,
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    // ]
+    // [
+    //   {
+    //     name: "fillNoiseOverlay",
+    //     orientation: getRandomFromList(["x"]),
+    //     OVERLAY: true,
+    //     brushCount: 300,  // 100
+    //     noiseIncrement: 0.9,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 5,  // 15
+    //     maxSpeedMax: 10, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 40,
+    //     finishedRadius: 10,
+    //     // targetBdistList: [50, 100, 200],
+    //     targetBdistList: [500],
+    //     targetBDirectionList: [-1, 1],
+    //     // targetBDirectionList: [-1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.1,
+    //     noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 50,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#b8b8b883"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 10,
+    //     brushTemplateStrokeColor: color("#6d6d6d83"),
+    //     // brushTemplateStrokeColor: color("#52000083"),
+    //     brushTemplateStrokeColorDistort: 40,
+    //     brushType: "Fill Noise",
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    //   {
+    //     name: "fillNoiseOverlay",
+    //     orientation: getRandomFromList(["y"]),
+    //     OVERLAY: true,
+    //     brushCount: 300,  // 100
+    //     noiseIncrement: 0.9,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 5,  // 15
+    //     maxSpeedMax: 10, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 40,
+    //     finishedRadius: 10,
+    //     // targetBdistList: [50, 100, 200],
+    //     targetBdistList: [500],
+    //     targetBDirectionList: [-1, 1],
+    //     // targetBDirectionList: [-1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.1,
+    //     noiseColor: [color("#252525"), color("#fcfcfc"), color("#cacaca")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 50,
+    //     brushTemplateStrokeSize: 1,
+    //     brushTemplateFillColor: color("#b8b8b883"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 10,
+    //     brushTemplateStrokeColor: color("#6d6d6d83"),
+    //     // brushTemplateStrokeColor: color("#52000083"),
+    //     brushTemplateStrokeColorDistort: 40,
+    //     brushType: "Fill Noise",
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   },
+    // ],
+    // [{
+    //   name: "fillNoisePart1",
     //   // originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
     //   // targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
     //   // originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
     //   // targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   orientation: getRandomFromList(["x"]),
     //   OVERLAY: false,
     //   brushCount: 400,
     //   noiseIncrement: 0.6,  // 0.06
@@ -335,8 +550,44 @@ function setup() {
     //   brushOpacityDistort: 50,
     // },
     // {
+    //   name: "fillNoisePart2",
+    //   // originA: createVector(width / 3, height / 10),  // left, start of brushstrokes
+    //   // targetA: createVector(width / 3, height / 10 * 9), // left, end of brusshtrokes
+    //   // originB: createVector(width / 3 * 2, height / 10), // right, start of brushstrokes
+    //   // targetB: createVector(width / 3 * 2, height / 10 * 9), // right, end of brushstrokes
+    //   orientation: getRandomFromList(["y"]),
+    //   OVERLAY: false,
+    //   brushCount: 400,
+    //   noiseIncrement: 0.6,  // 0.06
+    //   DEBUG: false,
+    //   densityFactor: 2,
+    //   maxSpeedMin: 3,
+    //   maxSpeedMax: 10,
+    //   minSpeed: 2,
+    //   maxForce: 2,
+    //   slowRadius: 100,
+    //   finishedRadius: 20,
+    //   targetBdistList: [100, 200, 400, 600, 800],
+    //   targetBDirectionList: [1, -1],
+    //   basicSizeMin: 1,
+    //   basicSizeMax: 1,
+    //   noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //   brushTemplateCount: 20,
+    //   brushTemplateSize: 60,
+    //   brushTemplateStrokeSize: 1,
+    //   brushTemplateFillColor: color("#e2e2e2"),
+    //   brushTemplateFillColorDistort: 20,
+    //   brushTemplateStrokeColor: color("#f0f0f0"),
+    //   brushTemplateStrokeColorDistort: 20,
+    //   brushType: "Fill Noise",
+    //   brushCurveSexyness: 1,
+    //   brushPixelDistort: 50,
+    //   brushOpacityDistort: 50,
+    // },
+    // ]
+    // [{
     //   name: "strokeNoise",
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   orientation: getRandomFromList(["x"]),
     //   OVERLAY: false,
     //   brushCount: 300,
     //   noiseIncrement: 0.01,  // 0.009
@@ -366,12 +617,44 @@ function setup() {
     //   brushOpacityDistort: 0,
     // },
     // {
-    //   name: "example",
+    //   name: "strokeNoise",
+    //   orientation: getRandomFromList(["y"]),
+    //   OVERLAY: false,
+    //   brushCount: 300,
+    //   noiseIncrement: 0.01,  // 0.009
+    //   DEBUG: false,
+    //   densityFactor: 2,
+    //   maxSpeedMin: 10,
+    //   maxSpeedMax: 50,
+    //   minSpeed: 2,
+    //   maxForce: 2,
+    //   slowRadius: 100,
+    //   finishedRadius: 20,
+    //   targetBdistList: [600],
+    //   targetBDirectionList: [1],
+    //   basicSizeMin: 1,
+    //   basicSizeMax: 1,
+    //   noiseColor: [color("#ebebeb")],
+    //   brushTemplateCount: 20,
+    //   brushTemplateSize: 100,
+    //   brushTemplateStrokeSize: 1,
+    //   brushTemplateFillColor: color("#e2e2e2"),
+    //   brushTemplateFillColorDistort: 20,
+    //   brushTemplateStrokeColor: color("#929292"),
+    //   brushTemplateStrokeColorDistort: 50,
+    //   brushType: "Stroke Noise",
+    //   brushCurveSexyness: 1,
+    //   brushPixelDistort: 150,
+    //   brushOpacityDistort: 0,
+    // },
+    // ],
+    // [{
+    //   name: "example1",
     //   // originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
     //   // targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
     //   // originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
     //   // targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
-    //   orientation: getRandomFromList(["x", "y"]),
+    //   orientation: getRandomFromList(["x"]),
     //   OVERLAY: false,
     //   brushCount: 100,
     //   noiseIncrement: 0.6,  // 0.06
@@ -396,91 +679,124 @@ function setup() {
     //   brushTemplateStrokeColorDistort: 40,
     //   brushCurveSexyness: 1,
     // },
-    {
-      name: "esperimentO",
-      // orientation: getRandomFromList(["x", "y"]),
-      orientation: getRandomFromList(["x"]),
-      OVERLAY: false,
-      brushCount: 200, //500,  // 100 | good one 1300
-      noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
-      DEBUG: false,
-      maxSpeedMin: 20,  // 15
-      maxSpeedMax: 50, // 20
-      minSpeed: 2,
-      maxForce: 2,
-      slowRadius: 320,
-      finishedRadius: 40,
-      // targetBdistList: [1000],
-      targetBdistList: [200, 500, 600, 750, 1000, 2000],
-      // targetBDirectionList: [-1],  // oida
-      targetBDirectionList: [-1, 1],
-      basicSizeMin: 1,
-      basicSizeMax: 1.5,
-      noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
-      // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-      // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
-      brushTemplateCount: 20,
-      brushTemplateSize: 190,   // 50
-      brushTemplateStrokeSize: 5,
-      brushTemplateFillColor: color("#c9c9c9ff"),
-      // brushTemplateFillColor: color("#cc1a1a83"),
-      brushTemplateFillColorDistort: 20,
-      // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
-      brushTemplateStrokeColor: color("#52000083"),
-      // brushTemplateStrokeColorDistort: 20,  // out
-      // brushType: "Stroke Noise",
-      // brushType: "Gradient",  // cool
-      // brushType: "Noise",  // 1 loop
-      brushType: "Fill Noise",
-      // brushType: "Only Perlin",
-      // brushType: "Combined Perlin",  // 3 loops
-      brushCurveSexyness: 1,
-      brushPixelDistort: 50,
-      brushOpacityDistort: 50,
-    },
+    // {
+    //   name: "example2",
+    //   // originA: createVector(width / 8 * 3, height / 9),  // left, start of brushstrokes
+    //   // targetA: createVector(width / 8 * 3, height / 9 * 8), // left, end of brusshtrokes
+    //   // originB: createVector(width / 8 * 5, height / 9), // right, start of brushstrokes
+    //   // targetB: createVector(width / 8 * 5, height / 9 * 8), // right, end of brushstrokes
+    //   orientation: getRandomFromList(["y"]),
+    //   OVERLAY: false,
+    //   brushCount: 100,
+    //   noiseIncrement: 0.6,  // 0.06
+    //   DEBUG: false,
+    //   maxSpeedMin: 15,
+    //   maxSpeedMax: 20,
+    //   minSpeed: 2,
+    //   maxForce: 2,
+    //   slowRadius: 40,
+    //   finishedRadius: 10,
+    //   targetBdistList: [500],
+    //   targetBDirectionList: [1],
+    //   basicSizeMin: 1,
+    //   basicSizeMax: 1.1,
+    //   noiseColor: [color("#727272")],
+    //   brushTemplateCount: 20,
+    //   brushTemplateSize: 50,
+    //   brushTemplateStrokeSize: 1,
+    //   brushTemplateFillColor: color("#b8b8b883"),
+    //   brushTemplateFillColorDistort: 10,
+    //   brushTemplateStrokeColor: color("#6d6d6d83"),
+    //   brushTemplateStrokeColorDistort: 40,
+    //   brushCurveSexyness: 1,
+    // }
+    // ],
+    // [
+    //   {
+    //     name: "esperiment1",
+    //     // orientation: getRandomFromList(["x", "y"]),
+    //     orientation: getRandomFromList(["x"]),
+    //     OVERLAY: false,
+    //     brushCount: 200, //500,  // 100 | good one 1300
+    //     noiseIncrement: 0.01, // 0.006,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 20,  // 15
+    //     maxSpeedMax: 50, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 320,
+    //     finishedRadius: 40,
+    //     // targetBdistList: [1000],
+    //     targetBdistList: [200, 500, 600, 750, 1000, 2000],
+    //     // targetBDirectionList: [-1],  // oida
+    //     targetBDirectionList: [-1, 1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.5,
+    //     noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
+    //     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 190,   // 50
+    //     brushTemplateStrokeSize: 5,
+    //     brushTemplateFillColor: color("#c9c9c9ff"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 20,
+    //     // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    //     brushTemplateStrokeColor: color("#52000083"),
+    //     // brushTemplateStrokeColorDistort: 20,  // out
+    //     // brushType: "Stroke Noise",
+    //     // brushType: "Gradient",  // cool
+    //     // brushType: "Noise",  // 1 loop
+    //     brushType: "Fill Noise",
+    //     // brushType: "Only Perlin",
+    //     // brushType: "Combined Perlin",  // 3 loops
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   }, {
+    //     name: "esperiment2",
+    //     // orientation: getRandomFromList(["x", "y"]),
+    //     orientation: getRandomFromList(["y"]),
+    //     OVERLAY: false,
+    //     brushCount: 200, //500,  // 100
+    //     noiseIncrement: 0.006,  // 0.06 - 0.6
+    //     DEBUG: false,
+    //     maxSpeedMin: 10,  // 15
+    //     maxSpeedMax: 30, // 20
+    //     minSpeed: 2,
+    //     maxForce: 2,
+    //     slowRadius: 320,
+    //     finishedRadius: 40,
+    //     // targetBdistList: [1000],
+    //     targetBdistList: [200, 500, 600, 750, 1000, 2000],
+    //     // targetBDirectionList: [-1],
+    //     targetBDirectionList: [-1, 1],
+    //     basicSizeMin: 1,
+    //     basicSizeMax: 1.5,
+    //     noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
+    //     // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
+    //     // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
+    //     brushTemplateCount: 20,
+    //     brushTemplateSize: 190,
+    //     brushTemplateStrokeSize: 1,  // out
+    //     brushTemplateFillColor: color("#c9c9c9ff"),
+    //     // brushTemplateFillColor: color("#cc1a1a83"),
+    //     brushTemplateFillColorDistort: 20,
+    //     // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
+    //     brushTemplateStrokeColor: color("#52000083"),
+    //     // brushTemplateStrokeColorDistort: 20,  // out
+    //     brushType: "Fill Noise",
+    //     brushCurveSexyness: 1,
+    //     brushPixelDistort: 50,
+    //     brushOpacityDistort: 50,
+    //   }
+    // ]
   ]
 
-  pattern2Data = {
-    name: "ehemals layc",
-    // orientation: getRandomFromList(["x", "y"]),
-    orientation: getRandomFromList(["y"]),
-    OVERLAY: false,
-    brushCount: 200, //500,  // 100
-    noiseIncrement: 0.006,  // 0.06 - 0.6
-    DEBUG: false,
-    maxSpeedMin: 10,  // 15
-    maxSpeedMax: 30, // 20
-    minSpeed: 2,
-    maxForce: 2,
-    slowRadius: 320,
-    finishedRadius: 40,
-    // targetBdistList: [1000],
-    targetBdistList: [200, 500, 600, 750, 1000, 2000],
-    // targetBDirectionList: [-1],
-    targetBDirectionList: [-1, 1],
-    basicSizeMin: 1,
-    basicSizeMax: 1.5,
-    noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
-    // noiseColor: [color("#3b3b3b"), color("#c7c7c7"), color("#ffffff")],
-    // noiseColor: [color("#fd7b2f"), color("#ffa96f"), color("#f7dcc2")],
-    brushTemplateCount: 20,
-    brushTemplateSize: 190,
-    brushTemplateStrokeSize: 1,  // out
-    brushTemplateFillColor: color("#c9c9c9ff"),
-    // brushTemplateFillColor: color("#cc1a1a83"),
-    brushTemplateFillColorDistort: 20,
-    // brushTemplateStrokeColor: color("#4b4b4bff"),  // out
-    brushTemplateStrokeColor: color("#52000083"),
-    // brushTemplateStrokeColorDistort: 20,  // out
-    brushType: "Fill Noise",
-    brushCurveSexyness: 1,
-    brushPixelDistort: 50,
-    brushOpacityDistort: 50,
-  }
 
-  chosenPattern = new BrushstrokeSystem(getRandomFromList(patternProfiles));
-  pattern2 = new BrushstrokeSystem(pattern2Data);
+  chosenPattern = getRandomFromList(patternProfiles);
   chosenNoise = new Noise();
+
 
   gridProfile = {
     stripeOrientation: getRandomFromList(["x", "y"]),
@@ -488,8 +804,8 @@ function setup() {
     bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
     thickness: 1,
     spacing: getRandomFromList([1, 2, 3]),
-    pattern: chosenPattern,
-    pattern2: pattern2,
+    pattern: new BrushstrokeSystem(chosenPattern[0]),
+    pattern2: new BrushstrokeSystem(chosenPattern[1]),
     backgroundNoise: chosenNoise,
     // how many loopLayers with pattern
   }
