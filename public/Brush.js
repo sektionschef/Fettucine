@@ -1,9 +1,6 @@
 class Brush {
     constructor(data) {
-
-        // this.type = "Stroke Noise";
-        // this.type = "Fill Noise";
-        this.type = data.type;
+        this.type = data.type;  // "Stroke Noise", "Fill Noise"
 
         this.noiseColor = getRandomFromList(data.noiseColor);
 
@@ -112,7 +109,7 @@ class Brush {
                 // GRADIENT
                 if (this.type == "Gradient") {
                     let inter = map(x, 0, this.buffer.width, 0, 1);
-                    let c = lerpColor(color("#353535"), color("#dddddd"), inter);
+                    let c = lerpColor(this.strokeColor, this.fillColor, inter);
 
                     if (this.buffer.pixels[index + 3] != 0) {
                         this.buffer.pixels[index + 0] = red(c);

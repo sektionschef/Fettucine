@@ -46,7 +46,6 @@ class BrushstrokeSystem {
         let increment = 0;
 
 
-
         for (var i = 0; i < this.brushCount; i++) {
 
             // console.log(i * this.densityFactor);

@@ -4,14 +4,14 @@ class Paper {
         this.height = SHORTSIDE * 0.2;  // 800
 
         // this.strokeColor = distortColorSuperNew(color("#8a8a8a"), 30);
-        // this.strokeColorBase = color(PALETTE.paper);
-        this.strokeColorBase = color(
-            red(PALETTE.paper) + 30,
-            green(PALETTE.paper) + 30,
-            blue(PALETTE.paper) + 30,
-            alpha(PALETTE.paper),
-        );
-        this.strokeColorOffset = 20;
+        this.strokeColorBase = color(PALETTE.paper);
+        // this.strokeColorBase = color(
+        //     red(PALETTE.paper) + 30,
+        //     green(PALETTE.paper) + 30,
+        //     blue(PALETTE.paper) + 30,
+        //     alpha(PALETTE.paper),
+        // );
+        this.strokeColorOffset = 10;
         this.strokeSize = 1; // 1;
         this.lineLength = 25; // 25; // 5 +2
         this.lineCount = 0.002 * TOTALPIXEL; // 10000

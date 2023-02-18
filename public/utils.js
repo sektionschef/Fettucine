@@ -490,3 +490,8 @@ function highlightColor(colorCode, gain) {
 
     return color(red(colorCode) + gain, green(colorCode) + gain, blue(colorCode) + gain, alpha(colorCode));
 }
+
+// helper function for settimeout
+function reloader() {
+    window.location.reload();
+}

@@ -499,9 +499,7 @@ class Grid {
             this.loopBuffer.endShape(CLOSE);
             this.loopBuffer.pop();
 
-            // DANGER - REACTIVATE
             if (i % 3 == 0) {
-                // if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
                 this.loopBuffer.blendMode(OVERLAY);
                 this.loopBuffer.image(maskBuffers(this.backgroundNoise.masterBuffer, this.loopBuffer), 0, 0);
@@ -562,7 +560,6 @@ class Grid {
             this.DAStop2 = p5.Vector.add(stripe.DAStop2, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
             this.DAStop1 = p5.Vector.add(stripe.DAStop1, createVector(getRandomFromInterval(-distortChanger, distortChanger), getRandomFromInterval(-distortChanger, distortChanger)));
 
-            // # sau
             this.stripeLines.push({
                 "A": this.A,
                 "B": this.B,
@@ -628,7 +625,7 @@ class Grid {
     createNoise(A, ABStop1, ABStop2, B) {
 
         this.noiseWeight = 1; // 0.00025 * SHORTSIDE;
-        this.noiseColor = color("#8a8a8a");
+        this.noiseColor = color("#b1b1b1");
         this.pointCount = 0.2 * p5.Vector.dist(A, B);
         this.noiseDistance = 1 // p5.Vector.dist(A, C) * 0.02; // 25;
 
