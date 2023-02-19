@@ -491,6 +491,20 @@ function highlightColor(colorCode, gain) {
     return color(red(colorCode) + gain, green(colorCode) + gain, blue(colorCode) + gain, alpha(colorCode));
 }
 
+
+function showFxhashFeatures() {
+    push();
+    let xStart = 10;
+    let yStart = 50;
+    let textSizeY = 50;
+    textSize(textSizeY);
+    for (var key in window.$fxhashFeatures) {
+        text(key + ": " + window.$fxhashFeatures[key], xStart, yStart);
+        yStart += textSizeY * 1.1;
+    }
+    pop();
+}
+
 // helper function for settimeout
 function reloader() {
     window.location.reload();

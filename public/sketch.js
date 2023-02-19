@@ -94,94 +94,40 @@ function setup() {
   }
 
   oida = false;
+
+
   // Gradient, Noise schwierig, bei Stroke noise auswahl fill oder strok - dark oder light
-  let type = "Fill Noise"//getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"]);
-  let county = Math.round(getRandomFromInterval(50, 500)); // 500, 300;
-  let manouvre = getRandomFromList([[50, 100, 300], [100, 300, 500], [500, 750, 1000, 2000]]);  // UPDOWN [50], [100], [500, 750, 1000, 2000]
-  let directions = getRandomFromList([[-1, 1], [1], [-1]]);
-  let noiseIncrement = getRandomFromList([0.01, 0.06, 0.6]);
-  let whichLoopLevel = "last"; // getRandomFromList(["last", "secondlast", "thirdlast"])
-  let overlay = false // getRandomFromList([true, false]);
-  let maxSpeedMin = Math.round(getRandomFromInterval(5, 15));
-  let maxSpeedMax = Math.round(maxSpeedMin + getRandomFromInterval(5, 10));
-
-  console.log("whichLoopLevel: " + whichLoopLevel);
-  console.log("type: " + type);
-  console.log("county: " + county);
-  console.log("manouvre: " + manouvre);
-  console.log("directions: " + directions);
-  console.log("noiseIncrement: " + noiseIncrement);
-  console.log("overlay: " + overlay);
-  console.log("maxSpeedMin: " + maxSpeedMin);
-  console.log("maxSpeedMax: " + maxSpeedMax);
-
-
-  // size, and count and looplayer count and type
-  patternProfiles = [
-    [{
-      name: "flicknX",
-      orientation: "x",
-      OVERLAY: overlay,
-      brushCount: county,
-      noiseIncrement: noiseIncrement,
-      DEBUG: false,
-      maxSpeedMin: maxSpeedMin,
-      maxSpeedMax: maxSpeedMax,
-      minSpeed: 2,
-      maxForce: 2,
-      slowRadius: 320,
-      finishedRadius: 40,
-      targetBdistList: manouvre,
-      targetBDirectionList: directions,
-      basicSizeMin: 1,
-      basicSizeMax: 1.5,
-      noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
-      brushTemplateCount: 20,
-      brushTemplateSize: 200,
-      brushTemplateStrokeSize: 1,
-      brushTemplateFillColor: color(PALETTE.lightColor),
-      brushTemplateFillColorDistort: 20,
-      brushTemplateStrokeColor: color(PALETTE.darkColor),
-      brushTemplateStrokeColorDistort: 20,
-      brushType: type,
-      brushCurveSexyness: 1,
-      brushPixelDistort: 50,
-    },
-    {
-      name: "flicknY",
-      orientation: "y",
-      OVERLAY: overlay,
-      brushCount: county,
-      noiseIncrement: noiseIncrement,
-      DEBUG: false,
-      maxSpeedMin: maxSpeedMin,
-      maxSpeedMax: maxSpeedMax,
-      minSpeed: 2,
-      maxForce: 2,
-      slowRadius: 320,
-      finishedRadius: 40,
-      targetBdistList: manouvre,
-      targetBDirectionList: directions,
-      basicSizeMin: 1,
-      basicSizeMax: 1.5,
-      noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
-      brushTemplateCount: 20,
-      brushTemplateSize: 200,
-      brushTemplateStrokeSize: 1,
-      brushTemplateFillColor: color(PALETTE.lightColor),
-      brushTemplateFillColorDistort: 20,
-      brushTemplateStrokeColor: color(PALETTE.darkColor),
-      brushTemplateStrokeColorDistort: 20,
-      brushType: type,
-      brushCurveSexyness: 1,
-      brushPixelDistort: 50,
-    },
-    ]
-  ]
-
-  chosenPattern = getRandomFromList(patternProfiles);
-  chosenNoise = new Noise();
-
+  // darauf kommt es an size, and count and looplayer count and type
+  patternProfileX = {
+    orientation: "x",
+    OVERLAY: getRandomFromList([true, false]),
+    brushCount: Math.round(getRandomFromInterval(50, 500)),
+    noiseIncrement: getRandomFromList([0.01, 0.06, 0.6, 0.9]),
+    DEBUG: false,
+    maxSpeedMin: Math.round(getRandomFromInterval(5, 15)),
+    maxSpeedMax: Math.round(getRandomFromInterval(15, 30)),
+    minSpeed: 2,
+    maxForce: 2,
+    slowRadius: 320,
+    finishedRadius: 40,
+    targetBdistList: getRandomFromList([[50, 100, 300], [100, 300, 500], [500, 750, 1000, 2000]]),
+    targetBDirectionList: getRandomFromList([[-1, 1], [1], [-1]]),
+    basicSizeMin: 1,
+    basicSizeMax: 1.5,
+    noiseColor: [color(PALETTE.darkColor), color(PALETTE.lightColor)],
+    brushTemplateCount: 20,
+    brushTemplateSize: 200,
+    brushTemplateStrokeSize: 1,
+    brushTemplateFillColor: color(PALETTE.lightColor),
+    brushTemplateFillColorDistort: 20,
+    brushTemplateStrokeColor: color(PALETTE.darkColor),
+    brushTemplateStrokeColorDistort: 20,
+    brushType: getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"]),
+    brushCurveSexyness: 1,
+    brushPixelDistort: 50,
+  }
+  patternProfileY = { ...patternProfileX };
+  patternProfileY.orientation = "y";
 
   gridProfile = {
     stripeOrientation: getRandomFromList(["x", "y"]),
@@ -189,11 +135,10 @@ function setup() {
     bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
     thickness: 1,
     spacing: getRandomFromList([1, 2, 3]),
-    pattern: new BrushstrokeSystem(chosenPattern[0]),
-    pattern2: new BrushstrokeSystem(chosenPattern[1]),
-    backgroundNoise: chosenNoise,
-    whichLoopLevel: whichLoopLevel,
-    // how many loopLayers with pattern
+    pattern: new BrushstrokeSystem(patternProfileX),
+    pattern2: new BrushstrokeSystem(patternProfileY),
+    backgroundNoise: new Noise(),
+    whichLoopLevel: getRandomFromList(["last", "secondlast", "thirdlast"]),
   }
 
   grid = new Grid(gridProfile);
@@ -206,35 +151,24 @@ function setup() {
 
   // FEATURES
   window.$fxhashFeatures = {
-    "Format": canvasFormatChosen.name,
-    // "Palette": PALETTE_LABEL,
-    // "Element Count": TRIANGLECOUNT_LABEL,
-    // "Element types": PICKER_LABEL,
+    // "Format": canvasFormatChosen.name,
+    "Palette": PALETTE_LABEL,
+    // "Stripe Orientation": gridProfile.stripeOrientation,
+    // "Column/Row count": gridProfile.countColumnOrRow,
+    // "Stripe spacing": gridProfile.spacing,
+    // "Edge fuzzyness": gridProfile.bezierFactor,
+    "Brush Type": patternProfileX.brushType,
+    "Brush Count": patternProfileX.brushCount,
+    "Brush target movement": patternProfileX.targetBdistList,
+    "Brush target direction": patternProfileX.targetBDirectionList,
+    "Noise increment": patternProfileX.noiseIncrement,
+    "Pattern loop level": gridProfile.whichLoopLevel,
+    "Overlay": patternProfileX.OVERLAY,
+    "Brush Min speed": patternProfileX.maxSpeedMin,
+    "Brush Max speed": patternProfileX.maxSpeedMax,
   }
 
-  // console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
-  // console.info(`Format: %c${canvasFormatChosen.name}`, 'font-weight: bold');
-  // console.info(`Stripe Orientation: %c${gridProfile.stripeOrientation}`, 'font-weight: bold');
-  // console.info(`Number of rows or columns: %c${gridProfile.countColumnOrRow}`, 'font-weight: bold');
-  // console.info(`Wobbly factor: %c${gridProfile.bezierFactor}`, 'font-weight: bold');
-  // console.info(`Stripe thickness: %c${gridProfile.thickness}`, 'font-weight: bold');
-  // console.info(`Stripe spacing: %c${gridProfile.spacing}`, 'font-weight: bold');
-  // console.log('');
-
-  // console.group(`Palette: %c${PALETTE_LABEL} `, 'font-weight: bold');
-  // console.log(`background: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['background']}; `);
-  // console.log(`primaries: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['primaries'][0]}; `);
-  // console.log(`primaries: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['primaries'][1]}; `);
-  // console.log(`hatches: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['hatches'][0]}; `);
-  // console.log(`hatches: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['hatches'][1]}; `);
-  // console.log(`rothkoStroke: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['rothkoStroke']}; `);
-  // console.log(`dirtline: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['dirtline']}; `);
-  // console.log(`dirtCircles: %c   `, `background: ${PALETTESYSTEM[PALETTE_LABEL]['dirtCircles']}; `);
-  // console.groupEnd();
-  // console.log(`Palette: %c${PALETTE_LABEL} `, 'font-weight: bold');
-  // console.log(`Color smudge: %c${ROUGHYPUFFYLABEL}`, 'font-weight: bold');
-  // console.log(`Brush direction: %c${BRUSHDIRECTIONLABEL}`, 'font-weight: bold');
-  // console.log('');
+  console.log(window.$fxhashFeatures);
 }
 
 
@@ -301,6 +235,8 @@ function draw() {
   image(blob, 0, 0);
   pop();
 
+
+  showFxhashFeatures();
 
 
   // DEBUG
