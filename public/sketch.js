@@ -1,8 +1,6 @@
 const NOISESEED = hashFnv32a(fxhash);
 
 let BULK = false;
-let BULKNUMBER = 50;
-let BULKCOUNTER = 0;
 
 let startTime, endTime;
 let canvas;
@@ -21,8 +19,7 @@ let YEAR = "2023";
 let PRICE = "ꜩ 4";
 let EDITIONS = "256 editions";
 
-// let CURRENTPIXELDENS = 1;
-
+let CURRENTPIXELDENS = 1;
 
 function preload() {
 
@@ -42,8 +39,6 @@ function preload() {
     addStyleSheet("styles.css");
   }
 
-  // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
-
   // if (urlParams.has('infinity')) {
   //   INFINITYSTRING = urlParams.get('infinity');
   //   INFINITY = (INFINITYSTRING === 'true');
@@ -56,11 +51,10 @@ function preload() {
   //     }
   // }
 
-
   if (urlParams.has('res')) {
     CURRENTPIXELDENS = +urlParams.get("res");
-    console.log("resolution: " + CURRENTPIXELDENS + "x");
   }
+  console.log("resolution: " + CURRENTPIXELDENS + "x");
 }
 
 function setup() {
@@ -143,9 +137,6 @@ function setup() {
     overlay = getRandomFromList([true, false])
   }
 
-  // overlay false bei noise 
-  // Gradient, Noise schwierig, bei Stroke noise auswahl fill oder strok - dark oder light
-  // darauf kommt es an size, and count and looplayer count and type
   patternProfileX = {
     orientation: "x",
     OVERLAY: overlay,
@@ -228,12 +219,10 @@ function draw() {
 
   background(PALETTE.paper);
 
-
   // PAPER
   paper.show();
   corny.show();
   edgePixel.show();
-
 
   // chosenPattern.show();
   // chosenPattern.showBrushTemplates();
@@ -306,10 +295,5 @@ function mousePressed() {
 
 
 if (BULK) {
-  if (BULKCOUNTER <= (BULKNUMBER - 1)) {
-    console.log("BULKCOUNTER: " + BULKCOUNTER);
-    setTimeout(reloader, 30000)
-    BULKCOUNTER += 1;
-  }
-  else { }
+  setTimeout(reloader, 30000)
 }
