@@ -1,6 +1,9 @@
 const NOISESEED = hashFnv32a(fxhash);
 
 let BULK = false;
+let BULKNUMBER = 50;
+let BULKCOUNTER = 0;
+
 let startTime, endTime;
 let canvas;
 let rescaling_width;
@@ -95,12 +98,22 @@ function setup() {
 
   oida = false;
 
+  brushType = getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"])
 
+
+  // OVERRIDE
+  if (brushType == "Noise" && PALETTE_LABEL == "Emmerald") {
+    overlay = false;
+  } else {
+    overlay = getRandomFromList([true, false])
+  }
+
+  // overlay false bei noise 
   // Gradient, Noise schwierig, bei Stroke noise auswahl fill oder strok - dark oder light
   // darauf kommt es an size, and count and looplayer count and type
   patternProfileX = {
     orientation: "x",
-    OVERLAY: getRandomFromList([true, false]),
+    OVERLAY: overlay,
     brushCount: Math.round(getRandomFromInterval(50, 500)),
     noiseIncrement: getRandomFromList([0.01, 0.06, 0.6, 0.9]),
     DEBUG: false,
@@ -110,7 +123,7 @@ function setup() {
     maxForce: 2,
     slowRadius: 320,
     finishedRadius: 40,
-    targetBdistList: getRandomFromList([[50, 100, 300], [100, 300, 500], [500, 750, 1000, 2000]]),
+    targetBdistList: getRandomFromList([[50, 100, 300], [100, 300, 500], [500, 750, 1000]]),
     targetBDirectionList: getRandomFromList([[-1, 1], [1], [-1]]),
     basicSizeMin: 1,
     basicSizeMax: 1.5,
@@ -122,7 +135,7 @@ function setup() {
     brushTemplateFillColorDistort: 20,
     brushTemplateStrokeColor: color(PALETTE.darkColor),
     brushTemplateStrokeColorDistort: 20,
-    brushType: getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"]),
+    brushType: brushType,
     brushCurveSexyness: 1,
     brushPixelDistort: 50,
   }
@@ -195,45 +208,45 @@ function draw() {
 
 
   // PROTOTYPE SPLATTER
-  push();
-  let lengthFromCenterMin = 2;
-  let lengthFromCenterMax = 8;
-  // let changer = 100;
-  let loopCount = 1000;
+  // push();
+  // let lengthFromCenterMin = 2;
+  // let lengthFromCenterMax = 8;
+  // // let changer = 100;
+  // let loopCount = 1000;
 
-  let blob = createGraphics(width, height);
-  for (var i = 0; i < loopCount; i++) {
+  // let blob = createGraphics(width, height);
+  // for (var i = 0; i < loopCount; i++) {
 
-    let pointX = createVector(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
-    let pointA = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
-    let pointB = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
-    let pointC = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
-    let pointD = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
+  //   let pointX = createVector(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
+  //   let pointA = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
+  //   let pointB = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1));
+  //   let pointC = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax), getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
+  //   let pointD = p5.Vector.sub(pointX, createVector(getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax) * -1, getRandomFromInterval(lengthFromCenterMin, lengthFromCenterMax)));
 
-    // DEBUG
-    // strokeWeight(40);
-    // point(pointX.x, pointX.y);
-    // point(pointA.x, pointA.y);
-    // point(pointB.x, pointB.y);
-    // point(pointC.x, pointC.y);
-    // point(pointD.x, pointD.y);
+  //   // DEBUG
+  //   // strokeWeight(40);
+  //   // point(pointX.x, pointX.y);
+  //   // point(pointA.x, pointA.y);
+  //   // point(pointB.x, pointB.y);
+  //   // point(pointC.x, pointC.y);
+  //   // point(pointD.x, pointD.y);
 
-    blob.fill(color(130, 255));
-    // blob.fill(PALETTE.cardboard);
-    blob.noStroke();
+  //   blob.fill(color(130, 255));
+  //   // blob.fill(PALETTE.cardboard);
+  //   blob.noStroke();
 
-    blob.beginShape();
+  //   blob.beginShape();
 
-    blob.vertex(pointA.x, pointA.y);
-    // blob.bezierVertex(pointB.x, pointB.y, pointB.x, pointB.y, pointB.x, pointB.y);
-    blob.vertex(pointB.x, pointB.y);
-    blob.vertex(pointC.x, pointC.y);
-    blob.vertex(pointD.x, pointD.y);
-    blob.endShape(CLOSE);
-  }
-  blendMode(OVERLAY);
-  image(blob, 0, 0);
-  pop();
+  //   blob.vertex(pointA.x, pointA.y);
+  //   // blob.bezierVertex(pointB.x, pointB.y, pointB.x, pointB.y, pointB.x, pointB.y);
+  //   blob.vertex(pointB.x, pointB.y);
+  //   blob.vertex(pointC.x, pointC.y);
+  //   blob.vertex(pointD.x, pointD.y);
+  //   blob.endShape(CLOSE);
+  // }
+  // blendMode(OVERLAY);
+  // image(blob, 0, 0);
+  // pop();
 
 
   showFxhashFeatures();
@@ -258,5 +271,9 @@ function mousePressed() {
 
 
 if (BULK) {
-  setTimeout(reloader, 10000)
+  if (BULKCOUNTER <= (BULKNUMBER - 1)) {
+    setTimeout(reloader, 30000)
+    BULKCOUNTER += 1;
+  }
+  else { }
 }

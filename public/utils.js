@@ -289,7 +289,7 @@ function choosePalette() {
     }
     // console.log(allPalettes);
     PALETTE_LABEL = getRandomFromList(allPalettes);
-    console.log("Palette: " + PALETTE_LABEL);
+    // console.log("Palette: " + PALETTE_LABEL);
     PALETTE = PALETTESYSTEM[PALETTE_LABEL];
 }
 
