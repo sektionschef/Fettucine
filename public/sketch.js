@@ -126,7 +126,7 @@ function setup() {
     canvas.parent("canvasHolderPlain");
   }
 
-  oida = false;
+  // oida = false;
 
   brushType = getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"]);
 
@@ -190,21 +190,21 @@ function setup() {
 
   // FEATURES
   window.$fxhashFeatures = {
-    // "Format": canvasFormatChosen.name,
+    "Format": canvasFormatChosen.name,
     "Palette": PALETTE_LABEL,
-    // "Stripe Orientation": gridProfile.stripeOrientation,
-    // "Column/Row count": gridProfile.countColumnOrRow,
-    // "Stripe spacing": gridProfile.spacing,
-    // "Edge fuzzyness": gridProfile.bezierFactor,
+    "Stripe Orientation": gridProfile.stripeOrientation,
+    "Column/Row count": gridProfile.countColumnOrRow,
+    "Stripe spacing": gridProfile.spacing,
+    "Edge fuzzyness": gridProfile.bezierFactor,
     "Brush Type": patternProfileX.brushType,
-    "Brush Count": patternProfileX.brushCount,
-    "Brush target movement": patternProfileX.targetBdistList,
-    "Brush target direction": patternProfileX.targetBDirectionList,
-    "Noise increment": patternProfileX.noiseIncrement,
-    "Pattern loop level": gridProfile.whichLoopLevel,
-    "Overlay": patternProfileX.OVERLAY,
-    "Brush Min speed": patternProfileX.maxSpeedMin,
-    "Brush Max speed": patternProfileX.maxSpeedMax,
+    // "Brush Count": patternProfileX.brushCount,
+    // "Brush target movement": patternProfileX.targetBdistList,
+    // "Brush target direction": patternProfileX.targetBDirectionList,
+    // "Noise increment": patternProfileX.noiseIncrement,
+    // "Pattern loop level": gridProfile.whichLoopLevel,
+    // "Overlay": patternProfileX.OVERLAY,
+    // "Brush Min speed": patternProfileX.maxSpeedMin,
+    // "Brush Max speed": patternProfileX.maxSpeedMax,
   }
 
   console.log(window.$fxhashFeatures);
@@ -273,13 +273,14 @@ function draw() {
   // pop();
 
 
-  showFxhashFeatures();
+  // DEBUG
+  // showFxhashFeatures();
 
 
   // DEBUG
-  if (oida) {
-    new BrushstrokeSystem(chosenPattern[0]).show();
-  }
+  // if (oida) {
+  //   new BrushstrokeSystem(chosenPattern[0]).show();
+  // }
 
   fxpreview();
   noLoop();

@@ -1,1 +1,0 @@
-(()=>{const e=window.location.search,a=new URLSearchParams(e);if(setSpartaHTML(),setTagsHTML(),a.has("senza"))a.get("senza");else{var s=document.createElement("link");s.type="text/css",s.rel="stylesheet",s.href="styles.css",document.head.appendChild(s)}a.has("animated")&&"false"===a.get("animated")&&(ANIMATIONSTATE=!1)})();

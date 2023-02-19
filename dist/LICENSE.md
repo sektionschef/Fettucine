@@ -12,6 +12,3 @@ The p5.js library is free software; you can redistribute it and/or modify it und
 The Reference for the language is under a Creative Commons license which makes it possible to reuse this content for non-commercial purposes if it is credited.
 https://p5js.org/copyright.html 
 
-
-Open SANS
-https://www.fontsquirrel.com/fonts/open-sans 
