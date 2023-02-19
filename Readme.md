@@ -8,4 +8,6 @@ Press *e* to epxort the image as PNG in 4000x4000px
 
 Use the URL parameters *animated=false/true* to start with or without animation.
 
+res 
+
 Stefan Schwaha, @sektionschef, https://digitalitility.com/

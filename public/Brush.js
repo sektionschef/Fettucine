@@ -43,7 +43,7 @@ class Brush {
         this.buffer.curveTightness(this.curveSexyness);
 
 
-        if (this.type == "Stroke Noise") {
+        if (this.type == "Stroke Noise" || this.type == "Noise") {
             this.buffer.noFill();
             this.buffer.stroke(this.strokeColor);
             this.buffer.strokeWeight(this.strokeSize);

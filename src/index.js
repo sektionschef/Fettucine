@@ -61,33 +61,5 @@
 // `
 // document.body.prepend(containero)
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
 
-setSpartaHTML();
-setTagsHTML();
-
-if (urlParams.has('senza')) {
-    if (urlParams.get("senza") === "true") {
-        addStyleSheet("styles_senza.css");
-    } else {
-        addStyleSheet("styles.css");
-    }
-} else {
-    addStyleSheet("styles.css");
-}
-
-// console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
-
-// if (urlParams.has('infinity')) {
-//   INFINITYSTRING = urlParams.get('infinity');
-//   INFINITY = (INFINITYSTRING === 'true');
-// }
-// console.log("INFINITY: " + INFINITY);
-
-// if (urlParams.has('animated')) {
-//     if (urlParams.get("animated") === "false") {
-//         ANIMATIONSTATE = false;
-//     }
-// }
 

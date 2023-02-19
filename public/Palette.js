@@ -53,7 +53,7 @@ const PALETTESYSTEM = {
     "Alles gut mein Kind": {
         "cardboard": "#273797ff",
         "paper": "#fafafa",
-        "darkColor": "#0d1a63ff",
+        "darkColor": "#0d1a63f",
         "lightColor": "#3047ceff",
     },
 }

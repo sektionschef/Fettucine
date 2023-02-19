@@ -23,7 +23,7 @@
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
     // var fxhash = "ooWNZbbpcDW4REF9yasdSL77WSv8FxfmWSAvPZzUFZJoT6PbUNx"
-    var fxhash = "oojPVkSzMrH6vDibVobfHRtDAqyUVsj6U9x4UAgcgW3aSYZvnzE"
+    // var fxhash = "oogzNX2xxjrA4nc82s2ja8oSRfq1LEcLQA8fzq9BUDnLL6BFFhW"
 
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)

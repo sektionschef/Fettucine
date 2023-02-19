@@ -21,7 +21,7 @@ class Grid {
 
         this.DEBUG = false;
         this.paperMargin = SHORTSIDE * 0.05;
-        this.sizeStripeMin = 7;  // minimum length of stripe, in boxes
+        this.sizeStripeMin = 15;  // minimum length of stripe, in boxes
         // for x
         this.paddingHeightCountMin = 5;  // at least x boxes
         this.paddingHeightCountMax = 5;

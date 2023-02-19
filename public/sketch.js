@@ -21,10 +21,46 @@ let YEAR = "2023";
 let PRICE = "ꜩ 4";
 let EDITIONS = "256 editions";
 
-let CURRENTPIXELDENS = 1;
+// let CURRENTPIXELDENS = 1;
 
 
 function preload() {
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  setSpartaHTML();
+  setTagsHTML();
+
+  if (urlParams.has('senza')) {
+    if (urlParams.get("senza") === "true") {
+      addStyleSheet("styles_senza.css");
+    } else {
+      addStyleSheet("styles.css");
+    }
+  } else {
+    addStyleSheet("styles.css");
+  }
+
+  // console.log("CURRENTPIXELDENS: " + CURRENTPIXELDENS);
+
+  // if (urlParams.has('infinity')) {
+  //   INFINITYSTRING = urlParams.get('infinity');
+  //   INFINITY = (INFINITYSTRING === 'true');
+  // }
+  // console.log("INFINITY: " + INFINITY);
+
+  // if (urlParams.has('animated')) {
+  //     if (urlParams.get("animated") === "false") {
+  //         ANIMATIONSTATE = false;
+  //     }
+  // }
+
+
+  if (urlParams.has('res')) {
+    CURRENTPIXELDENS = +urlParams.get("res");
+    console.log("resolution: " + CURRENTPIXELDENS + "x");
+  }
 }
 
 function setup() {
@@ -98,8 +134,7 @@ function setup() {
 
   oida = false;
 
-  brushType = getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"])
-
+  brushType = getRandomFromList(["Stroke Noise", "Gradient", "Noise", "Fill Noise", "Only Perlin", "Combined Perlin"]);
 
   // OVERRIDE
   if (brushType == "Noise" && PALETTE_LABEL == "Emmerald") {
@@ -145,7 +180,7 @@ function setup() {
   gridProfile = {
     stripeOrientation: getRandomFromList(["x", "y"]),
     countColumnOrRow: getRandomFromList([1, 2, 3, 4]),
-    bezierFactor: getRandomFromList([0.001, 0.005, 0.007, 0.01]),
+    bezierFactor: getRandomFromList([0.001, 0.005, 0.007]),
     thickness: 1,
     spacing: getRandomFromList([1, 2, 3]),
     pattern: new BrushstrokeSystem(patternProfileX),
@@ -272,6 +307,7 @@ function mousePressed() {
 
 if (BULK) {
   if (BULKCOUNTER <= (BULKNUMBER - 1)) {
+    console.log("BULKCOUNTER: " + BULKCOUNTER);
     setTimeout(reloader, 30000)
     BULKCOUNTER += 1;
   }
