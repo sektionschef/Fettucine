@@ -12,7 +12,6 @@ class Brush {
         this.curveSexyness = data.curveSexyness;
         // this.curveSexyness = getRandomFromInterval(1, 5);
         this.pixelDistort = data.pixelDistort;
-        this.opacityDistort = data.opacityDistort;
 
         this.buffer = createGraphics(this.size, this.size);
 
@@ -143,7 +142,6 @@ class Brush {
                     // map x pos to prob. of noise
                     var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
                     var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                    var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
 
                     if (this.buffer.pixels[index + 3] != 0) {
                         if (fxrand() > threshold) {
@@ -155,7 +153,7 @@ class Brush {
                             this.buffer.pixels[index + 0] = red(this.noiseColor) + offset;
                             this.buffer.pixels[index + 1] = green(this.noiseColor) + offset;
                             this.buffer.pixels[index + 2] = blue(this.noiseColor) + offset;
-                            this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3] + opOffset;
+                            this.buffer.pixels[index + 3] = this.buffer.pixels[index + 3];
                         }
                     }
                 }
@@ -184,7 +182,6 @@ class Brush {
                     let r = noise(xoff, yoff) * 155 + 100;
                     var threshold = map(p5.Vector.dist(this.center, createVector(x, y)), 0, this.maxDist, 0, 1);
                     var offset = getRandomFromInterval(-this.pixelDistort, this.pixelDistort)
-                    // var opOffset = getRandomFromInterval(-this.opacityDistort, 0)
 
                     if (this.buffer.pixels[index + 3] != 0) {
                         if (fxrand() > threshold) {

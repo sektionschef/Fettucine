@@ -86,7 +86,6 @@ class BrushstrokeSystem {
                 strokeColor: distortColorSuperNew(this.brushTemplateStrokeColor, this.brushTemplateStrokeColorDistort),
                 curveSexyness: this.brushCurveSexyness,
                 pixelDistort: this.brushPixelDistort,
-                opacityDistort: this.brushOpacityDistort,
                 type: this.brushType,
             }
             this.brushTemplates.push(new Brush(BrushData).buffer);

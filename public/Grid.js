@@ -11,6 +11,14 @@ class Grid {
         this.pattern2 = data.pattern2.buffer;
         this.backgroundNoise = data.backgroundNoise;
 
+        if (data.whichLoopLevel == "last") {
+            this.whichLoopLevel = 1;
+        } else if (data.whichLoopLevel == "secondlast") {
+            this.whichLoopLevel = 2;
+        } else {
+            this.whichLoopLevel = 3;
+        }
+
         this.DEBUG = false;
         this.paperMargin = SHORTSIDE * 0.05;
         this.sizeStripeMin = 7;  // minimum length of stripe, in boxes
@@ -506,7 +514,8 @@ class Grid {
                 this.loopBuffer.pop();
             }
 
-            if (i == (this.loopLayerCount - 1)) {
+            // which layer
+            if (i == (this.loopLayerCount - this.whichLoopLevel)) {
                 // if (i >= (this.loopLayerCount - 2)) {
                 // if (i >= (this.loopLayerCount - 3)) {
                 this.loopBuffer.push();
