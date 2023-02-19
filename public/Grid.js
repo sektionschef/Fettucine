@@ -41,7 +41,7 @@ class Grid {
             throw new Error('wtf, there is a margin!');
         }
         this.longMargin = (LONGSIDE % this.boxSize) / 2;
-        console.log("longMargin: " + this.longMargin);
+        // console.log("longMargin: " + this.longMargin);
 
         if (width < height) {
             this.widthBoxCount = this.shortBoxCount;
